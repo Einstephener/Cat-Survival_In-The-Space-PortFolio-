@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour
 {
@@ -34,5 +35,22 @@ public class Main : MonoBehaviour
     }
 
     #endregion
+
+    private PoolManager _pool = new();
+    private ResourceManager _resource = new();
+    private DataManager _data = new();
+    private UIManager _ui = new();
+    private SceneManager _scene = new();
+    private ObjectManager _object = new();
+
+    public static PoolManager Pool => Instance?._pool;
+    public static ResourceManager Resource => Instance?._resource;
+    public static DataManager Data => Instance?._data;
+    public static UIManager UI => Instance?._ui;
+    public static SceneManager Scene => Instance?._scene;
+    public static ObjectManager Object => Instance?._object;
+
+
+
 
 }
