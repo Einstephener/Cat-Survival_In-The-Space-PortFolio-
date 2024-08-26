@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneManagerEOD : MonoBehaviour
+public class SceneManagerEOM : MonoBehaviour
 {
     // 씬 매니저.
     public void LoadScene(string sceneName)
