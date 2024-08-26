@@ -8,7 +8,7 @@ public class PoolManager
     private class Pool
     {
         public GameObject Original { get; private set; }
-        public Transform Root { get; set; } // Ç®¸µ ÇÒ ¿ÀºêÁ§Æ®º° Á¤¸®¿ë ·çÆ®.
+        public Transform Root { get; set; } // í’€ë§ í•  ì˜¤ë¸Œì íŠ¸ë³„ ì •ë¦¬ìš© ë£¨íŠ¸.
 
         private Stack<Poolable> _poolStack = new();
 
@@ -23,7 +23,7 @@ public class PoolManager
 
         Poolable Create()
         {
-            GameObject go = Object.Instantiate(Original); // ¿øº»À» º¹»çÇÏ¿© ·çÆ® »ı¼º.
+            GameObject go = Object.Instantiate(Original); // ì›ë³¸ì„ ë³µì‚¬í•˜ì—¬ ë£¨íŠ¸ ìƒì„±.
             go.name = Original.name;
             //return go.GetOrAddComponent<Poolable>();
             return null;
@@ -37,7 +37,7 @@ public class PoolManager
         //    return poolable;
         //}
 
-        // ¸¸µé¾îÁø ¿ÀºêÁ§Æ®¸¦ Á¾·ùº°·Î ³Ö¾îÁÖ±â.
+        // ë§Œë“¤ì–´ì§„ ì˜¤ë¸Œì íŠ¸ë¥¼ ì¢…ë¥˜ë³„ë¡œ ë„£ì–´ì£¼ê¸°.
         public void Push(Poolable poolable)
         {
             if (poolable == null) return;
@@ -49,7 +49,7 @@ public class PoolManager
             _poolStack.Push(poolable);
         }
 
-        // »ç¿ë ÇÒ ¿ÀºêÁ§Æ® ³»º¸³»±â.
+        // ì‚¬ìš© í•  ì˜¤ë¸Œì íŠ¸ ë‚´ë³´ë‚´ê¸°.
         public Poolable Pop(Transform parent)
         {
             Poolable poolable;
@@ -75,7 +75,7 @@ public class PoolManager
     {
         if (_root == null)
         {
-            _root = new GameObject { name = "@Pool_Root" }.transform; // Ç®¸µ ÇÒ ¿ÀºêÁ§Æ®µéÀÇ ·çÆ®.
+            _root = new GameObject { name = "@Pool_Root" }.transform; // í’€ë§ í•  ì˜¤ë¸Œì íŠ¸ë“¤ì˜ ë£¨íŠ¸.
             Object.DontDestroyOnLoad(_root);
         }
     }
