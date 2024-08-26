@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.UI.Image;
 
 public class PoolManager
 {
@@ -12,7 +13,7 @@ public class PoolManager
 
         private Stack<Poolable> _poolStack = new();
 
-        private void Init(GameObject original, int count = 5)
+        public void Init(GameObject original, int count = 5)
         {
             Original = original;
             Root = new GameObject().transform;
@@ -25,17 +26,11 @@ public class PoolManager
         {
             GameObject go = Object.Instantiate(Original); // 원본을 복사하여 루트 생성.
             go.name = Original.name;
-            //return go.GetOrAddComponent<Poolable>();
-            return null;
+            Poolable poolable = go.GetComponent<Poolable>();
+            if (poolable == null)
+                poolable = go.AddComponent<Poolable>();
+            return poolable;
         }
-
-        //public void GetOrAddComponent<Poolable>(GameObject go)
-        //{
-        //    Poolable poolable = go.GetComponent<Poolable>();
-        //    if (poolable == null)
-        //        poolable = go.AddComponent<T>();
-        //    return poolable;
-        //}
 
         // 만들어진 오브젝트를 종류별로 넣어주기.
         public void Push(Poolable poolable)
@@ -80,18 +75,52 @@ public class PoolManager
         }
     }
 
-    public void Push(Poolable poolable)
+    public void CreatePool(GameObject original, int count = 5)
     {
+        Pool pool = new();
+        pool.Init(original, count);
+        pool.Root.parent = _root; // 풀링 된 오브젝트들의 루트인 @Pool_Root에 연결.
 
+        _pool.Add(original.name, pool);
     }
 
-    public Poolable Pop(GameObject original, GameObject parent = null)
+    // 사용하지 않는 오브젝트 반환.
+    public void Push(Poolable poolable)
     {
-        return null;
+        string name = poolable.gameObject.name;
+        if (_pool.ContainsKey(name) == false)
+        {
+            GameObject.Destroy(poolable.gameObject);
+            return;
+        }
+
+        _pool[name].Push(poolable);
+    }
+
+    public Poolable Pop(GameObject original, Transform parent = null)
+    {
+        if (_pool.ContainsKey(original.name) == false)
+            CreatePool(original);
+
+        return _pool[original.name].Pop(parent);
     }
 
     public GameObject GetOriginal(string name)
     {
-        return null;
+        // 이미 만들어졌던 오브젝트인지 확인.
+        if (_pool.ContainsKey(name) == false)
+            return null;
+
+        return _pool[name].Original;
+    }
+
+    // 오브젝트 삭제.
+    // 씬과 씬에서 넘어가는데 다른 구역으로 넘어가서 오브젝트들 구성이 크게 다르다 등
+    public void Clear()
+    {
+        foreach(Transform child in _root)
+            GameObject.Destroy(child.gameObject);
+
+        _pool.Clear();
     }
 }
