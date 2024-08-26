@@ -7,11 +7,11 @@ public class Main : MonoBehaviour
 {
 
     #region Singleton
-    // ½Ì±ÛÅæ
+    // ì‹±ê¸€í†¤
 
     private static Main _instance;
     private static bool _initialized;
-    //ÃÊ±âÈ­ ¿©ºÎ.
+    //ì´ˆê¸°í™” ì—¬ë¶€.
 
     public static Main Instance
     {
@@ -24,10 +24,10 @@ public class Main : MonoBehaviour
                 GameObject obj = GameObject.Find("@Main");
                 if (obj == null)
                 {
-                    obj = new() { name = "@Main" };     //@MainÀÌ¶ó´Â ¿ÀºêÁ§Æ® »ı¼º.
+                    obj = new() { name = "@Main" };     //@Mainì´ë¼ëŠ” ì˜¤ë¸Œì íŠ¸ ìƒì„±.
                     obj.AddComponent<Main>();
-                    DontDestroyOnLoad(obj);     // ¾À ³Ñ¾î°¡µµ ÆÄ±« ¾ÈµÇµµ·Ï.
-                    _instance = obj.GetComponent<Main>();   // ÀÎ½ºÅÏ½ºÈ­.
+                    DontDestroyOnLoad(obj);     // ì”¬ ë„˜ì–´ê°€ë„ íŒŒê´´ ì•ˆë˜ë„ë¡.
+                    _instance = obj.GetComponent<Main>();   // ì¸ìŠ¤í„´ìŠ¤í™”.
                 }
             }
             return _instance;
@@ -40,14 +40,14 @@ public class Main : MonoBehaviour
     private ResourceManager _resource = new();
     private DataManager _data = new();
     private UIManager _ui = new();
-    private SceneManager _scene = new();
+    private SceneManagerEOM _scene = new();
     private ObjectManager _object = new();
 
     public static PoolManager Pool => Instance?._pool;
     public static ResourceManager Resource => Instance?._resource;
     public static DataManager Data => Instance?._data;
     public static UIManager UI => Instance?._ui;
-    public static SceneManager Scene => Instance?._scene;
+    public static SceneManagerEOM Scene => Instance?._scene;
     public static ObjectManager Object => Instance?._object;
 
 
