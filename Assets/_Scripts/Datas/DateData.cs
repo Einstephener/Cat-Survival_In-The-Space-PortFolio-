@@ -1,8 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Date
+/// <summary>
+/// 테스트 하기 위해 임시로 만들어 봤습니다. :)
+/// 안에 있는 변수는 무시 하시면 됩니다.
+/// </summary>
+[SerializeField]
+public class DateData : Data
 {
     public int year;
     public int month;
@@ -10,17 +14,4 @@ public class Date
     public int hour;
     public int minute;
     public int second;
-}
-[SerializeField]
-public class DateData : ILoader<int, Date>
-{
-    public List<Date> stats = new List<Date>();
-
-    public Dictionary<int, Date> MakeDict()
-    {
-        Dictionary<int, Date> dict = new Dictionary<int, Date>();
-        foreach (Date stat in stats)
-            dict.Add(stat.year, stat);
-        return dict;
-    }
 }

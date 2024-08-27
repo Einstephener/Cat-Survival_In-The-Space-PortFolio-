@@ -4,79 +4,51 @@ using UnityEngine;
 using System.IO;
 using Newtonsoft.Json;
 using System;
+using System.Linq;
 
-//Test ÀÓ½Ã - ³ªÁß¿¡ Data Ãß°¡ µÇ¸é »èÁ¦ ¤¡¤¡
-public class TestPlayerStateData
+public class Data
 {
-    public Vector3 position;
-    public int health;
-    public int hunger;
-    public int woodCutting;
-    public float stamina;
+    public string Key { get; set; }
 }
-
-
-public interface ILoader<Key, Value>
-{
-    Dictionary<Key, Value> MakeDict();
-}
-
 
 public class DataManager
 {
-    public Dictionary<string, DateData> _dateData = new();
-    //public Dictionary<string, TestPlayerStateData> _playerData = new();
-    //public Dictionary<string, TestPlayerStateData> _inventoryData = new();
-    //public Dictionary<string, TestPlayerStateData> _ResurcesData = new();
-
-    public Dictionary<int, Date> StatDict { get; private set; } = new Dictionary<int, Date>();
-
-
-    private string savePath;
-
-    //public void Init()
-    //{
-    //    // data Ãß°¡ ½Ã ÄÚµå Ãß°¡ 2
-    //    StatDict = LoadJson<DateData, int, Date>("StatData").MakeDict();
-    //}
-
-    //Loader LoadJson<Loader, Key, Value>(string path) where Loader : ILoader<Key, Value>
-    //{
-    //    //TextAsset textAsset = Main.Resource.Load<TextAsset>($"Data/{path}");
-    //    //return JsonUtility.FromJson<Loader>(textAsset.text);
-    //}
-
-
-
-
-    private void Awake()
-    {
-        savePath = Application.persistentDataPath + "/";
-    }
+    /// <summary>
+    /// ë°ì´í„° ì¶”ê°€ ë˜ë©´ ì¶”ê°€ í•˜ë„ë¡ í•˜ê² ìŠµë‹ˆë‹¤.
+    /// </summary>
+    public Dictionary<string, DateData> Date = new();
 
     public void Initialize()
     {
-        
+        Date = LoadJson<DateData>();
     }
-    // ¼¼ÀÌºê
-    // 1. key°ªÀ» ÀÌ¿ëÇÏ¿© ÆÄÀÏ¸¦ Ã£±â
-    // 2. ¾øÀ¸¸é key.jsonÀ¸·Î »ı¼º
-    // 3. ÀÖÀ¸¸é ´ş¾î ¾º¿ö!!
-    public void SaveData<T>(string key, T data) where T : class
+
+    // ë°ì´í„°ë¥¼ ë¡œë“œ í•˜ê¸° - LoadJson<ClassName>() - Dataë¥¼ ìƒì† ë°›ì€ Classë§Œ ê°€ëŠ¥
+    private Dictionary<string, T> LoadJson<T>() where T : Data
     {
-        string json = JsonUtility.ToJson(data); //¸Ş¸ğ¸® ÀúÀå 
-        File.WriteAllText(savePath + key + ".json", json);
+        var dataList = JsonConvert.DeserializeObject<List<T>>(Main.Resource.Get<TextAsset>($"{typeof(T).Name}").text);
+        var dictionary = new Dictionary<string, T>();
+
+        foreach (var data in dataList)
+        {
+            dictionary[data.Key] = data; // í‚¤ê°€ ì¤‘ë³µë  ê²½ìš° ë®ì–´ì”ë‹ˆë‹¤.
+        }
+
+        return dictionary;
     }
 
-    private Dictionary<string, dynamic> dataDictionary;
-
-    void Start()
+    // ë°ì–´í„° ì„¸ì´ë¸Œ - SaveJson(ë”•ì…”ë„ˆë¦¬ë¡œ ë˜ì–´ ìˆëŠ” Data, "ì €ì¥ë  ì´ë¦„")
+    public void SaveJson<T>(Dictionary<string, T> data, string fileName) where T : Data
     {
-        dataDictionary = new Dictionary<string, dynamic>();
+        string json = JsonConvert.SerializeObject(data.Values.ToList(), Formatting.Indented);
+        File.WriteAllText(Path.Combine(Application.persistentDataPath, $"{fileName}.json"), json);
     }
-    /// <summary>
 
 
 
-
+    //public void SaveData<T>(string key, T data) where T : class
+    //{
+    //    string json = JsonUtility.ToJson(data); //ë©”ëª¨ë¦¬ ì €ì¥ 
+    //    File.WriteAllText(savePath + key + ".json", json);
+    //}
 }
