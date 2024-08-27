@@ -1,10 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager 
+public enum OrderValue { _sceneOrder = 0, _popUpOrder = 10, _settingOrder = 20 }
+/*
+_sceneOrder = 0; // 팝업에 사용할 오더 값
+_popUpOrder = 10; // 팝업에 사용할 오더 값
+_settingOrder = 20; // 설정창에 사용할 오더 값
+*/
+
+public class UIManager
 {
     // 게임 씬 상에서 생길 여러가지 "UI 캔버스 프리팹" 들의 생성과 삭제를 관리하는 스크립트로 사용할 것
 
@@ -35,28 +43,23 @@ public class UIManager
         }
     }
 
-
-
     #region Fields
-
-    //private int _popUpOrder = 10; // 팝업에 사용할 오더 값
-    //private int _settingOrder = 10; // 팝업에 사용할 오더 값
-    //private GameObject _alreayOpenPopUpUI; // 이미 열려있는 PopUp UI
+    private GameObject _alreayOpenPopUpUI; // 이미 열려있는 PopUp UI
 
     #endregion
-    public void SetCanvas(GameObject obj)
+    public void SetCanvas(GameObject obj, OrderValue sort)
     {
-        if (!obj.TryGetComponent<Canvas>(out Canvas canvas))
+        if (!obj.TryGetComponent(out Canvas canvas))
         {
             // 오브젝트에 Canvas 컴포넌트 유무 확인, 확인 후 없으면 추가해줌.
-           canvas = obj.AddComponent<Canvas>();
+            canvas = obj.AddComponent<Canvas>();
         }
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
         canvas.overrideSorting = true;
 
+        canvas.sortingOrder = (int)sort;
 
-
-        if (!obj.TryGetComponent<CanvasScaler>(out CanvasScaler scaler))
+        if (!obj.TryGetComponent(out CanvasScaler scaler))
         {
             // 오브젝트에 CanvasScaler 컴포넌트 유무 확인, 확인 후 없으면 추가해줌.
             scaler = obj.AddComponent<CanvasScaler>();
@@ -67,20 +70,28 @@ public class UIManager
 
     #region Scene UI
 
-    // UI_Scene 자식들만 가능
-    //public T ShowSceneUI<T>(string name = null) where T : UI_Scene
-    //{
-    //    if (string.IsNullOrEmpty(name))
-    //        name = typeof(T).Name;
+    //UI_Scene 자식들만 가능
+    public T ShowSceneUI<T>(string name = null) where T : UI_Scene
+    {
+        if (string.IsNullOrEmpty(name))
+            name = typeof(T).Name;
 
-    //    GameObject go = Main.ResourceManager.Instantiate($"UI/Scene/{name}");
-    //    T sceneUI = Util.GetOrAddComponent<T>(go);
-    //    _sceneUI = sceneUI;
+        GameObject go = new GameObject();
 
-    //    go.transform.SetParent(Root.transform);
+        //GameObject go = Main.Resource.Instantiate($"UI/Scene/{name}"); // 원래 코드. 리소스 매니저에 연결 필요. 
 
-    //    return sceneUI;
-    //}
+        if (!go.TryGetComponent(out T sceneUI))
+        {
+            // 오브젝트에 Canvas 컴포넌트 유무 확인, 확인 후 없으면 추가해줌.
+            sceneUI = go.AddComponent<T>();
+        }
+
+        //_sceneUI = sceneUI;
+
+        go.transform.SetParent(Root.transform);
+
+        return sceneUI;
+    }
 
 
     #endregion
@@ -88,38 +99,49 @@ public class UIManager
 
     #region PopUp UI
 
-    // TODO 이미 열려있는 팝업이 있는 경우, 팝업 요청 무시.
-    // TODO PopUp 리스트로 관리하는 거 수정.
 
     // UI_Popup 자식들만 가능
-    //public T ShowPopupUI<T>(string name = null) where T : UI_Popup
-    //{
-    //    if (string.IsNullOrEmpty(name)) // 이름을 안받았다면 T로 ㄱㄱ
-    //        name = typeof(T).Name;
+    public T ShowPopupUI<T>(string name = null) where T : UI_Popup
+    {
+        if (string.IsNullOrEmpty(name)) // 이름을 안받았다면 T로 ㄱㄱ
+            name = typeof(T).Name;
 
-    //    GameObject go = Managers.Resource.Instantiate($"UI/Popup/{name}");
-    //    T popup = Util.GetOrAddComponent<T>(go);
-    //    _popupStack.Push(popup);
+        if (_alreayOpenPopUpUI = null)
+        {
+            GameObject go = new GameObject();
 
-    //    go.transform.SetParent(Root.transform);
+            if (!go.TryGetComponent(out T popup))
+            {
+                // 오브젝트에 Canvas 컴포넌트 유무 확인, 확인 후 없으면 추가해줌.
+                popup = go.AddComponent<T>();
+            }
 
-    //    Time.timeScale = 0.0f;
+            _alreayOpenPopUpUI = go;
 
-    //    return popup;
-    //}
+            go.transform.SetParent(Root.transform);
 
-    //public void ClosePopupUI()
-    //{
+            Time.timeScale = 0.0f;
 
-    //    Time.timeScale = 1.0f;
-    //    if (_popupStack.Count == 0)
-    //        return;
+            return popup;
+        }
+        else
+        {
+            // 이미 열려있는 팝업이 있는 경우, 팝업 요청 무시.
+            return null;
+        }
+        //GameObject go = Main.Resource.Instantiate($"UI/Popup/{name}");
+    }
 
-    //    UI_Popup popup = _popupStack.Pop();
-    //    Managers.Resource.Destroy(popup.gameObject);
-    //    popup = null;
-    //    _order--; // order 줄이기
-    //}
+    public void ClosePopupUI(GameObject obj)
+    {
+        Time.timeScale = 1.0f;
+
+        if (_alreayOpenPopUpUI == obj)
+        {
+            obj.SetActive(false); // TODO: 파괴되는 코드로 바꾸어야 함.
+        }
+        _alreayOpenPopUpUI = null;        
+    }
 
 
     #region Setting PopUp UI
