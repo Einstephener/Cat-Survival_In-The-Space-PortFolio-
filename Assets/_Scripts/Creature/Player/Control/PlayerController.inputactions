@@ -2,11 +2,11 @@
     "name": "PlayerController",
     "maps": [
         {
-            "name": "PlayerActionKey",
+            "name": "Player",
             "id": "7acb054f-e4d3-4c41-b2a8-4a6ca3d9a8b5",
             "actions": [
                 {
-                    "name": "View",
+                    "name": "Look",
                     "type": "Value",
                     "id": "b1c21ed4-f124-4712-b4cc-e5df3403cbef",
                     "expectedControlType": "Vector2",
@@ -58,42 +58,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "UI_Setting",
-                    "type": "Button",
-                    "id": "76c1777f-9cbb-4508-80e0-f591fd2f47b1",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "UI_Inventory",
-                    "type": "Button",
-                    "id": "7e50cf95-a012-4515-9b56-e7403f53c679",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "UI_Map",
-                    "type": "Button",
-                    "id": "06d9ce71-2c3e-4cf6-a5c0-2092d7ed5b8e",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "UI_Tablet",
-                    "type": "Button",
-                    "id": "74492f59-c932-4619-88d0-542300e4e996",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -104,7 +68,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "View",
+                    "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -113,7 +77,7 @@
                     "id": "aaea6269-7017-43e1-aae8-6c4e1d216bd1",
                     "path": "2DVector",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "NormalizeVector2",
                     "groups": "",
                     "action": "Move",
                     "isComposite": true,
@@ -217,10 +181,74 @@
                     "action": "Sit",
                     "isComposite": false,
                     "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "a1a02703-6466-43b2-a7a3-eb757be3095d",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "8a30b2c6-c147-480f-abc4-b171abd9c22c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UI_Setting",
+                    "type": "Button",
+                    "id": "0b6490e2-68b6-4bd1-9f2a-73aa78616d1f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UI_Inventory",
+                    "type": "Button",
+                    "id": "751e03a1-f65a-42fb-a77f-eb07e036937e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UI_Map",
+                    "type": "Button",
+                    "id": "e76d4621-3308-435d-9384-6aadaed4f634",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UI_Tablet",
+                    "type": "Button",
+                    "id": "8e7a1d34-6de2-44fc-8075-8db8206c95cc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f49876bf-c211-47af-857a-83cde0f95dc3",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "eae052d4-58b6-47b7-b1ca-1f1820b2d46c",
+                    "id": "1faf7b4f-91a5-4d70-8866-a118e72dceaf",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
@@ -231,7 +259,7 @@
                 },
                 {
                     "name": "",
-                    "id": "aa318c45-782b-4641-a3ff-7c3b6615132c",
+                    "id": "586fc3ee-5f14-4d27-8f8d-a054175df9ba",
                     "path": "<Keyboard>/i",
                     "interactions": "",
                     "processors": "",
@@ -242,7 +270,7 @@
                 },
                 {
                     "name": "",
-                    "id": "525764c5-8105-49d1-aa2d-654d0b051cdf",
+                    "id": "75052186-2ffb-457a-84dd-3aef266a3a71",
                     "path": "<Keyboard>/m",
                     "interactions": "",
                     "processors": "",
@@ -253,7 +281,7 @@
                 },
                 {
                     "name": "",
-                    "id": "495294bb-fc94-4304-abc7-3025d707a946",
+                    "id": "5195007a-f35a-4f87-a866-6116730d3cc9",
                     "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
