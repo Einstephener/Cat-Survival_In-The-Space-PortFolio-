@@ -55,6 +55,11 @@ public class PoolManager
                 poolable = Create();
 
             poolable.gameObject.SetActive(true);
+
+            // 씬이 이동되었을 때, DontDestroy 해제 용도.
+            //if (parent == null)
+            //    poolable.transform.parent = Main.Scene.현재씬.transform;
+
             poolable.transform.parent = parent;
             poolable.IsUsing = true;
 
