@@ -17,7 +17,7 @@ public class PlayerInputController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 nextVec = _moveInput * _speed * Time.fixedTime;
+        Vector3 nextVec = _moveInput * _speed * Time.fixedDeltaTime;
         _rigid.MovePosition(_rigid.position + nextVec);
     }
 
