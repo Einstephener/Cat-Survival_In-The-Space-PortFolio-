@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static Pathfinding.AdvancedSmooth;
 using Object = UnityEngine.Object;
 //using UnityEngine.AddressableAssets;
 
@@ -35,7 +36,7 @@ public class ResourceManager
         return resource.name;
     }
 
-    // 리소스를 비동기적으로 로드하기
+    // 리소스를 비동기적으로 로드하기 - Initialize에 사용하여 특정 파일에 있는 Object를 전부 생성 Hierchy에 생성 되도록 함
     private void LoadResource<T>(string path, Func<T, string> keyFinder = null) where T : Object
     {
         if (keyFinder == null)
@@ -100,14 +101,28 @@ public class ResourceManager
         return resourceList;
     }
 
-    //// 생성
-    //public GameObject Instantiate()
-    //{
-    //    return;
-    //}
-    ////제거
-    //public void Destroy(GameObject obj)
-    //{
+    public GameObject Instantiate(string key, Transform parent = null)
+    {
+        GameObject prefab = Get<GameObject>(key);
+        //프리팹
+        if (prefab == null)
+        {
+            Debug.LogError($"[ResourceManager] Instantiate({key}): Failed to load prefab.");
+            return null;
+        }
 
-    //}
+        bool pooling = prefab.GetComponent<Poolable>().IsUsing;
+
+        if (pooling)
+        {
+            return Main.Pool.Pop(prefab).GetComponent<GameObject>();
+        }
+        //풀 매니저
+
+        GameObject obj = UnityEngine.Object.Instantiate(prefab, parent);
+        obj.name = prefab.name;
+        return obj;
+    }
+
+
 }
