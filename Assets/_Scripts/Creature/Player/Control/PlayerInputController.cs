@@ -5,10 +5,14 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputController : MonoBehaviour
 {
+    [Header("Player Move")]
     [SerializeField] private Vector3 _moveInput;
-    [SerializeField] private float _speed;
 
     private Rigidbody _rigid;
+    [SerializeField] private float _speed;
+    private float _walkSpeed = 3.0f;
+    private float _runSpeed = 10.0f;
+    private float _jumpForce = 3.0f;
 
     private void Awake()
     {
@@ -24,6 +28,19 @@ public class PlayerInputController : MonoBehaviour
     private void OnMove(InputValue value)
     {
         _moveInput = value.Get<Vector3>();
+    }
+
+    private void OnRun(InputValue value)
+    {
+        if (value.isPressed)
+            _speed = _runSpeed;
+        else
+            _speed = _walkSpeed;
+    }
+
+    private void OnJump()
+    {
+        _rigid.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
     }
 
     private void OnLook(InputValue value)

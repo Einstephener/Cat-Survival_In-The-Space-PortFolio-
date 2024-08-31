@@ -27,13 +27,14 @@ public enum EquipableType
 public class ItemDataConsumable
 {
     public ConsumableType type;
-    public float value;
+    public float ConsumableValue;
 }
 
+[System.Serializable]
 public class ItemDataEquipable
 {
     public EquipableType type;
-    public float value;
+    public int DurabilityValue;
 }
 
 [CreateAssetMenu(fileName = "Item", menuName = "New Item")]

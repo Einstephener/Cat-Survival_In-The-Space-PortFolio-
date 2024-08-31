@@ -43,12 +43,12 @@
                 },
                 {
                     "name": "Run",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "11f7efb7-9fbc-47af-bae4-797d5449e9b5",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
+                    "interactions": "Press(pressPoint=0.01,behavior=2)",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Sit",
