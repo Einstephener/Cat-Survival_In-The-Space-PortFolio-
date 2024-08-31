@@ -7,6 +7,7 @@ public class PlayerInputController : MonoBehaviour
 {
     [Header("Player Move")]
     [SerializeField] private Vector3 _moveInput;
+    [HideInInspector] public bool IsRun;
 
     private Rigidbody _rigid;
     [SerializeField] private float _speed;
@@ -33,9 +34,15 @@ public class PlayerInputController : MonoBehaviour
     private void OnRun(InputValue value)
     {
         if (value.isPressed)
+        {
             _speed = _runSpeed;
+            IsRun = true;
+        }
         else
+        {
             _speed = _walkSpeed;
+            IsRun = false;
+        }
     }
 
     private void OnJump()
