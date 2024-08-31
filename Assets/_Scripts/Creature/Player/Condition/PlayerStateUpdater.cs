@@ -8,12 +8,14 @@ public class PlayerStateUpdater : MonoBehaviour
     private PlayerCondition _playerCondition;
     private PlayerState _state;
 
-    [HideInInspector] public float hungerDecreaseRate = 0.1f;  // 배고픔 감소 속도
-    [HideInInspector] public float thirstDecreaseRate = 0.1f; // 목마름 감소 속도
+    [HideInInspector] public float hungerDecreaseRate = 0.5f;  // 배고픔 감소 속도
+    [HideInInspector] public float thirstDecreaseRate = 0.5f; // 목마름 감소 속도
     [HideInInspector] public float healthDecreaseRate = 1f;    // 체력 감소 속도 
     [HideInInspector] public float staminaDecreaseRate = 1f;    // 체력 감소 속도 
 
     [HideInInspector] public bool isRun = false; //TODO 달리기 상태일때 is Run값 바꿔주기.
+    [HideInInspector] public bool canRun = false; //TODO 달리기 상태일때 is Run값 바꿔주기.
+    private bool _isStaminaLock = false;
     #endregion
 
     public void Initialize(PlayerCondition playerCondition, PlayerState state)
@@ -27,6 +29,7 @@ public class PlayerStateUpdater : MonoBehaviour
         TimeToDecrease();
         HealthDecrease();
         StaminaUpdate(isRun);
+        IsPlayerDead();
     }
 
     private void TimeToDecrease()
@@ -52,35 +55,61 @@ public class PlayerStateUpdater : MonoBehaviour
 
     private void StaminaUpdate(bool isRun = false)
     {
-        if (isRun)
+        // 스태미나 회복 시도 (달리기 키를 누르고 있지 않을 때, 달리키를 누르더라도 달릴 수 없는 상황일 때.)
+        if (!isRun || _isStaminaLock)
         {
-            // 스테미나 감소.
-            _playerCondition.UpdateStamina(-staminaDecreaseRate * Time.deltaTime);
-        }
-        else
-        {
-            // 스테미나 회복.
-            if (_state.Stamina != 0)
+            // 스태미나 회복.
+            if (_state.Stamina <= 100)
             {
-                // 배고픔에 따라 다른 스테미나 회복량.
+                // 배고픔에 따라 다른 스태미나 회복량.
                 if (_state.Hunger >= 50)
                     _playerCondition.UpdateStamina(staminaDecreaseRate * Time.deltaTime);
                 else
                     _playerCondition.UpdateStamina(staminaDecreaseRate * 0.5f * Time.deltaTime);
             }
         }
+        else
+        {
+            // 달리기 중이고 스태미나가 0 이상일 때만 감소
+            if (CheckStamina())
+            {
+                // 스태미나 감소.
+                _playerCondition.UpdateStamina(-staminaDecreaseRate * Time.deltaTime);
+            }
+        }
     }
 
-    //TODO
-    /*
-     플레이어 상태
+    private bool CheckStamina()
+    {
+        if (_state.Stamina <= 0) // 스태미나가 0 이하일 때
+        {
+            _isStaminaLock = true;
+            return false;
+        }
 
-        스테미너
-            스테미너 0일 때는 달리기 불가능
-                한번 0으로 떨어진 후
-                스테미너가 20퍼센트 까지 차오르기 전에는 달리기 불가능
-        체력
-            체력 0일 시 사망.
-     */
+        if (_state.Stamina >= 20) // 스태미나가 20 이상일 때
+        {
+            _isStaminaLock = false;
+            return true;
+        }
+
+        // 스태미나가 0과 20 사이일 때
+        return !_isStaminaLock;
+    }
+
+    public bool IsPlayerDead()
+    {
+        // TODO 죽을 때 화면 등등..
+        if(_state.Health <= 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
 
 }

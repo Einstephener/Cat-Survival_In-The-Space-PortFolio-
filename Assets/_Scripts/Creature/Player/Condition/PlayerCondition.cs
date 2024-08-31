@@ -28,11 +28,12 @@ public class PlayerCondition : MonoBehaviour, ISubject
 {
     private List<IObserver> _observers = new List<IObserver>();
     private PlayerState _state;
+    private float _maxValue = 100f;
 
     private void Start()
     {
         // TODO: 저장 시점에 어떤 값을 가지고 있는지, 게임 시작시 초기화.
-        _state = new PlayerState(100, 100, 100, 100);
+        _state = new PlayerState(_maxValue, _maxValue, _maxValue, _maxValue);
 
         UI_PlayerCondition uI_PlayerCondition = FindObjectOfType<UI_PlayerCondition>();
         if (uI_PlayerCondition != null)
@@ -91,5 +92,6 @@ public class PlayerCondition : MonoBehaviour, ISubject
         _state.Stamina += amount;
         Notify();
     }
+
     #endregion
 }
