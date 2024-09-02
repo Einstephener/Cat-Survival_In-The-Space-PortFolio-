@@ -195,6 +195,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Plane
       objectReference: {fileID: 0}
+    - target: {fileID: 8435297962310241519, guid: 8805e9a5f3fbf9d46babe26bc5a2b42c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -518,7 +523,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7223748507151818215, guid: 740903bfc8486c04ba691fe3543d121b,
+        type: 3}
+      propertyPath: ground.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 7223748507151818215, guid: 740903bfc8486c04ba691fe3543d121b,
+        type: 3}
+      propertyPath: _groundDistance
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7223748507151818215, guid: 740903bfc8486c04ba691fe3543d121b,
+        type: 3}
+      propertyPath: _groundCheckLayer.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5235956271857532438, guid: 740903bfc8486c04ba691fe3543d121b, type: 3}
+    - {fileID: 5063405788485668207, guid: 740903bfc8486c04ba691fe3543d121b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

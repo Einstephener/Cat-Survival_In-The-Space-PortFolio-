@@ -8,7 +8,7 @@ public class Poolable : MonoBehaviour
 
     #region Field
 
-    private bool IsUsing;
+    public bool IsUsing;
 
     #endregion
 }
