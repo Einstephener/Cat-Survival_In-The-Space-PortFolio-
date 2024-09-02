@@ -1,43 +1,108 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MaterialSpawn : MonoBehaviour
 {
+
     #region Fields
 
-    // 자원 프리팹
-    [SerializeField] private GameObject Tree;
-    [SerializeField] private GameObject Stone;
+    // 스폰할 오브젝트들 list로 받아오기.
+    public List<Poolable> SpawnMaterials = new List<Poolable>();
 
-    // 현재 스폰되어 있는 자원 수.
-    [SerializeField] private int _treeCountNow = 0;
-    [SerializeField] private int _stoneCountNow = 0;
-
-    // 최소 유지 자원 수.
-    [SerializeField] private int _treeKeepCount = 0;
-    [SerializeField] private int _stoneKeepCount = 0;
-
-    // 소환 한번에 생성되는 자원 수.
-    private int _spawnAtOneTimeTree = 1;
-    private int _spawnAtOneTimeStone = 1;
-
-    // 좌표
-    [SerializeField] private Vector3 _spawnPosTree;
-    [SerializeField] private Vector3 _spawnPosStone;
-
-    [SerializeField] float _spawnRadius = 15.0f; // 소환 좌표 간격.
-    [SerializeField] float _spawnTime = 5.0f; // 소환 주기.
     #endregion
 
 
     private void Awake()
     {
+        //// TODO: ResourceManager에서 소환으로 변경.
+        //Main.Resource.Instantiate("Tree");
+        //Main.Resource.Instantiate("Stone");
+
         // 오브젝트 Pool에 생성.
-        Main.Pool.Init();
-        Main.Pool.CreatePool(Tree, _treeKeepCount);
-        Main.Pool.CreatePool(Stone, _stoneKeepCount);
+        foreach (var poolable in SpawnMaterials)
+        {
+            Main.Pool.Init();
+            Main.Pool.CreatePool(poolable.Prefab, poolable._KeepCount);
+
+
+        }
     }
 
+
+    private void Update()
+    {
+        //foreach(var poolable in SpawnMaterials)
+        //{
+        //    while (CheckSpawnEachMaterials(poolable))
+        //    {
+        //        StartCoroutine(ReserveSpawn(poolable));
+        //    }
+        //}
+        
+    }
+
+    private bool CheckSpawnEachMaterials(Poolable _pool)
+    {
+        if (_pool._CountNow < _pool._KeepCount)
+            return true;
+        else
+            return false;
+    }
+
+    IEnumerator ReserveSpawn(Poolable _pool)
+    {
+        // Ensure that we do not exceed the spawn limit
+        if (_pool._CountNow >= _pool._KeepCount)
+        {
+            yield break;
+        }
+        _pool._spawnAtOneTimeCount++;
+        yield return new WaitForSeconds(Random.Range(0, _pool._spawnTime));
+
+        //GameObject obj = Managers.Game.Spawn(Define.WorldObject.Monster, "Knight");
+
+        Poolable spawnedObject = Main.Pool.Pop(_pool.Prefab);
+
+        if (spawnedObject == null)
+        {
+            Debug.LogError("Failed to spawn object.");
+            yield break;
+        }
+        Vector3 randPos;
+        //NavMeshAgent nma = obj.GetOrAddComponent<NavMeshAgent>();
+        while (true)
+        {
+            Vector3 randDir = Random.insideUnitSphere * Random.Range(0, _pool._spawnRadius);
+            randDir.y = 0;
+
+
+            randPos = _pool._spawnPos + randDir;
+
+            //NavMeshPath path = new NavMeshPath();
+            //if (nma.CalculatePath(randPos, path))
+            break;
+        }
+
+        //obj.transform.position = randPos;
+        spawnedObject.transform.position = randPos;
+
+        _pool._CountNow++;
+        _pool._spawnAtOneTimeCount--;
+    }
+
+
+    //TODO 오브젝트 디스폰 수정중.
+    //public void OnObjectDespawn(Poolable poolable)
+    //{
+    //    var matchingPool = SpawnMaterials.Find(p => p.Prefab == poolable.Prefab);
+    //    if (matchingPool != null)
+    //    {
+    //        matchingPool._CountNow--;
+    //    }
+
+    //    Main.Pool.Push(poolable);
+    //}
 
 }
