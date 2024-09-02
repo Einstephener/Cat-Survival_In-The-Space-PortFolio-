@@ -37,7 +37,7 @@ public class ItemDataEquipable
     public int DurabilityValue;
 }
 
-[CreateAssetMenu(fileName = "Item", menuName = "New Item")]
+//[CreateAssetMenu(fileName = "Item", menuName = "New Item")]
 public class ItemData : ScriptableObject
 {
     [Header("Info")]
@@ -47,16 +47,16 @@ public class ItemData : ScriptableObject
     public Sprite Icon;
     public GameObject DropPrefab;
 
-    [Header("Stacking")]
-    public bool CanStack;
-    public int MaxStackAmount;
+    //[Header("Stacking")]
+    //public bool CanStack;
+    //public int MaxStackAmount;
 
-    [Header("Consumable")]
-    public ItemDataConsumable[] Consumables;
+    //[Header("Consumable")]
+    //public ItemDataConsumable[] Consumables;
 
-    [Header("Equip")]
-    public GameObject EquipPrefab;
+    //[Header("Equip")]
+    //public GameObject EquipPrefab;
 
-    [Header("Equipable")]
-    public ItemDataEquipable[] Equipables;
+    //[Header("Equipable")]
+    //public ItemDataEquipable[] Equipables;
 }
