@@ -22,6 +22,7 @@ public class PlayerInputController : MonoBehaviour
     private float _groundDistance = 0.2f; // 박스 캐스트 높이.
 
     private bool isGrounded;
+    private bool isRun;
     #endregion
 
     private void Awake()
@@ -35,6 +36,7 @@ public class PlayerInputController : MonoBehaviour
     private void FixedUpdate()
     {
         // 이동.
+        ChangeSpeed();
         Vector3 nextVec = _moveInput * _currentSpeed * Time.fixedDeltaTime;
         _rigid.MovePosition(_rigid.position + nextVec);
 
@@ -52,14 +54,22 @@ public class PlayerInputController : MonoBehaviour
     private void OnRun(InputValue value)
     {
         if (value.isPressed)
-        {
-            if (isGrounded)
-                _currentSpeed = _runSpeed;
-        }
+            isRun = true;
         else
-            _currentSpeed = _walkSpeed;
+            isRun = false;
 
         OnRunStateChanged?.Invoke(value.isPressed); // 달리기 이벤트 호출.
+    }
+
+    private void ChangeSpeed()
+    {
+        if (isGrounded)
+        {
+            if (isRun)
+                _currentSpeed = _runSpeed;
+            else
+                _currentSpeed = _walkSpeed;
+        }
     }
 
     private void OnJump()
