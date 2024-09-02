@@ -52,7 +52,10 @@ public class PlayerInputController : MonoBehaviour
     private void OnRun(InputValue value)
     {
         if (value.isPressed)
-            _currentSpeed = _runSpeed;
+        {
+            if (isGrounded)
+                _currentSpeed = _runSpeed;
+        }
         else
             _currentSpeed = _walkSpeed;
 
