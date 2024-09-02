@@ -111,12 +111,12 @@ public class ResourceManager
             return null;
         }
 
-        bool pooling = prefab.GetComponent<Poolable>().IsUsing;
 
-        if (pooling)
+        if (prefab.TryGetComponent<Poolable>(out Poolable poolable)) // Prefab에 Poolable 컴포넌트가 붙어있는가?
         {
             return Main.Pool.Pop(prefab).GetComponent<GameObject>();
         }
+
         //풀 매니저
 
         GameObject obj = UnityEngine.Object.Instantiate(prefab, parent);
