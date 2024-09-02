@@ -17,6 +17,25 @@ public class PlayerStateUpdater : MonoBehaviour
     [HideInInspector] public bool canRun = false; //TODO 달리기 상태일때 is Run값 바꿔주기.
     private bool _isStaminaLock = false;
     #endregion
+    private void Start()
+    {
+        GetInputController();
+    }
+
+    private void GetInputController()
+    {
+        // PlayerInputController의 OnRunStateChanged 이벤트 구독.
+        PlayerInputController inputController = GetComponent<PlayerInputController>();
+        if (inputController != null)
+        {
+            inputController.OnRunStateChanged += HandleRunStateChanged;
+        }
+    }
+
+    private void HandleRunStateChanged(bool isRunning)
+    {
+        isRun = isRunning;  // 이벤트를 통해 isRun 업데이트
+    }
 
     public void Initialize(PlayerCondition playerCondition, PlayerState state)
     {

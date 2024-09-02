@@ -5,9 +5,11 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputController : MonoBehaviour
 {
+    public delegate void RunStateChanged(bool isRunning);
+    public event RunStateChanged OnRunStateChanged; // 달리기 이벤트.
+
     [Header("Player Move")]
     [SerializeField] private Vector3 _moveInput;
-    [HideInInspector] public bool IsRun;
 
     private Rigidbody _rigid;
     [SerializeField] private float _speed;
@@ -36,13 +38,13 @@ public class PlayerInputController : MonoBehaviour
         if (value.isPressed)
         {
             _speed = _runSpeed;
-            IsRun = true;
         }
         else
         {
             _speed = _walkSpeed;
-            IsRun = false;
         }
+
+        OnRunStateChanged?.Invoke(value.isPressed); // 달리기 이벤트 호출.
     }
 
     private void OnJump()
