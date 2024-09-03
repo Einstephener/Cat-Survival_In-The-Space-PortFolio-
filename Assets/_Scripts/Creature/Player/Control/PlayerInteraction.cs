@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public interface IInteractable
 {
     string GetInteractPrompt();
-    //void OnInteract();
+    void OnInteract();
 }
 
 public class PlayerInteraction : MonoBehaviour
@@ -31,6 +31,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void Update()
     {
+        //test
         Debug.DrawRay(camera.transform.position, camera.transform.forward * maxCheckDistance, Color.green);
 
         if (Time.time - lastCheckTime > checkRate)
@@ -63,14 +64,14 @@ public class PlayerInteraction : MonoBehaviour
         promptText.text = string.Format("<b>[E]</b> {0}", curInteractable.GetInteractPrompt());
     }
 
-    //public void OnInteractInput(InputAction.CallbackContext callbackContext)
-    //{
-    //    if (callbackContext.phase == InputActionPhase.Started && curInteractable != null)
-    //    {
-    //        curInteractable.OnInteract();
-    //        curInteractGameObject = null;
-    //        curInteractable = null;
-    //        promptText.gameObject.SetActive(false);
-    //    }
-    //}
+    public void OnInteractInput(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.phase == InputActionPhase.Started && curInteractable != null)
+        {
+            curInteractable.OnInteract();
+            curInteractGameObject = null;
+            curInteractable = null;
+            promptText.gameObject.SetActive(false);
+        }
+    }
 }
