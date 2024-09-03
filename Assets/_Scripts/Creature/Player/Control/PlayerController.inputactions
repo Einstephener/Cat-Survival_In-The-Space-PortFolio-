@@ -33,15 +33,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Click",
-                    "type": "Button",
-                    "id": "b59b843c-7629-48ac-b4d7-3567ab7668b9",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Run",
                     "type": "Value",
                     "id": "11f7efb7-9fbc-47af-bae4-797d5449e9b5",
@@ -54,6 +45,24 @@
                     "name": "Sit",
                     "type": "Button",
                     "id": "68d58f1e-c290-4427-857e-ce4413e0948f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Fire",
+                    "type": "Button",
+                    "id": "95302d41-a305-4d67-8bb5-2bc4f3fa7e8d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "55752aac-8631-499a-941c-d7d7abf165ca",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -140,28 +149,6 @@
                 },
                 {
                     "name": "",
-                    "id": "4b9dbff8-af2a-4af0-8833-2b0867528eb7",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Click",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6776387b-623e-4f20-acdf-546885c1e3f8",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Click",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "ad82ae7f-a7b0-4ee4-b6b4-c0b57a29c8b7",
                     "path": "<Keyboard>/leftShift",
                     "interactions": "",
@@ -179,6 +166,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Sit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b90a4a1c-c8e1-42d3-a826-fb7f3283ccd7",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8460fc24-4649-4ccb-8c19-50f41d47415e",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
