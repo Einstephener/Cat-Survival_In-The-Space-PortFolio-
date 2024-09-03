@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInputController : MonoBehaviour
 {
     #region Field
+    [SerializeField] private CameraController _cameraController;
+    private float _eulerAngleX;
+    private float _eulerAngleY;
+    private float _rotateSpeed = 3f;
+
     public delegate void RunStateChanged(bool isRunning);
     public event RunStateChanged OnRunStateChanged; // 달리기 이벤트.
 
@@ -31,13 +37,18 @@ public class PlayerInputController : MonoBehaviour
         _currentSpeed = _walkSpeed;
         _groundCheckLayer = LayerMask.GetMask("Ground");
         _groundCheck = GetComponent<Transform>();
+        Cursor.lockState = CursorLockMode.Locked; // 커서 가운데 고정.
     }
 
     private void FixedUpdate()
     {
         // 이동.
         ChangeSpeed();
-        Vector3 nextVec = _moveInput * _currentSpeed * Time.fixedDeltaTime;
+        Vector3 cameraForward = _cameraController.transform.forward;
+        Vector3 cameraRight = _cameraController.transform.right;
+
+        Vector3 nextVec = (_moveInput.z * cameraForward + _moveInput.x * cameraRight).normalized * _currentSpeed * Time.fixedDeltaTime;
+        nextVec.y = 0;
         _rigid.MovePosition(_rigid.position + nextVec);
 
         // 점프.
@@ -80,11 +91,27 @@ public class PlayerInputController : MonoBehaviour
 
     private void OnLook(InputValue value)
     {
-        //Debug.Log("OnLook" + value.ToString());
+        Vector2 lookInput = value.Get<Vector2>();
+
+        float mouseX = lookInput.x;
+        float mouseY = lookInput.y;
+
+        // 카메라 좌/우 회전.
+        _eulerAngleY += mouseX * _rotateSpeed;
+        // 카메라 위/아래 회전.
+        _eulerAngleX -= mouseY * _rotateSpeed;
+
+        _cameraController.RotateTo(_eulerAngleY, _eulerAngleX);
+        _rigid.rotation = Quaternion.Euler(0, _eulerAngleY, 0);
     }
 
     private void OnFire(InputValue value)
     {
-        //Debug.Log("OnFire" + value.ToString());
+        Debug.Log("OnFire" + value.ToString());
+    }
+
+    private void OnInteract(InputValue value)
+    {
+        Debug.Log("OnInteract" + value.ToString());
     }
 }
