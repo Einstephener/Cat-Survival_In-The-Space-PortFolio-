@@ -19,7 +19,7 @@ public class Poolable : MonoBehaviour
     public int _KeepCount = 0;
 
     // 소환 한번에 생성되는 자원 수.
-    public int _spawnAtOneTimeCount = 1;
+    //public int _spawnAtOneTimeCount = 1;
 
     // 좌표
     public Vector3 _spawnPos;

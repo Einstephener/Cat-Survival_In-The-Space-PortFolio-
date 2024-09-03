@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class MaterialSpawn : MonoBehaviour
 {
-
     #region Fields
 
     // 스폰할 오브젝트들 list로 받아오기.
     public List<Poolable> SpawnMaterials = new List<Poolable>();
 
+    // 스폰 위치 부모 transform.
+    private List<Transform> _parents = new List<Transform>();
+
     #endregion
 
+
+    // 코루틴 중복 실행 방지용 플래그
+    private bool[] _isSpawning;
 
     private void Awake()
     {
@@ -21,76 +26,61 @@ public class MaterialSpawn : MonoBehaviour
         //Main.Resource.Instantiate("Stone");
 
         // 오브젝트 Pool에 생성.
-        foreach (var poolable in SpawnMaterials)
+        Main.Pool.Init();
+
+        // 각 프리팹별로 코루틴 중복 실행 방지 플래그 초기화
+        _isSpawning = new bool[SpawnMaterials.Count];
+
+        // Create
+        for (int i = 0; i < SpawnMaterials.Count; i++)
         {
-            Main.Pool.Init();
-            Main.Pool.CreatePool(poolable.Prefab, poolable._KeepCount);
-
-
+            Main.Pool.CreatePool(SpawnMaterials[i].Prefab, SpawnMaterials[i]._KeepCount);
+            SpawnMaterials[i]._CountNow = 0;
+            //프리팹 별로 부모 설정.
+            _parents.Add(new GameObject { name = SpawnMaterials[i].Prefab.name + "_Root" }.transform);
+            _parents[i].parent = transform;
         }
     }
 
-
     private void Update()
     {
-        //foreach(var poolable in SpawnMaterials)
-        //{
-        //    while (CheckSpawnEachMaterials(poolable))
-        //    {
-        //        StartCoroutine(ReserveSpawn(poolable));
-        //    }
-        //}
-        
+        for (int i = 0; i < SpawnMaterials.Count; i++)
+        {
+            if (CheckSpawnEachMaterials(SpawnMaterials[i]) && !_isSpawning[i])
+            {
+                StartCoroutine(RespawnMaterial(i));
+            }
+        }
     }
 
     private bool CheckSpawnEachMaterials(Poolable _pool)
     {
-        if (_pool._CountNow < _pool._KeepCount)
-            return true;
-        else
-            return false;
+        return _pool._CountNow < _pool._KeepCount;
     }
 
-    IEnumerator ReserveSpawn(Poolable _pool)
+    IEnumerator RespawnMaterial(int i)
     {
-        // Ensure that we do not exceed the spawn limit
-        if (_pool._CountNow >= _pool._KeepCount)
-        {
-            yield break;
-        }
-        _pool._spawnAtOneTimeCount++;
-        yield return new WaitForSeconds(Random.Range(0, _pool._spawnTime));
+        _isSpawning[i] = true; // 코루틴 시작 시 플래그 설정
 
-        //GameObject obj = Managers.Game.Spawn(Define.WorldObject.Monster, "Knight");
+        yield return new WaitForSeconds(SpawnMaterials[i]._spawnTime);
 
-        Poolable spawnedObject = Main.Pool.Pop(_pool.Prefab);
+        Poolable spawnedObject = Main.Pool.Pop(SpawnMaterials[i].Prefab, _parents[i]);
 
-        if (spawnedObject == null)
-        {
-            Debug.LogError("Failed to spawn object.");
-            yield break;
-        }
-        Vector3 randPos;
-        //NavMeshAgent nma = obj.GetOrAddComponent<NavMeshAgent>();
-        while (true)
-        {
-            Vector3 randDir = Random.insideUnitSphere * Random.Range(0, _pool._spawnRadius);
-            randDir.y = 0;
+        SetRandomPosition(spawnedObject.transform, i);
 
+        SpawnMaterials[i]._CountNow++;
 
-            randPos = _pool._spawnPos + randDir;
-
-            //NavMeshPath path = new NavMeshPath();
-            //if (nma.CalculatePath(randPos, path))
-            break;
-        }
-
-        //obj.transform.position = randPos;
-        spawnedObject.transform.position = randPos;
-
-        _pool._CountNow++;
-        _pool._spawnAtOneTimeCount--;
+        _isSpawning[i] = false; // 코루틴 종료 시 플래그 해제
     }
+
+    private void SetRandomPosition(Transform objTransform, int index)
+    {
+        Vector3 randDir = Random.insideUnitSphere * Random.Range(1, SpawnMaterials[index]._spawnRadius);
+        randDir.y = 0; // 높이(Y)를 고정하여 평면 상에서 위치를 랜덤하게 설정
+        Vector3 randPos = SpawnMaterials[index]._spawnPos + randDir;
+        objTransform.position = randPos;
+    }
+    
 
 
     //TODO 오브젝트 디스폰 수정중.
