@@ -10,7 +10,9 @@ public class PlayerInputController : MonoBehaviour
     [SerializeField] private CameraController _cameraController;
     private float _eulerAngleX;
     private float _eulerAngleY;
-    private float _rotateSpeed = 3f;
+    private float _limitMinX = -70;
+    private float _limitMaxX = 70;
+    private float _rotateSpeed = 0.5f;
 
     public delegate void RunStateChanged(bool isRunning);
     public event RunStateChanged OnRunStateChanged; // 달리기 이벤트.
@@ -101,8 +103,11 @@ public class PlayerInputController : MonoBehaviour
         // 카메라 위/아래 회전.
         _eulerAngleX -= mouseY * _rotateSpeed;
 
-        _cameraController.RotateTo(_eulerAngleY, _eulerAngleX);
-        _rigid.rotation = Quaternion.Euler(0, _eulerAngleY, 0);
+        // X축 회전 각도 제한
+        _eulerAngleX = Mathf.Clamp(_eulerAngleX, _limitMinX, _limitMaxX);
+
+        _cameraController.RotateTo(_eulerAngleX);
+        transform.rotation = Quaternion.Euler(0, _eulerAngleY, 0);
     }
 
     private void OnFire(InputValue value)
