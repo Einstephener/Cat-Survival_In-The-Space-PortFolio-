@@ -4,21 +4,17 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public void RotateTo(float _eulerAngleX)
+    private float _sitSight = -1f;
+
+    public void RotateTo(float eulerAngleX)
     {
         // 실제 카메라의 Quaternion 회전에 적용.
-        transform.localRotation = Quaternion.Euler(_eulerAngleX, 0, 0);
+        transform.localRotation = Quaternion.Euler(eulerAngleX, 0, 0);
     }
 
     public void SitSightChange(bool isSit)
     {
-        if (isSit)
-        {
-            transform.localPosition = new Vector3(0, -1f, 0);
-        }
-        else
-        {
-            transform.localPosition = new Vector3(0, 0, 0);
-        }
+        float y = isSit ? _sitSight : 0f;
+        transform.localPosition = new Vector3(0, y, 0);
     }
 }
