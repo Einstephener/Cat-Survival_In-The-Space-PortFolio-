@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneManagerEOM : MonoBehaviour
 {
-    public int SceneNum { get; set; }
+    public BaseScene CurrentScene { get; set; }
 
     // 씬 매니저.
     public void LoadScene(string sceneName)
