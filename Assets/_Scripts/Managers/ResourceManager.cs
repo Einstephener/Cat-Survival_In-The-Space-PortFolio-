@@ -14,7 +14,7 @@ public class ResourceManager
     /// </summary>
     private Dictionary<Type, Dictionary<string, Object>> _resources = new();
 
-    private bool _isInitialized;
+    private bool _isInitialized = false;
 
     // 초기화
     public void Initialize()
@@ -24,7 +24,6 @@ public class ResourceManager
             return;
         }
         _isInitialized = true;
-
         // 임시파일 이름 - 아직 추가 안함. 파일 추가 되면 수정 될 예정
         LoadResource<GameObject>("Prefabs");
         LoadResource<TextAsset>("JsonData");
