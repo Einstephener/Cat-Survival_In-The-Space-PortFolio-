@@ -42,6 +42,7 @@ public class Main : MonoBehaviour
     private UIManager _ui = new();
     private SceneManagerEOM _scene = new();
     private ObjectManager _object = new();
+    private InventoryManager _inventory = new();
 
     public static PoolManager Pool => Instance?._pool;
     public static ResourceManager Resource => Instance?._resource;
@@ -49,8 +50,38 @@ public class Main : MonoBehaviour
     public static UIManager UI => Instance?._ui;
     public static SceneManagerEOM Scene => Instance?._scene;
     public static ObjectManager Object => Instance?._object;
+    public static InventoryManager Inventory => Instance?._inventory;
 
 
+    void Awake()
+    {
+        Initialize();
+    }
+
+    #region CoroutineHelper
+
+    public new static Coroutine StartCoroutine(IEnumerator coroutine) => (Instance as MonoBehaviour).StartCoroutine(coroutine);
+    public new static void StopCoroutine(Coroutine coroutine) => (Instance as MonoBehaviour).StopCoroutine(coroutine);
+
+    #endregion
+
+    private static void Initialize()
+    {
+        //if (instance != null) return;
+
+        //GameObject obj = GameObject.Find("@MainManager") ?? new GameObject { name = "@MainManager" };
+        //instance = Utilities.GetOrAddComponent<Main>(obj);
+        //DontDestroyOnLoad(obj);
+
+        
+        Resource.Initialize();
+        //UI.Initialize();
+        Data.Initialize();
+
+
+        //Application.targetFrameRate = 60;
+
+    }
 
 
 }
