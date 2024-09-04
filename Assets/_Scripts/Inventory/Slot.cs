@@ -28,7 +28,7 @@ public class Slot : MonoBehaviour
     /// </summary>
     public void SetSlot()
     {
-        image = itemData.Icon;
+        //image = itemData.Icon;
         quantityText.text = amount > 1 ? amount.ToString() : string.Empty;
     }
 
@@ -37,7 +37,7 @@ public class Slot : MonoBehaviour
     /// </summary>
     public void ClearSlot()
     {
-        image = itemData.Icon;
+        //image = itemData.Icon;
         quantityText.text = string.Empty;
     }
 

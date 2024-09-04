@@ -8,20 +8,11 @@ using UnityEngine.UI;
 public class UI_Base : MonoBehaviour
 {
     private bool _initialized;
-
-    public virtual void Init()
-    {
-
-    }
-
-
     protected virtual void OnEnable()
     {
         Initialize();
     }
 
-    protected virtual void OnDisable() { }
-    protected virtual void OnDestroy() { }
     public virtual bool Initialize()
     {
         if (_initialized) return false;
@@ -30,10 +21,8 @@ public class UI_Base : MonoBehaviour
         return true;
     }
 
-    protected virtual void SetOrder()
-    {
-
-    }
+    protected virtual void OnDisable() { }
+    protected virtual void OnDestroy() { }
 
 
     #region UI Binding 코드

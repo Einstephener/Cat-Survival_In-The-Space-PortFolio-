@@ -23,12 +23,12 @@
         /// Q.
         /// </summary>
         /// 
-    #endregion
+        #endregion
         public Dictionary<int, Slot> slots = new();
 
         [Header("#UI")]
         public Slot[] inventorySlots;
-        public Slot[] qickslots;
+        //public Slot[] qickslots;
 
         [Header("#Test")]
         public ItemData _Testitemdata;

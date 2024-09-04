@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.InputSystem.InputAction;
 
 public interface IInteractable
 {
@@ -14,7 +15,7 @@ public class PlayerInteraction : MonoBehaviour
 {
     public float checkRate = 0.5f;
     private float lastCheckTime;
-    public float maxCheckDistance;
+    public float maxCheckDistance = 2.5f;
     public LayerMask layerMask;
 
     private GameObject curInteractGameObject;
@@ -63,10 +64,21 @@ public class PlayerInteraction : MonoBehaviour
         promptText.gameObject.SetActive(true);
         promptText.text = string.Format("<b>[E]</b> {0}", curInteractable.GetInteractPrompt());
     }
-
-    public void OnInteractInput(InputAction.CallbackContext callbackContext)
+    #region
+    //public void OnInteractInput(InputAction.CallbackContext callbackContext)
+    //{
+    //    if (callbackContext.phase == InputActionPhase.Started && curInteractable != null)
+    //    {
+    //        curInteractable.OnInteract();
+    //        curInteractGameObject = null;
+    //        curInteractable = null;
+    //        promptText.gameObject.SetActive(false);
+    //    }
+    //}
+    #endregion
+    public void OnInteract(InputValue value)
     {
-        if (callbackContext.phase == InputActionPhase.Started && curInteractable != null)
+        if (curInteractable != null)
         {
             curInteractable.OnInteract();
             curInteractGameObject = null;

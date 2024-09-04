@@ -13,11 +13,6 @@ public class UI_PlayerCondition : UI_Scene, IObserver
 
     public Transform ConditionParent;
 
-    public override void Init()
-    {
-        //Main.UI.SetCanvas(gameObject, OrderValue._sceneOrder);
-    }
-
     private void Start()
     {
         //ConditionParent = GameManager.Instance._UI.transform.Find("HUD_Canvas/PlayerCondition");

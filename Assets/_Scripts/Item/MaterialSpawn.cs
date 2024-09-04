@@ -21,9 +21,6 @@ public class MaterialSpawn : MonoBehaviour
 
     private void Awake()
     {
-        //// TODO: ResourceManager에서 소환으로 변경.
-        //Main.Resource.Instantiate("Tree");
-        //Main.Resource.Instantiate("Stone");
 
         // 오브젝트 Pool에 생성.
         Main.Pool.Init();
@@ -80,18 +77,13 @@ public class MaterialSpawn : MonoBehaviour
         Vector3 randPos = SpawnMaterials[index]._spawnPos + randDir;
         objTransform.position = randPos;
     }
-    
 
 
-    //TODO 오브젝트 디스폰 수정중.
-    //public void OnObjectDespawn(Poolable poolable)
+
+    // 오브젝트 삭제는 다음 코드를 참고
+    //public void OnReturnPrefab(Poolable poolable)
     //{
-    //    var matchingPool = SpawnMaterials.Find(p => p.Prefab == poolable.Prefab);
-    //    if (matchingPool != null)
-    //    {
-    //        matchingPool._CountNow--;
-    //    }
-
+    //    poolable._CountNow--;
     //    Main.Pool.Push(poolable);
     //}
 
