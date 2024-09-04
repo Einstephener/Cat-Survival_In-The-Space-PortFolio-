@@ -55,15 +55,13 @@ public class Main : MonoBehaviour
 
     void Awake()
     {
-        Initialize();
+        //Initialize();
+
+        //Resource.Initialize();
+        //Data.Initialize();
     }
 
-    #region CoroutineHelper
 
-    public new static Coroutine StartCoroutine(IEnumerator coroutine) => (Instance as MonoBehaviour).StartCoroutine(coroutine);
-    public new static void StopCoroutine(Coroutine coroutine) => (Instance as MonoBehaviour).StopCoroutine(coroutine);
-
-    #endregion
 
     private static void Initialize()
     {
@@ -75,8 +73,8 @@ public class Main : MonoBehaviour
 
         
         Resource.Initialize();
-        //UI.Initialize();
         Data.Initialize();
+        //UI.Initialize();
 
 
         //Application.targetFrameRate = 60;
