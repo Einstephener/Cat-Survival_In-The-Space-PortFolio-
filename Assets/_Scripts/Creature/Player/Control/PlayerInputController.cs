@@ -19,9 +19,10 @@ public class PlayerInputController : MonoBehaviour
 
     private Vector3 _moveInput;
     private Rigidbody _rigid;
-    private float _currentSpeed;
+    [SerializeField] private float _currentSpeed;
     private float _walkSpeed = 3.0f;
     private float _runSpeed = 10.0f;
+    private float _sitSpeed = 0.5f;
 
     private LayerMask _groundCheckLayer;
     private float _jumpForce = 5.0f;
@@ -31,6 +32,7 @@ public class PlayerInputController : MonoBehaviour
 
     private bool isGrounded;
     private bool isRun;
+    private bool isSit;
     #endregion
 
     private void Awake()
@@ -67,21 +69,37 @@ public class PlayerInputController : MonoBehaviour
     private void OnRun(InputValue value)
     {
         if (value.isPressed)
+        {
             isRun = true;
+        }
         else
+        {
             isRun = false;
-
+        }
         OnRunStateChanged?.Invoke(value.isPressed); // 달리기 이벤트 호출.
+    }
+
+    private void OnSit(InputValue value)
+    {
+        _cameraController.SitSightChange(value.isPressed);
+        isSit = value.isPressed;
     }
 
     private void ChangeSpeed()
     {
-        if (isGrounded)
+        if (!isGrounded) return;
+
+        if (isSit)
         {
-            if (isRun)
-                _currentSpeed = _runSpeed;
-            else
-                _currentSpeed = _walkSpeed;
+            _currentSpeed = _sitSpeed;
+        }
+        else if (isRun)
+        {
+            _currentSpeed = _runSpeed;
+        }
+        else
+        {
+            _currentSpeed = _walkSpeed;
         }
     }
 
