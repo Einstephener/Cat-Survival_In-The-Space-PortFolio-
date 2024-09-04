@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class InventoryUI : MonoBehaviour
+public class InventoryUI : MonoBehaviour /*UI_Popup*/
 {
+    //public GameObject inventoryUI;
     #region 메모장!
     ///<summary>
     ///1. 슬롯 UI 업데이트
@@ -18,9 +20,21 @@ public class InventoryUI : MonoBehaviour
     ///
     /// </summary>
     #endregion
-    public Slot[] slotObjects;
+    public Slot[] slotObjects = Main.Inventory.slotObjects;
 
-    private void UpdateUI()
+    //public void OnUI_Inventory()
+    //{
+
+    //}
+
+    //bool isToggle()
+    //{
+    //    return inventoryUI.activeInHierarchy;
+    //}
+
+    
+
+    public void UpdateUI()
     {
         //foreach (var slot in inventorySlots)
         //{

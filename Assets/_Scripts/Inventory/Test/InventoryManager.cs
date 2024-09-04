@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class InventoryManager
 {
@@ -18,7 +19,8 @@ public class InventoryManager
     #endregion
     //int : 슬롯 인덱스, Slot : itemdata, 갯수
     public Dictionary<int, Slot> dicSlots = new();
-
+    public Slot[] slotObjects;
+    public InventoryUI inventoryUI;
 
     #region - bool
     //아이템 있는지 여부
@@ -43,6 +45,7 @@ public class InventoryManager
 
     public void AddItem(ItemData _itemdata, int _amount = 1)
     {
+        Debug.Log("AddItem 호출됨: " + _itemdata.DisplayName);
         if (HadItem(_itemdata) && IsCountTableItem(_itemdata))
         {
             foreach (var slot in dicSlots.Values)
@@ -51,6 +54,8 @@ public class InventoryManager
                 if (slot.itemData == _itemdata && slot.amount < ((ContableItemData)_itemdata).MaxAmount)
                 {
                     slot.amount += _amount;
+                    inventoryUI.UpdateUI();
+                    Debug.Log($"Add Item - index : {GetSlotIndex(slot)} | 아이템: {slot.itemData.DisplayName} | 갯수: {slot.amount}");
                     //UIUpdate
                     return;
                 }
@@ -64,6 +69,7 @@ public class InventoryManager
             {
                 slot.itemData = _itemdata;
                 slot.amount = _amount;
+                inventoryUI.UpdateUI();
                 //UIUpdate
                 return;
             }
@@ -81,10 +87,24 @@ public class InventoryManager
                 {
                     slot.ClearSlot(); // 슬롯 비우기
                 }
+                inventoryUI.UpdateUI();
                 //UpdateUI();
                 return;
             }
         }
         Debug.Log("아이템을 찾을 수 없습니다.");
+    }
+
+    private int GetSlotIndex(Slot slot)
+    {
+        // 슬롯의 인덱스를 찾는 메서드
+        foreach (var kvp in dicSlots)
+        {
+            if (kvp.Value == slot)
+            {
+                return kvp.Key;
+            }
+        }
+        return -1; // 슬롯을 찾지 못한 경우
     }
 }
