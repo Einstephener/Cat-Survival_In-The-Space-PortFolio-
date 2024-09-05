@@ -5,14 +5,14 @@ using UnityEngine.EventSystems;
 
 public class LobbyScene : BaseScene
 {
-    public GameObject Canvas;
+    //public GameObject Canvas;
     protected override bool Initialize()
     {
         if (!base.Initialize()) return false;
 
         //Scene에 필요한 오브젝트들 소환.
         Main.Resource.Initialize();
-        Main.Resource.Instantiate("UI_LobbyScene" , Canvas.transform);
+        Main.Resource.Instantiate("UI_LobbyScene" );
 
 
         return true;

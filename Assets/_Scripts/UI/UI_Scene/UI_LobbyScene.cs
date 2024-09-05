@@ -58,7 +58,15 @@ public class UI_LobbyScene : UI_Scene
     public void OnBtnEndGame()
     {
 
+#if UNITY_EDITOR
+        // 유니티 에디터에서 실행 중일 때 에디터 종료.
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        // 빌드된 환경에서 실행 중일 때 애플리케이션 종료.
+        Application.Quit();
+#endif
     }
+
     public void OnBtnSetting()
     {
 
