@@ -19,7 +19,8 @@ public class InventoryManager
     #endregion
     //int : 슬롯 인덱스, Slot : itemdata, 갯수
     public Dictionary<int, Slot> dicSlots = new();
-    public Slot[] slotObjects;
+    private int maxSlots; // 최대 슬롯 수
+
     public InventoryUI inventoryUI;
 
     #region - bool
@@ -46,8 +47,11 @@ public class InventoryManager
     public void AddItem(ItemData _itemdata, int _amount = 1)
     {
         Debug.Log("AddItem 호출됨: " + _itemdata.DisplayName);
+        Debug.Log(dicSlots.Count);
+        DebugPrintItems();
         if (HadItem(_itemdata) && IsCountTableItem(_itemdata))
         {
+            Debug.Log("AddItem 확인");
             foreach (var slot in dicSlots.Values)
             {
                 // maxStack은 아이템 최대 스택 수
@@ -67,6 +71,7 @@ public class InventoryManager
         {
             if (slot.IsEmpty())
             {
+                Debug.Log("Test");
                 slot.itemData = _itemdata;
                 slot.amount = _amount;
                 inventoryUI.UpdateUI();
@@ -107,4 +112,29 @@ public class InventoryManager
         }
         return -1; // 슬롯을 찾지 못한 경우
     }
+
+    public Dictionary<int, Slot> GetItems()
+    {
+        return dicSlots; // 아이템 딕셔너리 반환
+    }
+
+    #region DeBug
+
+    void Start()
+    {
+        AddItem(inventoryUI.TestItemData);
+        DebugPrintItems(); // 현재 아이템 리스트 출력
+    }
+    public void DebugPrintItems()
+    {
+        foreach (var entry in dicSlots)
+        {
+            int index = entry.Key; // 슬롯 인덱스
+            Slot slot = entry.Value; // 슬롯 정보
+
+            // 슬롯 정보를 로그로 출력
+            Debug.Log($"슬롯 인덱스: {index}, 아이템: {slot.itemData.name}, 수량: {slot.amount}");
+        }
+    }
+    #endregion
 }

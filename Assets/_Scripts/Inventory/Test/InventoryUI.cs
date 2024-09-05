@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,7 +21,9 @@ public class InventoryUI : MonoBehaviour /*UI_Popup*/
     ///
     /// </summary>
     #endregion
-    public Slot[] slotObjects = Main.Inventory.slotObjects;
+    public Slot[] slotObjects;
+
+    public ItemData TestItemData;
 
     //public void OnUI_Inventory()
     //{
@@ -31,8 +34,11 @@ public class InventoryUI : MonoBehaviour /*UI_Popup*/
     //{
     //    return inventoryUI.activeInHierarchy;
     //}
+    private void OnEnable()
+    {
+        UpdateUI();
+    }
 
-    
 
     public void UpdateUI()
     {
@@ -41,23 +47,48 @@ public class InventoryUI : MonoBehaviour /*UI_Popup*/
         //    // 각 슬롯의 UI를 갱신하는 코드
         //}
 
-        for (int i = 0; i < Main.Inventory.dicSlots.Count; i++)
-        {
-            if (slotObjects[i] != null)
-            {
-                Slot slot = Main.Inventory.dicSlots[i];
+        var dicSlots = Main.Inventory.GetItems(); // 아이템 딕셔너리 가져오기
 
-                slotObjects[i].SetSlot();
-                if (slot.IsEmpty())
-                {
-                    slotObjects[i].ClearSlot();
-                }
-                else
-                {
-                    slotObjects[i].SetSlot();
-                }
+        foreach (var entry in dicSlots)
+        {
+            int index = entry.Key; // 슬롯 인덱스
+            Slot slot = entry.Value; // 슬롯 정보
+
+            if (index < slotObjects.Length) // 인덱스가 배열 범위 내에 있는지 확인
+            {
+                slotObjects[index].SetSlot();
+                //slotObjects[index].SetItemText($"{slot.itemData.DisplayName} (수량: {slot.amount})"); // 슬롯 텍스트 업데이트
             }
         }
+
+        // 빈 슬롯 처리
+        for (int i = 0; i < slotObjects.Length; i++)
+        {
+            if (!dicSlots.ContainsKey(i)) // 해당 인덱스에 아이템이 없으면
+            {
+                slotObjects[i].SetSlot();
+                //slotObjects[i].SetItemText("빈 슬롯"); // 빈 슬롯 텍스트 설정
+            }
+        }
+
+        ////
+        //for (int i = 0; i < Main.Inventory.dicSlots.Count; i++)
+        //{
+        //    if (slotObjects[i] != null)
+        //    {
+        //        Slot slot = Main.Inventory.dicSlots[i];
+
+        //        slotObjects[i].SetSlot();
+        //        if (slot.IsEmpty())
+        //        {
+        //            slotObjects[i].ClearSlot();
+        //        }
+        //        else
+        //        {
+        //            slotObjects[i].SetSlot();
+        //        }
+        //    }
+        //}
     }
 
     #region - 정렬

@@ -11,6 +11,7 @@ public class Slot : MonoBehaviour
     private Outline outline;
 
     [Header("#SlotDataUI")]
+    public GameObject SlotUIObject;
     public Sprite image;
     public TextMeshProUGUI quantityText;//갯수
 
@@ -28,6 +29,7 @@ public class Slot : MonoBehaviour
     /// </summary>
     public void SetSlot()
     {
+        SlotUIObject.SetActive(true);
         //image = itemData.Icon;
         quantityText.text = amount > 1 ? amount.ToString() : string.Empty;
     }
@@ -37,12 +39,16 @@ public class Slot : MonoBehaviour
     /// </summary>
     public void ClearSlot()
     {
+        SlotUIObject.SetActive(false);
+
         //image = itemData.Icon;
         quantityText.text = string.Empty;
     }
 
     public bool IsEmpty()
     {
+        //SlotUIObject.SetActive(false);
+        Debug.Log($"IsEmpty() : {IsEmpty()}");
         return amount <= 0 && itemData == null;
     }
 
