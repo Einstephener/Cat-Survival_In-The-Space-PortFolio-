@@ -18,6 +18,6 @@ public class ItemObject : MonoBehaviour, IInteractable
         //Destroy(this.gameObject);
 
         //Debug.Log($"Add Inventory AddItem() function to OnInteract() ");
-        //Debug.Log($"Eat Item - ItemName : {item.DisplayName}");
+        //Debug.Log($"Eat Item - ItemName : {itemData.DisplayName}");
     }
 }

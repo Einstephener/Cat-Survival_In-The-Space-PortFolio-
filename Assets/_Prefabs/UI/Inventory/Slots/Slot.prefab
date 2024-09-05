@@ -189,10 +189,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   button: {fileID: 5878471155951598160}
   SlotUIObject: {fileID: 4922155326772832831}
-  image: {fileID: 0}
-  quantityText: {fileID: 8835531114999196350}
-  itemData: {fileID: 0}
-  amount: 0
+  icon: {fileID: 0}
+  amuontText: {fileID: 0}
+  index: 0
 --- !u!114 &5878471155951598160
 MonoBehaviour:
   m_ObjectHideFlags: 0
