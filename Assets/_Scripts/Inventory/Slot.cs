@@ -11,12 +11,16 @@ public class Slot : MonoBehaviour
     private Outline outline;
 
     [Header("#SlotDataUI")]
-    public Sprite image;
-    public TextMeshProUGUI quantityText;//갯수
+    public GameObject SlotUIObject;
+    public Image icon;
+    public TextMeshProUGUI amuontText;//갯수
+    private SlotData curSlot;
 
-    [Header("#SlotData")]
-    public ItemData itemData;
-    public int amount;
+    public int index;
+
+    //[Header("#SlotData")]
+    //public ItemData itemData;
+    //public int amount;
 
     private void Awake()
     {
@@ -26,10 +30,12 @@ public class Slot : MonoBehaviour
     /// <summary>
     /// 슬롯에 아이템 등록
     /// </summary>
-    public void SetSlot()
+    public void SetSlot(SlotData _slotData)
     {
-        //image = itemData.Icon;
-        quantityText.text = amount > 1 ? amount.ToString() : string.Empty;
+        curSlot = _slotData;
+        //SlotUIObject.SetActive(true);
+        icon.sprite = _slotData.itemData.Icon;
+        amuontText.text = _slotData.amount > 1 ? _slotData.amount.ToString() : string.Empty;
     }
 
     /// <summary>
@@ -37,14 +43,19 @@ public class Slot : MonoBehaviour
     /// </summary>
     public void ClearSlot()
     {
-        //image = itemData.Icon;
-        quantityText.text = string.Empty;
+        //SlotUIObject.SetActive(false);
+
+        //icon = itemData.Icon;
+        //itemData = null;
+        amuontText.text = string.Empty;
     }
 
-    public bool IsEmpty()
-    {
-        return amount <= 0 && itemData == null;
-    }
+    //public bool IsEmpty()
+    //{
+    //    //SlotUIObject.SetActive(false);
+    //    Debug.Log($"IsEmpty() : {IsEmpty()}");
+    //    return amount <= 0 && itemData == null;
+    //}
 
     
 }

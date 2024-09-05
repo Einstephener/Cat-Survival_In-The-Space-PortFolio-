@@ -193,7 +193,7 @@ namespace UnityEngine.PostProcessing
             var material = context.materialFactory.Get(k_ShaderString);
             var settings = model.settings.motionVectors;
 
-            // Blit the original source image
+            // Blit the original source icon
             int tempRT = Uniforms._TempRT;
             cb.GetTemporaryRT(tempRT, context.width, context.height, 0, FilterMode.Bilinear);
             cb.SetGlobalFloat(Uniforms._Opacity, settings.sourceOpacity);
