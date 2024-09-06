@@ -33,23 +33,29 @@ public class InventoryManager
     public SlotData[] slotsData = new SlotData[18];
     public InventoryUI inventoryUI;
 
+    public void Start()
+    {
+        Initialize();
+    }
+    public void Initialize()
+    {
+        Debug.Log("InventoryManager Initialize");
+        //if (inventoryUI == null)
+        //{
+        //    Debug.LogError("InventoryUI가 할당되지 않았습니다.");
+        //}
+        inventoryUI = GameObject.FindObjectOfType<InventoryUI>();
+        Slot[] slotUI = inventoryUI.slotObjects;
+        //slotsData = new SlotData[slotUI.Length];
 
-    //public void Start()
-    //{
-    //    //Initialize();
-    //}
-    //public void Initialize()
-    //{
-    //    Slot[] slotUI = inventoryUI.slotObjects;
-    //    //slotsData = new SlotData[slotUI.Length];
-
-    //    for (int i = 0; i < slotsData.Length; i++)
-    //    {
-    //        //slotsData[i] = new SlotData();
-    //        slotUI[i].index = i;
-    //        slotUI[i].ClearSlot();
-    //    }
-    //}
+        for (int i = 0; i < slotsData.Length; i++)
+        {
+            slotsData[i] = new SlotData();
+            slotUI[i].index = i;
+            slotUI[i].ClearSlot();
+            //inventoryUI.UpdateUI();
+        }
+    }
 
     #region - bool
     //아이템 있는지 여부
@@ -87,17 +93,17 @@ public class InventoryManager
     {
         Debug.Log("AddItem 호출됨: " + _itemdata.DisplayName);
 
-        for (int i = 0; i < slotsData.Length; i++)
-        {
-            if (slotsData[i].itemData == null)
-            {
-                Debug.Log($"not Data");
-            }
-            else
-            {
-                Debug.Log($"{slotsData[i].itemData.name}, {slotsData[i].amount}");
-            }
-        }
+        //for (int i = 0; i < slotsData.Length; i++)
+        //{
+        //    if (slotsData[i].itemData == null)
+        //    {
+        //        Debug.Log($"not Data");
+        //    }
+        //    else
+        //    {
+        //        Debug.Log($"{slotsData[i].itemData.name}, {slotsData[i].amount}");
+        //    }
+        //}
 
         if (HadItem(_itemdata) && IsCountTableItem(_itemdata))
         {
@@ -106,7 +112,9 @@ public class InventoryManager
                 if (slot != null && slot.itemData == _itemdata && slot.amount < ((ContableItemData)_itemdata).MaxAmount)
                 {
                     slot.amount += _amount;
-                    inventoryUI.UpdateUI();
+                    //inventoryUI.UpdateUI();
+                    Debug.Log($"{slot.itemData} += {_itemdata} // Index : Null ItemName : {slot.itemData.DisplayName}, Amunt : {slot.amount}");
+
                     //Debug.Log($"Add Item - index : {GetSlotIndex(slotsData)} | 아이템: {slotsData.itemData.DisplayName} | 갯수: {slotsData.amount}");
                     return;
                 }
@@ -118,10 +126,11 @@ public class InventoryManager
         {
             if (slotsData[i] == null || slotsData[i].IsEmpty())
             {
-                Debug.Log($"{slotsData[i].itemData} += {_itemdata} ");
+                slotsData[i] = new SlotData();
                 slotsData[i].itemData = _itemdata;
                 slotsData[i].amount = _amount;
-                inventoryUI.UpdateUI();
+                Debug.Log($"{slotsData[i].itemData} += {_itemdata} //Index : {i} ItemName : {slotsData[i].itemData.DisplayName}, Amunt : {slotsData[i].amount}");
+                //inventoryUI.UpdateUI();
                 return;
             }
         }
@@ -149,42 +158,7 @@ public class InventoryManager
         Debug.Log("아이템을 찾을 수 없습니다.");
     }
 
-    //private int GetSlotIndex(Slot slotsData)
-    //{
-    //    // 슬롯의 인덱스를 찾는 메서드
-    //    foreach (var kvp in dicSlots)
-    //    {
-    //        if (kvp.Value == slotsData)
-    //        {
-    //            return kvp.Key;
-    //        }
-    //    }
-    //    return -1; // 슬롯을 찾지 못한 경우
-    //}
-
-    //public Dictionary<int, Slot> GetItems()
-    //{
-    //    return dicSlots; // 아이템 딕셔너리 반환
-    //}
-
     #region DeBug
-
-    //public void Start()
-    //{
-    //    //Initialize();
-    //    AddItem(inventoryUI.TestItemData, 5);
-    //    DebugPrintItems(); // 현재 아이템 리스트 출력
-    //}
-    //public void DebugPrintItems()
-    //{
-    //    foreach (var entry in dicSlots)
-    //    {
-    //        int index = entry.Key; // 슬롯 인덱스
-    //        Slot slotsData = entry.Value; // 슬롯 정보
-
-    //        // 슬롯 정보를 로그로 출력
-    //        Debug.Log($"슬롯 인덱스: {index}, 아이템: {slotsData.itemData.name}, 수량: {slotsData.amount}");
-    //    }
-    //}
+    
     #endregion
 }

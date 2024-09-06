@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,9 +15,11 @@ public class Slot : MonoBehaviour
     public GameObject SlotUIObject;
     public Image icon;
     public TextMeshProUGUI amuontText;//갯수
-    private SlotData curSlot;
+    public SlotData curSlot;
 
     public int index;
+    public int _amuont;
+
 
     //[Header("#SlotData")]
     //public ItemData itemData;
@@ -32,10 +35,12 @@ public class Slot : MonoBehaviour
     /// </summary>
     public void SetSlot(SlotData _slotData)
     {
+        _amuont = curSlot.amount;
+
+        SlotUIObject.SetActive(true);
         curSlot = _slotData;
-        //SlotUIObject.SetActive(true);
-        icon.sprite = _slotData.itemData.Icon;
-        amuontText.text = _slotData.amount > 1 ? _slotData.amount.ToString() : string.Empty;
+        icon = curSlot.itemData.Icon;
+        amuontText.text = curSlot.amount > 1 ? curSlot.amount.ToString() : string.Empty;
     }
 
     /// <summary>
@@ -43,10 +48,10 @@ public class Slot : MonoBehaviour
     /// </summary>
     public void ClearSlot()
     {
-        //SlotUIObject.SetActive(false);
+        _amuont = curSlot.amount;
 
-        //icon = itemData.Icon;
-        //itemData = null;
+        icon.gameObject.SetActive(false);
+        curSlot = null;
         amuontText.text = string.Empty;
     }
 

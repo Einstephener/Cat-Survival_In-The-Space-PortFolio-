@@ -4,7 +4,7 @@ using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventoryUI : MonoBehaviour /*UI_Popup*/
+public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 {
     //public GameObject inventoryUI;
     #region 메모장!
@@ -22,18 +22,18 @@ public class InventoryUI : MonoBehaviour /*UI_Popup*/
     /// </summary>
     #endregion
     public Slot[] slotObjects;
-    
-    private void OnEnable()
+
+
+    private void Awake()
     {
-        //UpdateUI();
+        //임시 초기화
+        Main.Inventory.Initialize();
+        UpdateUI();
     }
-
-
-    public void AddItemUIUpdate()
-    {
-
-    }
-
+    //private void OnEnable()
+    //{
+    //    //UpdateUI();
+    //}
 
     public void UpdateUI()
     {
@@ -42,7 +42,7 @@ public class InventoryUI : MonoBehaviour /*UI_Popup*/
         // 슬롯 UI 업데이트
         for (int i = 0; i < _slots.Length; i++)
         {
-            if (!_slots[i].IsEmpty()) // 슬롯이 딕셔너리에 존재하는지 확인
+            if (!_slots[i].IsEmpty()) // 슬롯이 데이터가 있는지 확인
             {
                 slotObjects[i].SetSlot(_slots[i]); // 슬롯 정보 업데이트
             }
