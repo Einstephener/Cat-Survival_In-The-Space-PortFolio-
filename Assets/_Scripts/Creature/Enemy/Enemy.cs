@@ -5,11 +5,17 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private float _sight = 3f;
-    [SerializeField] private AIDestinationSetter _target;
+    private float _sight = 5f;
+    private AIDestinationSetter _target;
+    private LayerMask _playerLayer;
     private Transform _playerTransform;
     private bool _isChasing = false;
-    [SerializeField] private string _playerTag = "Player";
+
+    private void Awake()
+    {
+        _target = GetComponent<AIDestinationSetter>();
+        _playerLayer = LayerMask.GetMask("Player");
+    }
 
     private void Update()
     {
@@ -18,29 +24,31 @@ public class Enemy : MonoBehaviour
 
     private void FindTarget()
     {
-        // 시야 범위 안에 있는 모든 콜라이더를 감지.
-        Collider[] hits = Physics.OverlapSphere(transform.position, _sight);
-        foreach (Collider hit in hits)
+        Collider[] hits = Physics.OverlapSphere(transform.position, _sight, _playerLayer);
+        // hits 배열이 비어 있지 않으면 플레이어가 감지된 것
+        if (hits.Length > 0)
         {
-            // 태그가 "Player"인지 확인.
-            if (hit.CompareTag(_playerTag))
+            // 첫 번째로 감지된 플레이어를 대상으로 설정
+            _playerTransform = hits[0].transform;
+
+            // A* Pathfinding에서의 타겟을 플레이어로 설정
+            if (_target != null)
             {
-                _playerTransform = hit.transform;
-                // 추적할 타겟 설정.
-                if (_target != null)
-                {
-                    _target.target = _playerTransform;
-                    _isChasing = true;
-                }
-                return;
+                Debug.Log("Target Set: " + _target.target);
+                _target.target = _playerTransform;
+
+                // 추격 시작
+                _isChasing = true;
             }
         }
-        // 시야 범위 내에 플레이어가 없으면 추적 중지.
-        if (_target != null)
+        else
         {
-            // 감지된 플레이어가 없으면 추격을 멈춤
-            _isChasing = false;
-            _target.target = null;
+            if (_target != null)
+            {
+                // 감지된 플레이어가 없으면 추격을 멈춤
+                _isChasing = false;
+                _target.target = null;
+            }
         }
     }
 
