@@ -35,11 +35,16 @@ public class Slot : MonoBehaviour
     /// </summary>
     public void SetSlot(SlotData _slotData)
     {
-        _amuont = curSlot.amount;
+        //_amuont = curSlot.amount == 0 ? _amuont = 0 : _amuont = 1;
 
-        SlotUIObject.SetActive(true);
+        //if (curSlot == null)
+        //{
+        //    Debug.Log("curSlot null");
+        //}
+
         curSlot = _slotData;
-        icon = curSlot.itemData.Icon;
+        icon.gameObject.SetActive(true);
+        icon.sprite = curSlot.itemData.Icon;
         amuontText.text = curSlot.amount > 1 ? curSlot.amount.ToString() : string.Empty;
     }
 
@@ -48,10 +53,14 @@ public class Slot : MonoBehaviour
     /// </summary>
     public void ClearSlot()
     {
-        _amuont = curSlot.amount;
-
+        //_amuont = curSlot.amount == 0 ? _amuont = 0 : _amuont = 1;
+        //if (curSlot == null )
+        //{
+        //    Debug.Log("curSlot null");
+        //}
+        icon.sprite = null;
+        curSlot.itemData = null;
         icon.gameObject.SetActive(false);
-        curSlot = null;
         amuontText.text = string.Empty;
     }
 
@@ -61,6 +70,4 @@ public class Slot : MonoBehaviour
     //    Debug.Log($"IsEmpty() : {IsEmpty()}");
     //    return amount <= 0 && itemData == null;
     //}
-
-    
 }

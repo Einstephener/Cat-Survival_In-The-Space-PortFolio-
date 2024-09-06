@@ -28,12 +28,12 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     {
         //임시 초기화
         Main.Inventory.Initialize();
+        //UpdateUI();
+    }
+    private void OnEnable()
+    {
         UpdateUI();
     }
-    //private void OnEnable()
-    //{
-    //    //UpdateUI();
-    //}
 
     public void UpdateUI()
     {
@@ -42,7 +42,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         // 슬롯 UI 업데이트
         for (int i = 0; i < _slots.Length; i++)
         {
-            if (!_slots[i].IsEmpty()) // 슬롯이 데이터가 있는지 확인
+            if (_slots[i].itemData != null) // 슬롯이 데이터가 있는지 확인
             {
                 slotObjects[i].SetSlot(_slots[i]); // 슬롯 정보 업데이트
             }

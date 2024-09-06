@@ -10,7 +10,8 @@ public class SlotData
 
     public bool IsEmpty()
     {
-        return amount <= 0 && itemData == null;
+        
+        return /*amount <= 0 && */itemData == null;
     }
 }
 
@@ -33,10 +34,10 @@ public class InventoryManager
     public SlotData[] slotsData = new SlotData[18];
     public InventoryUI inventoryUI;
 
-    public void Start()
-    {
-        Initialize();
-    }
+    //public void Start()
+    //{
+    //    Initialize();
+    //}
     public void Initialize()
     {
         Debug.Log("InventoryManager Initialize");
@@ -46,15 +47,14 @@ public class InventoryManager
         //}
         inventoryUI = GameObject.FindObjectOfType<InventoryUI>();
         Slot[] slotUI = inventoryUI.slotObjects;
-        //slotsData = new SlotData[slotUI.Length];
 
         for (int i = 0; i < slotsData.Length; i++)
         {
             slotsData[i] = new SlotData();
             slotUI[i].index = i;
-            slotUI[i].ClearSlot();
-            //inventoryUI.UpdateUI();
+            slotUI[i].curSlot = slotsData[i];
         }
+        inventoryUI.UpdateUI();
     }
 
     #region - bool
@@ -112,7 +112,7 @@ public class InventoryManager
                 if (slot != null && slot.itemData == _itemdata && slot.amount < ((ContableItemData)_itemdata).MaxAmount)
                 {
                     slot.amount += _amount;
-                    //inventoryUI.UpdateUI();
+                    inventoryUI.UpdateUI();
                     Debug.Log($"{slot.itemData} += {_itemdata} // Index : Null ItemName : {slot.itemData.DisplayName}, Amunt : {slot.amount}");
 
                     //Debug.Log($"Add Item - index : {GetSlotIndex(slotsData)} | 아이템: {slotsData.itemData.DisplayName} | 갯수: {slotsData.amount}");
@@ -130,7 +130,7 @@ public class InventoryManager
                 slotsData[i].itemData = _itemdata;
                 slotsData[i].amount = _amount;
                 Debug.Log($"{slotsData[i].itemData} += {_itemdata} //Index : {i} ItemName : {slotsData[i].itemData.DisplayName}, Amunt : {slotsData[i].amount}");
-                //inventoryUI.UpdateUI();
+                inventoryUI.UpdateUI();
                 return;
             }
         }
