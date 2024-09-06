@@ -22,7 +22,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     /// </summary>
     #endregion
     public Slot[] slotObjects;
-
+    public Slot selectSlot = null;
 
     private void Awake()
     {
@@ -30,14 +30,10 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         Main.Inventory.Initialize();
         //UpdateUI();
     }
-    private void OnEnable()
-    {
-        UpdateUI();
-    }
 
     public void UpdateUI()
     {
-        var _slots = Main.Inventory.slotsData; // InventoryManager에서 아이템 딕셔너리 가져오기
+        var _slots = Main.Inventory.slotsData; // InventoryManager SlotData 가지고 오기
 
         // 슬롯 UI 업데이트
         for (int i = 0; i < _slots.Length; i++)

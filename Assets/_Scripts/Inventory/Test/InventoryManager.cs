@@ -41,10 +41,7 @@ public class InventoryManager
     public void Initialize()
     {
         Debug.Log("InventoryManager Initialize");
-        //if (inventoryUI == null)
-        //{
-        //    Debug.LogError("InventoryUI가 할당되지 않았습니다.");
-        //}
+        
         inventoryUI = GameObject.FindObjectOfType<InventoryUI>();
         Slot[] slotUI = inventoryUI.slotObjects;
 
@@ -91,20 +88,6 @@ public class InventoryManager
 
     public void AddItem(ItemData _itemdata, int _amount = 1)
     {
-        Debug.Log("AddItem 호출됨: " + _itemdata.DisplayName);
-
-        //for (int i = 0; i < slotsData.Length; i++)
-        //{
-        //    if (slotsData[i].itemData == null)
-        //    {
-        //        Debug.Log($"not Data");
-        //    }
-        //    else
-        //    {
-        //        Debug.Log($"{slotsData[i].itemData.name}, {slotsData[i].amount}");
-        //    }
-        //}
-
         if (HadItem(_itemdata) && IsCountTableItem(_itemdata))
         {
             foreach (var slot in slotsData)
@@ -113,9 +96,8 @@ public class InventoryManager
                 {
                     slot.amount += _amount;
                     inventoryUI.UpdateUI();
-                    Debug.Log($"{slot.itemData} += {_itemdata} // Index : Null ItemName : {slot.itemData.DisplayName}, Amunt : {slot.amount}");
+                    //Debug.Log($"{slot.itemData} += {_itemdata} // Index : Null ItemName : {slot.itemData.DisplayName}, Amunt : {slot.amount}");
 
-                    //Debug.Log($"Add Item - index : {GetSlotIndex(slotsData)} | 아이템: {slotsData.itemData.DisplayName} | 갯수: {slotsData.amount}");
                     return;
                 }
             }
@@ -129,7 +111,7 @@ public class InventoryManager
                 slotsData[i] = new SlotData();
                 slotsData[i].itemData = _itemdata;
                 slotsData[i].amount = _amount;
-                Debug.Log($"{slotsData[i].itemData} += {_itemdata} //Index : {i} ItemName : {slotsData[i].itemData.DisplayName}, Amunt : {slotsData[i].amount}");
+                //Debug.Log($"{slotsData[i].itemData} += {_itemdata} //Index : {i} ItemName : {slotsData[i].itemData.DisplayName}, Amunt : {slotsData[i].amount}");
                 inventoryUI.UpdateUI();
                 return;
             }
@@ -147,8 +129,6 @@ public class InventoryManager
                 slot.amount -= amount;
                 if (slot.IsEmpty())
                 {
-                    //slotsData 데어터 제거
-                    //UIUpdate
                     inventoryUI.UpdateUI();
                 }
                 inventoryUI.UpdateUI();

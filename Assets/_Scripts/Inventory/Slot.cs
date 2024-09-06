@@ -16,6 +16,7 @@ public class Slot : MonoBehaviour
     public Image icon;
     public TextMeshProUGUI amuontText;//갯수
     public SlotData curSlot;
+    public Slider WeaponDurability;
 
     public int index;
     public int _amuont;
@@ -41,9 +42,10 @@ public class Slot : MonoBehaviour
         //{
         //    Debug.Log("curSlot null");
         //}
-
+        
         curSlot = _slotData;
         icon.gameObject.SetActive(true);
+        isWeapon();
         icon.sprite = curSlot.itemData.Icon;
         amuontText.text = curSlot.amount > 1 ? curSlot.amount.ToString() : string.Empty;
     }
@@ -60,8 +62,28 @@ public class Slot : MonoBehaviour
         //}
         icon.sprite = null;
         curSlot.itemData = null;
+        isWeapon();
         icon.gameObject.SetActive(false);
         amuontText.text = string.Empty;
+    }
+
+    public void isWeapon()
+    {
+        if (curSlot.itemData != null)
+        {
+            if (!Main.Inventory.IsCountTableItem(curSlot.itemData))
+            {
+                WeaponDurability.gameObject.SetActive(true);
+            }
+            else
+            {
+                WeaponDurability.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            WeaponDurability.gameObject.SetActive(false);
+        }
     }
 
     //public bool IsEmpty()
