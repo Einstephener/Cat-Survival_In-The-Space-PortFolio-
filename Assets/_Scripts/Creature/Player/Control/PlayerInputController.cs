@@ -30,9 +30,9 @@ public class PlayerInputController : MonoBehaviour
     private Vector3 _boxCastSize = new Vector3(0.5f, 0.1f, 0.5f); // 박스 캐스트 크기
     private float _groundDistance = 0.2f; // 박스 캐스트 높이.
 
-    private bool isGrounded;
-    private bool isRun;
-    private bool isSit;
+    private bool _isGrounded;
+    private bool _isRun;
+    private bool _isSit;
     #endregion
 
     private void Awake()
@@ -57,7 +57,7 @@ public class PlayerInputController : MonoBehaviour
 
         // 점프.
         Vector3 boxCastPosition = _groundCheck.position + Vector3.up * 0.1f;
-        isGrounded = Physics.BoxCast(boxCastPosition, _boxCastSize / 2, Vector3.down,
+        _isGrounded = Physics.BoxCast(boxCastPosition, _boxCastSize / 2, Vector3.down,
                                      Quaternion.identity, _groundDistance, _groundCheckLayer);
     }
 
@@ -70,11 +70,11 @@ public class PlayerInputController : MonoBehaviour
     {
         if (value.isPressed)
         {
-            isRun = true;
+            _isRun = true;
         }
         else
         {
-            isRun = false;
+            _isRun = false;
         }
         OnRunStateChanged?.Invoke(value.isPressed); // 달리기 이벤트 호출.
     }
@@ -82,18 +82,18 @@ public class PlayerInputController : MonoBehaviour
     private void OnSit(InputValue value)
     {
         _cameraController.SitSightChange(value.isPressed);
-        isSit = value.isPressed;
+        _isSit = value.isPressed;
     }
 
     private void ChangeSpeed()
     {
-        if (!isGrounded) return;
+        if (!_isGrounded) return;
 
-        if (isSit)
+        if (_isSit)
         {
             _currentSpeed = _sitSpeed;
         }
-        else if (isRun)
+        else if (_isRun)
         {
             _currentSpeed = _runSpeed;
         }
@@ -105,7 +105,7 @@ public class PlayerInputController : MonoBehaviour
 
     private void OnJump()
     {
-        if (isGrounded)
+        if (_isGrounded)
             _rigid.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
     }
 
