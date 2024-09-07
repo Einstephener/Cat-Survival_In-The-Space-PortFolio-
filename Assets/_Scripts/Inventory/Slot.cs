@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,9 +15,12 @@ public class Slot : MonoBehaviour
     public GameObject SlotUIObject;
     public Image icon;
     public TextMeshProUGUI amuontText;//갯수
-    private SlotData curSlot;
+    public SlotData curSlot;
+    public Slider WeaponDurability;
 
     public int index;
+    public int _amuont;
+
 
     //[Header("#SlotData")]
     //public ItemData itemData;
@@ -32,10 +36,18 @@ public class Slot : MonoBehaviour
     /// </summary>
     public void SetSlot(SlotData _slotData)
     {
+        //_amuont = curSlot.amount == 0 ? _amuont = 0 : _amuont = 1;
+
+        //if (curSlot == null)
+        //{
+        //    Debug.Log("curSlot null");
+        //}
+        
         curSlot = _slotData;
-        //SlotUIObject.SetActive(true);
-        icon.sprite = _slotData.itemData.Icon;
-        amuontText.text = _slotData.amount > 1 ? _slotData.amount.ToString() : string.Empty;
+        icon.gameObject.SetActive(true);
+        isWeapon();
+        icon.sprite = curSlot.itemData.Icon;
+        amuontText.text = curSlot.amount > 1 ? curSlot.amount.ToString() : string.Empty;
     }
 
     /// <summary>
@@ -43,11 +55,35 @@ public class Slot : MonoBehaviour
     /// </summary>
     public void ClearSlot()
     {
-        //SlotUIObject.SetActive(false);
-
-        //icon = itemData.Icon;
-        //itemData = null;
+        //_amuont = curSlot.amount == 0 ? _amuont = 0 : _amuont = 1;
+        //if (curSlot == null )
+        //{
+        //    Debug.Log("curSlot null");
+        //}
+        icon.sprite = null;
+        curSlot.itemData = null;
+        isWeapon();
+        icon.gameObject.SetActive(false);
         amuontText.text = string.Empty;
+    }
+
+    public void isWeapon()
+    {
+        if (curSlot.itemData != null)
+        {
+            if (!Main.Inventory.IsCountTableItem(curSlot.itemData))
+            {
+                WeaponDurability.gameObject.SetActive(true);
+            }
+            else
+            {
+                WeaponDurability.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            WeaponDurability.gameObject.SetActive(false);
+        }
     }
 
     //public bool IsEmpty()
@@ -56,6 +92,4 @@ public class Slot : MonoBehaviour
     //    Debug.Log($"IsEmpty() : {IsEmpty()}");
     //    return amount <= 0 && itemData == null;
     //}
-
-    
 }

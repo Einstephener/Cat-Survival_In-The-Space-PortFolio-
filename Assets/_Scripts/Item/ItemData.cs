@@ -1,21 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
+[System.Serializable]
 public enum ItemType
 {
     Resource,
     Equipable,
     Consumable
 }
-
+[System.Serializable]
 public enum ConsumableType
 {
     Hunger,
     Health,
     Thirsty
 }
-
+[System.Serializable]
 public enum EquipableType
 {
     Ax,
