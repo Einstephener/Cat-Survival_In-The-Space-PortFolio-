@@ -9,12 +9,22 @@ public class Enemy : MonoBehaviour
     private AIDestinationSetter _target;
     private LayerMask _playerLayer;
     private Transform _playerTransform;
-    private bool _isChasing = false;
+    [HideInInspector] public bool _isChasing = false;
+    [HideInInspector] public bool _isAttack = false;
+
+    private IEnemyState currentState; // 현재 적의 상태
 
     private void Awake()
     {
         _target = GetComponent<AIDestinationSetter>();
         _playerLayer = LayerMask.GetMask("Player");
+    }
+
+    private void Start()
+    {
+        // 초기 상태를 배회 상태로 설정
+        //currentState = new EnemyChaseState();
+        currentState.EnterState(this);
     }
 
     private void Update()
@@ -57,5 +67,26 @@ public class Enemy : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, _sight);
+    }
+
+    // 상태 전환 메서드
+    public void TransitionToState(IEnemyState newState)
+    {
+        currentState.ExitState(this);   // 현재 상태에서 나가고
+        currentState = newState;        // 새로운 상태로 전환
+        currentState.EnterState(this);  // 새로운 상태로 진입
+    }
+
+    // 적의 공격 메서드
+    public void Attack()
+    {
+        Debug.Log("적이 플레이어를 공격합니다.");
+        // 공격 로직 구현 (플레이어에게 데미지 부여)
+    }
+
+    // 적의 속도 설정
+    public void SetSpeed(float speed)
+    {
+        // 적의 속도 설정 로직
     }
 }
