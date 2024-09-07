@@ -13,7 +13,7 @@ public class EnemyChaseState : IEnemyState
     public void EnterState(Enemy enemy)
     {
         Debug.Log("적이 플레이어를 추적하기 시작합니다.");
-        enemy.SetSpeed(4f); // 추적 중일 때 이동 속도를 증가시킴
+        enemy.SetSpeed(4f); // 추적 중일 때 이동 속도를 증가.
     }
 
     public void UpdateState(Enemy enemy)

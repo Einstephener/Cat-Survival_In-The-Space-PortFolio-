@@ -23,13 +23,16 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         // 초기 상태를 배회 상태로 설정
-        //currentState = new EnemyChaseState();
+        currentState = new EnemyProwlState();
         currentState.EnterState(this);
     }
 
     private void Update()
     {
         FindTarget();
+
+        // 현재 상태를 매 프레임마다 업데이트
+        currentState.UpdateState(this);
     }
 
     private void FindTarget()
@@ -69,6 +72,7 @@ public class Enemy : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, _sight);
     }
 
+    #region EnemyStateChange
     // 상태 전환 메서드
     public void TransitionToState(IEnemyState newState)
     {
@@ -89,4 +93,5 @@ public class Enemy : MonoBehaviour
     {
         // 적의 속도 설정 로직
     }
+    #endregion
 }
