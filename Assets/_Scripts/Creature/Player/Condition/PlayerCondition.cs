@@ -7,7 +7,7 @@ using UnityEngine.Playables;
 // 상태 변화를 관찰하는 옵저버가 구현해야 하는 메서드를 선언.
 public interface IObserver
 {
-    void OnPlayerStateChanged(PlayerState state);
+    void OnPlayerStateChanged(PlayerStatus state);
 }
 
 #endregion
@@ -27,13 +27,13 @@ public interface ISubject
 public class PlayerCondition : MonoBehaviour, ISubject
 {
     private List<IObserver> _observers = new List<IObserver>();
-    private PlayerState _state;
+    private PlayerStatus _state;
     private float _maxValue = 100f;
 
     private void Start()
     {
         // TODO: 저장 시점에 어떤 값을 가지고 있는지, 게임 시작시 초기화.
-        _state = new PlayerState(_maxValue, _maxValue, _maxValue, _maxValue);
+        _state = new PlayerStatus(_maxValue, _maxValue, _maxValue, _maxValue);
 
         UI_PlayerCondition uI_PlayerCondition = FindObjectOfType<UI_PlayerCondition>();
         if (uI_PlayerCondition != null)
@@ -42,7 +42,7 @@ public class PlayerCondition : MonoBehaviour, ISubject
         }
 
         // PlayerStateUpdater를 추가하여 시간에 따른 상태 감소를 처리.
-        PlayerStateUpdater updater = gameObject.AddComponent<PlayerStateUpdater>();
+        PlayerStatusUpdater updater = gameObject.AddComponent<PlayerStatusUpdater>();
         updater.Initialize(this, _state);
     }
 

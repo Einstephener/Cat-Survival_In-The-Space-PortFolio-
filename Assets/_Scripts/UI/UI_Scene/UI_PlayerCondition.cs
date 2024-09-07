@@ -15,8 +15,6 @@ public class UI_PlayerCondition : UI_Scene, IObserver
 
     private void Start()
     {
-        //ConditionParent = GameManager.Instance._UI.transform.Find("HUD_Canvas/PlayerCondition");
-        //GameObject condition = Instantiate(ConditionPrefab, ConditionParent); //시작시 condition추가
         //PlayerController.instance.heartAnim = condition.transform.Find("Health/Image").GetComponent<Animator>();
         SetImage();
     }
@@ -44,7 +42,7 @@ public class UI_PlayerCondition : UI_Scene, IObserver
         }
     }
 
-    public void OnPlayerStateChanged(PlayerState state)
+    public void OnPlayerStateChanged(PlayerStatus state)
     {
         hunger.fillAmount = state.Hunger / 100f;
         thirsty.fillAmount = state.Thirst / 100f;

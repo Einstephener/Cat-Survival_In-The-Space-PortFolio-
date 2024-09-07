@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStateUpdater : MonoBehaviour
+public class PlayerStatusUpdater : MonoBehaviour
 {
     #region Field
     private PlayerCondition _playerCondition;
-    private PlayerState _state;
+    private PlayerStatus _status;
 
     [HideInInspector] public float hungerDecreaseRate = 0.5f;  // 배고픔 감소 속도
     [HideInInspector] public float thirstDecreaseRate = 0.5f; // 목마름 감소 속도
@@ -37,10 +37,10 @@ public class PlayerStateUpdater : MonoBehaviour
         isRun = isRunning;  // 이벤트를 통해 isRun 업데이트
     }
 
-    public void Initialize(PlayerCondition playerCondition, PlayerState state)
+    public void Initialize(PlayerCondition playerCondition, PlayerStatus state)
     {
         this._playerCondition = playerCondition;
-        this._state = state;
+        this._status = state;
     }
 
     private void Update()
@@ -61,12 +61,12 @@ public class PlayerStateUpdater : MonoBehaviour
     private void HealthDecrease()
     {
         // 배고픔이 0이면 체력 감소.
-        if (_state.Hunger <= 0)
+        if (_status.Hunger <= 0)
         {
             _playerCondition.UpdateHealth(-healthDecreaseRate * Time.deltaTime);
         }
         // 목마름이 0이면 체력 감소.
-        if (_state.Thirst <= 0)
+        if (_status.Thirst <= 0)
         {
             _playerCondition.UpdateHealth(-healthDecreaseRate * 2f * Time.deltaTime);
         }
@@ -78,10 +78,10 @@ public class PlayerStateUpdater : MonoBehaviour
         if (!isRun || _isStaminaLock)
         {
             // 스태미나 회복.
-            if (_state.Stamina <= 100)
+            if (_status.Stamina <= 100)
             {
                 // 배고픔에 따라 다른 스태미나 회복량.
-                if (_state.Hunger >= 50)
+                if (_status.Hunger >= 50)
                     _playerCondition.UpdateStamina(staminaDecreaseRate * Time.deltaTime);
                 else
                     _playerCondition.UpdateStamina(staminaDecreaseRate * 0.5f * Time.deltaTime);
@@ -100,13 +100,13 @@ public class PlayerStateUpdater : MonoBehaviour
 
     private bool CheckStamina()
     {
-        if (_state.Stamina <= 0) // 스태미나가 0 이하일 때
+        if (_status.Stamina <= 0) // 스태미나가 0 이하일 때
         {
             _isStaminaLock = true;
             return false;
         }
 
-        if (_state.Stamina >= 20) // 스태미나가 20 이상일 때
+        if (_status.Stamina >= 20) // 스태미나가 20 이상일 때
         {
             _isStaminaLock = false;
             return true;
@@ -119,7 +119,7 @@ public class PlayerStateUpdater : MonoBehaviour
     public bool IsPlayerDead()
     {
         // TODO 죽을 때 화면 등등..
-        if(_state.Health <= 0)
+        if(_status.Health <= 0)
         {
             return true;
         }
@@ -128,7 +128,5 @@ public class PlayerStateUpdater : MonoBehaviour
             return false;
         }
     }
-
-
 
 }
