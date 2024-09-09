@@ -64,18 +64,7 @@ public class PlayerInteraction : MonoBehaviour
         promptText.gameObject.SetActive(true);
         promptText.text = string.Format("<b>[E]</b> {0}", curInteractable.GetInteractPrompt());
     }
-    #region
-    //public void OnInteractInput(InputAction.CallbackContext callbackContext)
-    //{
-    //    if (callbackContext.phase == InputActionPhase.Started && curInteractable != null)
-    //    {
-    //        curInteractable.OnInteract();
-    //        curInteractGameObject = null;
-    //        curInteractable = null;
-    //        promptText.gameObject.SetActive(false);
-    //    }
-    //}
-    #endregion
+    
     public void OnInteract(InputValue value)
     {
         if (curInteractable != null)

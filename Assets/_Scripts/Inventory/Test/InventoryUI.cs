@@ -23,6 +23,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     #endregion
     public Slot[] slotObjects;
     public Slot selectSlot = null;
+    public DragSlot dragSlot;
 
     private void Awake()
     {

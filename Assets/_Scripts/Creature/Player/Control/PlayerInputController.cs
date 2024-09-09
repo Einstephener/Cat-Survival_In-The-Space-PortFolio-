@@ -41,7 +41,7 @@ public class PlayerInputController : MonoBehaviour
         _currentSpeed = _walkSpeed;
         _groundCheckLayer = LayerMask.GetMask("Ground");
         _groundCheck = GetComponent<Transform>();
-        Cursor.lockState = CursorLockMode.Locked; // 커서 가운데 고정.
+        //Cursor.lockState = CursorLockMode.Locked; // 커서 가운데 고정.
     }
 
     private void FixedUpdate()
@@ -137,4 +137,5 @@ public class PlayerInputController : MonoBehaviour
     {
         Debug.Log("OnInteract" + value.ToString());
     }
+
 }
