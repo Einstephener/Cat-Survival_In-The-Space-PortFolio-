@@ -24,7 +24,7 @@ public class EnemyChaseState : IEnemyState
             enemy.TransitionToState(new EnemyAttackState());
         }
 
-        if (!enemy._isChasing)
+        if (!enemy._isChasing && !enemy._isAttack)
         {
             enemy.TransitionToState(new EnemyProwlState());
         }

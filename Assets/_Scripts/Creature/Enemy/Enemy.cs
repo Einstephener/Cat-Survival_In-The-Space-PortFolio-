@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public Transform basePosition;
+    private Transform playerPosition;
     private float _sightRange = 7f;
-    private float _attackRange = 3f;
+    private float _attackRange = 4f;
     private AIDestinationSetter _target;
     private LayerMask _playerLayer;
     private Transform _playerTransform;
@@ -33,7 +35,10 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         FindTarget();
-
+        if (playerPosition == null)
+        {
+            _target.target = basePosition;
+        }
         // 현재 상태를 매 프레임마다 업데이트
         currentState.UpdateState(this);
     }
@@ -53,14 +58,19 @@ public class Enemy : MonoBehaviour
             if (_target != null)
             {
                 _target.target = _playerTransform;
+                playerPosition = _playerTransform;
                 
                 if (hits.Length > 0)
                 {
                     _isAttack = true;
+                    _isChasing = false;
                 }
-                // 추격.
-                _isChasing = true;
-                _isAttack = false;
+                else
+                {
+                    // 추격.
+                    _isChasing = true;
+                    _isAttack = false;
+                }
             }
         }
         else
@@ -68,9 +78,10 @@ public class Enemy : MonoBehaviour
             if (_target != null)
             {
                 // 감지된 플레이어가 없으면 추격을 멈춤.
-                _isChasing = false;
+                _isChasing = true;
                 _isAttack = false;
                 _target.target = null;
+                playerPosition = null;
             }
         }
     }
@@ -99,9 +110,9 @@ public class Enemy : MonoBehaviour
     }
 
     // 적의 공격 메서드
-    public void Attack()
+    public void Attack(bool isAttack)
     {
-        _animator.SetTrigger("IsAttack");
+        _animator.SetBool("IsAttack", isAttack);
     }
 
     // 적의 속도 설정
