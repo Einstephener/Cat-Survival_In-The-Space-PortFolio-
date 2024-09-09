@@ -93,8 +93,8 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "left",
-                    "id": "a4d7e6f3-dd96-4f2f-9be4-171f1e708cb7",
+                    "name": "Left",
+                    "id": "96be7f6b-2d94-44b5-aaf6-7d26c96a1107",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
@@ -104,8 +104,8 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "right",
-                    "id": "186988c5-a272-465b-bca8-b2ce7448e138",
+                    "name": "Right",
+                    "id": "4c3a65d2-ff8d-46d5-8553-abbf9fdbc655",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
@@ -115,8 +115,8 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "forward",
-                    "id": "96be7f6b-2d94-44b5-aaf6-7d26c96a1107",
+                    "name": "Forward",
+                    "id": "5a65f60a-d944-4420-974a-2e09ad5ba591",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
@@ -126,8 +126,8 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "backward",
-                    "id": "4c3a65d2-ff8d-46d5-8553-abbf9fdbc655",
+                    "name": "Backward",
+                    "id": "7e1ec275-cf84-4bd2-8494-8f85515856e4",
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
@@ -198,15 +198,6 @@
             "id": "a1a02703-6466-43b2-a7a3-eb757be3095d",
             "actions": [
                 {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "8a30b2c6-c147-480f-abc4-b171abd9c22c",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "UI_Setting",
                     "type": "Button",
                     "id": "0b6490e2-68b6-4bd1-9f2a-73aa78616d1f",
@@ -244,17 +235,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "f49876bf-c211-47af-857a-83cde0f95dc3",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "New action",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "1faf7b4f-91a5-4d70-8866-a118e72dceaf",
