@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private float _sight = 5f;
+    private float _sightRange = 7f;
+    private float _attackRange = 5f;
     private AIDestinationSetter _target;
     private LayerMask _playerLayer;
     private Transform _playerTransform;
+    private Animator _animator;
     [HideInInspector] public bool _isChasing = false;
     [HideInInspector] public bool _isAttack = false;
 
@@ -18,6 +20,7 @@ public class Enemy : MonoBehaviour
     {
         _target = GetComponent<AIDestinationSetter>();
         _playerLayer = LayerMask.GetMask("Player");
+        _animator = GetComponentInChildren<Animator>();
     }
 
     private void Start()
@@ -37,17 +40,18 @@ public class Enemy : MonoBehaviour
 
     private void FindTarget()
     {
-        Collider[] hits = Physics.OverlapSphere(transform.position, _sight, _playerLayer);
+        Collider[] sight = Physics.OverlapSphere(transform.position, _sightRange, _playerLayer);
+        Collider[] hits = Physics.OverlapSphere(transform.position, _attackRange, _playerLayer);
+
         // hits 배열이 비어 있지 않으면 플레이어가 감지된 것
-        if (hits.Length > 0)
+        if (sight.Length > 0)
         {
             // 첫 번째로 감지된 플레이어를 대상으로 설정
-            _playerTransform = hits[0].transform;
+            _playerTransform = sight[0].transform;
 
             // A* Pathfinding에서의 타겟을 플레이어로 설정
             if (_target != null)
             {
-                Debug.Log("Target Set: " + _target.target);
                 _target.target = _playerTransform;
 
                 // 추격 시작
@@ -65,12 +69,37 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void AttackTarget()
+    {
+        Collider[] hits = Physics.OverlapSphere(transform.position, _attackRange, _playerLayer);
+
+        if (hits.Length > 0)
+        {
+            _playerTransform = hits[0].transform;
+            if (_target != null)
+            {
+                _target.target = _playerTransform;
+                _isAttack = true;
+            }
+        }
+        else
+        {
+            if (_target != null)
+            {
+                _isAttack = false;
+                _target.target = null;
+            }
+        }
+    }
+
+    #region Gizmos
     // 시야 범위를 Gizmos로 시각화 (디버깅용)
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, _sight);
+        Gizmos.DrawWireSphere(transform.position, _sightRange);
     }
+    #endregion
 
     #region EnemyStateChange
     // 상태 전환 메서드
@@ -81,11 +110,15 @@ public class Enemy : MonoBehaviour
         currentState.EnterState(this);  // 새로운 상태로 진입
     }
 
+    public void Walking(bool isWalking)
+    {
+        _animator.SetBool("IsChasing", isWalking);
+    }
+
     // 적의 공격 메서드
     public void Attack()
     {
-        Debug.Log("적이 플레이어를 공격합니다.");
-        // 공격 로직 구현 (플레이어에게 데미지 부여)
+        _animator.SetTrigger("IsAttack");
     }
 
     // 적의 속도 설정
