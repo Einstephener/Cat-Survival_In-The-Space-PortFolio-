@@ -6,11 +6,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     private float _sightRange = 7f;
-<<<<<<< Updated upstream
-    private float _attackRange = 5f;
-=======
     private float _attackRange = 3f;
->>>>>>> Stashed changes
     private AIDestinationSetter _target;
     private LayerMask _playerLayer;
     private Transform _playerTransform;
@@ -46,15 +42,6 @@ public class Enemy : MonoBehaviour
     {
         Collider[] sight = Physics.OverlapSphere(transform.position, _sightRange, _playerLayer);
         Collider[] hits = Physics.OverlapSphere(transform.position, _attackRange, _playerLayer);
-<<<<<<< Updated upstream
-
-        // hits 배열이 비어 있지 않으면 플레이어가 감지된 것
-        if (sight.Length > 0)
-        {
-            // 첫 번째로 감지된 플레이어를 대상으로 설정
-            _playerTransform = sight[0].transform;
-=======
->>>>>>> Stashed changes
 
         // hits 배열이 비어 있지 않으면 플레이어가 감지된 것.
         if (sight.Length > 0)
@@ -88,41 +75,11 @@ public class Enemy : MonoBehaviour
         }
     }
 
-<<<<<<< Updated upstream
-    private void AttackTarget()
-    {
-        Collider[] hits = Physics.OverlapSphere(transform.position, _attackRange, _playerLayer);
-
-        if (hits.Length > 0)
-        {
-            _playerTransform = hits[0].transform;
-            if (_target != null)
-            {
-                _target.target = _playerTransform;
-                _isAttack = true;
-            }
-        }
-        else
-        {
-            if (_target != null)
-            {
-                _isAttack = false;
-                _target.target = null;
-            }
-        }
-    }
-
-=======
->>>>>>> Stashed changes
     #region Gizmos
     // 시야 범위를 Gizmos로 시각화 (디버깅용)
     private void OnDrawGizmosSelected()
     {
-<<<<<<< Updated upstream
-        Gizmos.color = Color.red;
-=======
         Gizmos.color = Color.blue;
->>>>>>> Stashed changes
         Gizmos.DrawWireSphere(transform.position, _sightRange);
     }
     #endregion
