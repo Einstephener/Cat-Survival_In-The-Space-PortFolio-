@@ -283,7 +283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
+  m_Color: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -357,9 +357,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thisSlot: {fileID: 0}
-  amuontText: {fileID: 0}
-  icon: {fileID: 0}
-  WeaponDurability: {fileID: 0}
+  amuontText: {fileID: 8835531114999196350}
+  icon: {fileID: 3766336031971042037}
+  WeaponDurability: {fileID: 7495520179320900668}
 --- !u!1 &4922155326772832831
 GameObject:
   m_ObjectHideFlags: 0

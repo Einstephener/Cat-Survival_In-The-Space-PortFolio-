@@ -7,7 +7,7 @@ public class SlotData
 {
     public ItemData itemData;
     public int amount;
-
+    
     public bool IsEmpty()
     {
         
@@ -34,6 +34,9 @@ public class InventoryManager
     public SlotData[] slotsData = new SlotData[18];
     public InventoryUI inventoryUI;
 
+    
+
+
     //public void Start()
     //{
     //    Initialize();
@@ -51,6 +54,7 @@ public class InventoryManager
             slotUI[i].index = i;
             slotUI[i].curSlot = slotsData[i];
         }
+
         inventoryUI.UpdateUI();
     }
 

@@ -17,7 +17,7 @@ using UnityEngine.EventSystems;
 ///     ㄴ마우스 포인터가 UI 요소에서 나갈 때 호출됩니다.
 /// </summary>
 
-public class DraggableSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler, IPointerUpHandler
+public class DraggableSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler/*, IPointerDownHandler, IPointerUpHandler*/
 {
     /// <summary>
     /// Inventory에서 마우스 포인터를 이용한 기능
@@ -39,36 +39,38 @@ public class DraggableSlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-
+        Debug.Log($"Bedgin Drap");
     }
     public void OnDrag(PointerEventData eventData)
     {
-
+        Debug.Log($"Dragging");
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-
+        Debug.Log($"End Drap");
     }
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
+
+
+    //public void OnPointerDown(PointerEventData eventData)
+    //{
         
-    }
+    //}
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-    }
+    //public void OnPointerEnter(PointerEventData eventData)
+    //{
+    //}
 
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
+    //public void OnPointerExit(PointerEventData eventData)
+    //{
 
-    }
+    //}
 
-    public void OnPointerUp(PointerEventData eventData)
-    {
+    //public void OnPointerUp(PointerEventData eventData)
+    //{
 
-    }
+    //}
 }
 

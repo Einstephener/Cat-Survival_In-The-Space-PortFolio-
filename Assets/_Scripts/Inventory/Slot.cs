@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using static UnityEditor.Progress;
+using UnityEngine.PlayerLoop;
 
 #region - 상속자들!
 /// <summary> 
@@ -109,12 +110,13 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     //}
 
     //마우스 드래그가 시작 됐을 때 발생하는 이벤트
-
+    
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log($"{curSlot.itemData} aount : {curSlot.amount}");
         if (eventData.button == PointerEventData.InputButton.Right)
         {
+            Debug.Log($"{curSlot.itemData} aount : {curSlot.amount}");
+
             if (curSlot.itemData != null)
             {
                 Debug.Log($"{curSlot.itemData} aount : {curSlot.amount}");
@@ -128,8 +130,11 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         /// DaragSlot에 연결하여 복사
         /// DaragSlot을 PointerEventData연결
         /// </summary>
-        if(curSlot.itemData != null)
+        Debug.Log($"Bedgin Drap");
+
+        if (curSlot.itemData != null)
         {
+            Main.Inventory.inventoryUI.dragSlot.gameObject.SetActive(true);
             Main.Inventory.inventoryUI.dragSlot.thisSlot = this;
             Main.Inventory.inventoryUI.dragSlot.SetDragSlot(this);
             Main.Inventory.inventoryUI.dragSlot.transform.position = eventData.position;
@@ -139,10 +144,12 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     // 마우스 드래그 중일 때 계속 발생하는 이벤트
     public void OnDrag(PointerEventData eventData)
     {
+        Debug.Log($"Dragging");
+
         ///<summary>
         ///DaragSlot을 PointerEventData 계속 연결
         /// </summary>
-        if(curSlot.itemData != null)
+        if (curSlot.itemData != null)
         {
             Main.Inventory.inventoryUI.dragSlot.transform.position = eventData.position;
         }
@@ -155,9 +162,11 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         ///<summary>
         ///DaragSlot 연결 해제
         /// </summary>
+        Debug.Log($"End Drap");
 
-        Main.Inventory.inventoryUI.dragSlot.RemoveDragSlot();
         Main.Inventory.inventoryUI.dragSlot = null;
+        Main.Inventory.inventoryUI.dragSlot.RemoveDragSlot();
+        //Main.Inventory.inventoryUI.dragSlot.gameObject.SetActive(false);
     }
 
 
@@ -195,5 +204,6 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         }
 
     }
+
 
 }

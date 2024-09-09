@@ -25,11 +25,17 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     public Slot selectSlot = null;
     public DragSlot dragSlot;
 
+    public ItemData testItemData1;
+    public ItemData testItemData2;
+    public ItemData testItemData3;
+
     private void Awake()
     {
         //임시 초기화
         Main.Inventory.Initialize();
-        //UpdateUI();
+        Main.Inventory.AddItem(testItemData1, 3);
+        Main.Inventory.AddItem(testItemData2, 5);
+        Main.Inventory.AddItem(testItemData3);
     }
 
     public void UpdateUI()
