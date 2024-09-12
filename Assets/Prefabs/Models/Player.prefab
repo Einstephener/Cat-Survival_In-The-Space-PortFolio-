@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 1700495962428131172}
   - component: {fileID: 6179378379742888949}
   - component: {fileID: 6163355472542361111}
-  - component: {fileID: 7223748507151818215}
+  - component: {fileID: 8691804033539440806}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -114,7 +114,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8249062713629216920}
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &7223748507151818215
+--- !u!114 &8691804033539440806
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -210,7 +210,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2160383064890216136}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c57948f0a25897d4db14ea31d68cd4e6, type: 3}
+  m_Script: {fileID: 11500000, guid: 3800fb6eb9140644cabfd1df04193693, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraController: {fileID: 3060841905039953084}
