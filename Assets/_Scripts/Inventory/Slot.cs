@@ -37,11 +37,6 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     public int index;
     public int _amuont;
 
-
-    //[Header("#SlotData")]
-    //public ItemData itemData;
-    //public int amount;
-
     private void Awake()
     {
         
@@ -110,9 +105,9 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     //}
 
     //마우스 드래그가 시작 됐을 때 발생하는 이벤트
-    
     public void OnPointerClick(PointerEventData eventData)
     {
+        Debug.Log($"OnPointerClick");
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             Debug.Log($"{curSlot.itemData} aount : {curSlot.amount}");
@@ -123,66 +118,52 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
             }
         }
     }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
-        ///<summary>
-        ///아이템 있는지 확인 
-        /// DaragSlot에 연결하여 복사
-        /// DaragSlot을 PointerEventData연결
-        /// </summary>
-        Debug.Log($"Bedgin Drap");
+        //Debug.Log($"Bedgin Drap");
+        //Debug.Log($"{index}");
 
         if (curSlot.itemData != null)
         {
-            Main.Inventory.inventoryUI.dragSlot.gameObject.SetActive(true);
-            Main.Inventory.inventoryUI.dragSlot.thisSlot = this;
-            Main.Inventory.inventoryUI.dragSlot.SetDragSlot(this);
-            Main.Inventory.inventoryUI.dragSlot.transform.position = eventData.position;
+            Main.Inventory.inventoryUI.SlotIndex(index);
+            DragSlot _dragSlot = Main.Inventory.inventoryUI.dragSlot;
+            _dragSlot.gameObject.SetActive(true);
+            _dragSlot.thisSlot = this;
+            _dragSlot.SetDragSlot(this);
+            _dragSlot.transform.position = eventData.position;
         }
     }
 
     // 마우스 드래그 중일 때 계속 발생하는 이벤트
     public void OnDrag(PointerEventData eventData)
     {
-        Debug.Log($"Dragging");
-
-        ///<summary>
-        ///DaragSlot을 PointerEventData 계속 연결
-        /// </summary>
+        //Debug.Log($"Dragging");
         if (curSlot.itemData != null)
         {
             Main.Inventory.inventoryUI.dragSlot.transform.position = eventData.position;
         }
     }
 
-
     // 마우스 드래그가 끝났을 때 발생하는 이벤트
     public void OnEndDrag(PointerEventData eventData)
     {
-        ///<summary>
-        ///DaragSlot 연결 해제
-        /// </summary>
         Debug.Log($"End Drap");
-
-        Main.Inventory.inventoryUI.dragSlot = null;
         Main.Inventory.inventoryUI.dragSlot.RemoveDragSlot();
-        //Main.Inventory.inventoryUI.dragSlot.gameObject.SetActive(false);
+        //OnDrop(eventData);
     }
-
-
 
 
     // 해당 슬롯에 무언가가 마우스 드롭 됐을 때 발생하는 이벤트
     public void OnDrop(PointerEventData eventData)
     {
-        ///<summary>
-        ///슬롯의 데이터를 스왑한다.
-        /// </summary>
-        Debug.Log($"{curSlot.itemData} aount : {curSlot.amount}");
+        Debug.Log($"OnDrop");
+        //Debug.Log($"{index}");
 
         if (Main.Inventory.inventoryUI.dragSlot != null)
         {
             ChangeSlot();
+            //Main.Inventory.AddItem(curSlot.itemData, curSlot.amount);
         }
     }
 
@@ -196,14 +177,16 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
 
         if (curSlot.IsEmpty())
         {
-            //이동's
+            //기존의 있던 슬롯의 데이터 제거 후 index슬롯으로 이동;
+            Debug.Log($"아이템 이동");
+            //Main.Inventory.inventoryUI.SwapItem(Main.Inventory.inventoryUI.SlotIndex(index), index);
         }
         else
         {
-            //체체체체체인지
+            //이동할 위치의 데이터 값을 복사후 Drop된 위치로 기존의 데이터를 넣고 복사한 데이터를 
+            //체인지
+            Debug.Log($"아이템 스왑");
+            //Main.Inventory.inventoryUI.SwapItem(Main.Inventory.inventoryUI.SlotIndex(index), index);
         }
-
     }
-
-
 }

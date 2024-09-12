@@ -13,7 +13,6 @@ public class EnemyAttackState : IEnemyState
 
     public void UpdateState(Enemy enemy)
     {
-        // 적이 플레이어를 공격하는 로직
         if (!enemy._isAttack)
         {
             enemy.TransitionToState(new EnemyChaseState());
