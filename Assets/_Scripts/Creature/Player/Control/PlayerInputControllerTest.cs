@@ -4,7 +4,7 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerInputController : MonoBehaviour
+public class PlayerInputControllerTest : MonoBehaviour
 {
     #region Field
     [SerializeField] private CameraController _cameraController;
@@ -72,7 +72,7 @@ public class PlayerInputController : MonoBehaviour
     {
         _moveInput = value.Get<Vector3>();
         _moveInput.y = 0;  // y축은 0으로 고정
-        if (value.isPressed)
+        /*if (_moveInput.sqrMagnitude > 0)
         {
             if (_isSit)
             {
@@ -82,7 +82,7 @@ public class PlayerInputController : MonoBehaviour
             {
                 _playerAnimation.WalkAnimation(value.isPressed);
             }
-        }
+        }*/
     }
 
     private void OnRun(InputValue value)
@@ -96,10 +96,10 @@ public class PlayerInputController : MonoBehaviour
             _isRun = false;
         }
 
-        //if (!_isSit)
-        //{
-        //    _playerAnimation.RunAnimation(value.isPressed);
-        //}
+        if (!_isSit)
+        {
+            //_playerAnimation.RunAnimation(value.isPressed);
+        }
 
         OnRunStateChanged?.Invoke(value.isPressed); // 달리기 이벤트 호출.
     }
@@ -137,6 +137,7 @@ public class PlayerInputController : MonoBehaviour
             _rigid.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
             //_playerAnimation.JumpAnimation();
         }
+
     }
 
     private void OnLook(InputValue value)
@@ -167,4 +168,5 @@ public class PlayerInputController : MonoBehaviour
     {
         Debug.Log("OnInteract" + value.ToString());
     }
+
 }
