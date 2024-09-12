@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     private float _sightRange = 7f;
     private float _attackRange = 4f;
     private AIDestinationSetter _target;
+    private AIPath _aiPath;
     private LayerMask _playerLayer;
     private Transform _playerTransform;
     private Animator _animator;
@@ -21,6 +22,7 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         _target = GetComponent<AIDestinationSetter>();
+        _aiPath = GetComponent<AIPath>();
         _playerLayer = LayerMask.GetMask("Player");
         _animator = GetComponentInChildren<Animator>();
     }
@@ -64,12 +66,20 @@ public class Enemy : MonoBehaviour
                 {
                     _isAttack = true;
                     _isChasing = false;
+
+                    // 이동을 멈추고 공격 상태로 전환
+                    _aiPath.canMove = false;  // AIPath 이동 중지
+                    Attack();  // 공격 애니메이션 실행
                 }
                 else
                 {
                     // 추격.
                     _isChasing = true;
                     _isAttack = false;
+
+                    _aiPath.canMove = true;
+                    SetSpeed(4f);
+                    //Attack();  // 공격 애니메이션 중지
                 }
             }
         }
@@ -82,16 +92,22 @@ public class Enemy : MonoBehaviour
                 _isAttack = false;
                 _target.target = null;
                 playerPosition = null;
+                _aiPath.canMove = true;
+                SetSpeed(2f);
             }
         }
     }
 
     #region Gizmos
-    // 시야 범위를 Gizmos로 시각화 (디버깅용)
     private void OnDrawGizmosSelected()
     {
+        // 시야 범위.
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, _sightRange);
+
+        // 공격 범위.
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, _attackRange);
     }
     #endregion
 
@@ -110,15 +126,18 @@ public class Enemy : MonoBehaviour
     }
 
     // 적의 공격 메서드
-    public void Attack(bool isAttack)
+    public void Attack()
     {
-        _animator.SetBool("IsAttack", isAttack);
+        _animator.SetTrigger("OnAttack");
     }
 
     // 적의 속도 설정
     public void SetSpeed(float speed)
     {
-        // 적의 속도 설정 로직
+        if (_aiPath != null)
+        {
+            _aiPath.maxSpeed = speed;  // AIPath의 최대 속도 설정.
+        }
     }
     #endregion
 }

@@ -71,18 +71,18 @@ public class PlayerInputController : MonoBehaviour
     private void OnMove(InputValue value)
     {
         _moveInput = value.Get<Vector3>();
-        _moveInput.y = 0;  // y축은 0으로 고정
-        if (value.isPressed)
-        {
-            if (_isSit)
-            {
-                _playerAnimation.CrouchWalkAnimation(value.isPressed);
-            }
-            else
-            {
-                _playerAnimation.WalkAnimation(value.isPressed);
-            }
-        }
+        //_moveInput.y = 0;  // y축은 0으로 고정
+        //if (value.isPressed)
+        //{
+        //    if (_isSit)
+        //    {
+        //        _playerAnimation.CrouchWalkAnimation(value.isPressed);
+        //    }
+        //    else
+        //    {
+        //        _playerAnimation.WalkAnimation(value.isPressed);
+        //    }
+        //}
 
     }
 
@@ -97,10 +97,10 @@ public class PlayerInputController : MonoBehaviour
             _isRun = false;
         }
 
-        if (!_isSit)
-        {
-            _playerAnimation.RunAnimation(value.isPressed);
-        }
+        //if (!_isSit)
+        //{
+        //    _playerAnimation.RunAnimation(value.isPressed);
+        //}
 
         OnRunStateChanged?.Invoke(value.isPressed); // 달리기 이벤트 호출.
     }
@@ -110,7 +110,7 @@ public class PlayerInputController : MonoBehaviour
         //_cameraController.SitSightChange(value.isPressed);
         _isSit = value.isPressed;
 
-        _playerAnimation.CrouchIdleAnimation(value.isPressed);
+        //_playerAnimation.CrouchIdleAnimation(value.isPressed);
     }
 
     private void ChangeSpeed()
@@ -136,7 +136,7 @@ public class PlayerInputController : MonoBehaviour
         if (_isGrounded)
         {
             _rigid.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
-            _playerAnimation.JumpAnimation();
+            //_playerAnimation.JumpAnimation();
         }
 
     }

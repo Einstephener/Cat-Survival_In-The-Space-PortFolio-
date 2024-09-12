@@ -15,11 +15,11 @@ public class PlayerAnimationController : MonoBehaviour
 
     public void JumpAnimation()
     {
-        _playerAnimator.SetTrigger("IsJump");
+        _playerAnimator.SetTrigger("OnJump");
     }
     public void AttackAnimation()
     {
-        _playerAnimator.SetTrigger("IsAttack");
+        _playerAnimator.SetTrigger("OnAttack");
     }
     public void WalkAnimation(bool IsWalk)
     {

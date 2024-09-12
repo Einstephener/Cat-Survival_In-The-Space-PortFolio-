@@ -94,7 +94,7 @@
                 },
                 {
                     "name": "Left",
-                    "id": "96be7f6b-2d94-44b5-aaf6-7d26c96a1107",
+                    "id": "5a65f60a-d944-4420-974a-2e09ad5ba591",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
@@ -105,7 +105,7 @@
                 },
                 {
                     "name": "Right",
-                    "id": "4c3a65d2-ff8d-46d5-8553-abbf9fdbc655",
+                    "id": "8018e45a-d8bb-4564-8fea-0ebc317e30ca",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
@@ -116,7 +116,7 @@
                 },
                 {
                     "name": "Forward",
-                    "id": "5a65f60a-d944-4420-974a-2e09ad5ba591",
+                    "id": "41fba601-2751-45bf-97eb-994dc3d682df",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
@@ -127,7 +127,7 @@
                 },
                 {
                     "name": "Backward",
-                    "id": "7e1ec275-cf84-4bd2-8494-8f85515856e4",
+                    "id": "0ac84335-4d59-4379-837e-8dcbd823c2dd",
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
