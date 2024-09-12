@@ -69,14 +69,24 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     #endregion
 
     #region - 아이템 스왑
-    public void SwapItem()
+    public void SwapItem(int indexA, int indexB)
     {
-
+        //Debug.Log($"{indexA},{indexB}");
+        SlotData slotdatatemp = slotObjects[indexA].curSlot;
+        slotObjects[indexA].curSlot = slotObjects[indexB].curSlot;
+        slotObjects[indexB].curSlot = slotdatatemp;
+        UpdateUI();
     }
 
     public void SeparateAmount()
     {
 
+    }
+
+    public int SlotIndex(int SlotIndex)
+    {
+        //Debug.Log(SlotIndex);
+        return SlotIndex;
     }
     #endregion
 }

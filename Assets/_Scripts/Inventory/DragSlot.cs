@@ -26,8 +26,11 @@ public class DragSlot : MonoBehaviour
         ///<summary>
         ///드레그한 슬롯 UI 정보 복사
         /// </summary>
+
+
+        this.gameObject.SetActive(true);
         thisSlot = _dragSlot;
-        icon.gameObject.SetActive(true);
+        //icon.gameObject.SetActive(true);
         //isWeapon();
         icon.sprite = thisSlot.curSlot.itemData.Icon;
         amuontText.text = thisSlot.curSlot.amount > 1 ? thisSlot.curSlot.amount.ToString() : string.Empty;
@@ -38,10 +41,11 @@ public class DragSlot : MonoBehaviour
         ///<summary>
         ///드레그한 슬롯 UI 정보 복사
         /// </summary>
-        thisSlot = null;
-        icon.sprite = null;
-        icon.gameObject.SetActive(false);
-        amuontText.text = string.Empty;
+        //thisSlot = null;
+        //icon.sprite = null;
+        //icon.gameObject.SetActive(false);
+        //amuontText.text = string.Empty;
+        this.gameObject.SetActive(false);
     }
 
 }
