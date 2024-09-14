@@ -3,23 +3,31 @@ using UnityEngine;
 
 public interface IPlayerAnimation
 {
-    void Move(PlayerInputController player, Animator animator);
+    void AnimationSet(PlayerInputController player, Animator animator);
 }
 
 // 걷기 전략
 public class WalkingMovement : IPlayerAnimation
 {
-    public void Move(PlayerInputController player, Animator animator)
+    public void AnimationSet(PlayerInputController player, Animator animator)
     {
-        animator.SetBool("IsWalking", true);
+        animator.SetBool("IsWalk", true);
     }
 }
 
 // 달리기 전략
 public class RunningMovement : IPlayerAnimation
 {
-    public void Move(PlayerInputController player, Animator animator)
+    public void AnimationSet(PlayerInputController player, Animator animator)
     {
-        animator.SetBool("IsRunning", true);
+        animator.SetBool("IsRun", true);
+    }
+}
+
+public class SitMovement : IPlayerAnimation
+{
+    public void AnimationSet(PlayerInputController player, Animator animator)
+    {
+        animator.SetBool("IsSit", true);
     }
 }
