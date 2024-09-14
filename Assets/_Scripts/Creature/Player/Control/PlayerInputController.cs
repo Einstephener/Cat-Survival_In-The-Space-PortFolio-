@@ -34,7 +34,7 @@ public class PlayerInputController : MonoBehaviour
     private bool _isRun;
     private bool _isSit;
 
-    private PlayerAnimationController _playerAnimation;
+    private IPlayerAnimation _playerAnimation;
     #endregion
 
     private void Awake()
@@ -48,15 +48,16 @@ public class PlayerInputController : MonoBehaviour
 
     private void Start()
     {
-        _playerAnimation = GetComponent<PlayerAnimationController>();
+        //_playerAnimation = GetComponent<IPlayerAnimation>();
     }
 
     private void FixedUpdate()
     {
         // 이동.
         ChangeSpeed();
-        Vector3 cameraForward = _cameraController.transform.forward;
-        Vector3 cameraRight = _cameraController.transform.right;
+        Vector3 cameraForward = new Vector3(_cameraController.transform.forward.x, 0, _cameraController.transform.forward.z).normalized;
+        Vector3 cameraRight = new Vector3(_cameraController.transform.right.x, 0, _cameraController.transform.right.z).normalized;
+
 
         Vector3 nextVec = (_moveInput.z * cameraForward + _moveInput.x * cameraRight).normalized * _currentSpeed * Time.fixedDeltaTime;
         nextVec.y = 0;
@@ -72,17 +73,36 @@ public class PlayerInputController : MonoBehaviour
     {
         _moveInput = value.Get<Vector3>();
         _moveInput.y = 0;  // y축은 0으로 고정
-        if (value.isPressed)
-        {
-            if (_isSit)
-            {
-                _playerAnimation.CrouchWalkAnimation(value.isPressed);
-            }
-            else
-            {
-                _playerAnimation.WalkAnimation(value.isPressed);
-            }
-        }
+        //if (_moveInput != Vector3.zero)
+        //{            
+        //    if (_isSit)
+        //    {
+        //        _playerAnimation.CrouchWalkAnimation(true);
+        //    }
+        //    else
+        //    {
+        //        if (_isRun)
+        //        {
+        //            _playerAnimation.RunAnimation(true);
+        //        }
+        //        else
+        //        {
+        //            _playerAnimation.WalkAnimation(true);
+        //        }
+        //    }
+        //}
+        //else
+        //{
+        //    if (_isSit)
+        //    {
+        //        _playerAnimation.CrouchWalkAnimation(false);
+        //    }
+        //    else
+        //    {
+        //        _playerAnimation.WalkAnimation(false);
+        //    }
+
+        //}
     }
 
     private void OnRun(InputValue value)
@@ -96,17 +116,17 @@ public class PlayerInputController : MonoBehaviour
             _isRun = false;
         }
 
-        //if (!_isSit)
-        //{
-        //    _playerAnimation.RunAnimation(value.isPressed);
-        //}
+        if (!_isRun)
+        {
+            //_playerAnimation.RunAnimation(false);
+        }
 
         OnRunStateChanged?.Invoke(value.isPressed); // 달리기 이벤트 호출.
     }
 
     private void OnSit(InputValue value)
     {
-        //_cameraController.SitSightChange(value.isPressed);
+        _cameraController.SitSightChange(value.isPressed);
         _isSit = value.isPressed;
 
         //_playerAnimation.CrouchIdleAnimation(value.isPressed);
