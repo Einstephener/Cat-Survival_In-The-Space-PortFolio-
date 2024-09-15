@@ -23,12 +23,12 @@ public class Catcher : Enemy
     private void Start()
     {
         enemyState = EnemyState.Idle;
-        TransitionToState(new EnemyIdleState());
+        //TransitionToState(new EnemyIdleState());
     }
 
     private void Update()
     {
-        UpdateState();
+        //UpdateState();
         if (_playerPosition == null)
         {
             _target.target = basePosition;
