@@ -12,10 +12,10 @@ public class EnemyProwlState : IEnemyState
 
     public void UpdateState(Enemy enemy)
     {
-        if (enemy._isChasing)
-        {
-            enemy.TransitionToState(new EnemyChaseState());
-        }
+        //if (enemy.enemyState == EnemyState.Chasing)
+        //{
+        //    enemy.TransitionToState(new EnemyChaseState());
+        //}
     }
 
     public void ExitState(Enemy enemy)
