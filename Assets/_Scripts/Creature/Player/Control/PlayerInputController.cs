@@ -33,22 +33,27 @@ public class PlayerInputController : MonoBehaviour
     private bool _isGrounded;
     private bool _isRun;
     private bool _isSit;
+    private bool _isMoving;
 
     private IPlayerAnimation _playerAnimation;
+    private Animator _playerAnimator;
     #endregion
 
     private void Awake()
     {
-        _rigid = GetComponent<Rigidbody>();
         _currentSpeed = _walkSpeed;
         _groundCheckLayer = LayerMask.GetMask("Ground");
+
+        _rigid = GetComponent<Rigidbody>();
         _groundCheck = GetComponent<Transform>();
+        _playerAnimator = GetComponent<Animator>();
         //Cursor.lockState = CursorLockMode.Locked; // 커서 가운데 고정.
     }
 
     private void Start()
     {
-        //_playerAnimation = GetComponent<IPlayerAnimation>();
+        _playerAnimation = new IdleMovement();
+        _playerAnimation.AnimationSet(_playerAnimator);
     }
 
     private void FixedUpdate()
@@ -69,85 +74,40 @@ public class PlayerInputController : MonoBehaviour
             Quaternion.identity, _groundDistance, _groundCheckLayer);
     }
 
+    #region PlayerControl
     private void OnMove(InputValue value)
     {
         _moveInput = value.Get<Vector3>();
         _moveInput.y = 0;  // y축은 0으로 고정
-        //if (_moveInput != Vector3.zero)
-        //{            
-        //    if (_isSit)
-        //    {
-        //        _playerAnimation.CrouchWalkAnimation(true);
-        //    }
-        //    else
-        //    {
-        //        if (_isRun)
-        //        {
-        //            _playerAnimation.RunAnimation(true);
-        //        }
-        //        else
-        //        {
-        //            _playerAnimation.WalkAnimation(true);
-        //        }
-        //    }
-        //}
-        //else
-        //{
-        //    if (_isSit)
-        //    {
-        //        _playerAnimation.CrouchWalkAnimation(false);
-        //    }
-        //    else
-        //    {
-        //        _playerAnimation.WalkAnimation(false);
-        //    }
 
-        //}
+        _isMoving = _moveInput != Vector3.zero;
+
+        AnimationStateSet(_isMoving);
     }
 
     private void OnRun(InputValue value)
     {
-        if (value.isPressed)
-        {
-            _isRun = true;
-        }
-        else
-        {
-            _isRun = false;
-        }
+        _isRun = value.isPressed;
 
-        if (!_isRun)
-        {
-            //_playerAnimation.RunAnimation(false);
-        }
+        OnRunStateChanged?.Invoke(value.isPressed); // 달리기(스테미나 사용) 이벤트 호출.        
 
-        OnRunStateChanged?.Invoke(value.isPressed); // 달리기 이벤트 호출.
+        if (_isMoving)
+        {
+            _playerAnimation = _isRun ? new RunningMovement() : new WalkingMovement();
+            _playerAnimation.AnimationSet(_playerAnimator);
+        }
     }
 
     private void OnSit(InputValue value)
     {
-        _cameraController.SitSightChange(value.isPressed);
+        //_cameraController.SitSightChange(value.isPressed);
+        // 고양이 에셋에서는 사용안함.
+
         _isSit = value.isPressed;
 
-        //_playerAnimation.CrouchIdleAnimation(value.isPressed);
-    }
+        _playerAnimation = _isSit ? new SitMovement() : new IdleMovement();
+        _playerAnimation.AnimationSet(_playerAnimator);
 
-    private void ChangeSpeed()
-    {
-        if (!_isGrounded) return;
-
-        if (_isSit)
-        {
-            _currentSpeed = _sitSpeed;
-        }
-        else if (_isRun)
-        {
-            _currentSpeed = _runSpeed;
-        }
-        else
-        {
-            _currentSpeed = _walkSpeed;
-        }
     }
 
     private void OnJump()
@@ -155,7 +115,8 @@ public class PlayerInputController : MonoBehaviour
         if (_isGrounded)
         {
             _rigid.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
-            //_playerAnimation.JumpAnimation();
+            _playerAnimator.SetTrigger("OnJump");
+            //TODO: 점프 착지시 동작 연결[Animator탭에서 수정할듯.]
         }
     }
 
@@ -186,5 +147,45 @@ public class PlayerInputController : MonoBehaviour
     private void OnInteract(InputValue value)
     {
         Debug.Log("OnInteract" + value.ToString());
+    }
+    #endregion
+
+    private void AnimationStateSet(bool isMoving)
+    {
+        if (isMoving)
+        {
+            if (_isSit)
+            {
+                _playerAnimation = _isRun ? new SitWalkMovement() : new SitMovement();
+            }
+            else
+            {
+                _playerAnimation = _isRun ? new RunningMovement() : new WalkingMovement();
+            }
+        }
+        else
+        {
+            _playerAnimation = _isSit ? new SitMovement() : new IdleMovement(); // 움직임이 멈추면 대기 상태로 설정
+        }
+
+        _playerAnimation.AnimationSet(_playerAnimator);
+    }
+
+    private void ChangeSpeed()
+    {
+        if (!_isGrounded) return;
+
+        if (_isSit)
+        {
+            _currentSpeed = _sitSpeed;
+        }
+        else if (_isRun)
+        {
+            _currentSpeed = _runSpeed;
+        }
+        else
+        {
+            _currentSpeed = _walkSpeed;
+        }
     }
 }
