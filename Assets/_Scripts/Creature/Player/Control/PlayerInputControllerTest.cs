@@ -34,7 +34,7 @@ public class PlayerInputControllerTest : MonoBehaviour
     private bool _isRun;
     private bool _isSit;
 
-    private PlayerAnimationController _playerAnimation;
+    private IPlayerAnimation _playerAnimation;
     #endregion
 
     private void Awake()
@@ -48,7 +48,6 @@ public class PlayerInputControllerTest : MonoBehaviour
 
     private void Start()
     {
-        _playerAnimation = GetComponent<PlayerAnimationController>();
     }
 
     private void FixedUpdate()

@@ -23,23 +23,23 @@ public class PlayerInteraction : MonoBehaviour
 
 
     public TextMeshProUGUI promptText;
-    private Camera camera;
+    private Camera playerCameara;
 
     void Start()
     {
-        camera = Camera.main;
+        playerCameara = Camera.main;
     }
 
     private void Update()
     {
         //test
-        Debug.DrawRay(camera.transform.position, camera.transform.forward * maxCheckDistance, Color.green);
+        Debug.DrawRay(playerCameara.transform.position, playerCameara.transform.forward * maxCheckDistance, Color.green);
 
         if (Time.time - lastCheckTime > checkRate)
         {
             lastCheckTime = Time.time;
 
-            Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height/ 2));
+            Ray ray = playerCameara.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height/ 2));
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, maxCheckDistance, layerMask))
             {

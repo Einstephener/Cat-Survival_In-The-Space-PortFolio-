@@ -3,113 +3,94 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//public enum EnemyStateType
-//{
-//    Idle,
-//    Prowl,
-//    Walking,
-//    Chasing,
-//    Hit,
-//    Attack,
-//}
+public enum EnemyState
+{
+    Idle,
+    Prowl,
+    Walking,
+    Chasing,
+    Hit,
+    Attack,
+    Dead,
+}
 
 public class Enemy : MonoBehaviour
 {
-    public Transform basePosition;
-    private Transform playerPosition;
-    private float _sightRange = 7f;
-    private float _attackRange = 4f;
-    private AIDestinationSetter _target;
+    private Vector3 _basePosition;
     private AIPath _aiPath;
+    private Animator _animator;
     private LayerMask _playerLayer;
     private Transform _playerTransform;
-    private Animator _animator;
+    private AIDestinationSetter _target;
 
-    //public EnemyStateType enemyStateType;
-    [HideInInspector] public bool _isChasing = false;
-    [HideInInspector] public bool _isAttack = false;
-    [HideInInspector] public bool _isWalk = false;
+    private EnemyState _enemyState;
+    //private IEnemyState _currentState;
 
-    private IEnemyState _currentState; // 현재 적의 상태
+    private float _sightRange = 8f;
+    private float exitBuffer = 2f;  // 플레이어가 나갈 때 추가 거리.(시야 경계선에 있을 때, 버그 방지.)
+    private float _attackRange = 4f;
 
     private void Awake()
     {
-        _target = GetComponent<AIDestinationSetter>();
         _aiPath = GetComponent<AIPath>();
-        _playerLayer = LayerMask.GetMask("Player");
         _animator = GetComponentInChildren<Animator>();
+        _target = GetComponent<AIDestinationSetter>();
     }
 
     private void Start()
     {
-        _currentState = new EnemyIdleState();
-        _currentState.EnterState(this);
+        _basePosition = transform.position;
+        _enemyState = EnemyState.Idle;
+        _playerLayer = LayerMask.GetMask("Player");
+        //TransitionToState(new EnemyIdleState());
     }
 
     private void Update()
     {
-        FindTarget();
-        if (playerPosition == null)
+        //UpdateState();
+
+        switch (_enemyState)
         {
-            _target.target = basePosition;
+            case EnemyState.Idle:
+                // Idle 행동 구현.
+                UpdateIdle();
+                break;
+            case EnemyState.Prowl:
+                // Prowl 행동 구현.
+
+                break;
+            case EnemyState.Walking:
+                // Walking 행동 구현.
+                UpdateWalking();
+                break;
+            case EnemyState.Chasing:
+                // Chasing 행동 구현.
+                UpdateChasing();
+                break;
+            case EnemyState.Hit:
+                // Hit 행동 구현.
+                UpdateHit();
+                break;
+            case EnemyState.Attack:
+                // Attack 행동 구현.
+                UpdateAttack();
+                break;
+            case EnemyState.Dead:
+                UpdateDead();
+                break;
         }
-        // 현재 상태를 매 프레임마다 업데이트
-        _currentState.UpdateState(this);
     }
 
-    private void FindTarget()
+    public void SetSpeed(float speed)
     {
-        Collider[] sight = Physics.OverlapSphere(transform.position, _sightRange, _playerLayer);
-        Collider[] hits = Physics.OverlapSphere(transform.position, _attackRange, _playerLayer);
-
-        // hits 배열이 비어 있지 않으면 플레이어가 감지된 것.
-        if (sight.Length > 0)
+        if (_aiPath != null)
         {
-            // 첫 번째로 감지된 플레이어를 대상으로 설정.
-            _playerTransform = sight[0].transform;
-
-            // A* Pathfinding에서의 타겟을 플레이어로 설정.
-            if (_target != null)
-            {
-                _target.target = _playerTransform;
-                playerPosition = _playerTransform;
-                
-                if (hits.Length > 0)
-                {
-                    // 이동을 멈추고 공격 상태로 전환
-                    //enemyStateType = EnemyStateType.Attack;
-                    _isAttack = true;
-                    _isChasing = false;
-                    _isWalk = false;
-                    _aiPath.canMove = false;  // AIPath 이동 중지
-                }
-                else
-                {
-                    //enemyStateType = EnemyStateType.Chasing;
-                    _isAttack = false;
-                    _isChasing = false;
-                    _isWalk = true;
-
-                    _aiPath.canMove = true;
-                    SetSpeed(4f);
-                }
-            }
-        }
-        else
-        {
-            if (_target != null)
-            {
-                // 감지된 플레이어가 없으면 추격을 멈춤.
-                _target.target = null;
-                playerPosition = null;
-                _aiPath.canMove = true;
-                SetSpeed(2f);
-            }
+            _aiPath.maxSpeed = speed;  // AIPath의 최대 속도 설정.
         }
     }
 
     #region Gizmos
-    private void OnDrawGizmosSelected()
+    public virtual void OnDrawGizmosSelected()
     {
         // 시야 범위.
         Gizmos.color = Color.blue;
@@ -123,36 +104,128 @@ public class Enemy : MonoBehaviour
 
     #region EnemyStateChange
     // 상태 전환 메서드
-    public void TransitionToState(IEnemyState newState)
-    {
-        _currentState.ExitState(this);   // 현재 상태에서 나가고
-        _currentState = newState;        // 새로운 상태로 전환
-        _currentState.EnterState(this);  // 새로운 상태로 진입
-    }
+    //public virtual void TransitionToState(IEnemyState newState)
+    //{
+    //    if (newState == _currentState) return;
+    //    _currentState?.ExitState(this);
 
-    public void Idle()
+    //    _currentState = newState;
+    //    _currentState.EnterState(this);
+    //}
+
+    //public virtual void UpdateState()
+    //{
+    //    _currentState?.UpdateState(this);
+    //}
+
+    private void UpdateIdle()
     {
+        if (IsDead())
+            return;
+
+        Debug.Log("대기");
         _animator.SetFloat("Speed", 0.1f);
-    }
 
-    public void Chasing()
-    {
-        _animator.SetFloat("Speed", _aiPath.maxSpeed);
-    }
-
-    // 적의 공격 메서드
-    public void Attack()
-    {
-        _animator.SetTrigger("OnAttack");
-    }
-
-    // 적의 속도 설정
-    public void SetSpeed(float speed)
-    {
-        if (_aiPath != null)
+        Collider[] sight = Physics.OverlapSphere(transform.position, _sightRange, _playerLayer);
+        // 배열이 비어 있지 않으면 플레이어가 감지된 것.
+        if (sight.Length > 0)
         {
-            _aiPath.maxSpeed = speed;  // AIPath의 최대 속도 설정.
+            // 첫 번째로 감지된 플레이어를 대상으로 설정.
+            _playerTransform = sight[0].transform;
+            Debug.Log("플레이어 감지");
+            _enemyState = EnemyState.Chasing;
         }
+    }
+
+    private void UpdateWalking()
+    {
+        if (IsDead())
+            return;
+
+        if (Vector3.Distance(transform.position, _basePosition) < 0.1f)
+        {
+            _enemyState = EnemyState.Idle;
+        }
+        else
+        {
+            SetSpeed(2f);
+            _animator.SetFloat("Speed", _aiPath.maxSpeed);
+            _target.target = null;
+            _aiPath.destination = _basePosition;
+        }
+    }
+
+    private void UpdateChasing()
+    {
+        Debug.Log("추적");
+        if (IsDead())
+            return;
+
+        // A* Pathfinding에서의 타겟을 플레이어로 설정.
+        if (_playerTransform != null)
+        {
+            _target.target = _playerTransform;
+            _aiPath.canMove = true;
+            SetSpeed(4f);
+            _animator.SetFloat("Speed", _aiPath.maxSpeed);
+
+            // 공격 범위 체크
+            float distanceToPlayer = Vector3.Distance(transform.position, _playerTransform.position);
+            if (distanceToPlayer <= _attackRange)
+            {
+                _enemyState = EnemyState.Attack;
+                return;  // 공격 상태로 전환했으니 추적 로직을 종료.
+            }
+
+            // 시야 범위를 벗어났는지 체크
+            if (distanceToPlayer > _sightRange + exitBuffer)
+            {
+                Debug.Log("플레이어 시야에서 벗어남, 복귀");
+                _playerTransform = null;
+                _enemyState = EnemyState.Walking;
+                _target.target = null;
+                _aiPath.destination = _basePosition;
+            }
+        }
+        else
+        {
+            _enemyState = EnemyState.Walking;
+            _aiPath.canMove = true;
+        }
+    }
+
+    private void UpdateHit()
+    {
+        _animator.SetTrigger("OnHit");
+    }
+
+    private void UpdateAttack()
+    {
+        if (IsDead()) return;
+
+        _animator.SetTrigger("OnAttack");
+
+        // 플레이어와의 거리 체크 (만약 플레이어가 멀어졌다면 다시 추적)
+        float distanceToPlayer = Vector3.Distance(transform.position, _playerTransform.position);
+        if (distanceToPlayer > _attackRange)
+        {
+            _enemyState = EnemyState.Chasing;
+            _aiPath.canMove = true;
+        }
+        else
+        {
+            _aiPath.canMove = false;  // 공격 중에는 이동하지 않음
+        }
+    }
+
+    private void UpdateDead()
+    {
+        // 죽음.
+    }
+
+    private bool IsDead()
+    {
+        return _enemyState == EnemyState.Dead;
     }
     #endregion
 }
