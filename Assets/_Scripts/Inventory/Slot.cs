@@ -126,8 +126,14 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     public void OnEndDrag(PointerEventData eventData)
     {
         Debug.Log($"End Drap");
-
-        Main.Inventory.inventoryUI.dragSlot.RemoveDragSlot();
+        if (Main.Inventory.inventoryUI.dragSlot.thisSlot != null)
+        {
+            Main.Inventory.inventoryUI.dragSlot.RemoveDragSlot();
+        }
+        else
+        {
+            return;
+        }
     }
 
 
@@ -136,7 +142,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     {
         Debug.Log($"OnDrop");
 
-        if (Main.Inventory.inventoryUI.dragSlot != null)
+        if (Main.Inventory.inventoryUI.dragSlot.thisSlot != null)
         {
             ChangeSlot();
         }
@@ -149,17 +155,21 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         ///SlotData의 정보를 교환 하자
         /// </summary>
 
-        if (curSlot.IsEmpty())//이동할 슬롯의 SlotaData가 업으면
+        if (curSlot.IsEmpty() && !Main.Inventory.inventoryUI.dragSlot.thisSlot.curSlot.IsEmpty())//이동할 슬롯의 SlotaData가 업으면
         {
             //기존의 있던 슬롯의 데이터 제거 후 index슬롯으로 이동;
             Debug.Log($"아이템 이동");
             Main.Inventory.inventoryUI.MoveSlot(Main.Inventory.inventoryUI.dragSlot.thisSlot.curSlot, curSlot);
             //Main.Inventory.inventoryUI.SwapItem(Main.Inventory.inventoryUI.SlotIndex(index), index);
         }
-        else
+        else if (!curSlot.IsEmpty() && !Main.Inventory.inventoryUI.dragSlot.thisSlot.curSlot.IsEmpty())
         {
             Debug.Log($"아이템 스왑");
             Main.Inventory.inventoryUI.SwapItem(Main.Inventory.inventoryUI.dragSlot.thisSlot.curSlot, curSlot);
+        }
+        else
+        {
+            Debug.Log($"아이템 정보 없음");
         }
     }
 }

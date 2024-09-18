@@ -92,32 +92,45 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     #region - 아이템 스왑
     public void SwapItem(SlotData dragSlotData, SlotData dropSlotData)
     {
-        if (dragSlotData.itemData != dropSlotData.itemData)
+        if (dragSlotData.itemData != null && dropSlotData != null)
         {
-            //Debug.Log($"[InventoryUI] SwapItem Before - dragSlotData : {dragSlotData.itemData.DisplayName}, {dragSlotData.amount}/ dropSlotData : {dropSlotData.itemData.DisplayName}, {dropSlotData.amount}");
-            MoveSlot(dragSlotData, dropSlotData);
-            //Debug.Log($"[InventoryUI] SwapItem After - dragSlotData : {dragSlotData.itemData.DisplayName}, {dragSlotData.amount}/ dropSlotData : {dropSlotData.itemData.DisplayName}, {dropSlotData.amount}");
+            if (dragSlotData.itemData != dropSlotData.itemData)
+            {
+                //Debug.Log($"[InventoryUI] SwapItem Before - dragSlotData : {dragSlotData.itemData.DisplayName}, {dragSlotData.amount}/ dropSlotData : {dropSlotData.itemData.DisplayName}, {dropSlotData.amount}");
+                MoveSlot(dragSlotData, dropSlotData);
+                //Debug.Log($"[InventoryUI] SwapItem After - dragSlotData : {dragSlotData.itemData.DisplayName}, {dragSlotData.amount}/ dropSlotData : {dropSlotData.itemData.DisplayName}, {dropSlotData.amount}");
+            }
+            else if (dragSlotData.itemData == dropSlotData.itemData && Main.Inventory.IsCountTableItem(dragSlotData.itemData))
+            {
+                //Debug.Log("같은 아이템이며 셀 수 있는 아이템이넹");
+                //두 아이템이 같은 ItemData이면서 셀 수 있는 아이템이면 SeparateAmount() 함수를 통해 갯수를 합치고 만약 함친 값이 MaxAmount보다 높으면 MaxAmount, @ 헤서 함치자 예압
+            }
         }
-        else if (dragSlotData.itemData == dropSlotData.itemData && Main.Inventory.IsCountTableItem(dragSlotData.itemData))
+        else
         {
-            //Debug.Log("같은 아이템이며 셀 수 있는 아이템이넹");
-            //두 아이템이 같은 ItemData이면서 셀 수 있는 아이템이면 SeparateAmount() 함수를 통해 갯수를 합치고 만약 함친 값이 MaxAmount보다 높으면 MaxAmount, @ 헤서 함치자 예압
+            Debug.Log($"아이템의 정보가 없습니다");
         }
     }
 
     public void MoveSlot(SlotData dragSlotData, SlotData dropSlotData)
     {
-        ItemData tempSlotaData_ItemData = dragSlotData.itemData;
-        int tempAmount = dragSlotData.amount;
+        if (dragSlotData.itemData != null && dropSlotData != null)
+        {
+            ItemData tempSlotaData_ItemData = dragSlotData.itemData;
+            int tempAmount = dragSlotData.amount;
 
-        dragSlotData.itemData = dropSlotData.itemData;
-        dragSlotData.amount = dropSlotData.amount;
+            dragSlotData.itemData = dropSlotData.itemData;
+            dragSlotData.amount = dropSlotData.amount;
 
-        dropSlotData.itemData = tempSlotaData_ItemData;
-        dropSlotData.amount = tempAmount;
+            dropSlotData.itemData = tempSlotaData_ItemData;
+            dropSlotData.amount = tempAmount;
 
-        UpdateUI();
-
+            UpdateUI();
+        }
+        else
+        {
+            Debug.Log($"아이템의 정보가 없습니다");
+        }
     }
 
     public void SeparateAmount()
