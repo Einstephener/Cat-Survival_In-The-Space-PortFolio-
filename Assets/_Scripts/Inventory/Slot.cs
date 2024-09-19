@@ -85,13 +85,28 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         Debug.Log($"OnPointerClick");
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            Debug.Log($"{curSlot.itemData} aount : {curSlot.amount}");
-
             if (curSlot.itemData != null)
             {
                 Debug.Log($"{curSlot.itemData} aount : {curSlot.amount}");
             }
         }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (curSlot.itemData != null)
+        {
+            Debug.Log($"OnPointerEnter");
+            Main.Inventory.inventoryUI.toolTipContainer.SetToolTip(curSlot);
+            //툴팁 보이도록
+        }
+    }
+
+    public void OnPointerEixt(PointerEventData eventData)
+    {
+        Debug.Log($"OnPointerEixt");
+
+        Main.Inventory.inventoryUI.toolTipContainer.HideToolTip();
     }
 
     public void OnBeginDrag(PointerEventData eventData)

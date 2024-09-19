@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 6298543862659487958}
   - component: {fileID: 3795769732175515469}
   - component: {fileID: 8618373718483002545}
+  - component: {fileID: 3938857825991773884}
   m_Layer: 6
-  m_Name: TestItem 1
+  m_Name: AppleObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,3 +148,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: e18af78648779b5498cf8628bc892128, type: 2}
+--- !u!114 &3938857825991773884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9166431057789560856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbdbe0b2cae90784185ccee4d98b3738, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 0}
+  HealAmount: 0
