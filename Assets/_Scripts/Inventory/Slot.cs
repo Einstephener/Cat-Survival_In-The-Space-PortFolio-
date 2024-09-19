@@ -4,8 +4,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using static UnityEditor.Progress;
-using UnityEngine.PlayerLoop;
 
 #region - 상속자들!
 /// <summary> 
@@ -25,7 +23,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
 {
     [Header("#SlotButton")]
     public Button button;
-    private Outline outline;    
+    private Outline outline;
 
     [Header("#SlotDataUI")]
     public GameObject SlotUIObject;
@@ -37,23 +35,12 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     public int index;
     public int _amuont;
 
-    private void Awake()
-    {
-        
-    }
 
     /// <summary>
     /// 슬롯에 아이템 등록
     /// </summary>
     public void SetSlot(SlotData _slotData)
     {
-        //_amuont = curSlot.amount == 0 ? _amuont = 0 : _amuont = 1;
-
-        //if (curSlot == null)
-        //{
-        //    Debug.Log("curSlot null");
-        //}
-        
         curSlot = _slotData;
         icon.gameObject.SetActive(true);
         isWeapon();
@@ -66,11 +53,6 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     /// </summary>
     public void ClearSlot()
     {
-        //_amuont = curSlot.amount == 0 ? _amuont = 0 : _amuont = 1;
-        //if (curSlot == null )
-        //{
-        //    Debug.Log("curSlot null");
-        //}
         icon.sprite = null;
         curSlot.itemData = null;
         isWeapon();
@@ -97,13 +79,6 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         }
     }
 
-    //public bool IsEmpty()
-    //{
-    //    //SlotUIObject.SetActive(false);
-    //    Debug.Log($"IsEmpty() : {IsEmpty()}");
-    //    return amount <= 0 && itemData == null;
-    //}
-
     //마우스 드래그가 시작 됐을 때 발생하는 이벤트
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -121,27 +96,29 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        //Debug.Log($"Bedgin Drap");
-        //Debug.Log($"{index}");
-
         if (curSlot.itemData != null)
         {
-            Main.Inventory.inventoryUI.SlotIndex(index);
             DragSlot _dragSlot = Main.Inventory.inventoryUI.dragSlot;
-            _dragSlot.gameObject.SetActive(true);
-            _dragSlot.thisSlot = this;
             _dragSlot.SetDragSlot(this);
             _dragSlot.transform.position = eventData.position;
+        }
+        else
+        {
+            return;
         }
     }
 
     // 마우스 드래그 중일 때 계속 발생하는 이벤트
+    //이놈 잡아라!!!
     public void OnDrag(PointerEventData eventData)
     {
-        //Debug.Log($"Dragging");
         if (curSlot.itemData != null)
         {
             Main.Inventory.inventoryUI.dragSlot.transform.position = eventData.position;
+        }
+        else
+        {
+            return;
         }
     }
 
@@ -149,8 +126,14 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     public void OnEndDrag(PointerEventData eventData)
     {
         Debug.Log($"End Drap");
-        Main.Inventory.inventoryUI.dragSlot.RemoveDragSlot();
-        //OnDrop(eventData);
+        if (Main.Inventory.inventoryUI.dragSlot.thisSlot != null)
+        {
+            Main.Inventory.inventoryUI.dragSlot.RemoveDragSlot();
+        }
+        else
+        {
+            return;
+        }
     }
 
 
@@ -158,13 +141,12 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     public void OnDrop(PointerEventData eventData)
     {
         Debug.Log($"OnDrop");
-        //Debug.Log($"{index}");
 
-        if (Main.Inventory.inventoryUI.dragSlot != null)
+        if (Main.Inventory.inventoryUI.dragSlot.thisSlot != null)
         {
             ChangeSlot();
-            //Main.Inventory.AddItem(curSlot.itemData, curSlot.amount);
         }
+
     }
 
     private void ChangeSlot()
@@ -173,20 +155,21 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         ///SlotData의 정보를 교환 하자
         /// </summary>
 
-        SlotData tempSlotData = curSlot;
-
-        if (curSlot.IsEmpty())
+        if (curSlot.IsEmpty() && !Main.Inventory.inventoryUI.dragSlot.thisSlot.curSlot.IsEmpty())//이동할 슬롯의 SlotaData가 업으면
         {
             //기존의 있던 슬롯의 데이터 제거 후 index슬롯으로 이동;
             Debug.Log($"아이템 이동");
+            Main.Inventory.inventoryUI.MoveSlot(Main.Inventory.inventoryUI.dragSlot.thisSlot.curSlot, curSlot);
             //Main.Inventory.inventoryUI.SwapItem(Main.Inventory.inventoryUI.SlotIndex(index), index);
+        }
+        else if (!curSlot.IsEmpty() && !Main.Inventory.inventoryUI.dragSlot.thisSlot.curSlot.IsEmpty())
+        {
+            Debug.Log($"아이템 스왑");
+            Main.Inventory.inventoryUI.SwapItem(Main.Inventory.inventoryUI.dragSlot.thisSlot.curSlot, curSlot);
         }
         else
         {
-            //이동할 위치의 데이터 값을 복사후 Drop된 위치로 기존의 데이터를 넣고 복사한 데이터를 
-            //체인지
-            Debug.Log($"아이템 스왑");
-            //Main.Inventory.inventoryUI.SwapItem(Main.Inventory.inventoryUI.SlotIndex(index), index);
+            Debug.Log($"아이템 정보 없음");
         }
     }
 }
