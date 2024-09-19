@@ -1537,6 +1537,11 @@ PrefabInstance:
       propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3766336031971042037, guid: fa2a501ca1d11504986570918acee62e,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3791380690535164332, guid: fa2a501ca1d11504986570918acee62e,
         type: 3}
       propertyPath: m_Name
@@ -1545,7 +1550,7 @@ PrefabInstance:
     - target: {fileID: 3791380690535164332, guid: fa2a501ca1d11504986570918acee62e,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6444342093720739874, guid: fa2a501ca1d11504986570918acee62e,
         type: 3}
@@ -1635,7 +1640,7 @@ PrefabInstance:
     - target: {fileID: 6529174475578797686, guid: fa2a501ca1d11504986570918acee62e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -75
+      value: -580
       objectReference: {fileID: 0}
     - target: {fileID: 6529174475578797686, guid: fa2a501ca1d11504986570918acee62e,
         type: 3}

@@ -33,14 +33,18 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     {
         //임시 초기화
         Main.Inventory.Initialize();
-        Main.Inventory.AddItem(testItemData1, 3);
-        Main.Inventory.AddItem(testItemData2, 5);
+        //Test
+        Main.Inventory.AddItem(testItemData1, 10);
+        Main.Inventory.AddItem(testItemData2, 99);
+        Main.Inventory.AddItem(testItemData2, 29);
         Main.Inventory.AddItem(testItemData3);
+        //Main.Inventory.RemoveItem(testItemData1, 7);
+        //Main.Inventory.RemoveItem(testItemData2, 5);
     }
 
     public void UpdateUI()
     {
-        var _slots = Main.Inventory.slotsData; // InventoryManager SlotData 가지고 오기
+        SlotData[] _slots = Main.Inventory.slotsData; // InventoryManager SlotData 가지고 오기
 
         // 슬롯 UI 업데이트
         for (int i = 0; i < _slots.Length; i++)
@@ -56,6 +60,23 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         }
     }
 
+    //디버그 호출 함수 Test용
+    public void DebugSlotObjects()
+    {
+        for (int i = 0; i < slotObjects.Length; i++)
+        {
+            if (slotObjects[i] != null && slotObjects[i].curSlot.itemData != null)
+            {
+                Debug.Log($"Slot {i}: Item - {slotObjects[i].curSlot.itemData.DisplayName}, Amount - {slotObjects[i].curSlot.amount}");
+            }
+            else
+            {
+                Debug.Log($"Slot {i}: Empty Slot");
+            }
+        }
+    }
+
+
     #region - 정렬
     public void TrimAll()
     {
@@ -69,24 +90,52 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     #endregion
 
     #region - 아이템 스왑
-    public void SwapItem(int indexA, int indexB)
+    public void SwapItem(SlotData dragSlotData, SlotData dropSlotData)
     {
-        //Debug.Log($"{indexA},{indexB}");
-        SlotData slotdatatemp = slotObjects[indexA].curSlot;
-        slotObjects[indexA].curSlot = slotObjects[indexB].curSlot;
-        slotObjects[indexB].curSlot = slotdatatemp;
-        UpdateUI();
+        if (dragSlotData.itemData != null && dropSlotData != null)
+        {
+            if (dragSlotData.itemData != dropSlotData.itemData)
+            {
+                //Debug.Log($"[InventoryUI] SwapItem Before - dragSlotData : {dragSlotData.itemData.DisplayName}, {dragSlotData.amount}/ dropSlotData : {dropSlotData.itemData.DisplayName}, {dropSlotData.amount}");
+                MoveSlot(dragSlotData, dropSlotData);
+                //Debug.Log($"[InventoryUI] SwapItem After - dragSlotData : {dragSlotData.itemData.DisplayName}, {dragSlotData.amount}/ dropSlotData : {dropSlotData.itemData.DisplayName}, {dropSlotData.amount}");
+            }
+            else if (dragSlotData.itemData == dropSlotData.itemData && Main.Inventory.IsCountTableItem(dragSlotData.itemData))
+            {
+                //Debug.Log("같은 아이템이며 셀 수 있는 아이템이넹");
+                //두 아이템이 같은 ItemData이면서 셀 수 있는 아이템이면 SeparateAmount() 함수를 통해 갯수를 합치고 만약 함친 값이 MaxAmount보다 높으면 MaxAmount, @ 헤서 함치자 예압
+            }
+        }
+        else
+        {
+            Debug.Log($"아이템의 정보가 없습니다");
+        }
+    }
+
+    public void MoveSlot(SlotData dragSlotData, SlotData dropSlotData)
+    {
+        if (dragSlotData.itemData != null && dropSlotData != null)
+        {
+            ItemData tempSlotaData_ItemData = dragSlotData.itemData;
+            int tempAmount = dragSlotData.amount;
+
+            dragSlotData.itemData = dropSlotData.itemData;
+            dragSlotData.amount = dropSlotData.amount;
+
+            dropSlotData.itemData = tempSlotaData_ItemData;
+            dropSlotData.amount = tempAmount;
+
+            UpdateUI();
+        }
+        else
+        {
+            Debug.Log($"아이템의 정보가 없습니다");
+        }
     }
 
     public void SeparateAmount()
     {
 
-    }
-
-    public int SlotIndex(int SlotIndex)
-    {
-        //Debug.Log(SlotIndex);
-        return SlotIndex;
     }
     #endregion
 }

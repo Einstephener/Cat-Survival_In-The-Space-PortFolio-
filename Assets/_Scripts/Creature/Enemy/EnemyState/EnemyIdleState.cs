@@ -14,15 +14,22 @@ public class EnemyIdleState : IEnemyState
     public void EnterState(Enemy enemy)
     {
         Debug.Log("적이 대기 상태입니다.");
-        enemy.Idle();
+        enemy.SetSpeed(0.1f);
     }
 
     public void UpdateState(Enemy enemy)
     {
-        if (enemy._isChasing)
-        {
-            enemy.TransitionToState(new EnemyChaseState());
-        }
+        //if (enemy.IsTarget())
+        //{
+        //    if (enemy.IsTargetAttackRange())
+        //    {
+        //        enemy.TransitionToState(new EnemyAttackState());
+        //    }
+        //    else
+        //    {
+        //        enemy.TransitionToState(new EnemyChaseState());
+        //    }
+        //}
     }
 
     public void ExitState(Enemy enemy)
