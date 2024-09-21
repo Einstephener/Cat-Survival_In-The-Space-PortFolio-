@@ -87,6 +87,26 @@ public class InventoryManager
     {
         return _itemdata is ContableItemData;
     }
+
+    // 특정 아이템의 갯수를 전부 반환하는 함수
+    public int GetTotalItemCount(ItemData _itemdata)
+    {
+        int totalCount = 0;
+
+        foreach (var slot in slotsData)
+        {
+            if (slot != null && slot.itemData == _itemdata)
+            {
+                // 셀 수 있는 아이템인지 확인
+                if (IsCountTableItem(_itemdata))
+                {
+                    totalCount += slot.amount; // 갯수 누적
+                }
+            }
+        }
+
+        return totalCount; // 총 갯수 반환
+    }
     #endregion
 
 

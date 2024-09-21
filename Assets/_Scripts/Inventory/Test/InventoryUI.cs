@@ -24,6 +24,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     public Slot[] slotObjects;
     public Slot selectSlot = null;
     public DragSlot dragSlot;
+    public ToolTipContainer toolTipContainer;
 
     public ItemData testItemData1;
     public ItemData testItemData2;

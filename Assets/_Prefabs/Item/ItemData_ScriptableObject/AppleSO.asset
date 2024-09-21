@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b9b71d8bad673b41a4b024c97bc9fdb, type: 3}
-  m_Name: PotionItemData
+  m_Name: AppleSO
   m_EditorClassIdentifier: 
-  DisplayName: PortionItem
-  Description: PortionItem
+  DisplayName: Apple
+  Description: Apple is Hunger +50
   Type: 2
   Icon: {fileID: 21300000, guid: e12e1a0e4a7453c42932e826264d0473, type: 3}
   DropPrefab: {fileID: 0}
   MaxAmount: 99
   Consumables:
   - type: 0
-    ConsumableValue: 100
+    ConsumableValue: 50

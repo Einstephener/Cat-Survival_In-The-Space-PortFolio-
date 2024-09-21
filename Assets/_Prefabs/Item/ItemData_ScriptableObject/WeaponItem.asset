@@ -23,4 +23,4 @@ MonoBehaviour:
     type: 3}
   Equipables:
   - type: 0
-    DurabilityValue: 100
+    DurabilityValue: 10

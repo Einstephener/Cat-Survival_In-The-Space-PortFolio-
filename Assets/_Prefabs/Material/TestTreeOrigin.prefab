@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4214335611123044306}
   - component: {fileID: 3642696082631562735}
   - component: {fileID: 6182866876985170910}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TestTreeOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,6 @@ MonoBehaviour:
   Prefab: {fileID: 3656365151992050753}
   _CountNow: 4
   _KeepCount: 4
-  _spawnAtOneTimeCount: 1
   _spawnPos: {x: 0, y: 0, z: 0}
   _spawnRadius: 15
   _spawnTime: 5
