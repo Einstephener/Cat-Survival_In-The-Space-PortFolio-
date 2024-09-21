@@ -38,6 +38,7 @@ public class PlayerInputController : MonoBehaviour
     private bool _isMoving;
 
     private Animator _playerAnimator;
+    private float _animationWeightValue;
     #endregion
 
     private void Awake()
@@ -68,6 +69,17 @@ public class PlayerInputController : MonoBehaviour
         Vector3 boxCastPosition = _groundCheck.position + Vector3.up * 0.1f;
         _isGrounded = Physics.BoxCast(boxCastPosition, _boxCastSize / 2, Vector3.down,
             Quaternion.identity, _groundDistance, _groundCheckLayer);
+
+        // 애니메이션
+        if (_playerAnimator.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.9f)
+        {
+            if (_animationWeightValue >= 0)
+            {
+                _animationWeightValue -= Time.deltaTime;
+            }
+            _playerAnimator.SetLayerWeight(1, _animationWeightValue);
+        }
+        
     }
 
 
@@ -132,6 +144,8 @@ public class PlayerInputController : MonoBehaviour
     private void OnFire(InputValue value)
     {
         Debug.Log("OnFire" + value.ToString());
+        _animationWeightValue = 1f;
+        _playerAnimator.SetTrigger("IsAttack");
     }
 
     private void OnInteract(InputValue value)
