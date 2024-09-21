@@ -15,21 +15,24 @@ public class EnemyIdleState : IEnemyState
     {
         Debug.Log("적이 대기 상태입니다.");
         enemy.SetSpeed(0.1f);
+        enemy.animator.SetFloat("Speed", 0.1f);
     }
 
     public void UpdateState(Enemy enemy)
     {
-        //if (enemy.IsTarget())
-        //{
-        //    if (enemy.IsTargetAttackRange())
-        //    {
-        //        enemy.TransitionToState(new EnemyAttackState());
-        //    }
-        //    else
-        //    {
-        //        enemy.TransitionToState(new EnemyChaseState());
-        //    }
-        //}
+        if (enemy.IsDead())
+        {
+            enemy.TransitionToState(new EnemyDeadState());
+            return;
+        }
+
+        Debug.Log("대기");
+        //_animator.SetFloat("Speed", 0.1f);
+
+        if (enemy.IsTarget())
+        {
+            enemy.TransitionToState(new EnemyChaseState());
+        }
     }
 
     public void ExitState(Enemy enemy)
