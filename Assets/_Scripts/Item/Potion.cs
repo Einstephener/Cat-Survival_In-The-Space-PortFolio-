@@ -13,6 +13,7 @@ public class Potion : Item
             if (potionData.Consumables.Length > 0)
             {
                 value = potionData.Consumables[0].ConsumableValue;
+                //Debug.Log($"{potionData.Consumables[0].type}, {potionData.Consumables[0].ConsumableValue}");
             }
         }
     }

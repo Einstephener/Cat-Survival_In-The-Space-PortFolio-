@@ -19,5 +19,5 @@ MonoBehaviour:
   DropPrefab: {fileID: 0}
   MaxAmount: 99
   Consumables:
-  - type: 0
+  - type: 1
     ConsumableValue: 50
