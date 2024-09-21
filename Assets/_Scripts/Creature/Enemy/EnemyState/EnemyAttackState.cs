@@ -4,20 +4,28 @@ using UnityEngine;
 
 public class EnemyAttackState : IEnemyState
 {
+
     public void EnterState(Enemy enemy)
     {
         Debug.Log("적이 공격을 시작합니다.");
-        enemy.GetComponentInChildren<Animator>().SetTrigger("OnAttack");
         //공격 애니메이션 재생, 공격 사운드, 공격 딜레이 등등 설정. 
     }
 
     public void UpdateState(Enemy enemy)
     {
-        Debug.Log("Attack");
-        //if (!enemy.IsTargetAttackRange())
-        //{
-        //    enemy.TransitionToState(new EnemyChaseState());
-        //}
+        if (enemy.IsDead())
+        {
+            enemy.TransitionToState(new EnemyDeadState());
+            return;
+        }
+
+        // 플레이어와의 거리 체크 (만약 플레이어가 멀어졌다면 다시 추적)
+        if (!enemy.IsAttackRange())
+        {
+            enemy.TransitionToState(new EnemyChaseState());
+        }
+
+        enemy.animator.SetTrigger("OnAttack");
     }
 
     public void ExitState(Enemy enemy)
