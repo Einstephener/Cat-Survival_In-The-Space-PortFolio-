@@ -33,12 +33,7 @@ public class ItemObject : MonoBehaviour, IInteractable
 
     public void OnInteract()
     {
-        //인벤에 아이템 추가 
         Main.Inventory.AddItem(itemData);
-        //Destroy(this.gameObject);
-
-        //Debug.Log($"Add Inventory AddItem() function to OnInteract() ");
-        //Debug.Log($"Eat Item - ItemName : {itemData.DisplayName}");
     }
 
     public void Use()

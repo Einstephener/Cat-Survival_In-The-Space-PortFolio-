@@ -88,6 +88,11 @@ public class InventoryManager
         return _itemdata is ContableItemData;
     }
 
+    public bool IsPotionItem(ItemData _itemdata)
+    {
+        return _itemdata is PotionItemData;
+    }
+
     // 특정 아이템의 갯수를 전부 반환하는 함수
     public int GetTotalItemCount(ItemData _itemdata)
     {

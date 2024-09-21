@@ -220,12 +220,6 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
---- !u!4 &15542612 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3490355923430725924, guid: 4fa3cf1ab181d73409dc6a3a27da2b7e,
-    type: 3}
-  m_PrefabInstance: {fileID: 751683045}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &15542613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,7 +232,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41a792876dc012b48a8b2c332931645e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basePosition: {fileID: 15542612}
 --- !u!1001 &89587753
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -448,7 +441,7 @@ PrefabInstance:
     - target: {fileID: 3490355923430725924, guid: 4fa3cf1ab181d73409dc6a3a27da2b7e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.31
+      value: 8.53
       objectReference: {fileID: 0}
     - target: {fileID: 3490355923430725924, guid: 4fa3cf1ab181d73409dc6a3a27da2b7e,
         type: 3}
@@ -458,7 +451,7 @@ PrefabInstance:
     - target: {fileID: 3490355923430725924, guid: 4fa3cf1ab181d73409dc6a3a27da2b7e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.2080584
+      value: -1.02
       objectReference: {fileID: 0}
     - target: {fileID: 3490355923430725924, guid: 4fa3cf1ab181d73409dc6a3a27da2b7e,
         type: 3}

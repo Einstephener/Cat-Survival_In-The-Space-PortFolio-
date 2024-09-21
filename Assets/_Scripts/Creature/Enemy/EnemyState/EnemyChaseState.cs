@@ -9,19 +9,37 @@ public class EnemyChaseState : IEnemyState
     {
         Debug.Log("적이 플레이어를 추적하기 시작합니다.");
         enemy.SetSpeed(4f);
+        enemy.animator.SetFloat("Speed", enemy.aiPath.maxSpeed);
     }
 
     public void UpdateState(Enemy enemy)
     {
-        Debug.Log("Chase");
-        //if (enemy.IsTargetAttackRange())
-        //{
-        //    enemy.TransitionToState(new EnemyAttackState());
-        //}
-        //else if (!enemy.IsTarget())
-        //{
-        //    enemy.TransitionToState(new EnemyIdleState());
-        //}
+        if (enemy.IsDead())
+        {
+            enemy.TransitionToState(new EnemyDeadState());
+            return;
+        }
+
+        // A* Pathfinding에서의 타겟을 플레이어로 설정.
+        if (enemy.IsTarget())
+        {
+            enemy.SetSpeed(4f);
+            // _animator.SetFloat("Speed", _aiPath.maxSpeed);
+
+            // 공격 범위 체크
+            if(enemy.IsAttackRange())
+            {
+                enemy.TransitionToState(new EnemyAttackState());
+            }
+        }
+        else
+        {
+            if (!enemy.IsHome())
+            {
+                Debug.Log("집갈래");
+                enemy.TransitionToState(new EnemyWalkingState());
+            }
+        }
     }
 
     public void ExitState(Enemy enemy)

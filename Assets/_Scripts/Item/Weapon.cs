@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class Weapon : Item
 {
@@ -8,7 +9,15 @@ public class Weapon : Item
 
     public Weapon(ItemData data) : base(data)
     {
-        //Durability = data.Equipables[0].DurabilityValue;
+        if (data is WeaponItemData weaponItemData)
+        {
+            // 첫 번째 consumable의 값을 무조건 받음
+            if (weaponItemData.Equipables.Length > 0)
+            {
+                Durability = weaponItemData.Equipables[0].DurabilityValue;
+                //Debug.Log($"{weaponItemData.Equipables[0].type}, {weaponItemData.Equipables[0].DurabilityValue}");
+            }
+        }
     }
 
     public override void Use()

@@ -19,7 +19,7 @@ using UnityEngine.EventSystems;
 ///     ㄴ마우스 포인터가 UI 요소에서 나갈 때 호출됩니다.
 /// </summary>
 #endregion
-public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
     [Header("#SlotButton")]
     public Button button;
@@ -79,35 +79,46 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         }
     }
 
-    //마우스 드래그가 시작 됐을 때 발생하는 이벤트
+
+    #region Pointer
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log($"OnPointerClick");
+        //Debug.Log($"OnPointerClick");
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             if (curSlot.itemData != null)
             {
-                Debug.Log($"{curSlot.itemData} aount : {curSlot.amount}");
+                if (Main.Inventory.IsPotionItem(curSlot.itemData))
+                {
+                    Debug.Log($"{curSlot.itemData} 사용하기");
+                }
+                //Debug.Log($"{curSlot.itemData} aount : {curSlot.amount}");
             }
         }
     }
 
+    // 마우스 포인터가 슬롯에 들어갈 때
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (curSlot.itemData != null)
+        //1. 툴팁 보이도록
+        //2. 투팀 생성된 위치값 조정 :)
+        if (curSlot.itemData != null) // 에러
         {
-            Debug.Log($"OnPointerEnter");
-            Main.Inventory.inventoryUI.toolTipContainer.SetToolTip(curSlot);
-            //툴팁 보이도록
+            //Debug.Log($"OnPointerEnter");
+            Main.Inventory.inventoryUI.toolTipContainer.SetToolTip(curSlot, this.transform.position);
         }
     }
 
-    public void OnPointerEixt(PointerEventData eventData)
+    // 마우스 포인터가 슬롯에서 빠져나갈 때
+    public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log($"OnPointerEixt");
-
+        //Debug.Log($"OnPointerEixt");
         Main.Inventory.inventoryUI.toolTipContainer.HideToolTip();
     }
+   
+    #endregion
+
+    #region Drag & Drop
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -140,7 +151,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     // 마우스 드래그가 끝났을 때 발생하는 이벤트
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log($"End Drap");
+        //Debug.Log($"End Drap");
         if (Main.Inventory.inventoryUI.dragSlot.thisSlot != null)
         {
             Main.Inventory.inventoryUI.dragSlot.RemoveDragSlot();
@@ -155,7 +166,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
     // 해당 슬롯에 무언가가 마우스 드롭 됐을 때 발생하는 이벤트
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log($"OnDrop");
+        //Debug.Log($"OnDrop");
 
         if (Main.Inventory.inventoryUI.dragSlot.thisSlot != null)
         {
@@ -163,6 +174,7 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         }
 
     }
+    #endregion
 
     private void ChangeSlot()
     {
@@ -173,13 +185,13 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
         if (curSlot.IsEmpty() && !Main.Inventory.inventoryUI.dragSlot.thisSlot.curSlot.IsEmpty())//이동할 슬롯의 SlotaData가 업으면
         {
             //기존의 있던 슬롯의 데이터 제거 후 index슬롯으로 이동;
-            Debug.Log($"아이템 이동");
+            //Debug.Log($"아이템 이동");
             Main.Inventory.inventoryUI.MoveSlot(Main.Inventory.inventoryUI.dragSlot.thisSlot.curSlot, curSlot);
             //Main.Inventory.inventoryUI.SwapItem(Main.Inventory.inventoryUI.SlotIndex(index), index);
         }
         else if (!curSlot.IsEmpty() && !Main.Inventory.inventoryUI.dragSlot.thisSlot.curSlot.IsEmpty())
         {
-            Debug.Log($"아이템 스왑");
+            //Debug.Log($"아이템 스왑");
             Main.Inventory.inventoryUI.SwapItem(Main.Inventory.inventoryUI.dragSlot.thisSlot.curSlot, curSlot);
         }
         else
@@ -187,4 +199,5 @@ public class Slot : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDra
             Debug.Log($"아이템 정보 없음");
         }
     }
+
 }

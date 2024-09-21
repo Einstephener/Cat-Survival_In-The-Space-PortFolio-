@@ -12,5 +12,6 @@ public class Resource : Item
 
     public override void Use()
     {
+
     }
 }
