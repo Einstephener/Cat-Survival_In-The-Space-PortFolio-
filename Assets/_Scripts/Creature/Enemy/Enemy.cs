@@ -3,20 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EnemyState
-{
-    Idle,
-    Prowl,
-    Walking,
-    Chasing,
-    Hit,
-    Attack,
-    Dead,
-}
+//public enum EnemyState
+//{
+//    Idle,
+//    Prowl,
+//    Walking,
+//    Chasing,
+//    Hit,
+//    Attack,
+//    Dead,
+//}
 
 public class Enemy : MonoBehaviour
 {
-    //public float currentSpeed;
+    #region Field
     public Animator animator { get; private set; }
     public AIPath aiPath { get; private set; }
 
@@ -25,27 +25,27 @@ public class Enemy : MonoBehaviour
     private Transform _playerTransform;
     private AIDestinationSetter _target;
 
-    private EnemyState _enemyState;
+    // private EnemyState _enemyState;
     private IEnemyState _currentState;
 
-    private float _currentSightRange = 8f;
-    private float _sightRange = 8f;
-    private float _exitBuffer = 13f;  // 플레이어가 나갈 때 추가 거리.(시야 경계선에 있을 때, 버그 방지.)
-    private float _attackRange = 4f;
+    protected float _currentSightRange;
+    protected float _sightRange = 8f;
+    protected float _exitBuffer = 5f;  // 플레이어가 감지 되었을 때 추가 거리.(시야 경계선에 있을 때, 버그 방지.)
+    protected float _attackRange = 4f;
+    #endregion
 
-    private void Awake()
+    protected virtual void Awake()
     {
         aiPath = GetComponent<AIPath>();
         animator = GetComponentInChildren<Animator>();
         _target = GetComponent<AIDestinationSetter>();
-
-        //currentSpeed = aiPath.maxSpeed;
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         _basePosition = transform.position;
-        _enemyState = EnemyState.Idle;
+        _currentSightRange = _sightRange;
+        // _enemyState = EnemyState.Idle;
         _playerLayer = LayerMask.GetMask("Player");
         TransitionToState(new EnemyIdleState());
     }
@@ -101,9 +101,10 @@ public class Enemy : MonoBehaviour
         // 배열이 비어 있지 않으면 플레이어가 감지된 것.
         if (sight.Length > 0)
         {
+            // 플레이어가 감지되면 시야가 넓어짐.
+            _currentSightRange = _sightRange + _exitBuffer;
+
             // 첫 번째로 감지된 플레이어를 대상으로 설정.
-            _currentSightRange = _exitBuffer;
-            Debug.Log(_currentSightRange);
             _playerTransform = sight[0].transform;
             _target.target = _playerTransform;
             aiPath.canMove = true;
@@ -120,6 +121,7 @@ public class Enemy : MonoBehaviour
             return true;
         }
 
+        _currentSightRange = _sightRange;
         return false;
     }
 
@@ -133,14 +135,15 @@ public class Enemy : MonoBehaviour
         return distanceToPlayer <= _attackRange;
     }
 
+    // 현재 리스폰지역에 있는가 확인.
     public bool IsHome()
     {
         if (Vector3.Distance(transform.position, _basePosition) < 0.1f)
         {
+            _currentSightRange = _sightRange;
             return true;
         }
 
-        _currentSightRange = _sightRange;
         _target.target = null;
         aiPath.destination = _basePosition;
         return false;
@@ -148,11 +151,12 @@ public class Enemy : MonoBehaviour
 
     public bool IsDead()
     {
-        return _enemyState == EnemyState.Dead;
+        // TODO.
+        return false;
     }
 
     #region Gizmos
-    public virtual void OnDrawGizmosSelected()
+    protected virtual void OnDrawGizmosSelected()
     {
         // 시야 범위.
         Gizmos.color = Color.blue;
@@ -175,114 +179,114 @@ public class Enemy : MonoBehaviour
         _currentState.EnterState(this);
     }
 
-    public virtual void UpdateState()
+    protected virtual void UpdateState()
     {
         _currentState?.UpdateState(this);
     }
 
-    private void UpdateIdle()
-    {
-        if (IsDead())
-            return;
+    //private void UpdateIdle()
+    //{
+    //    if (IsDead())
+    //        return;
 
-        Debug.Log("대기");
-        animator.SetFloat("Speed", 0.1f);
+    //    Debug.Log("대기");
+    //    animator.SetFloat("Speed", 0.1f);
 
-        Collider[] sight = Physics.OverlapSphere(transform.position, _currentSightRange, _playerLayer);
-        // 배열이 비어 있지 않으면 플레이어가 감지된 것.
-        if (sight.Length > 0)
-        {
-            // 첫 번째로 감지된 플레이어를 대상으로 설정.
-            _playerTransform = sight[0].transform;
-            Debug.Log("플레이어 감지");
-            _enemyState = EnemyState.Chasing;
-        }
-    }
+    //    Collider[] sight = Physics.OverlapSphere(transform.position, _currentSightRange, _playerLayer);
+    //    // 배열이 비어 있지 않으면 플레이어가 감지된 것.
+    //    if (sight.Length > 0)
+    //    {
+    //        // 첫 번째로 감지된 플레이어를 대상으로 설정.
+    //        _playerTransform = sight[0].transform;
+    //        Debug.Log("플레이어 감지");
+    //        _enemyState = EnemyState.Chasing;
+    //    }
+    //}
 
-    private void UpdateWalking()
-    {
-        if (IsDead())
-            return;
+    //private void UpdateWalking()
+    //{
+    //    if (IsDead())
+    //        return;
 
-        if (Vector3.Distance(transform.position, _basePosition) < 0.1f)
-        {
-            _enemyState = EnemyState.Idle;
-        }
-        else
-        {
-            SetSpeed(2f);
-            animator.SetFloat("Speed", aiPath.maxSpeed);
-            _target.target = null;
-            aiPath.destination = _basePosition;
-        }
-    }
+    //    if (Vector3.Distance(transform.position, _basePosition) < 0.1f)
+    //    {
+    //        _enemyState = EnemyState.Idle;
+    //    }
+    //    else
+    //    {
+    //        SetSpeed(2f);
+    //        animator.SetFloat("Speed", aiPath.maxSpeed);
+    //        _target.target = null;
+    //        aiPath.destination = _basePosition;
+    //    }
+    //}
 
-    private void UpdateChasing()
-    {
-        Debug.Log("추적");
-        if (IsDead())
-            return;
+    //private void UpdateChasing()
+    //{
+    //    Debug.Log("추적");
+    //    if (IsDead())
+    //        return;
 
-        // A* Pathfinding에서의 타겟을 플레이어로 설정.
-        if (_playerTransform != null)
-        {
-            _target.target = _playerTransform;
-            aiPath.canMove = true;
-            SetSpeed(4f);
-            animator.SetFloat("Speed", aiPath.maxSpeed);
+    //    // A* Pathfinding에서의 타겟을 플레이어로 설정.
+    //    if (_playerTransform != null)
+    //    {
+    //        _target.target = _playerTransform;
+    //        aiPath.canMove = true;
+    //        SetSpeed(4f);
+    //        animator.SetFloat("Speed", aiPath.maxSpeed);
 
-            // 공격 범위 체크
-            float distanceToPlayer = Vector3.Distance(transform.position, _playerTransform.position);
-            if (distanceToPlayer <= _attackRange)
-            {
-                _enemyState = EnemyState.Attack;
-                return;  // 공격 상태로 전환했으니 추적 로직을 종료.
-            }
+    //        // 공격 범위 체크
+    //        float distanceToPlayer = Vector3.Distance(transform.position, _playerTransform.position);
+    //        if (distanceToPlayer <= _attackRange)
+    //        {
+    //            _enemyState = EnemyState.Attack;
+    //            return;  // 공격 상태로 전환했으니 추적 로직을 종료.
+    //        }
 
-            // 시야 범위를 벗어났는지 체크
-            if (distanceToPlayer > _currentSightRange + _exitBuffer)
-            {
-                Debug.Log("플레이어 시야에서 벗어남, 복귀");
-                _playerTransform = null;
-                _enemyState = EnemyState.Walking;
-                _target.target = null;
-                aiPath.destination = _basePosition;
-            }
-        }
-        else
-        {
-            _enemyState = EnemyState.Walking;
-            aiPath.canMove = true;
-        }
-    }
+    //        // 시야 범위를 벗어났는지 체크
+    //        if (distanceToPlayer > _currentSightRange + _exitBuffer)
+    //        {
+    //            Debug.Log("플레이어 시야에서 벗어남, 복귀");
+    //            _playerTransform = null;
+    //            _enemyState = EnemyState.Walking;
+    //            _target.target = null;
+    //            aiPath.destination = _basePosition;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        _enemyState = EnemyState.Walking;
+    //        aiPath.canMove = true;
+    //    }
+    //}
 
-    private void UpdateHit()
-    {
-        animator.SetTrigger("OnHit");
-    }
+    //private void UpdateHit()
+    //{
+    //    animator.SetTrigger("OnHit");
+    //}
 
-    private void UpdateAttack()
-    {
-        if (IsDead()) return;
+    //private void UpdateAttack()
+    //{
+    //    if (IsDead()) return;
 
-        animator.SetTrigger("OnAttack");
+    //    animator.SetTrigger("OnAttack");
 
-        // 플레이어와의 거리 체크 (만약 플레이어가 멀어졌다면 다시 추적)
-        float distanceToPlayer = Vector3.Distance(transform.position, _playerTransform.position);
-        if (distanceToPlayer > _attackRange)
-        {
-            _enemyState = EnemyState.Chasing;
-            aiPath.canMove = true;
-        }
-        else
-        {
-            aiPath.canMove = false;  // 공격 중에는 이동하지 않음
-        }
-    }
+    //    // 플레이어와의 거리 체크 (만약 플레이어가 멀어졌다면 다시 추적)
+    //    float distanceToPlayer = Vector3.Distance(transform.position, _playerTransform.position);
+    //    if (distanceToPlayer > _attackRange)
+    //    {
+    //        _enemyState = EnemyState.Chasing;
+    //        aiPath.canMove = true;
+    //    }
+    //    else
+    //    {
+    //        aiPath.canMove = false;  // 공격 중에는 이동하지 않음
+    //    }
+    //}
 
-    private void UpdateDead()
-    {
-        // 죽음.
-    }
+    //private void UpdateDead()
+    //{
+    //    // 죽음.
+    //}
     #endregion
 }
