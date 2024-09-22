@@ -31,7 +31,7 @@ public class InventoryManager
     #endregion
     //int : 슬롯 인덱스, Slot : itemdata, 갯수
     //public Dictionary<int, Slot> dicSlots = new();
-    public SlotData[] slotsData = new SlotData[18];
+    public SlotData[] slotsData = new SlotData[23];
     public InventoryUI inventoryUI;
 
     

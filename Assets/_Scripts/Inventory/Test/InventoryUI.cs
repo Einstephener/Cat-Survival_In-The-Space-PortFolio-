@@ -22,6 +22,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     /// </summary>
     #endregion
     public Slot[] slotObjects;
+    public Slot[] quickSlotObjects;
     public Slot selectSlot = null;
     public DragSlot dragSlot;
     public ToolTipContainer toolTipContainer;
@@ -43,6 +44,36 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         //Main.Inventory.RemoveItem(testItemData2, 5);
     }
 
+    #region QuickSlot
+    public void QuickSlot()
+    {
+        for (int i = 0; i < quickSlotObjects.Length; i++)
+        {
+            quickSlotObjects[i].curSlot = slotObjects[i].curSlot;
+        }
+        QuickSlotUpdateUI();
+    }
+    public void QuickSlotUpdateUI()
+    {
+        SlotData[] _slots = Main.Inventory.slotsData;
+
+        for (int i = 0; i < quickSlotObjects.Length; i++)
+        {
+            if (quickSlotObjects[i].curSlot.itemData != null) // 슬롯이 데이터가 있는지 확인
+            {
+                quickSlotObjects[i].SetSlot(_slots[i]); // 슬롯 정보 업데이트
+                //Debug.Log($"Slot {i}: Item - {quickSlotObjects[i].curSlot.itemData.DisplayName}, Amount - {quickSlotObjects[i].curSlot.amount}");
+
+            }
+            else
+            {
+                quickSlotObjects[i].ClearSlot(); // 빈 슬롯 처리
+            }
+        }
+    }
+
+    #endregion
+
     public void UpdateUI()
     {
         SlotData[] _slots = Main.Inventory.slotsData; // InventoryManager SlotData 가지고 오기
@@ -59,6 +90,8 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
                 slotObjects[i].ClearSlot(); // 빈 슬롯 처리
             }
         }
+
+        QuickSlot();
     }
 
     //디버그 호출 함수 Test용

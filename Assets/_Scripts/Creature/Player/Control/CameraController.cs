@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        transform.position = PlayerHead.transform.position;
+        //transform.position = PlayerHead.transform.position;
     }
 
     public void SitSightChange(bool isSit)
