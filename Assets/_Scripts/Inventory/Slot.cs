@@ -81,16 +81,18 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 
 
     #region Pointer
+    // 마우스 클릭 이벤트
     public void OnPointerClick(PointerEventData eventData)
     {
         //Debug.Log($"OnPointerClick");
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            if (curSlot.itemData != null)
+            if (curSlot.itemData != null && curSlot.itemData.item != null)
             {
                 if (Main.Inventory.IsPotionItem(curSlot.itemData))
                 {
                     Debug.Log($"{curSlot.itemData} 사용하기");
+                    //curSlot.itemData.item.Use();
                 }
                 //Debug.Log($"{curSlot.itemData} aount : {curSlot.amount}");
             }

@@ -16,11 +16,6 @@ public class DragSlot : MonoBehaviour
     public Image icon;
     //public Slider WeaponDurability;
 
-    //private void OnEnable()
-    //{
-    //    SetDragSlot(thisSlot);
-    //}
-
     public void SetDragSlot(Slot _dragSlot)
     {
         this.gameObject.SetActive(true);
