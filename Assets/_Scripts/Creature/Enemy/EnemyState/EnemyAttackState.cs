@@ -25,6 +25,7 @@ public class EnemyAttackState : IEnemyState
             enemy.TransitionToState(new EnemyChaseState());
         }
 
+        enemy.OnAttack();
         enemy.animator.SetTrigger("OnAttack");
     }
 

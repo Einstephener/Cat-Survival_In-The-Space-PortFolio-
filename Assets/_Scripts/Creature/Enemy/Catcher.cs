@@ -8,9 +8,8 @@ public class Catcher : Enemy
     protected override void Awake()
     {
         base.Awake();
-        //_currentSightRange = 10f;
         //_sightRange = 10f;
-        //_exitBuffer = 15f;
+        //_exitBuffer = 3f;
         //_attackRange = 5f;
     }
 
