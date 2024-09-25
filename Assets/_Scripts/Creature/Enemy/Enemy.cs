@@ -31,7 +31,11 @@ public class Enemy : MonoBehaviour
     protected float _currentSightRange;
     protected float _sightRange = 8f;
     protected float _exitBuffer = 5f;  // 플레이어가 감지 되었을 때 추가 거리.(시야 경계선에 있을 때, 버그 방지.)
-    protected float _attackRange = 4f;
+    protected float _attackRange = 3f;
+
+    protected float _hp = 200f;
+    protected float _currentHp;
+    protected float _damage = 10f;
     #endregion
 
     protected virtual void Awake()
@@ -45,6 +49,7 @@ public class Enemy : MonoBehaviour
     {
         _basePosition = transform.position;
         _currentSightRange = _sightRange;
+        _currentHp = _hp;
         // _enemyState = EnemyState.Idle;
         _playerLayer = LayerMask.GetMask("Player");
         TransitionToState(new EnemyIdleState());
@@ -92,6 +97,17 @@ public class Enemy : MonoBehaviour
         {
             aiPath.maxSpeed = speed;  // AIPath의 최대 속도 설정.
         }
+    }
+
+    public virtual void OnAttack()
+    {
+        Debug.Log($"{_target.target} 에게 {_damage} 를 입혔습니다.");
+    }
+
+    public virtual void OnHit(float damage)
+    {
+        _currentHp -= damage;
+        if (_currentHp <= 0) IsDead();
     }
 
     // 플레이어가 시야에 있는지 체크 후 타겟 설정.
