@@ -147,7 +147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44ceabffca3475742975518c0611d4e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: e18af78648779b5498cf8628bc892128, type: 2}
+  itemData: {fileID: 11400000, guid: e18af78648779b5498cf8628bc892128, type: 2}
+  item: {fileID: 3938857825991773884}
 --- !u!114 &3938857825991773884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,5 +161,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbdbe0b2cae90784185ccee4d98b3738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 0}
-  HealAmount: 0
+  itemData: {fileID: 11400000, guid: e18af78648779b5498cf8628bc892128, type: 2}
+  value: 0

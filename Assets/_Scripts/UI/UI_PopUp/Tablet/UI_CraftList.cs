@@ -8,7 +8,7 @@ public class UI_CraftList : MonoBehaviour
     public Image CraftItemImage;
     public GameObject CraftItemDescription;
     public Button CraftBTN;
-
+    private ItemData _itemData;
 
     private void Awake()
     {
@@ -23,8 +23,16 @@ public class UI_CraftList : MonoBehaviour
 
     public void InitSetting(GameObject _craftItem)
     {
-        //아이템 정보 가지고 오기.
-
+        if (_craftItem.TryGetComponent(out ItemObject _itemObject))
+        {
+            _itemData = _itemObject.itemData;
+            CraftItemImage.sprite = _itemData.Icon;
+        }
+        else
+        {
+            Debug.LogError("ItemObject");
+        }
     }
+
 
 }

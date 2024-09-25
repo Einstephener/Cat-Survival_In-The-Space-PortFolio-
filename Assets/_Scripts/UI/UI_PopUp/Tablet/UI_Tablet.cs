@@ -24,15 +24,17 @@ public class UI_Tablet : MonoBehaviour
     {
         ToolCraftingPanel.SetActive(false);
         FurnitureCraftingPanel.SetActive(false);
-        foreach(var tool in ToolsWeapons)
+        foreach (GameObject tool in ToolsWeapons)
         {
             GameObject _craftList = Instantiate(CraftList_Prefab, ToolsContentsParent.transform);
-            _craftList.GetComponent<UI_CraftList>().InitSetting(tool);
+            _craftList.TryGetComponent(out UI_CraftList ui_CraftList);
+            ui_CraftList.InitSetting(tool);
         }
-        foreach(var furniture in Furnitures)
+        foreach (GameObject furniture in Furnitures)
         {
             GameObject _craftList = Instantiate(CraftList_Prefab, FurnitureContentsParent.transform);
-            _craftList.GetComponent<UI_CraftList>().InitSetting(furniture);
+            _craftList.TryGetComponent(out UI_CraftList ui_CraftList);
+            ui_CraftList.InitSetting(furniture);
         }
     }
 

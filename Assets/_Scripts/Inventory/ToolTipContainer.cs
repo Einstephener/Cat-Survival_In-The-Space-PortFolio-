@@ -13,7 +13,6 @@ public class ToolTipContainer : MonoBehaviour
     public void SetToolTip(SlotData _slotData, Vector3 _pos)
     {
         this.gameObject.SetActive(true);
-        //_pos += new Vector3(this.GetComponent<RectTransform>().rect.width * 0.5f, this.GetComponent<RectTransform>().rect.height * -0.5f, 0f);
 
         RectTransform rectTransform = this.GetComponent<RectTransform>();
         Vector3 offset = new Vector3(rectTransform.rect.width * 0.5f, -rectTransform.rect.height * 0.5f, 0f);
