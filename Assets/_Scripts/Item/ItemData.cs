@@ -8,8 +8,10 @@ public enum ItemType
 {
     Resource,
     Equipable,
-    Consumable
+    Consumable,
+    Installation
 }
+
 [System.Serializable]
 public enum ConsumableType
 {
@@ -39,6 +41,13 @@ public class ItemDataEquipable
     public int DurabilityValue;
 }
 
+[System.Serializable]
+public class CraftingResource
+{
+    public ItemData ResourceData;
+    public int Amount;
+}
+
 //[CreateAssetMenu(fileName = "Item", menuName = "New Item")]
 public class ItemData : ScriptableObject
 {
@@ -49,6 +58,9 @@ public class ItemData : ScriptableObject
     public Sprite Icon;
     public GameObject DropPrefab;
     public Item item;
+
+    [Header("Crafting")]
+    public CraftingResource[] CraftingResourceList;
 
     //[Header("Stacking")]
     //public bool CanStack;

@@ -15,7 +15,7 @@ MonoBehaviour:
   DisplayName: Fish
   Description: Apple is Hunger +50
   Type: 2
-  Icon: {fileID: 21300000, guid: e12e1a0e4a7453c42932e826264d0473, type: 3}
+  Icon: {fileID: 21300000, guid: 742979fc8114d0445a7901d7627f52a4, type: 3}
   DropPrefab: {fileID: 0}
   item: {fileID: 3938857825991773884, guid: 730aa33df531aa44e9a9e1d36963ce4c, type: 3}
   MaxAmount: 99

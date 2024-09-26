@@ -15,10 +15,15 @@ MonoBehaviour:
   DisplayName: StoneAX
   Description: 
   Type: 1
-  Icon: {fileID: 21300000, guid: 9d00c78642bd5ac438b2603f5c744d5d, type: 3}
+  Icon: {fileID: 21300000, guid: 03a3938682c7cc94d9a33c0f5c5f1a59, type: 3}
   DropPrefab: {fileID: 9166431057789560856, guid: 1f8519165644f4949b32df74bd95a373,
     type: 3}
   item: {fileID: 0}
+  CraftingResourceList:
+  - ResourceType: 0
+    Amount: 5
+  - ResourceType: 1
+    Amount: 5
   MaxAmount: 1
   EquipPrefab: {fileID: 9166431057789560856, guid: 1f8519165644f4949b32df74bd95a373,
     type: 3}

@@ -513,7 +513,37 @@ MonoBehaviour:
   bg: {fileID: 972193538}
   grade: 0
   size: 3
-  obj: []
+  obj:
+  - {fileID: 5987572886358014243, guid: 923791c7c386b014dab87eb63f30018d, type: 3}
+  - {fileID: 1755865475335770947, guid: 6db7680dca4eb2748a7339cb3bc13d14, type: 3}
+  - {fileID: 4666017353234428848, guid: c6606374ad6058448b3ce4a22865ff19, type: 3}
+  - {fileID: 8944395455035007036, guid: e70c788d9b889f44b8057c1ca261dbb9, type: 3}
+  - {fileID: 6225732306763118652, guid: f3834b0b997a98f4abd2393ccf97366b, type: 3}
+  - {fileID: 4745661115560378933, guid: 3ff9c98c0990fce468bb0d49a51b6461, type: 3}
+  - {fileID: 2651747729594002529, guid: fcdb12c0011022649b9ec1569d29917d, type: 3}
+  - {fileID: 2488915889958085675, guid: c8abccebf51185b4097c6c21f9537b03, type: 3}
+  - {fileID: 146442772897834998, guid: 81356192e1efef14b9abc1cf4b9bacfb, type: 3}
+  - {fileID: 533969784003325081, guid: 33e67b2c06da9fb45bc1dd04a92e1756, type: 3}
+  - {fileID: 6767123147300739391, guid: 59c8f0b45e078024790e41c60925eebd, type: 3}
+  - {fileID: 2831683187207543018, guid: aafd8a29881ca0c44a84cc241a46738d, type: 3}
+  - {fileID: 3428171896838543631, guid: c6a8f57ad6f610e4f96b3eb30d67d5a9, type: 3}
+  - {fileID: 5765071742734176566, guid: 9c3ca8a1873da8c4285f51dd82fc7756, type: 3}
+  - {fileID: 2033055110962353314, guid: 02abdc19f195ac84391d9dd3b8d5e667, type: 3}
+  - {fileID: 1980320178175070823, guid: 2df30fc5b60f17646bce1554e46da0c0, type: 3}
+  - {fileID: 3060091062635557942, guid: 90b7ac96b9ca155409bb24ff791a6206, type: 3}
+  - {fileID: 8604014862111390200, guid: 705ea568440259c4c8f0e26ac261c69b, type: 3}
+  - {fileID: 5546413172616124203, guid: 598e0a14a6cd8eb46aa28e9380775a6f, type: 3}
+  - {fileID: 3828846876288801734, guid: 1c6865324f95c004293d5d1efe86d559, type: 3}
+  - {fileID: 412090124883188085, guid: 65c61591445ed8245b88a9bd45165f5b, type: 3}
+  - {fileID: 104517609856167801, guid: 94c015d94f6e5364e9b36b960bbe1b77, type: 3}
+  - {fileID: 7770584863604633872, guid: 67de17aaa6711224f80123d9b1ef8cb7, type: 3}
+  - {fileID: 2206852426022253465, guid: de500f6b90f89bc4c87a6585b2dea01a, type: 3}
+  - {fileID: 1937588542411740048, guid: a05072560c3476b4cb8dddf22f697392, type: 3}
+  - {fileID: 5536447206541363498, guid: d8ee164b0a7fd47458d8294000a8bcbe, type: 3}
+  - {fileID: 3366140265147980475, guid: 1a8fa040e5c684308b95679dd2c1dcd6, type: 3}
+  - {fileID: 135748, guid: 43a5797f593865e43babe6221167d9e0, type: 3}
+  - {fileID: 919132149155446097, guid: 6724caf277831854fa8c7e4bcd500aa1, type: 3}
+  - {fileID: 8475171451159580080, guid: 6046a64e832cdad44ac9e18fe66d19f1, type: 3}
 --- !u!4 &337669966
 Transform:
   m_ObjectHideFlags: 0
@@ -1129,7 +1159,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0

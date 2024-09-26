@@ -33,7 +33,15 @@ public class ItemObject : MonoBehaviour, IInteractable
 
     public void OnInteract()
     {
-        Main.Inventory.AddItem(itemData);
+        //상호작용할 아이템이 설치가능한 아이템인지 확인 후 상호작용하기
+        if (itemData.Type != ItemType.Installation)
+        {
+            Main.Inventory.AddItem(itemData);
+        }
+        else
+        {
+            Use();
+        }
     }
 
     public void Use()
