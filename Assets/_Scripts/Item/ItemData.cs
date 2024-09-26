@@ -11,6 +11,13 @@ public enum ItemType
     Consumable
 }
 [System.Serializable]
+public enum ResourceType
+{
+    Wood,
+    Stone,
+    Fiber,
+}
+[System.Serializable]
 public enum ConsumableType
 {
     Hunger,
@@ -39,6 +46,13 @@ public class ItemDataEquipable
     public int DurabilityValue;
 }
 
+[System.Serializable]
+public class CraftingResource
+{
+    public ResourceType ResourceType;
+    public int Amount;
+}
+
 //[CreateAssetMenu(fileName = "Item", menuName = "New Item")]
 public class ItemData : ScriptableObject
 {
@@ -49,6 +63,9 @@ public class ItemData : ScriptableObject
     public Sprite Icon;
     public GameObject DropPrefab;
     public Item item;
+
+    [Header("Info")]
+    public CraftingResource[] CraftingResourceList;
 
     //[Header("Stacking")]
     //public bool CanStack;

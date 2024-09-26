@@ -592,5 +592,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CraftItemImage: {fileID: 6701677272125667412}
-  CraftItemDescription: {fileID: 4523359424426440510}
+  CraftItemDescriptionParent: {fileID: 1135538640688816227}
+  CraftItemListTxt: {fileID: 2725740674886991101}
   CraftBTN: {fileID: 2346108782646223614}

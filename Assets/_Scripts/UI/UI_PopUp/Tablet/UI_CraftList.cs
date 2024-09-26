@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_CraftList : MonoBehaviour
 {
     public Image CraftItemImage;
-    public GameObject CraftItemDescription;
+    public GameObject CraftItemDescriptionParent;
+    public TMP_Text CraftItemListTxt;
     public Button CraftBTN;
     private ItemData _itemData;
 
@@ -27,6 +29,10 @@ public class UI_CraftList : MonoBehaviour
         {
             _itemData = _itemObject.itemData;
             CraftItemImage.sprite = _itemData.Icon;
+            for(int i = 0; i < _itemData.CraftingResourceList.Length; i++)
+            {
+                CraftItemListTxt.text += _itemData.CraftingResourceList[i].ResourceType.ToString() + " " + _itemData.CraftingResourceList[i].Amount + " \n";
+            }
         }
         else
         {
