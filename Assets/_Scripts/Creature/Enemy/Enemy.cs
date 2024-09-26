@@ -6,9 +6,9 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     #region Field
+    [SerializeField] private Transform _projectileSpawnPoint;
     public Animator animator { get; private set; }
     public AIPath aiPath { get; private set; }
-    protected EnemyData enemyData;
 
     private Vector3 _basePosition;
     private LayerMask _playerLayer;
@@ -17,9 +17,13 @@ public class Enemy : MonoBehaviour
 
     private IEnemyState _currentState;
 
-    protected float _currentSightRange;
+    protected EnemyData _enemyData;
 
+    protected float _currentSightRange;
     protected float _currentHp;
+    private float _attackCooldown;
+    private float _lastAttackTime;
+
     #endregion
 
     protected virtual void Awake()
@@ -32,6 +36,7 @@ public class Enemy : MonoBehaviour
     protected virtual void Start()
     {
         _basePosition = transform.position;
+        _attackCooldown = _enemyData.attackCooldown;
         _playerLayer = LayerMask.GetMask("Player");
         TransitionToState(new EnemyIdleState());
     }
@@ -41,11 +46,11 @@ public class Enemy : MonoBehaviour
         UpdateState();
     }
 
-    protected void Init(EnemyData enemy)
+    protected void Init(EnemyData enemyData)
     {
-        enemyData = enemy;
-        _currentSightRange = enemyData.sightRange;
-        _currentHp = enemyData.maxHp;
+        _enemyData = enemyData;
+        _currentSightRange = _enemyData.sightRange;
+        _currentHp = _enemyData.maxHp;
     }
 
     public void SetSpeed(float speed)
@@ -58,7 +63,46 @@ public class Enemy : MonoBehaviour
 
     public virtual void OnAttack()
     {
-        Debug.Log($"{_target.target} 에게 {enemyData.damage} 를 입혔습니다.");
+        if (Time.time >= _lastAttackTime + _attackCooldown) // 쿨타임 체크.
+        {
+            if (_enemyData.attackType == IAttackType.Melee)
+            {
+                MeleeAttack();
+                Debug.Log($"{_target.target}에게 {_enemyData.damage}의 근거리 공격을 했습니다.");
+            }
+            else if (_enemyData.attackType == IAttackType.Ranged)
+            {
+                RangedAttack();
+                Debug.Log($"{_target.target}에게 {_enemyData.damage}의 원거리 공격을 했습니다.");
+            }
+            _lastAttackTime = Time.time; // 마지막 공격 시간 업데이트.
+        }
+    }
+    protected virtual void MeleeAttack()
+    {
+        if (Vector3.Distance(transform.position, _playerTransform.position) <= _enemyData.attackRange)
+        {
+            // 플레이어 맞는 상태.
+        }
+    }
+
+    protected virtual void RangedAttack()
+    {
+        FireProjectile();
+    }
+
+    // 투사체 발사
+    protected virtual void FireProjectile()
+    {
+        // 투사체 생성 및 발사
+        Projectile projectile = Main.Pool.Pop(_enemyData.projectilePrefab).GetComponent<Projectile>();
+
+        // 투사체의 위치와 방향 설정
+        projectile.transform.position = _projectileSpawnPoint.position; // 손끝 위치에서 발사
+        //projectile.transform.rotation = _projectileSpawnPoint.rotation; // 손끝 방향으로 회전
+
+        // 투사체 초기화
+        projectile.Init(_playerTransform, _enemyData.attackSpeed, _enemyData.damage);
     }
 
     public virtual void OnHit(float damage)
@@ -75,7 +119,7 @@ public class Enemy : MonoBehaviour
         if (sight.Length > 0)
         {
             // 플레이어가 감지되면 시야가 넓어짐.
-            _currentSightRange = enemyData.sightRange + enemyData.exitBuffer;
+            _currentSightRange = _enemyData.sightRange + _enemyData.exitBuffer;
 
             // 첫 번째로 감지된 플레이어를 대상으로 설정.
             _playerTransform = sight[0].transform;
@@ -86,7 +130,7 @@ public class Enemy : MonoBehaviour
             return true;
         }
 
-        _currentSightRange = enemyData.sightRange;
+        _currentSightRange = _enemyData.sightRange;
         return false;
     }
 
@@ -97,7 +141,7 @@ public class Enemy : MonoBehaviour
 
         float distanceToPlayer = Vector3.Distance(transform.position, _playerTransform.position);
 
-        return distanceToPlayer <= enemyData.attackRange;
+        return distanceToPlayer <= _enemyData.attackRange;
     }
 
     // 현재 리스폰지역에 있는가 확인.
@@ -105,7 +149,7 @@ public class Enemy : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, _basePosition) < 0.1f)
         {
-            _currentSightRange = enemyData.sightRange;
+            _currentSightRange = _enemyData.sightRange;
             return true;
         }
 
@@ -123,7 +167,7 @@ public class Enemy : MonoBehaviour
     #region Gizmos
     protected virtual void OnDrawGizmosSelected()
     {
-        if (enemyData == null) return;
+        if (_enemyData == null) return;
 
         // 시야 범위.
         Gizmos.color = Color.blue;
@@ -131,7 +175,7 @@ public class Enemy : MonoBehaviour
 
         // 공격 범위.
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, enemyData.attackRange);
+        Gizmos.DrawWireSphere(transform.position, _enemyData.attackRange);
     }
     #endregion
 
