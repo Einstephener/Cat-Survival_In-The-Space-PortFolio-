@@ -7,10 +7,9 @@ public class SlotData
 {
     public ItemData itemData;
     public int amount;
-    
+    public int weaponDurability;
     public bool IsEmpty()
     {
-        
         return /*amount <= 0 && */itemData == null;
     }
 }

@@ -66,6 +66,7 @@ public class PlayerInteraction : MonoBehaviour
         promptText.text = string.Format("<b>[E]</b> {0}", curInteractable.GetInteractPrompt());
     }
     
+    //아이템 획득
     public void OnInteract(InputValue value)
     {
         if (curInteractable != null)

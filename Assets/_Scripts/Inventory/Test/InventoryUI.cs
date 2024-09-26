@@ -110,6 +110,19 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         }
     }
 
+    //임시 함수 InputSystem에서 값을 받아 퀵슬롯에서 아이템 스위칭
+    public void Inputvalue()
+    {
+        //현재slotObjects 0~4 을 복사하여 quickSlotObjects에 있는 슬롯에게 보여주는 중이다.
+        //InputSystem에서 값을 밭아 quickSlotObjects에 아웃 라인을 두껍게 하여 현재 선택한 퀵슬롯이 무엇인지 보여주며
+        //selectSlot의 ItemData를 통해 플레이어 화면에 보이도록 하자!
+    }
+
+    public Slot EquipItem(Slot slot)
+    {
+        //Input System에서 밭은 Value값을 통해 slotObjects의 퀵슬롯의 있는 아이템을 selectSlot에 넣어 주는 역할
+        return selectSlot;
+    }
 
     #region - 정렬
     public void TrimAll()
