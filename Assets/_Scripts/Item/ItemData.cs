@@ -11,13 +11,7 @@ public enum ItemType
     Consumable,
     Installation
 }
-[System.Serializable]
-public enum ResourceType
-{
-    Wood,
-    Stone,
-    Fiber,
-}
+
 [System.Serializable]
 public enum ConsumableType
 {
@@ -50,7 +44,7 @@ public class ItemDataEquipable
 [System.Serializable]
 public class CraftingResource
 {
-    public ResourceType ResourceType;
+    public ItemData ResourceData;
     public int Amount;
 }
 
@@ -65,7 +59,7 @@ public class ItemData : ScriptableObject
     public GameObject DropPrefab;
     public Item item;
 
-    [Header("Info")]
+    [Header("Crafting")]
     public CraftingResource[] CraftingResourceList;
 
     //[Header("Stacking")]
