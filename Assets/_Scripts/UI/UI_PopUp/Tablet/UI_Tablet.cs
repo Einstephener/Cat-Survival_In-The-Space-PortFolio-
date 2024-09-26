@@ -22,8 +22,10 @@ public class UI_Tablet : MonoBehaviour
 
     private void Start()
     {
-        ToolCraftingPanel.SetActive(false);
+        ToolCraftingPanel.SetActive(true);
         FurnitureCraftingPanel.SetActive(false);
+
+        // 지정해놓은 제작 품목들 제작창에 동기화.
         foreach (GameObject tool in ToolsWeapons)
         {
             GameObject _craftList = Instantiate(CraftList_Prefab, ToolsContentsParent.transform);
