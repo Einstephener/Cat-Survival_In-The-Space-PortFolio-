@@ -133,13 +133,7 @@ PrefabInstance:
     - target: {fileID: 2465751278626249774, guid: effe6696b4d66ed4aaecc62f8572e48a,
         type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'root'\n\tTransform 'index_03_l'\n\tTransform
-        'lowerarm_l'\n\tTransform 'root'\n\tTransform 'neck_01'\n\tTransform 'ring_03_l'\n\tTransform
-        'clavicle_l'\n\tTransform 'ring_02_l'\n\tTransform 'ball_l'\n\tTransform
-        'hand_l'\n\tand more ...\n\tFrom animation clip 'mixamo.com'\n\tFrom animation
-        clip 'mixamo.com'"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2713223316979259522, guid: effe6696b4d66ed4aaecc62f8572e48a,
         type: 3}
@@ -219,6 +213,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1532157939}
+    - targetCorrespondingSourceObject: {fileID: 4716674183552887032, guid: effe6696b4d66ed4aaecc62f8572e48a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1532157940}
   m_SourcePrefab: {fileID: 100100000, guid: effe6696b4d66ed4aaecc62f8572e48a, type: 3}
 --- !u!4 &379234278 stripped
 Transform:
@@ -498,6 +496,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd6095f98491572459b7415aba52bfb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1532157940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532157938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 431cab6294730394d9040ce49bd6555f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UI_Tablet: {fileID: 1621469486}
+  UI_Setting: {fileID: 0}
+  UI_Inventory: {fileID: 0}
+  UI_Map: {fileID: 0}
+  inputActionAsset: {fileID: -944628639613478452, guid: 632c2093c7bb3fd47979f08a4ad25d0c,
+    type: 3}
+--- !u!1 &1621469486 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 871043244367082204, guid: 83648a5d408bd84408311c2ca670004b,
+    type: 3}
+  m_PrefabInstance: {fileID: 5984216218462298324}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1811045968
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,6 +714,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI_CraftingTabletUI
       objectReference: {fileID: 0}
+    - target: {fileID: 871043244367082204, guid: 83648a5d408bd84408311c2ca670004b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1016091686951548438, guid: 83648a5d408bd84408311c2ca670004b,
         type: 3}
       propertyPath: m_Pivot.x
@@ -795,32 +822,32 @@ PrefabInstance:
     - target: {fileID: 4617505695792134003, guid: 83648a5d408bd84408311c2ca670004b,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4617505695792134003, guid: 83648a5d408bd84408311c2ca670004b,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4617505695792134003, guid: 83648a5d408bd84408311c2ca670004b,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: -23
       objectReference: {fileID: 0}
     - target: {fileID: 5837014565106001791, guid: 83648a5d408bd84408311c2ca670004b,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7240187696216325780, guid: 83648a5d408bd84408311c2ca670004b,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7240187696216325780, guid: 83648a5d408bd84408311c2ca670004b,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

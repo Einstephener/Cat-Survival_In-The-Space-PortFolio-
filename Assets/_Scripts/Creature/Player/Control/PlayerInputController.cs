@@ -152,7 +152,13 @@ public class PlayerInputController : MonoBehaviour
     {
         Debug.Log("OnInteract" + value.ToString());
     }
+
+    private void OnQuickSlot(InputValue value)
+    {
+        //퀵슬롯 부분 추가
+    }
     #endregion
+
 
     private void ChangeSpeed()
     {
