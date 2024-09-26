@@ -15,7 +15,8 @@ public class PlayerInteraction : MonoBehaviour
 {
     public float checkRate = 0.5f;
     private float lastCheckTime;
-    public float maxCheckDistance = 2.5f;
+    [SerializeField]
+    private float maxCheckDistance = 5f;
     public LayerMask layerMask;
 
     private GameObject curInteractGameObject;

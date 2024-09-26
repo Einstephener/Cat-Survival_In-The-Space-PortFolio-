@@ -84,6 +84,8 @@ public class Capture : MonoBehaviour
         {
             var nowObj = Instantiate(obj[nowCnt].gameObject);
 
+            AdjustCameraDistance(nowObj);
+
             yield return null;
 
             Texture2D tex = new Texture2D(rt.width, rt.height, TextureFormat.ARGB32, false, true);
@@ -116,28 +118,82 @@ public class Capture : MonoBehaviour
         }
     }
 
+    //void AdjustCameraDistance(GameObject obj)
+    //{
+    //    // 오브젝트의 크기를 기준으로 카메라와의 거리 조정
+    //    Renderer objRenderer = obj.GetComponent<Renderer>();
+    //    if (objRenderer != null)
+    //    {
+    //        // 오브젝트의 경계 박스를 가져온다
+    //        Bounds bounds = objRenderer.bounds;
+    //        float objectHeight = bounds.size.y; // 오브젝트의 높이
+
+    //        // 카메라의 FOV와 비율에 따라 거리 계산
+    //        float distance = objectHeight / (2.0f * Mathf.Tan(cam.fieldOfView * 0.5f * Mathf.Deg2Rad));
+
+    //        // 카메라의 위치 조정
+    //        cam.transform.position = new Vector3(cam.transform.position.x, cam.transform.position.y, -distance);
+    //        cam.transform.LookAt(bounds.center); // 오브젝트를 바라보도록 설정
+    //    }
+    //}
+    void AdjustCameraDistance(GameObject obj)
+    {
+        Renderer objRenderer = obj.GetComponent<Renderer>();
+        if (objRenderer != null)
+        {
+            // 오브젝트의 경계 박스를 가져온다
+            Bounds bounds = objRenderer.bounds;
+            float objectHeight = bounds.size.y; // 오브젝트의 높이
+            float objectWidth = bounds.size.x; // 오브젝트의 너비
+
+            // 카메라의 FOV와 비율에 따라 거리 계산
+            float distance = (objectHeight / 2) / Mathf.Tan(cam.fieldOfView * 0.5f * Mathf.Deg2Rad);
+
+            // 오브젝트의 중앙을 기준으로 카메라 위치 설정
+            Vector3 targetPosition = bounds.center;
+
+            // 오브젝트의 너비를 고려하여 추가 거리 계산
+            float aspectRatio = (float)Screen.width / (float)Screen.height;
+            float horizontalDistance = (objectWidth / 2) / Mathf.Tan(cam.fieldOfView * 0.5f * Mathf.Deg2Rad) * aspectRatio;
+
+            // 카메라의 Z 위치 조정
+            float finalDistance = Mathf.Max(distance, horizontalDistance);
+
+            // 여유 공간을 추가 (여유 공간 비율 조정)
+            float padding = objectHeight * 1.5f; // 여유 공간을 더 넉넉하게 설정
+            cam.transform.position = new Vector3(targetPosition.x, targetPosition.y, targetPosition.z - finalDistance - padding); // 카메라를 좀 더 뒤로 이동
+            cam.transform.LookAt(targetPosition); // 오브젝트를 바라보도록 설정
+        }
+    }
+
+
     void SettingColor()
     {
         switch (grade)
         {
             case Grade.Null:
                 //투명하게
-                cam.backgroundColor = Color.white;
+                cam.clearFlags = CameraClearFlags.Color;
+                cam.backgroundColor = new Color(1, 1, 1, 0);
                 bg.color = new Color(1, 1, 1, 0);
                 break;
             case Grade.Normal:
+                cam.clearFlags = CameraClearFlags.SolidColor;
                 cam.backgroundColor = Color.white;
                 bg.color = Color.white;
                 break;
             case Grade.Uncommon:
+                cam.clearFlags = CameraClearFlags.SolidColor;
                 cam.backgroundColor = Color.green;
                 bg.color = Color.green;
                 break;
             case Grade.Rare:
+                cam.clearFlags = CameraClearFlags.SolidColor;
                 cam.backgroundColor = Color.blue;
                 bg.color = Color.blue;
                 break;
             case Grade.Legend:
+                cam.clearFlags = CameraClearFlags.SolidColor;
                 cam.backgroundColor = Color.yellow;
                 bg.color = Color.yellow;
                 break;
