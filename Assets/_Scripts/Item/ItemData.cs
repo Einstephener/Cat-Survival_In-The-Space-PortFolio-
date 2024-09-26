@@ -8,7 +8,8 @@ public enum ItemType
 {
     Resource,
     Equipable,
-    Consumable
+    Consumable,
+    Installation
 }
 [System.Serializable]
 public enum ResourceType
