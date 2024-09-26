@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 766bd3998316396499a295bb145ea71f, type: 3}
-  m_Name: StonSO
+  m_Name: StoneSO
   m_EditorClassIdentifier: 
   DisplayName: Ston
   Description: ResouceItem

@@ -7,20 +7,34 @@ using UnityEngine.UI;
 public class UI_CraftList : MonoBehaviour
 {
     public Image CraftItemImage;
-    public GameObject CraftItemDescriptionParent;
-    public TMP_Text CraftItemListTxt;
+    public GameObject CraftDescriptionParent;
+    public GameObject CraftItemResoursePrefab;
     public Button CraftBTN;
     private ItemData _itemData;
 
-    private void Awake()
-    {
-        
-    }
+    private Image ResourceItemImage;
+    private TMP_Text ResourceItemAmount;
+    private int _itemOwnedAmount = 0; //todo
+    private int _itemNeedAmount;
 
 
     public void ClickCraftBTN()
     {
 
+    }
+
+    public void CanCraft()
+    {
+        if(_itemOwnedAmount < _itemNeedAmount)
+        {
+            // 제작 불가
+            CraftBTN.interactable = false;
+        }
+        else
+        {
+            //제작 가능
+            CraftBTN.interactable = true;
+        }
     }
 
     public void InitSetting(GameObject _craftItem)
@@ -31,7 +45,17 @@ public class UI_CraftList : MonoBehaviour
             CraftItemImage.sprite = _itemData.Icon;
             for(int i = 0; i < _itemData.CraftingResourceList.Length; i++)
             {
-                CraftItemListTxt.text += _itemData.CraftingResourceList[i].ResourceType.ToString() + " " + _itemData.CraftingResourceList[i].Amount + " \n";
+                GameObject ResourceIcon = Instantiate(CraftItemResoursePrefab, CraftDescriptionParent.transform);
+
+                ResourceIcon.GetComponent<Image>().sprite = _itemData.CraftingResourceList[i].ResourceData.Icon;
+
+                _itemOwnedAmount = Main.Inventory.GetTotalItemCount(_itemData.CraftingResourceList[i].ResourceData);
+                _itemNeedAmount = _itemData.CraftingResourceList[i].Amount;
+                CanCraft();
+
+                ResourceIcon.GetComponentInChildren<TMP_Text>().text = _itemOwnedAmount + " / " + _itemNeedAmount;
+
+
             }
         }
         else

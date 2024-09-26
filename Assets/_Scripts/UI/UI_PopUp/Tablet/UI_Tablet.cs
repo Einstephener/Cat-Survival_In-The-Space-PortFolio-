@@ -22,7 +22,7 @@ public class UI_Tablet : MonoBehaviour
 
     private void Start()
     {
-        ToolCraftingPanel.SetActive(false);
+        ToolCraftingPanel.SetActive(true);
         FurnitureCraftingPanel.SetActive(false);
         foreach (GameObject tool in ToolsWeapons)
         {
