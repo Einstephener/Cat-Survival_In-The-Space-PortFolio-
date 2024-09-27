@@ -155,7 +155,7 @@ public class PlayerInputController : MonoBehaviour
 
     private void OnQuickSlot(InputValue value)
     {
-        //퀵슬롯 부분 추가
+        // TODO : 퀵슬롯 부분 추가
     }
     #endregion
 

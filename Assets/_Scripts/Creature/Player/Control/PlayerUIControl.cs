@@ -24,6 +24,7 @@ public class PlayerUIControl : MonoBehaviour
     private InputActionMap uiActionMap;        // UI용 ActionMap
     #endregion
 
+
     private void Start()
     {
         playerActionMap = inputActionAsset.FindActionMap("Player");
@@ -32,6 +33,8 @@ public class PlayerUIControl : MonoBehaviour
         playerActionMap.Enable();
     }
 
+    //TODO : 플레이어 inputaction map 변경 메서드.
+    #region inputActionMap 변경
     public void SwitchToPlayer()
     {
         uiActionMap.Disable();
@@ -44,10 +47,13 @@ public class PlayerUIControl : MonoBehaviour
         uiActionMap.Enable();
     }
 
+    #endregion
 
+    #region UIControl
     private void OnUI_Tablet(InputValue value)
     {
-        if (IsTabletON) {
+        if (IsTabletON)
+        {
             UI_Tablet.SetActive(false);
             IsTabletON = false;
             SwitchToPlayer();
@@ -104,8 +110,7 @@ public class PlayerUIControl : MonoBehaviour
             IsInventoryON = true;
             SwitchToUI();
         }
-    }    
-
-    //TODO : 플레이어 inputaction map 변경 메서드.
+    }
+    #endregion
 
 }
