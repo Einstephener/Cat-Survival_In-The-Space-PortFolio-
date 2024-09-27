@@ -82,8 +82,19 @@ public class Enemy : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, _playerTransform.position) <= _enemyData.attackRange)
         {
-            // 플레이어 맞는 상태.
+            Projectile projectile = Main.Pool.Pop(_enemyData.projectilePrefab).GetComponent<Projectile>();
+
+            // 투사체 초기화.
+            projectile.Init(_playerTransform, _enemyData.attackTime, _enemyData.damage, _enemyData.attackType, _projectileSpawnPoint);
+
+            StartCoroutine(DisableMeleeProjectileAfterAttack(projectile));
         }
+    }
+
+    private IEnumerator DisableMeleeProjectileAfterAttack(Projectile projectile)
+    {
+        yield return new WaitForSeconds(_enemyData.attackTime);
+        Main.Pool.Push(projectile);
     }
 
     protected virtual void RangedAttack()
@@ -98,11 +109,10 @@ public class Enemy : MonoBehaviour
         Projectile projectile = Main.Pool.Pop(_enemyData.projectilePrefab).GetComponent<Projectile>();
 
         // 투사체의 위치와 방향 설정
-        projectile.transform.position = _projectileSpawnPoint.position; // 손끝 위치에서 발사
-        //projectile.transform.rotation = _projectileSpawnPoint.rotation; // 손끝 방향으로 회전
+        projectile.transform.position = _projectileSpawnPoint.position; // 손끝 위치에서 발사.
 
         // 투사체 초기화
-        projectile.Init(_playerTransform, _enemyData.attackSpeed, _enemyData.damage);
+        projectile.Init(_playerTransform, _enemyData.attackTime, _enemyData.damage, _enemyData.attackType);
     }
 
     public virtual void OnHit(float damage)
