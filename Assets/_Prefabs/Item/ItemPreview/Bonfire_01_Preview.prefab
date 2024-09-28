@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1012849989202360695}
   - component: {fileID: 129348145699190942}
   m_Layer: 0
-  m_Name: Bonfire_01
+  m_Name: Bonfire_01_Preview
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,6 +64,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: a99372db45d269a4988dfaee17940b85, type: 2}
+  - {fileID: 2100000, guid: c6600fa2654ea97429fd586153224bf9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -100,7 +101,7 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5

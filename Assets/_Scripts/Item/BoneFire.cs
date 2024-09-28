@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
-/// 1. 플레이어 탐색
-/// 2. Item상호작용
+/// 1. 아이템이 있는지 확인 
+/// 2. 
 /// </summary>
 public class BoneFire : Installation
 {
-    public Slot slot;
+    public InventorySlot slot;
 
     public BoneFire(ItemData data) : base(data)
     {

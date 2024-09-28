@@ -9,4 +9,7 @@ public class PotionItemData : ContableItemData
 
     [Header("Consumable")]
     public ItemDataConsumable[] Consumables;
+
+    [Header("Cooking")]
+    public ItemData CookingItemData;
 }

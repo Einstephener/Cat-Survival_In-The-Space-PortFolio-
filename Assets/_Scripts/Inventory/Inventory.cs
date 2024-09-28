@@ -24,11 +24,11 @@
     //    /// </summary>
     //    /// 
     //    #endregion
-    //    public Dictionary<int, Slot> slots = new();
+    //    public Dictionary<int, InventorySlot> slots = new();
 
     //    [Header("#UI")]
-    //    public Slot[] inventorySlots;
-    //    //public Slot[] qickslots;
+    //    public InventorySlot[] inventorySlots;
+    //    //public InventorySlot[] qickslots;
 
     //    [Header("#Test")]
     //    public ItemData _Testitemdata;
