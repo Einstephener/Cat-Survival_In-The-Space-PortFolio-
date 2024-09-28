@@ -22,7 +22,7 @@ public class EnemyData : ScriptableObject
     public float maxHp;
     public float damage;
     public float addSpeed;
-    public float attackSpeed;
+    public float attackTime;
     public float attackCooldown;
 
     public float sightRange;
