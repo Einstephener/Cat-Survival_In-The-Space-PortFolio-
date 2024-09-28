@@ -5,36 +5,21 @@ using UnityEngine;
 public class Projectile : Poolable
 {
     private Transform _target;
-    private Transform _parent;
 
     private float _attackTime;
     private float _damage;
 
-    private IAttackType _attackType;
-
-    public void Init(Transform target, float attackSpeed, float damage, IAttackType attackType, Transform parent = null)
+    public void Init(Transform target, float attackSpeed, float damage)
     {
         this._target = target;
-        this._parent = parent;
         this._attackTime = attackSpeed;
         this._damage = damage;
-        this._attackType = attackType;
 
-        if (_attackType == IAttackType.Melee)
-        {
-            transform.SetParent(_parent);
-            transform.localPosition = Vector3.zero;
-        }
-        else
-        {
-            transform.SetParent(null);
-        }
+        transform.position = transform.position;
     }
 
     private void Update()
     {
-        if (_attackType == IAttackType.Melee) return;
-
         if (_target == null)
         {
             Main.Pool.Push(this); // 타겟이 없으면 풀로 반환.
@@ -58,15 +43,9 @@ public class Projectile : Poolable
         // 타겟에 데미지를 입힘.
         Debug.Log($"원거리 {_damage} 데미지");
 
+        // TODO : 플레이어 Hp 깎기.
+
         // 풀로 반환.
         Main.Pool.Push(this);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (_attackType == IAttackType.Melee && other.CompareTag("Player"))
-        {
-            Debug.Log("뭐지");
-        }
     }
 }

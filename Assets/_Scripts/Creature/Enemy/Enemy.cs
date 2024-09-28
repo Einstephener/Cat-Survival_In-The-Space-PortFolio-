@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
 {
     #region Field
     [SerializeField] private Transform _projectileSpawnPoint;
+    [SerializeField] private MeleeHitbox _meleeHitbox;
+
     public Animator animator { get; private set; }
     public AIPath aiPath { get; private set; }
 
@@ -68,12 +70,15 @@ public class Enemy : MonoBehaviour
             if (_enemyData.attackType == IAttackType.Melee)
             {
                 MeleeAttack();
-                Debug.Log($"{_target.target}에게 {_enemyData.damage}의 근거리 공격을 했습니다.");
             }
             else if (_enemyData.attackType == IAttackType.Ranged)
             {
                 RangedAttack();
-                Debug.Log($"{_target.target}에게 {_enemyData.damage}의 원거리 공격을 했습니다.");
+            }
+            else if (_enemyData.attackType == IAttackType.Both)
+            {
+                MeleeAttack();
+                RangedAttack();
             }
             _lastAttackTime = Time.time; // 마지막 공격 시간 업데이트.
         }
@@ -82,19 +87,23 @@ public class Enemy : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, _playerTransform.position) <= _enemyData.attackRange)
         {
-            Projectile projectile = Main.Pool.Pop(_enemyData.projectilePrefab).GetComponent<Projectile>();
+            if (_meleeHitbox != null)
+            {
+                _meleeHitbox.Activate(_enemyData.damage);
 
-            // 투사체 초기화.
-            projectile.Init(_playerTransform, _enemyData.attackTime, _enemyData.damage, _enemyData.attackType, _projectileSpawnPoint);
-
-            StartCoroutine(DisableMeleeProjectileAfterAttack(projectile));
+                // 공격 시간이 지난 후 히트박스 비활성화
+                StartCoroutine(DisableMeleeHitboxAfterAttack());
+            }
         }
     }
 
-    private IEnumerator DisableMeleeProjectileAfterAttack(Projectile projectile)
+    private IEnumerator DisableMeleeHitboxAfterAttack()
     {
         yield return new WaitForSeconds(_enemyData.attackTime);
-        Main.Pool.Push(projectile);
+        if (_meleeHitbox != null)
+        {
+            _meleeHitbox.Deactivate();
+        }
     }
 
     protected virtual void RangedAttack()
@@ -102,17 +111,14 @@ public class Enemy : MonoBehaviour
         FireProjectile();
     }
 
-    // 투사체 발사
     protected virtual void FireProjectile()
     {
-        // 투사체 생성 및 발사
+        // 투사체 생성 및 발사.
         Projectile projectile = Main.Pool.Pop(_enemyData.projectilePrefab).GetComponent<Projectile>();
 
-        // 투사체의 위치와 방향 설정
-        projectile.transform.position = _projectileSpawnPoint.position; // 손끝 위치에서 발사.
-
-        // 투사체 초기화
-        projectile.Init(_playerTransform, _enemyData.attackTime, _enemyData.damage, _enemyData.attackType);
+        // 투사체의 위치와 방향 설정.
+        projectile.transform.position = _projectileSpawnPoint.position;
+        projectile.Init(_playerTransform, _enemyData.attackTime, _enemyData.damage); // 투사체 초기화.
     }
 
     public virtual void OnHit(float damage)

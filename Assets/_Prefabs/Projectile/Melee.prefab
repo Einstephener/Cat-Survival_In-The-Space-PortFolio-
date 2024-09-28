@@ -13,14 +13,14 @@ GameObject:
   - component: {fileID: 4849641528501506076}
   - component: {fileID: 718060146343163196}
   - component: {fileID: 2763293641649656906}
-  - component: {fileID: 82794875889024845}
+  - component: {fileID: -3029407931748103535}
   m_Layer: 0
-  m_Name: TestProjectile
+  m_Name: Melee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2085636095071229700
 Transform:
   m_ObjectHideFlags: 0
@@ -30,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 5518298659372828043}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.94, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -134,7 +134,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &82794875889024845
+--- !u!114 &-3029407931748103535
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,13 +143,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 5518298659372828043}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a3507e32aa1015429ee6d58967970a4, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b3b321ee18c7c8409d48a8335771c0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsUsing: 0
-  Prefab: {fileID: 5518298659372828043}
-  _CountNow: 0
-  _KeepCount: 5
-  _spawnPos: {x: 0, y: 0, z: 0}
-  _spawnRadius: 15
-  _spawnTime: 5

@@ -9,21 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: CatcherBossData
-  m_EditorClassIdentifier: Assembly-CSharp::BossEnemyData
-  name: Catcher
-  attackType: 0
+  m_Script: {fileID: 11500000, guid: 7b6b54e5c8dbec3498ccb281fd507a70, type: 3}
+  m_Name: RangedEnemy
+  m_EditorClassIdentifier: 
+  name: Ranged
+  attackType: 1
   projectilePrefab: {fileID: 5518298659372828043, guid: 1331ec86057647043b42cd9f6162fb59,
     type: 3}
-  maxHp: 200
-  damage: 10
+  maxHp: 150
+  damage: 7
   addSpeed: 0
-  attackTime: 1.5
+  attackTime: 30
   attackCooldown: 1.5
   sightRange: 10
   exitBuffer: 5
   attackRange: 10
-  skillRange: 10
-  skillDamage: 30
-  skillCooldown: 5
