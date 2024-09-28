@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3925921518961112872}
   - component: {fileID: 6637790920859408762}
   m_Layer: 5
-  m_Name: QickSlots
+  m_Name: QuickSlots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

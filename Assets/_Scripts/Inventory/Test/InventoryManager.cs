@@ -28,8 +28,8 @@ public class InventoryManager
     /// 셀 수 있는 아이템인지 여부
     /// </summary>
     #endregion
-    //int : 슬롯 인덱스, Slot : itemdata, 갯수
-    //public Dictionary<int, Slot> dicSlots = new();
+    //int : 슬롯 인덱스, InventorySlot : itemdata, 갯수
+    //public Dictionary<int, InventorySlot> dicSlots = new();
     public SlotData[] slotsData = new SlotData[23];
     public InventoryUI inventoryUI;
 
@@ -45,7 +45,7 @@ public class InventoryManager
         Debug.Log("InventoryManager Initialize");
         
         inventoryUI = GameObject.FindObjectOfType<InventoryUI>();
-        Slot[] slotUI = inventoryUI.slotObjects;
+        InventorySlot[] slotUI = inventoryUI.slotObjects;
 
         for (int i = 0; i < slotsData.Length; i++)
         {

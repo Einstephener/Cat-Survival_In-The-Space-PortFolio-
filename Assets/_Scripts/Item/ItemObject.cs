@@ -21,6 +21,9 @@ public class ItemObject : MonoBehaviour, IInteractable
             case WeaponItemData weaponData:
                 item = new Weapon(itemData);
                 break;
+            case InstallationItemData InstallationData:
+                item = new Weapon(itemData);
+                break;
             default:
                 Debug.LogWarning("알 수 없는 아이템 타입입니다.");
                 break;

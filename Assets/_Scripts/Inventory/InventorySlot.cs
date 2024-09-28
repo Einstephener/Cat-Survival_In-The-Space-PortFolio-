@@ -19,65 +19,41 @@ using UnityEngine.EventSystems;
 ///     ㄴ마우스 포인터가 UI 요소에서 나갈 때 호출됩니다.
 /// </summary>
 #endregion
-public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+public class InventorySlot : SlotBase, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
-    [Header("#SlotButton")]
-    public Button button;
-    private Outline outline;
-
-    [Header("#SlotDataUI")]
-    public GameObject SlotUIObject;
-    public Image icon;
-    public TextMeshProUGUI amuontText;//갯수
-    public SlotData curSlot;
-    public Slider WeaponDurability;
-
-    public int index;
-    public int _amuont;
-
-
-    /// <summary>
-    /// 슬롯에 아이템 등록
-    /// </summary>
-    public void SetSlot(SlotData _slotData)
+    #region UI 기능
+    protected override void Awake()
     {
-        curSlot = _slotData;
-        icon.gameObject.SetActive(true);
-        isWeapon();
-        icon.sprite = curSlot.itemData.Icon;
-        amuontText.text = curSlot.amount > 1 ? curSlot.amount.ToString() : string.Empty;
+        base.Awake();
+        //ClearOutLine();
     }
 
-    /// <summary>
-    /// 슬롯에서 아이템 제거
-    /// </summary>
-    public void ClearSlot()
+    public override void SetSlot(SlotData _slotData)
     {
-        icon.sprite = null;
-        curSlot.itemData = null;
-        isWeapon();
-        icon.gameObject.SetActive(false);
-        amuontText.text = string.Empty;
+        base.SetSlot(_slotData);
     }
 
-    public void isWeapon()
+    public override void ClearSlot()
     {
-        if (curSlot.itemData != null)
-        {
-            if (!Main.Inventory.IsCountTableItem(curSlot.itemData))
-            {
-                WeaponDurability.gameObject.SetActive(true);
-            }
-            else
-            {
-                WeaponDurability.gameObject.SetActive(false);
-            }
-        }
-        else
-        {
-            WeaponDurability.gameObject.SetActive(false);
-        }
+        base.ClearSlot();
     }
+
+    public override void isWeapon()
+    {
+        base.isWeapon();
+    }
+
+    public override void SetOutLine()
+    {
+        base.SetOutLine();
+    }
+
+    public override void ClearOutLine()
+    {
+        base.ClearOutLine();
+    }
+
+    #endregion
 
 
     #region Pointer
@@ -104,7 +80,7 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     {
         //1. 툴팁 보이도록
         //2. 투팀 생성된 위치값 조정 :)
-        if (curSlot.itemData != null) // 에러
+        if (curSlot.itemData != null)
         {
             //Debug.Log($"OnPointerEnter");
             Main.Inventory.inventoryUI.toolTipContainer.SetToolTip(curSlot, this.transform.position);
