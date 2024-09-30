@@ -41,6 +41,8 @@ public class PlayerInputControllerTest : MonoBehaviour
     [Header("#UI")]
     public GameObject inventoryUIDiplay;
 
+    private PlayerInteraction _playerInteraction;
+
     #endregion
 
     private void Awake()
@@ -50,6 +52,11 @@ public class PlayerInputControllerTest : MonoBehaviour
         _groundCheckLayer = LayerMask.GetMask("Ground");
         _groundCheck = GetComponent<Transform>();
         //Cursor.lockState = CursorLockMode.Locked; // 커서 가운데 고정.
+
+        if(TryGetComponent<PlayerInteraction>(out PlayerInteraction playerInteraction))
+        {
+            _playerInteraction = playerInteraction;
+        }
     }
 
 
@@ -165,6 +172,8 @@ public class PlayerInputControllerTest : MonoBehaviour
     private void OnFire(InputValue value)
     {
         Debug.Log("OnFire" + value.ToString());
+
+        //_playerInteraction.enemyGameObject.공격메서드
     }
 
     private void OnInteract(InputValue value)
