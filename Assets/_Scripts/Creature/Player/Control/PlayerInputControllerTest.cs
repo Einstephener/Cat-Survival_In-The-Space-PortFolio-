@@ -20,8 +20,8 @@ public class PlayerInputControllerTest : MonoBehaviour
     private Vector3 _moveInput;
     private Rigidbody _rigid;
     [SerializeField] private float _currentSpeed;
-    private float _walkSpeed = 3.0f;
-    private float _runSpeed = 10.0f;
+    private float _walkSpeed = 10.0f; // 수정
+    private float _runSpeed = 20.0f; // 수정
     private float _sitSpeed = 0.5f;
 
     private LayerMask _groundCheckLayer;
