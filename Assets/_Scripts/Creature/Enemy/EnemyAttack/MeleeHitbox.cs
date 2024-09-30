@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class MeleeHitbox : MonoBehaviour
 {
@@ -31,6 +32,11 @@ public class MeleeHitbox : MonoBehaviour
         {
             // TODO : 플레이어 Hp 깎기.
             Debug.Log($"근거리 공격으로 {_damage} 데미지를 입혔습니다.");
+
+            if (other.gameObject.TryGetComponent<PlayerCondition>(out PlayerCondition playerCondition))
+            {
+                playerCondition.UpdateHealth(-_damage); // 체력 감소이므로 - 부호를 곱함.
+            }
         }
     }
 }
