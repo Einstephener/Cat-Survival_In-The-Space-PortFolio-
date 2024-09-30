@@ -9,6 +9,7 @@ public class TestScene : BaseScene
     {
         if (!base.Initialize()) return false;
 
+        Main.UI.ShowSceneUI<UI_Scene>("UI_MainSceneUI");
 
 
         return true;

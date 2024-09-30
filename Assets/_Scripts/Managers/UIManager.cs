@@ -78,7 +78,7 @@ public class UIManager
 
         GameObject go = new GameObject();
 
-        //GameObject go = Main.Resource.Instantiate($"UI/Scene/{name}"); // 원래 코드. 리소스 매니저에 연결 필요. 
+        //GameObject go = Main.Resource.Instantiate($"Prefabs/{name}"); // 임시. 폴더 로드 필요.
 
         if (!go.TryGetComponent(out T sceneUI))
         {
@@ -138,7 +138,7 @@ public class UIManager
 
         if (_alreayOpenPopUpUI == obj)
         {
-            obj.SetActive(false); // TODO: 파괴되는 코드로 바꾸어야 함.
+            obj.SetActive(false);
         }
         _alreayOpenPopUpUI = null;        
     }

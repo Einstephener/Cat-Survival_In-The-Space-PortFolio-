@@ -22,8 +22,8 @@ public class PlayerInputControllerTest : MonoBehaviour
     private Vector3 _moveInput;
     private Rigidbody _rigid;
     [SerializeField] private float _currentSpeed;
-    private float _walkSpeed = 3.0f;
-    private float _runSpeed = 10.0f;
+    private float _walkSpeed = 30.0f; // 수정
+    private float _runSpeed = 60.0f; // 수정
     private float _sitSpeed = 0.5f;
 
     private LayerMask _groundCheckLayer;
@@ -41,6 +41,8 @@ public class PlayerInputControllerTest : MonoBehaviour
     [Header("#UI")]
     public GameObject inventoryUIDiplay;
 
+    private PlayerInteraction _playerInteraction;
+
     #endregion
 
     private void Awake()
@@ -50,11 +52,13 @@ public class PlayerInputControllerTest : MonoBehaviour
         _groundCheckLayer = LayerMask.GetMask("Ground");
         _groundCheck = GetComponent<Transform>();
         //Cursor.lockState = CursorLockMode.Locked; // 커서 가운데 고정.
+
+        if(TryGetComponent<PlayerInteraction>(out PlayerInteraction playerInteraction))
+        {
+            _playerInteraction = playerInteraction;
+        }
     }
 
-    private void Start()
-    {
-    }
 
     private void FixedUpdate()
     {
@@ -92,21 +96,22 @@ public class PlayerInputControllerTest : MonoBehaviour
 
     private void OnRun(InputValue value)
     {
-        if (value.isPressed)
-        {
-            _isRun = true;
-        }
-        else
-        {
-            _isRun = false;
-        }
+        //if (value.isPressed)
+        //{
+        //    _isRun = true;
+        //}
+        //else
+        //{
+        //    _isRun = false;
+        //}
 
         if (!_isSit)
         {
             //_playerAnimation.RunAnimation(value.isPressed);
         }
+        _isRun = value.isPressed;
 
-        OnRunStateChanged?.Invoke(value.isPressed); // 달리기 이벤트 호출.
+        OnRunStateChanged?.Invoke(value.isPressed); // 달리기(스테미나 사용) 이벤트 호출.     
     }
 
     private void OnSit(InputValue value)
@@ -167,6 +172,8 @@ public class PlayerInputControllerTest : MonoBehaviour
     private void OnFire(InputValue value)
     {
         Debug.Log("OnFire" + value.ToString());
+
+        //_playerInteraction.enemyGameObject.공격메서드
     }
 
     private void OnInteract(InputValue value)

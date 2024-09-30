@@ -19,7 +19,11 @@ public class PlayerInteraction : MonoBehaviour
     private float maxCheckDistance = 5f;
     public LayerMask layerMask;
 
+    private int enemyLayerMask = LayerMask.GetMask("Enemy");
+
     private GameObject curInteractGameObject;
+    [HideInInspector]
+    public GameObject enemyGameObject;
     private IInteractable curInteractable;
 
 
@@ -51,9 +55,17 @@ public class PlayerInteraction : MonoBehaviour
                     SetPromptText();
                 }
             }
+            else if (Physics.Raycast(ray, out hit, maxCheckDistance, enemyLayerMask))
+            {
+                if (hit.collider.gameObject != enemyGameObject)
+                {
+                    enemyGameObject = hit.collider.gameObject;
+                }
+            }
             else
             {
                 curInteractGameObject = null;
+                enemyGameObject = null;
                 curInteractable = null;
                 promptText.gameObject.SetActive(false);
             }

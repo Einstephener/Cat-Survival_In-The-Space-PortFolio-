@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b7dba0c0eda45447bb411578b2b4296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  planePrefab: {fileID: 8435297962310241519, guid: 8805e9a5f3fbf9d46babe26bc5a2b42c,
+  planePrefab: {fileID: 8435297962310241519, guid: 40f6c70af3e9e014d96633b1e29019b8,
     type: 3}
   chunkSize: 10
   planeSize: 3
