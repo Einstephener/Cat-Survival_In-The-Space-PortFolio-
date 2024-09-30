@@ -11,7 +11,6 @@ public class UI_PlayerCondition : UI_Scene, IObserver
     [HideInInspector] public Image thirsty;
     [HideInInspector] public Image stamina;
 
-    public Transform ConditionParent;
 
     private void Start()
     {

@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     private Vector3 _basePosition;
     private LayerMask _playerLayer;
     private Transform _playerTransform;
+    private GameObject _player;
     private AIDestinationSetter _target;
 
     private IEnemyState _currentState;
@@ -118,7 +119,7 @@ public class Enemy : MonoBehaviour
 
         // 투사체의 위치와 방향 설정.
         projectile.transform.position = _projectileSpawnPoint.position;
-        projectile.Init(_playerTransform, _enemyData.attackTime, _enemyData.damage); // 투사체 초기화.
+        projectile.Init(_playerTransform, _player, _enemyData.attackTime, _enemyData.damage); // 투사체 초기화.
     }
 
     public virtual void OnHit(float damage)
@@ -139,6 +140,10 @@ public class Enemy : MonoBehaviour
 
             // 첫 번째로 감지된 플레이어를 대상으로 설정.
             _playerTransform = sight[0].transform;
+
+            // 플레이어 확인.
+            _player = sight[0].transform.gameObject;
+
             _target.target = _playerTransform;
             aiPath.canMove = true;
             Debug.Log("플레이어 감지");
@@ -170,6 +175,7 @@ public class Enemy : MonoBehaviour
         }
 
         _target.target = null;
+        _player = null;
         aiPath.destination = _basePosition;
         return false;
     }
