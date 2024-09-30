@@ -22,5 +22,5 @@ MonoBehaviour:
   attackTime: 1.5
   attackCooldown: 1.5
   sightRange: 7
-  exitBuffer: 3
+  exitBuffer: 5
   attackRange: 3
