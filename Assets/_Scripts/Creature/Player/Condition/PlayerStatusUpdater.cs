@@ -8,10 +8,10 @@ public class PlayerStatusUpdater : MonoBehaviour
     private PlayerCondition _playerCondition;
     private PlayerStatus _status;
 
-    [HideInInspector] public float hungerDecreaseRate = 0.5f;  // 배고픔 감소 속도
-    [HideInInspector] public float thirstDecreaseRate = 0.5f; // 목마름 감소 속도
-    [HideInInspector] public float healthDecreaseRate = 1f;    // 체력 감소 속도 
-    [HideInInspector] public float staminaDecreaseRate = 1f;    // 체력 감소 속도 
+    [HideInInspector] public float hungerDecreaseRate = 1f;  // 배고픔 감소 속도
+    [HideInInspector] public float thirstDecreaseRate = 1f; // 목마름 감소 속도
+    [HideInInspector] public float healthDecreaseRate = 5f;    // 체력 감소 속도 
+    [HideInInspector] public float staminaDecreaseRate = 10f;    // 스테미나 감소 속도 
 
     [HideInInspector] public bool isRun = false; //TODO 달리기 상태일때 is Run값 바꿔주기.
     [HideInInspector] public bool canRun = false; //TODO 달리기 상태일때 is Run값 바꿔주기.
@@ -25,10 +25,14 @@ public class PlayerStatusUpdater : MonoBehaviour
     private void GetInputController()
     {
         // PlayerInputController의 OnRunStateChanged 이벤트 구독.
-        PlayerInputController inputController = GetComponent<PlayerInputController>();
-        if (inputController != null)
+        if (TryGetComponent<PlayerInputController>(out PlayerInputController inputController))
         {
             inputController.OnRunStateChanged += HandleRunStateChanged;
+        }
+        else // 지후님 Test 전용 코드
+        {
+            PlayerInputControllerTest inputControllerTest = GetComponent<PlayerInputControllerTest>();
+            inputControllerTest.OnRunStateChanged += HandleRunStateChanged;
         }
     }
 
@@ -92,6 +96,7 @@ public class PlayerStatusUpdater : MonoBehaviour
             // 달리기 중이고 스태미나가 0 이상일 때만 감소
             if (CheckStamina())
             {
+                Debug.Log(isRun);
                 // 스태미나 감소.
                 _playerCondition.UpdateStamina(-staminaDecreaseRate * Time.deltaTime);
             }
@@ -119,7 +124,7 @@ public class PlayerStatusUpdater : MonoBehaviour
     public bool IsPlayerDead()
     {
         // TODO 죽을 때 화면 등등..
-        if(_status.Health <= 0)
+        if (_status.Health <= 0)
         {
             return true;
         }

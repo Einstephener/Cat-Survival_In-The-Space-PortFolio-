@@ -52,9 +52,6 @@ public class PlayerInputControllerTest : MonoBehaviour
         //Cursor.lockState = CursorLockMode.Locked; // 커서 가운데 고정.
     }
 
-    private void Start()
-    {
-    }
 
     private void FixedUpdate()
     {
@@ -92,21 +89,22 @@ public class PlayerInputControllerTest : MonoBehaviour
 
     private void OnRun(InputValue value)
     {
-        if (value.isPressed)
-        {
-            _isRun = true;
-        }
-        else
-        {
-            _isRun = false;
-        }
+        //if (value.isPressed)
+        //{
+        //    _isRun = true;
+        //}
+        //else
+        //{
+        //    _isRun = false;
+        //}
 
         if (!_isSit)
         {
             //_playerAnimation.RunAnimation(value.isPressed);
         }
+        _isRun = value.isPressed;
 
-        OnRunStateChanged?.Invoke(value.isPressed); // 달리기 이벤트 호출.
+        OnRunStateChanged?.Invoke(value.isPressed); // 달리기(스테미나 사용) 이벤트 호출.     
     }
 
     private void OnSit(InputValue value)
