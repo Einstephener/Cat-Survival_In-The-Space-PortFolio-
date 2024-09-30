@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b9b71d8bad673b41a4b024c97bc9fdb, type: 3}
-  m_Name: FishSO
+  m_Name: CookedFishSO
   m_EditorClassIdentifier: 
-  DisplayName: Fish
-  Description: Apple is Hunger +50
-  Type: 2
-  Icon: {fileID: 21300000, guid: 742979fc8114d0445a7901d7627f52a4, type: 3}
+  DisplayName: CookedFish
+  Description: CookedFish Hunger + 100
+  Type: 0
+  Icon: {fileID: 0}
   DropPrefab: {fileID: 0}
-  item: {fileID: 3938857825991773884, guid: 730aa33df531aa44e9a9e1d36963ce4c, type: 3}
+  item: {fileID: 0}
   CraftingResourceList: []
   MaxAmount: 99
   EquipPrefab: {fileID: 0}
   Consumables:
-  - type: 1
-    ConsumableValue: 50
-  CookingItemData: {fileID: 11400000, guid: 461f997950600b9418f1e3001caa2b28, type: 2}
+  - type: 0
+    ConsumableValue: 100
+  CookingItemData: {fileID: 0}

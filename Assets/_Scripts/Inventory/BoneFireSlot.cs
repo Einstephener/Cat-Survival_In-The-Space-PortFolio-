@@ -41,6 +41,7 @@ public class BoneFireSlot : InventorySlot // 추 후에 변경될 수 있음
 
     #endregion
 
+
     //Slot에 아이템이 있는지 확인 후 실행 -> 
     public bool Cooking()
     {

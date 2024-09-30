@@ -4,6 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Unity.VisualScripting;
+using System;
 
 #region - 상속자들!
 /// <summary> 
@@ -21,6 +23,7 @@ using UnityEngine.EventSystems;
 #endregion
 public class InventorySlot : SlotBase, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
+    public bool boneFireSlot = false;
     #region UI 기능
     protected override void Awake()
     {
@@ -148,11 +151,34 @@ public class InventorySlot : SlotBase, IPointerEnterHandler, IPointerExitHandler
 
         if (Main.Inventory.inventoryUI.dragSlot.thisSlot != null)
         {
-            ChangeSlot();
+            if (!boneFireSlot)
+            {
+                Debug.Log("inventorySlot");
+                ChangeSlot();
+            }
+            else
+            {
+                Debug.Log("boneFireSlot");
+                ChangeSlot();
+            }
         }
 
     }
     #endregion
+
+    //public void BoneFireTest()
+    //{
+    //    if (boneFireSlot)
+    //    {
+    //        AddFireSlot();
+
+    //    }
+    //}
+
+    //private void AddFireSlot()
+    //{
+
+    //}
 
     private void ChangeSlot()
     {
