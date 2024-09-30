@@ -25,9 +25,12 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     #endregion
     public InventorySlot[] slotObjects;
     public QuickSlot[] quickSlotObjects;
+    public GameObject bonefireobject;
     public SlotBase selectSlot;
     public DragSlot dragSlot;
     public ToolTipContainer toolTipContainer;
+    public Image inventoryBackGround;
+    public RectTransform parentTransform;
 
     public ItemData testItemData1;
     public ItemData testItemData2;
@@ -44,6 +47,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         Main.Inventory.AddItem(testItemData3);
         //Main.Inventory.RemoveItem(testItemData1, 7);
         //Main.Inventory.RemoveItem(testItemData2, 5);
+        AdjustParentHeight();
     }
 
     #region QuickSlot
@@ -75,6 +79,29 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     }
 
     #endregion
+
+    public void AdjustParentHeight()
+    {
+        float totalHeight = 140f;//위 아래 빈 공간
+        //구조상 이렇게 해야함 :(
+        foreach (RectTransform child in parentTransform)
+        {
+            foreach (RectTransform grandChild in child)
+            {
+                // 손자 오브젝트가 활성화되어 있는지 확인
+                if (grandChild.gameObject.activeSelf)
+                {
+                    // 손자의 높이를 추가
+                    totalHeight += grandChild.sizeDelta.y;
+                }
+            }
+        }
+
+        // 부모의 높이를 손자 오브젝트의 총 높이에 설정
+        Vector2 parentSize = parentTransform.sizeDelta;
+        parentSize.y = totalHeight;
+        parentTransform.sizeDelta = parentSize;
+    }
 
     public void UpdateUI()
     {
@@ -191,4 +218,12 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 
     }
     #endregion
+
+    //public void Preview()
+    //{
+    //    if ()
+    //    {
+    //        selectSlot.curSlot.itemData = null;
+    //    }
+    //}
 }

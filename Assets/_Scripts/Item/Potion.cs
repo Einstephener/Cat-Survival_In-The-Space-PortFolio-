@@ -5,6 +5,7 @@ using UnityEngine;
 public class Potion : Item
 {
     public float value;
+    public PlayerCondition playerCondition;
     public Potion(ItemData data) : base(data)
     {
         if (data is PotionItemData potionData)
@@ -25,14 +26,17 @@ public class Potion : Item
             switch (potionData.Consumables[0].type)
             {
                 case ConsumableType.Health:
+                    playerCondition.UpdateHealth(value);
                     //Player.Instance.Heal(value); // 체력 회복
                     Debug.Log($"{itemData.DisplayName}을 사용하여 {value}만큼 체력을 회복합니다.");
                     break;
                 case ConsumableType.Hunger:
+                    playerCondition.UpdateHunger(value);
                     //Player.Instance.RecoverHunger(value); // 허기 회복 로직
                     Debug.Log($"{itemData.DisplayName}을 사용하여 {value}만큼 허기를 회복합니다.");
                     break;
                 case ConsumableType.Thirsty:
+                    playerCondition.UpdateThirst(value);
                     //Player.Instance.RecoverThirst(value); // 갈증 회복 로직
                     Debug.Log($"{itemData.DisplayName}을 사용하여 {value}만큼 갈증을 회복합니다.");
                     break;

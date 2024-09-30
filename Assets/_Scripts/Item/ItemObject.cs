@@ -10,24 +10,24 @@ public class ItemObject : MonoBehaviour, IInteractable
 
     private void Start()
     {
-        switch (itemData)
-        {
-            case PotionItemData potionData:
-                item = new Potion(itemData);
-                break;
-            case ContableItemData contableItemData:
-                item = new Resource(itemData);
-                break;
-            case WeaponItemData weaponData:
-                item = new Weapon(itemData);
-                break;
-            case InstallationItemData InstallationData:
-                item = new Weapon(itemData);
-                break;
-            default:
-                Debug.LogWarning("알 수 없는 아이템 타입입니다.");
-                break;
-        }
+        //switch (itemData)
+        //{
+        //    case PotionItemData potionData:
+        //        item = new Potion(itemData);
+        //        break;
+        //    case ContableItemData contableItemData:
+        //        item = new Resource(itemData);
+        //        break;
+        //    case WeaponItemData weaponData:
+        //        item = new Weapon(itemData);
+        //        break;
+        //    case InstallationItemData InstallationData:
+        //        item = new Weapon(itemData);
+        //        break;
+        //    default:
+        //        Debug.LogWarning("알 수 없는 아이템 타입입니다.");
+        //        break;
+        //}
     }
     public string GetInteractPrompt()
     {

@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 7167457149419449080}
   - component: {fileID: 8796477872950864567}
   - component: {fileID: 6708287941724693295}
-  - component: {fileID: 4704568730788984693}
-  m_Layer: 0
+  - component: {fileID: 4263999013248488210}
+  m_Layer: 6
   m_Name: Bonfire_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,8 +149,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 4533f3d5054a5e64dbe6c8ce7f9a9e3a, type: 2}
-  item: {fileID: 4704568730788984693}
---- !u!114 &4704568730788984693
+  item: {fileID: 0}
+--- !u!114 &4263999013248488210
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -159,7 +159,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 468049451368783353}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef96dcaa99d802643b1bd03065ab3bcb, type: 3}
+  m_Script: {fileID: 11500000, guid: 77dd376a3fb4a694b9572f2a4b7f02fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 4533f3d5054a5e64dbe6c8ce7f9a9e3a, type: 2}
+  isInstallation: 0
+  boneFireSlots: {fileID: 0}
+  boneFireSlot: {fileID: 0}
+  nextBoneFireSlot: {fileID: 0}
+  cookingTime: 0

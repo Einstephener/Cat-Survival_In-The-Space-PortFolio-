@@ -25,6 +25,6 @@ public class Weapon : Item
         Debug.Log($"{itemData.DisplayName}으로 의 피해를 줍니다.");
         // 내구도 감소 로직 추가
         Durability--;
-        Debug.Log($"{itemData.DisplayName}의 내구도가 {Durability}로 감소했습니다.");
+        //Debug.Log($"{itemData.DisplayName}의 내구도가 {Durability}로 감소했습니다.");
     }
 }
