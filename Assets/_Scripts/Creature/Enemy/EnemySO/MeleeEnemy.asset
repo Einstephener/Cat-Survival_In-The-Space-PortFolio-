@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b6b54e5c8dbec3498ccb281fd507a70, type: 3}
+  m_Name: MeleeEnemy
+  m_EditorClassIdentifier: 
+  name: Melee
+  attackType: 0
+  projectilePrefab: {fileID: 5518298659372828043, guid: 1331ec86057647043b42cd9f6162fb59,
+    type: 3}
+  maxHp: 200
+  damage: 10
+  addSpeed: 0
+  attackTime: 1.5
+  attackCooldown: 1.5
+  sightRange: 7
+  exitBuffer: 3
+  attackRange: 3

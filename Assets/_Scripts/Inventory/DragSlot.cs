@@ -11,17 +11,12 @@ public class DragSlot : MonoBehaviour
     /// 선택된 슬롯의 ItemData의 Icon을 복사한다.
     /// </summary>
     #endregion
-    public Slot thisSlot;
+    public InventorySlot thisSlot;
     //public TextMeshProUGUI amuontText;
     public Image icon;
     //public Slider WeaponDurability;
 
-    //private void OnEnable()
-    //{
-    //    SetDragSlot(thisSlot);
-    //}
-
-    public void SetDragSlot(Slot _dragSlot)
+    public void SetDragSlot(InventorySlot _dragSlot)
     {
         this.gameObject.SetActive(true);
         thisSlot = _dragSlot;

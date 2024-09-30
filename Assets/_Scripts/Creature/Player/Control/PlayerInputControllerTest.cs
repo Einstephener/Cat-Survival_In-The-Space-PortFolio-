@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerInputControllerTest : MonoBehaviour
 {
@@ -35,6 +37,10 @@ public class PlayerInputControllerTest : MonoBehaviour
     private bool _isSit;
 
     private IPlayerAnimation _playerAnimation;
+
+    [Header("#UI")]
+    public GameObject inventoryUIDiplay;
+
     #endregion
 
     private void Awake()
@@ -168,4 +174,57 @@ public class PlayerInputControllerTest : MonoBehaviour
         Debug.Log("OnInteract" + value.ToString());
     }
 
+    #region UI
+    private void OnQuickSlot(InputValue value)
+    {
+        var inventory = Main.Inventory.inventoryUI;
+        int index = 0;
+        if (value.isPressed)
+        {
+            // 눌린 키에 따라 슬롯 인덱스를 설정
+            switch (true)
+            {
+                case var _ when Keyboard.current.digit1Key.isPressed:
+                    index = 0;
+                    inventory.SelectSlot(index);
+
+                    break;
+                case var _ when Keyboard.current.digit2Key.isPressed:
+                    index = 1;
+                    inventory.SelectSlot(index);
+
+                    break;
+                case var _ when Keyboard.current.digit3Key.isPressed:
+                    index = 2;
+                    inventory.SelectSlot(index);
+
+                    break;
+                case var _ when Keyboard.current.digit4Key.isPressed:
+                    index = 3;
+                    inventory.SelectSlot(index);
+
+                    break;
+                case var _ when Keyboard.current.digit5Key.isPressed:
+                    index = 4;
+                    inventory.SelectSlot(index);
+
+                    break;
+            }
+        }
+    }
+
+    private void OnUI_Inventory()
+    {
+        //Debug.Log("OnUI_Inventory");
+        if (!inventoryUIDiplay.activeInHierarchy)
+        {
+            inventoryUIDiplay.SetActive(true);
+        }
+        else
+        {
+            inventoryUIDiplay.SetActive(false);
+        }
+    }
+
+    #endregion
 }

@@ -15,7 +15,8 @@ public class PlayerInteraction : MonoBehaviour
 {
     public float checkRate = 0.5f;
     private float lastCheckTime;
-    public float maxCheckDistance = 2.5f;
+    [SerializeField]
+    private float maxCheckDistance = 5f;
     public LayerMask layerMask;
 
     private GameObject curInteractGameObject;
@@ -65,6 +66,7 @@ public class PlayerInteraction : MonoBehaviour
         promptText.text = string.Format("<b>[E]</b> {0}", curInteractable.GetInteractPrompt());
     }
     
+    //아이템 획득
     public void OnInteract(InputValue value)
     {
         if (curInteractable != null)

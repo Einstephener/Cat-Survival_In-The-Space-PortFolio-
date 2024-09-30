@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/_Scenes/InGame/LobbyScene.unity
     guid: 053d241f382400c47b13e74c7c8ff458
   - enabled: 1
-    path: Assets/_Scenes/InGame/StartScene.unity
+    path: Assets/_Scenes/InGame/CutScene.unity
     guid: c38c05b68f037664387fe77d7dc53e70
   - enabled: 1
     path: Assets/_Scenes/InGame/MainScene.unity

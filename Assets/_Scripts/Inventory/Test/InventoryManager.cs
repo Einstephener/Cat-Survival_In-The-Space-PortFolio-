@@ -7,10 +7,9 @@ public class SlotData
 {
     public ItemData itemData;
     public int amount;
-    
+    public int weaponDurability;
     public bool IsEmpty()
     {
-        
         return /*amount <= 0 && */itemData == null;
     }
 }
@@ -29,9 +28,9 @@ public class InventoryManager
     /// 셀 수 있는 아이템인지 여부
     /// </summary>
     #endregion
-    //int : 슬롯 인덱스, Slot : itemdata, 갯수
-    //public Dictionary<int, Slot> dicSlots = new();
-    public SlotData[] slotsData = new SlotData[18];
+    //int : 슬롯 인덱스, InventorySlot : itemdata, 갯수
+    //public Dictionary<int, InventorySlot> dicSlots = new();
+    public SlotData[] slotsData = new SlotData[23];
     public InventoryUI inventoryUI;
 
     
@@ -46,7 +45,7 @@ public class InventoryManager
         Debug.Log("InventoryManager Initialize");
         
         inventoryUI = GameObject.FindObjectOfType<InventoryUI>();
-        Slot[] slotUI = inventoryUI.slotObjects;
+        InventorySlot[] slotUI = inventoryUI.slotObjects;
 
         for (int i = 0; i < slotsData.Length; i++)
         {
@@ -86,6 +85,31 @@ public class InventoryManager
     public bool IsCountTableItem(ItemData _itemdata)
     {
         return _itemdata is ContableItemData;
+    }
+
+    public bool IsPotionItem(ItemData _itemdata)
+    {
+        return _itemdata is PotionItemData;
+    }
+
+    // 특정 아이템의 갯수를 전부 반환하는 함수
+    public int GetTotalItemCount(ItemData _itemdata)
+    {
+        int totalCount = 0;
+
+        foreach (var slot in slotsData)
+        {
+            if (slot != null && slot.itemData == _itemdata)
+            {
+                // 셀 수 있는 아이템인지 확인
+                if (IsCountTableItem(_itemdata))
+                {
+                    totalCount += slot.amount; // 갯수 누적
+                }
+            }
+        }
+
+        return totalCount; // 총 갯수 반환
     }
     #endregion
 

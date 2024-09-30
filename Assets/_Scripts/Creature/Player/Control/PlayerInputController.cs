@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -23,11 +24,12 @@ public class PlayerInputController : MonoBehaviour
     private float _walkSpeed = 3.0f;
     private float _runSpeed = 10.0f;
     private float _sitSpeed = 0.5f;
+    private float _idleSpeed = 0.0f;
 
     private LayerMask _groundCheckLayer;
     private float _jumpForce = 5.0f;
     private Transform _groundCheck;
-    private Vector3 _boxCastSize = new Vector3(0.5f, 0.1f, 0.5f); // 박스 캐스트 크기
+    private Vector3 _boxCastSize = new Vector3(0.8f, 0.1f, 0.8f); // 박스 캐스트 크기
     private float _groundDistance = 0.2f; // 박스 캐스트 높이.
 
     private bool _isGrounded;
@@ -35,8 +37,8 @@ public class PlayerInputController : MonoBehaviour
     private bool _isSit;
     private bool _isMoving;
 
-    private IPlayerAnimation _playerAnimation;
     private Animator _playerAnimator;
+    private float _animationWeightValue;
     #endregion
 
     private void Awake()
@@ -50,11 +52,6 @@ public class PlayerInputController : MonoBehaviour
         //Cursor.lockState = CursorLockMode.Locked; // 커서 가운데 고정.
     }
 
-    private void Start()
-    {
-        _playerAnimation = new IdleMovement();
-        _playerAnimation.AnimationSet(_playerAnimator);
-    }
 
     private void FixedUpdate()
     {
@@ -72,7 +69,19 @@ public class PlayerInputController : MonoBehaviour
         Vector3 boxCastPosition = _groundCheck.position + Vector3.up * 0.1f;
         _isGrounded = Physics.BoxCast(boxCastPosition, _boxCastSize / 2, Vector3.down,
             Quaternion.identity, _groundDistance, _groundCheckLayer);
+
+        // 애니메이션
+        if (_playerAnimator.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.9f)
+        {
+            if (_animationWeightValue >= 0)
+            {
+                _animationWeightValue -= Time.deltaTime;
+            }
+            _playerAnimator.SetLayerWeight(1, _animationWeightValue);
+        }
+        
     }
+
 
     #region PlayerControl
     private void OnMove(InputValue value)
@@ -81,8 +90,6 @@ public class PlayerInputController : MonoBehaviour
         _moveInput.y = 0;  // y축은 0으로 고정
 
         _isMoving = _moveInput != Vector3.zero;
-
-        AnimationStateSet(_isMoving);
     }
 
     private void OnRun(InputValue value)
@@ -93,20 +100,15 @@ public class PlayerInputController : MonoBehaviour
 
         if (_isMoving)
         {
-            _playerAnimation = _isRun ? new RunningMovement() : new WalkingMovement();
-            _playerAnimation.AnimationSet(_playerAnimator);
+            _playerAnimator.SetBool("IsRun", _isRun);
         }
     }
 
     private void OnSit(InputValue value)
     {
-        //_cameraController.SitSightChange(value.isPressed);
-        // 고양이 에셋에서는 사용안함.
-
         _isSit = value.isPressed;
 
-        _playerAnimation = _isSit ? new SitMovement() : new IdleMovement();
-        _playerAnimation.AnimationSet(_playerAnimator);
+        _playerAnimator.SetBool("IsSit", _isSit);
 
     }
 
@@ -142,40 +144,31 @@ public class PlayerInputController : MonoBehaviour
     private void OnFire(InputValue value)
     {
         Debug.Log("OnFire" + value.ToString());
+        _animationWeightValue = 1f;
+        _playerAnimator.SetTrigger("IsAttack");
     }
 
     private void OnInteract(InputValue value)
     {
         Debug.Log("OnInteract" + value.ToString());
     }
+
+    private void OnQuickSlot(InputValue value)
+    {
+        // TODO : 퀵슬롯 부분 추가
+    }
     #endregion
 
-    private void AnimationStateSet(bool isMoving)
-    {
-        if (isMoving)
-        {
-            if (_isSit)
-            {
-                _playerAnimation = _isRun ? new SitWalkMovement() : new SitMovement();
-            }
-            else
-            {
-                _playerAnimation = _isRun ? new RunningMovement() : new WalkingMovement();
-            }
-        }
-        else
-        {
-            _playerAnimation = _isSit ? new SitMovement() : new IdleMovement(); // 움직임이 멈추면 대기 상태로 설정
-        }
-
-        _playerAnimation.AnimationSet(_playerAnimator);
-    }
 
     private void ChangeSpeed()
     {
         if (!_isGrounded) return;
 
-        if (_isSit)
+        if (!_isMoving)
+        {
+            _currentSpeed = _idleSpeed;
+        }
+        else if (_isSit)
         {
             _currentSpeed = _sitSpeed;
         }
@@ -187,5 +180,7 @@ public class PlayerInputController : MonoBehaviour
         {
             _currentSpeed = _walkSpeed;
         }
+
+        _playerAnimator.SetFloat("Speed", _currentSpeed);
     }
 }

@@ -1,7 +1,9 @@
+using Mono.Cecil.Cil;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class InventoryUI : /*MonoBehaviour*/ UI_Popup
@@ -21,9 +23,11 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     ///
     /// </summary>
     #endregion
-    public Slot[] slotObjects;
-    public Slot selectSlot = null;
+    public InventorySlot[] slotObjects;
+    public QuickSlot[] quickSlotObjects;
+    public SlotBase selectSlot;
     public DragSlot dragSlot;
+    public ToolTipContainer toolTipContainer;
 
     public ItemData testItemData1;
     public ItemData testItemData2;
@@ -42,6 +46,36 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         //Main.Inventory.RemoveItem(testItemData2, 5);
     }
 
+    #region QuickSlot
+    public void QuickSlot()
+    {
+        for (int i = 0; i < quickSlotObjects.Length; i++)
+        {
+            quickSlotObjects[i].curSlot = slotObjects[i].curSlot;
+        }
+        QuickSlotUpdateUI();
+    }
+    public void QuickSlotUpdateUI()
+    {
+        SlotData[] _slots = Main.Inventory.slotsData;
+
+        for (int i = 0; i < quickSlotObjects.Length; i++)
+        {
+            if (quickSlotObjects[i].curSlot.itemData != null) // 슬롯이 데이터가 있는지 확인
+            {
+                quickSlotObjects[i].SetSlot(_slots[i]); // 슬롯 정보 업데이트
+                //Debug.Log($"InventorySlot {i}: Item - {quickSlotObjects[i].curSlot.itemData.DisplayName}, Amount - {quickSlotObjects[i].curSlot.amount}");
+
+            }
+            else
+            {
+                quickSlotObjects[i].ClearSlot(); // 빈 슬롯 처리
+            }
+        }
+    }
+
+    #endregion
+
     public void UpdateUI()
     {
         SlotData[] _slots = Main.Inventory.slotsData; // InventoryManager SlotData 가지고 오기
@@ -58,6 +92,8 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
                 slotObjects[i].ClearSlot(); // 빈 슬롯 처리
             }
         }
+
+        QuickSlot();
     }
 
     //디버그 호출 함수 Test용
@@ -67,15 +103,32 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         {
             if (slotObjects[i] != null && slotObjects[i].curSlot.itemData != null)
             {
-                Debug.Log($"Slot {i}: Item - {slotObjects[i].curSlot.itemData.DisplayName}, Amount - {slotObjects[i].curSlot.amount}");
+                Debug.Log($"InventorySlot {i}: Item - {slotObjects[i].curSlot.itemData.DisplayName}, Amount - {slotObjects[i].curSlot.amount}");
             }
             else
             {
-                Debug.Log($"Slot {i}: Empty Slot");
+                Debug.Log($"InventorySlot {i}: Empty InventorySlot");
             }
         }
     }
 
+    public void SelectSlot(int index)
+    {
+        Debug.Log($"사용한 슬롯: {index}");
+        selectSlot = quickSlotObjects[index];
+
+        quickSlotObjects[index].SetOutLine();
+
+
+        for (int i = 0; i < quickSlotObjects.Length; i++)
+        {
+            if (i != index)
+            {
+                //selectSlot = quickSlotObjects[i];
+                quickSlotObjects[i].ClearOutLine();
+            }
+        }
+    }
 
     #region - 정렬
     public void TrimAll()
