@@ -714,6 +714,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI_CraftingTabletUI
       objectReference: {fileID: 0}
+    - target: {fileID: 871043244367082204, guid: 83648a5d408bd84408311c2ca670004b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1016091686951548438, guid: 83648a5d408bd84408311c2ca670004b,
         type: 3}
       propertyPath: m_Pivot.x
@@ -812,6 +817,36 @@ PrefabInstance:
     - target: {fileID: 1016091686951548438, guid: 83648a5d408bd84408311c2ca670004b,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4617505695792134003, guid: 83648a5d408bd84408311c2ca670004b,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4617505695792134003, guid: 83648a5d408bd84408311c2ca670004b,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4617505695792134003, guid: 83648a5d408bd84408311c2ca670004b,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5837014565106001791, guid: 83648a5d408bd84408311c2ca670004b,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7240187696216325780, guid: 83648a5d408bd84408311c2ca670004b,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7240187696216325780, guid: 83648a5d408bd84408311c2ca670004b,
+        type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
