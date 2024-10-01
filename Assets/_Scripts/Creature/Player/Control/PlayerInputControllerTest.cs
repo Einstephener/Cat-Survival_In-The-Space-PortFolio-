@@ -173,7 +173,21 @@ public class PlayerInputControllerTest : MonoBehaviour
     {
         Debug.Log("OnFire" + value.ToString());
 
-        //_playerInteraction.enemyGameObject.공격메서드
+        if(_playerInteraction.enemyGameObject != null)
+        {
+            if(_playerInteraction.enemyGameObject.TryGetComponent<Enemy>(out Enemy enemy))
+            {
+                enemy.DamagedByPlayer(10f);
+            }
+            else if (_playerInteraction.enemyGameObject.TryGetComponent<Catcher>(out Catcher catcher))
+            {
+                catcher.DamagedByPlayer(10f);
+            }
+            else
+            {
+                Debug.Log("Non-Enemy");
+            }
+        }
     }
 
     private void OnInteract(InputValue value)

@@ -177,11 +177,15 @@ public class Enemy : MonoBehaviour
         return false;
     }
 
+    public void DamagedByPlayer(float damage)
+    {
+        _currentHp -= damage;
+        Debug.Log(_currentHp);
+    }
+
     public bool IsDead()
     {
-        // TODO.
-        //_enemyData.rewardItem
-        return false;
+        return _currentHp <= 0;
     }
 
     #region Gizmos

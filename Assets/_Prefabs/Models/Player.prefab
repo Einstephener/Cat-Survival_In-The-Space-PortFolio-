@@ -97,6 +97,8 @@ GameObject:
   - component: {fileID: 6179378379742888949}
   - component: {fileID: 6163355472542361111}
   - component: {fileID: 8691804033539440806}
+  - component: {fileID: 5544604307884932833}
+  - component: {fileID: 9158580204687178107}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -114,7 +116,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8249062713629216920}
@@ -215,6 +217,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cameraController: {fileID: 3060841905039953084}
   _currentSpeed: 0
+  inventoryUIDiplay: {fileID: 0}
+--- !u!114 &5544604307884932833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2160383064890216136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd6095f98491572459b7415aba52bfb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9158580204687178107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2160383064890216136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26563c5ed360fa84faabd3bec40b69ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkRate: 0.5
+  maxCheckDistance: 5
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  enemyGameObject: {fileID: 0}
+  promptText: {fileID: 0}
 --- !u!1 &6808742496790014856
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +351,7 @@ GameObject:
   - component: {fileID: 3060841905039953084}
   m_Layer: 9
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -449,3 +486,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e922fc1ab35f42e4ebbc2c3030926573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerHead: {fileID: 0}

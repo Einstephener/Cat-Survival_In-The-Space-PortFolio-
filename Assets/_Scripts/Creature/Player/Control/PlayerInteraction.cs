@@ -19,7 +19,7 @@ public class PlayerInteraction : MonoBehaviour
     private float maxCheckDistance = 5f;
     public LayerMask layerMask;
 
-    private int enemyLayerMask = LayerMask.GetMask("Enemy");
+    public LayerMask enemyLayerMask;
 
     private GameObject curInteractGameObject;
     [HideInInspector]
