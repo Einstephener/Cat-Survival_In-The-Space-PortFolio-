@@ -5,19 +5,20 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Projectile : Poolable
 {
-    private Rigidbody _rigidbody;
     private Transform _target;
+    private Rigidbody _rigidbody;
+    private Vector3 _direction;
+    private Vector3 _spawnPosition;
 
     private float _attackSpeed;
     private float _damage;
-    public float maxDistance = 50f;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
         if (_rigidbody == null)
         {
-            Debug.LogError("프리팹의 Rigidbody를 가져올 수 없습니다.");
+            Debug.LogError("Rigidbody가 없습니다.");
         }
     }
 
@@ -27,55 +28,37 @@ public class Projectile : Poolable
         this._attackSpeed = attackSpeed;
         this._damage = damage;
 
-        _rigidbody.velocity = Vector3.zero;
-        transform.position = transform.position;
+        _direction = (_target.position - transform.position).normalized;
+        _spawnPosition = transform.position;
 
-        Vector3 direction = (_target.position - transform.position).normalized;
-        _rigidbody.AddForce(direction * _attackSpeed, ForceMode.Impulse);
-        Debug.Log(direction);
+        _rigidbody.velocity = Vector3.zero; // 기존 속도 초기화. 중첩 방지.
+        _rigidbody.AddForce(_direction * _attackSpeed, ForceMode.VelocityChange); // 기존 속도를 무시하고 즉시 속도 적용.
     }
 
     private void FixedUpdate()
     {
-        if (_target == null || Vector3.Distance(transform.position, _target.position) > maxDistance)
+        if (_target == null || Vector3.Distance(_spawnPosition, _target.position) > 10f)
         {
             Main.Pool.Push(this); // 타겟이 없거나 사정거리를 넘어가면 풀로 반환.
         }
-
-        //// 타겟으로 투사체 이동.
-        //Vector3 direction = (_target.position - transform.position).normalized;
-        //transform.position += direction * _attackSpeed * Time.deltaTime;
-
-        //// 타겟에 도달했는지 확인.
-        //if (Vector3.Distance(transform.position, _target.position) < 0.1f /* ||
-        //    Vector3.Distance(transform.position, transform.position) > 20f */)
-        //{
-        //    HitTarget();
-        //}
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            GameObject player = _target.gameObject;
-            if (player.TryGetComponent<PlayerCondition>(out PlayerCondition playerCondition))
-            {
-                playerCondition.UpdateHealth(-_damage); // 체력 감소이므로 - 부호를 곱함.
-            }
-
-            Main.Pool.Push(this);
+            HitTarget();
         }
     }
 
-//    private void HitTarget()
-//    {
-//        // 타겟에 데미지를 입힘.
-//        Debug.Log($"원거리 {_damage} 데미지");
+    private void HitTarget()
+    {
+        // 타겟에 데미지를 입힘.
+        Debug.Log($"원거리 {_damage} 데미지");
 
-//        // TODO : 플레이어 Hp 깎기.
+        // TODO : 플레이어 Hp 깎기.
 
-//        // 풀로 반환.
-//        Main.Pool.Push(this);
-//    }
+        // 풀로 반환.
+        Main.Pool.Push(this);
+    }
 }

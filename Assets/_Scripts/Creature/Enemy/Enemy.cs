@@ -7,7 +7,8 @@ public class Enemy : MonoBehaviour
 {
     #region Field
     [SerializeField] private Transform _projectileSpawnPoint;
-    [SerializeField] private MeleeHitbox _meleeHitbox;
+    [SerializeField] private GameObject _melee;
+    private MeleeHitbox _meleeHitbox;
 
     public Animator animator { get; private set; }
     public AIPath aiPath { get; private set; }
@@ -39,6 +40,7 @@ public class Enemy : MonoBehaviour
     {
         _basePosition = transform.position;
         _attackCooldown = _enemyData.attackCooldown;
+        _meleeHitbox = _melee.GetComponent<MeleeHitbox>();
         _playerLayer = LayerMask.GetMask("Player");
         TransitionToState(new EnemyIdleState());
     }
@@ -85,6 +87,7 @@ public class Enemy : MonoBehaviour
     }
     protected virtual void MeleeAttack()
     {
+        //_meleeHitbox.Init(_enemyData.damage);
         if (Vector3.Distance(transform.position, _playerTransform.position) <= _enemyData.attackRange)
         {
             if (_meleeHitbox != null)
@@ -156,7 +159,7 @@ public class Enemy : MonoBehaviour
         if (_playerTransform == null) return false;
 
         float distanceToPlayer = Vector3.Distance(transform.position, _playerTransform.position);
-
+        
         return distanceToPlayer <= _enemyData.attackRange;
     }
 
@@ -177,6 +180,7 @@ public class Enemy : MonoBehaviour
     public bool IsDead()
     {
         // TODO.
+        //_enemyData.rewardItem
         return false;
     }
 
