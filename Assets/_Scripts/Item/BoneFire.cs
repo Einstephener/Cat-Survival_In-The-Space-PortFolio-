@@ -33,12 +33,13 @@ public class BoneFire : Installation
         nextBoneFireSlot.curSlot = new SlotData();
 
         BoneFireUpdateUI();
-        Test_Initialize();
+        //Test_Initialize();
     }
 
+    #region Test
     private void Test_Initialize()
     {
-        AddBoneFireSlot(TestItem1, 5);
+        AddBoneFireSlot(TestItem1, 3);
     }
 
     public void AddBoneFireSlot(ItemData _itemdata, int _amount = 1)
@@ -48,11 +49,12 @@ public class BoneFire : Installation
             boneFireSlot.curSlot = new SlotData();
             boneFireSlot.curSlot.itemData = _itemdata;
             boneFireSlot.curSlot.amount = _amount;
-            Debug.Log($"{boneFireSlot.curSlot.itemData} += {_itemdata} // ItemName : {boneFireSlot.curSlot.itemData.DisplayName}, Amount : {boneFireSlot.curSlot.amount}");
+            //Debug.Log($"{boneFireSlot.curSlot.itemData} += {_itemdata} // ItemName : {boneFireSlot.curSlot.itemData.DisplayName}, Amount : {boneFireSlot.curSlot.amount}");
             BoneFireUpdateUI();
             return;
         }
     }
+    #endregion
 
     public BoneFire(ItemData data) : base(data)
     {
@@ -62,10 +64,34 @@ public class BoneFire : Installation
     public override void Use()
     {
         base.Use();
-        if (cookingCoroutine == null)
+        if (isCooking())
         {
-            cookingCoroutine = StartCoroutine(Cooking());
+            // boneFireSlot에 아이템이 있는지 확인
+            if (boneFireSlot.curSlot != null && !boneFireSlot.curSlot.IsEmpty())
+            {
+                if (cookingCoroutine == null)
+                {
+                    cookingCoroutine = StartCoroutine(Cooking());
+                }
+            }
+            else
+            {
+                //Debug.Log("요리를 할 수 없습니다: boneFireSlot에 아이템이 없습니다.");
+                // 필요시 UI 업데이트 코드 추가
+            }
         }
+        else
+        {
+            // 요리를 할 수 없을 때 처리 (필요시 UI 업데이트)
+            // Debug.Log("요리를 할 수 없습니다.");
+        }
+    }
+
+    public override void UIInterac()
+    {
+        base .UIInterac();
+        UISet();
+        Main.Inventory.inventoryUI.AdjustParentHeight();
     }
 
     private void Update()
@@ -77,14 +103,14 @@ public class BoneFire : Installation
     #region UI
     private void UpdateSlotUI(InventorySlot slot)
     {
-        if (slot.curSlot.itemData != null)
+        if (!slot.curSlot.IsEmpty())
         {
-            Debug.Log("UpdateSlotUI");
+            //Debug.Log("UpdateSlotUI");
             slot.SetSlot(slot.curSlot);
         }
         else
         {
-            Debug.Log("UpdateSlotUI");
+            //Debug.Log("UpdateSlotUI");
             slot.ClearSlot();
         }
     }
@@ -94,29 +120,72 @@ public class BoneFire : Installation
         UpdateSlotUI(boneFireSlot);
         UpdateSlotUI(nextBoneFireSlot);
     }
+
+    public void UISet()
+    {
+        //UI창 생성
+        //boneFireSlots.SetActive(true);
+        Main.Inventory.inventoryUI.gameObject.SetActive(true);
+
+        Main.Inventory.inventoryUI.boneFireObject.SetActive(true);
+    }
+
+    public void UIRemove()
+    {
+        //if (Input.GetKeyDown(KeyCode.I)) 
+        //{
+        //    if (Main.Inventory.inventoryUI.gameObject.activeSelf)
+        //    {
+        //        Main.Inventory.inventoryUI.boneFireObject.SetActive(false);
+        //        Main.Inventory.inventoryUI.gameObject.SetActive(false);
+        //    }
+        //    //else
+        //    //{
+        //    //    Main.Inventory.inventoryUI.boneFireObject.SetActive(true);
+        //    //}
+        //}
+    }
+
     #endregion
 
+
+    #region cook
     IEnumerator Cooking()
     {
         Debug.Log("요리 시작");
         timer = 0f;
 
-        while (isCooking())
+        while (true) // 무한 루프, 종료 조건은 내부에서 처리
         {
+            // boneFireSlot 아이템 확인
+            if (boneFireSlot.curSlot == null || boneFireSlot.curSlot.IsEmpty() || boneFireSlot.curSlot.amount <= 0)
+            {
+                //Debug.Log("요리를 종료합니다: boneFireSlot에 아이템이 없습니다.");
+                cookingCoroutine = null; // 코루틴 참조 초기화
+                yield break; // 코루틴 종료
+            }
+
             timer += Time.deltaTime;
 
             // 현재 타이머 값을 디버그 로그로 출력
-            Debug.Log($"현재 요리 시간: {timer:F2}초"); // 소수점 둘째 자리까지 표시
+            //Debug.Log($"현재 요리 시간: {timer:F2}초"); // 소수점 둘째 자리까지 표시
 
             if (timer >= cookingTime)
             {
-                // 요리가 완료되었을 때 처리
                 CompleteCooking();
-                yield break; // 코루틴 종료
+
+                // 요리 완료 후 아이템 상태 확인
+                if (boneFireSlot.curSlot == null || boneFireSlot.curSlot.IsEmpty() || boneFireSlot.curSlot.amount <= 0)
+                {
+                    //Debug.Log("요리를 종료합니다: 요리 후 boneFireSlot에 아이템이 없습니다.");
+                    cookingCoroutine = null; // 코루틴 참조 초기화
+                    yield break; // 코루틴 종료
+                }
+
+                timer = 0f; // 타이머 초기화
             }
             yield return null; // 다음 프레임까지 대기
         }
-        cookingCoroutine = null; // 요리가 중단되면 코루틴 null로 설정
     }
 
     public void CompleteCooking()
@@ -124,20 +193,34 @@ public class BoneFire : Installation
         // nextBoneFireSlot의 ItemData가 있는지 확인
         if (nextBoneFireSlot.curSlot != null && nextBoneFireSlot.curSlot.itemData != null)
         {
-            // nextBoneFireSlot의 갯수 증가
-            nextBoneFireSlot.curSlot.amount++; // IncrementCount는 슬롯의 갯수를 증가시키는 메서드라고 가정
-            boneFireSlot.curSlot.amount--;
+            // 다음 슬롯의 갯수 증가
+            nextBoneFireSlot.curSlot.amount++;
         }
         else
         {
-            PotionItemData boneFirePotionData = boneFireSlot.curSlot.itemData as PotionItemData; // 들어가는 Item
+            // 현재 슬롯의 아이템이 PotionItemData로 캐스팅
+            PotionItemData boneFirePotionData = boneFireSlot.curSlot.itemData as PotionItemData;
+
+            // 요리 결과 아이템 데이터 가져오기
             ItemData cookingData = boneFirePotionData.CookingItemData;
-            //AddBoneFireSlot(cookingData);
+
+            // nextBoneFireSlot에 아이템 데이터 추가
             nextBoneFireSlot.curSlot.itemData = cookingData;
             nextBoneFireSlot.curSlot.amount = 1;
-            Debug.Log("nextBoneFireSlot에 ItemData가 없습니다.");
+            Debug.Log("nextBoneFireSlot에 새로운 아이템이 추가되었습니다.");
         }
-        BoneFireUpdateUI();
+
+        // boneFireSlot의 아이템 수량 감소
+        boneFireSlot.curSlot.amount--;
+
+        //boneFireSlot의 수량이 0이 되면 curSlot을 null로 설정
+        if (boneFireSlot.curSlot.IsEmpty())
+        {
+            BoneFireUpdateUI();
+            Debug.Log("boneFireSlot의 아이템 수량이 0이 되어 슬롯이 비어졌습니다.");
+        }
+
+        BoneFireUpdateUI(); // UI 업데이트
     }
 
 
@@ -147,9 +230,9 @@ public class BoneFire : Installation
         // 나가는 ItemData 필요
         // 두 데이터가 같아야 함
 
-        if (boneFireSlot.curSlot != null)
+        // 들어가는 ItemData의 PotionItemData의 CookingItemData가 필요
+        if (boneFireSlot.curSlot != null && !boneFireSlot.curSlot.IsEmpty())
         {
-            // 슬롯의 itemData를 PotionItemData로 캐스팅
             PotionItemData boneFirePotionData = boneFireSlot.curSlot.itemData as PotionItemData; // 들어가는 Item
             ItemData nextPotionData = nextBoneFireSlot?.curSlot?.itemData; // 나가는 Item (null 가능성 처리)
 
@@ -162,7 +245,6 @@ public class BoneFire : Installation
                 if (nextPotionData == null || nextPotionData == cookingData)
                 {
                     Debug.Log("두 아이템은 동일한 CookingItemData를 가지고 있습니다.");
-                    // 동일할 경우 추가 로직 실행
                     return true; // 동일한 경우 true 반환
                 }
                 else
@@ -195,11 +277,8 @@ public class BoneFire : Installation
     {
 
     }
-    public void Get()
-    {
-        //UI창 생성
-        boneFireSlots.SetActive(true);
-    }
+
+    #endregion
 
     public override void PreView()
     {

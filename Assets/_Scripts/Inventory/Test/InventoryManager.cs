@@ -10,7 +10,7 @@ public class SlotData
     public int weaponDurability;
     public bool IsEmpty()
     {
-        return /*amount <= 0 && */itemData == null;
+        return amount <= 0 || itemData == null;
     }
 }
 

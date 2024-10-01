@@ -25,12 +25,15 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     #endregion
     public InventorySlot[] slotObjects;
     public QuickSlot[] quickSlotObjects;
-    public GameObject bonefireobject;
+
+
+    public GameObject boneFireObject; // 모닥불 UI_Object
+    public InventorySlot[] boneFireSlots;
+
     public SlotBase selectSlot;
     public DragSlot dragSlot;
     public ToolTipContainer toolTipContainer;
-    public Image inventoryBackGround;
-    public RectTransform parentTransform;
+    public RectTransform parentTransform; // inventory 창 크기
 
     public ItemData testItemData1;
     public ItemData testItemData2;
@@ -206,6 +209,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
             dropSlotData.amount = tempAmount;
 
             UpdateUI();
+            BoneFireUpdateUI();
         }
         else
         {
@@ -226,4 +230,27 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     //        selectSlot.curSlot.itemData = null;
     //    }
     //}
+
+
+    private void UpdateSlotUI(InventorySlot slot)
+    {
+        if (!slot.curSlot.IsEmpty())
+        {
+            //Debug.Log("UpdateSlotUI");
+            slot.SetSlot(slot.curSlot);
+        }
+        else
+        {
+            //Debug.Log("UpdateSlotUI");
+            slot.ClearSlot();
+        }
+    }
+
+    public void BoneFireUpdateUI()
+    {
+        UpdateSlotUI(boneFireSlots[0]);
+        UpdateSlotUI(boneFireSlots[1]);
+    }
+
+
 }

@@ -18,6 +18,11 @@ public class Installation : Item
         Debug.Log("설치 아이템 상호작용");
     }
 
+    public virtual void UIInterac()
+    {
+        Debug.Log("설치 아이템 UI 상호작용");
+    }
+
     public virtual void PreView() //프리뷰 생성
     {
         //프리뷰
