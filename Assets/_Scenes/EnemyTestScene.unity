@@ -233,8 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _projectileSpawnPoint: {fileID: 161865646}
-  _meleeHitbox: {fileID: -3029407931748103535, guid: a7c0f209bab6d1f4fba67c0a89f1140d,
-    type: 3}
+  _melee: {fileID: 321041540}
   enemySO: {fileID: 11400000, guid: 1feaa3c2e34d24345b48e689386bfd92, type: 2}
 --- !u!1001 &89587753
 PrefabInstance:
@@ -330,6 +329,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8653074234926289890, guid: 4fa3cf1ab181d73409dc6a3a27da2b7e,
     type: 3}
   m_PrefabInstance: {fileID: 751683045}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &321041540 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5518298659372828043, guid: a7c0f209bab6d1f4fba67c0a89f1140d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1261793502}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &602590767
 GameObject:
