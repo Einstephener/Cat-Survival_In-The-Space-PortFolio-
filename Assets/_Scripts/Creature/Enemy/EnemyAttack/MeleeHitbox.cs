@@ -13,14 +13,23 @@ public class MeleeHitbox : MonoBehaviour
         _collider = GetComponent<Collider>();
     }
 
-    // 공격 시 이 메서드를 호출하여 히트박스를 활성화
+    private void Update()
+    {
+        Debug.Log(_collider.gameObject.name);
+    }
+
+    // 공격 시 이 메서드를 호출하여 히트박스를 활성화.
     public void Activate(float damage)
     {
         _damage = damage;
-        _collider.enabled = true;
+        if (_collider != null)
+        {
+            _collider.enabled = true;
+        }
+        else Debug.Log("콜라이더업덩");
     }
 
-    // 공격이 끝난 후 히트박스를 비활성화
+    // 공격이 끝난 후 히트박스를 비활성화.
     public void Deactivate()
     {
         _collider.enabled = false;

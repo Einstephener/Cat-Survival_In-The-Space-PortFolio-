@@ -235,7 +235,7 @@ MonoBehaviour:
   _projectileSpawnPoint: {fileID: 161865646}
   _meleeHitbox: {fileID: -3029407931748103535, guid: a7c0f209bab6d1f4fba67c0a89f1140d,
     type: 3}
-  enemySO: {fileID: 11400000, guid: b6da65920c006bf4280e2db55ac4825d, type: 2}
+  enemySO: {fileID: 11400000, guid: 1feaa3c2e34d24345b48e689386bfd92, type: 2}
 --- !u!1001 &89587753
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -19,6 +19,9 @@ public class EnemyData : ScriptableObject
     public IAttackType attackType;
     public GameObject projectilePrefab;
 
+    [Header("Reward")]
+    public ItemData rewardItem;
+
     [Header("Stats")]
     public float maxHp;
     public float damage;
