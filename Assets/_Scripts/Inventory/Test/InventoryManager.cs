@@ -146,6 +146,7 @@ public class InventoryManager
         }
 
         Debug.Log("슬롯이 가득 찼습니다.");
+        //[기혁님의 요청사항 10/01] : 인벤토리가 다 찼을 때 플레이어 위치에 아이템이 생성되도록 해줭
     }
 
     public void RemoveItem(ItemData itemdata, int amount = 1)
