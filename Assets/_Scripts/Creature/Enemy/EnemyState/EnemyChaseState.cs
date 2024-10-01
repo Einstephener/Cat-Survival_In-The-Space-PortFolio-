@@ -15,7 +15,6 @@ public class EnemyChaseState : IEnemyState
 
     public void UpdateState(Enemy enemy)
     {
-        Debug.Log("추적상태업데이트중");
         if (enemy.IsDead())
         {
             enemy.TransitionToState(new EnemyDeadState());
