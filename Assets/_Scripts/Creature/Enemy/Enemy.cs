@@ -174,9 +174,18 @@ public class Enemy : MonoBehaviour
         return false;
     }
 
+    public void DamagedByPlayer(float damage)
+    {
+        _currentHp -= damage;
+        Debug.Log(_currentHp);
+    }
+
     public bool IsDead()
     {
-        // TODO.
+        if(_currentHp <= 0)
+        {
+            return true;
+        }
         return false;
     }
 
