@@ -182,11 +182,7 @@ public class Enemy : MonoBehaviour
 
     public bool IsDead()
     {
-        if(_currentHp <= 0)
-        {
-            return true;
-        }
-        return false;
+        return _currentHp <= 0;
     }
 
     #region Gizmos
