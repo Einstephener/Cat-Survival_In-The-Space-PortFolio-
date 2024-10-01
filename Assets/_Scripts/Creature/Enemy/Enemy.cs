@@ -7,7 +7,8 @@ public class Enemy : MonoBehaviour
 {
     #region Field
     [SerializeField] private Transform _projectileSpawnPoint;
-    [SerializeField] private MeleeHitbox _meleeHitbox;
+    [SerializeField] private GameObject _melee;
+    private MeleeHitbox _meleeHitbox;
 
     public Animator animator { get; private set; }
     public AIPath aiPath { get; private set; }
@@ -15,7 +16,6 @@ public class Enemy : MonoBehaviour
     private Vector3 _basePosition;
     private LayerMask _playerLayer;
     private Transform _playerTransform;
-    private GameObject _player;
     private AIDestinationSetter _target;
 
     private IEnemyState _currentState;
@@ -40,6 +40,7 @@ public class Enemy : MonoBehaviour
     {
         _basePosition = transform.position;
         _attackCooldown = _enemyData.attackCooldown;
+        _meleeHitbox = _melee.GetComponent<MeleeHitbox>();
         _playerLayer = LayerMask.GetMask("Player");
         TransitionToState(new EnemyIdleState());
     }
@@ -86,6 +87,7 @@ public class Enemy : MonoBehaviour
     }
     protected virtual void MeleeAttack()
     {
+        //_meleeHitbox.Init(_enemyData.damage);
         if (Vector3.Distance(transform.position, _playerTransform.position) <= _enemyData.attackRange)
         {
             if (_meleeHitbox != null)
@@ -100,7 +102,7 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator DisableMeleeHitboxAfterAttack()
     {
-        yield return new WaitForSeconds(_enemyData.attackTime);
+        yield return new WaitForSeconds(_enemyData.attackSpeed);
         if (_meleeHitbox != null)
         {
             _meleeHitbox.Deactivate();
@@ -119,7 +121,7 @@ public class Enemy : MonoBehaviour
 
         // 투사체의 위치와 방향 설정.
         projectile.transform.position = _projectileSpawnPoint.position;
-        projectile.Init(_playerTransform, _player, _enemyData.attackTime, _enemyData.damage); // 투사체 초기화.
+        projectile.Init(_playerTransform, _enemyData.attackSpeed, _enemyData.damage); // 투사체 초기화.
     }
 
     public virtual void OnHit(float damage)
@@ -140,10 +142,6 @@ public class Enemy : MonoBehaviour
 
             // 첫 번째로 감지된 플레이어를 대상으로 설정.
             _playerTransform = sight[0].transform;
-
-            // 플레이어 확인.
-            _player = sight[0].transform.gameObject;
-
             _target.target = _playerTransform;
             aiPath.canMove = true;
             Debug.Log("플레이어 감지");
@@ -161,7 +159,7 @@ public class Enemy : MonoBehaviour
         if (_playerTransform == null) return false;
 
         float distanceToPlayer = Vector3.Distance(transform.position, _playerTransform.position);
-
+        
         return distanceToPlayer <= _enemyData.attackRange;
     }
 
@@ -175,15 +173,19 @@ public class Enemy : MonoBehaviour
         }
 
         _target.target = null;
-        _player = null;
         aiPath.destination = _basePosition;
         return false;
     }
 
+    public void DamagedByPlayer(float damage)
+    {
+        _currentHp -= damage;
+        Debug.Log(_currentHp);
+    }
+
     public bool IsDead()
     {
-        // TODO.
-        return false;
+        return _currentHp <= 0;
     }
 
     #region Gizmos

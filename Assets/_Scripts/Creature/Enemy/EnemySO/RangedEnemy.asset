@@ -16,11 +16,12 @@ MonoBehaviour:
   attackType: 1
   projectilePrefab: {fileID: 5518298659372828043, guid: 1331ec86057647043b42cd9f6162fb59,
     type: 3}
+  rewardItem: {fileID: 0}
   maxHp: 150
   damage: 7
   addSpeed: 0
-  attackTime: 30
+  attackSpeed: 10
   attackCooldown: 1.5
   sightRange: 10
   exitBuffer: 5
-  attackRange: 10
+  attackRange: 7

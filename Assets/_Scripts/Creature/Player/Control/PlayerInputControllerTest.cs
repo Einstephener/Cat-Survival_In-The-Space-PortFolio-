@@ -22,8 +22,8 @@ public class PlayerInputControllerTest : MonoBehaviour
     private Vector3 _moveInput;
     private Rigidbody _rigid;
     [SerializeField] private float _currentSpeed;
-    private float _walkSpeed = 30.0f; // 수정
-    private float _runSpeed = 60.0f; // 수정
+    private float _walkSpeed = 10.0f; // 수정
+    private float _runSpeed = 20.0f; // 수정
     private float _sitSpeed = 0.5f;
 
     private LayerMask _groundCheckLayer;
@@ -173,7 +173,21 @@ public class PlayerInputControllerTest : MonoBehaviour
     {
         Debug.Log("OnFire" + value.ToString());
 
-        //_playerInteraction.enemyGameObject.공격메서드
+        if(_playerInteraction.enemyGameObject != null)
+        {
+            if(_playerInteraction.enemyGameObject.TryGetComponent<Enemy>(out Enemy enemy))
+            {
+                enemy.DamagedByPlayer(10f);
+            }
+            else if (_playerInteraction.enemyGameObject.TryGetComponent<Catcher>(out Catcher catcher))
+            {
+                catcher.DamagedByPlayer(10f);
+            }
+            else
+            {
+                Debug.Log("Non-Enemy");
+            }
+        }
     }
 
     private void OnInteract(InputValue value)

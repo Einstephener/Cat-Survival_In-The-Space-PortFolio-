@@ -8,6 +8,8 @@ public class EnemyAttackState : IEnemyState
     public void EnterState(Enemy enemy)
     {
         Debug.Log("적이 공격을 시작합니다.");
+        enemy.aiPath.canMove = false;
+        enemy.animator.SetTrigger("OnAttack");
         //공격 애니메이션 재생, 공격 사운드, 공격 딜레이 등등 설정. 
     }
 
@@ -24,9 +26,11 @@ public class EnemyAttackState : IEnemyState
         {
             enemy.TransitionToState(new EnemyChaseState());
         }
-
-        enemy.OnAttack();
-        enemy.animator.SetTrigger("OnAttack");
+        else
+        {
+            enemy.OnAttack();
+        }
+        //enemy.animator.SetTrigger("OnAttack");
     }
 
     public void ExitState(Enemy enemy)

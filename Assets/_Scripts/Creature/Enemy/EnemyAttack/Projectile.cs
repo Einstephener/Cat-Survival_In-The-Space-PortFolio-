@@ -1,40 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Projectile : Poolable
 {
     private Transform _target;
-    private GameObject _player;
+    private Rigidbody _rigidbody;
+    private Vector3 _direction;
+    private Vector3 _spawnPosition;
 
-    private float _attackTime;
+    private float _attackSpeed;
     private float _damage;
 
-    public void Init(Transform target, GameObject player, float attackSpeed, float damage)
+    private void Awake()
     {
-        this._target = target;
-        this._attackTime = attackSpeed;
-        this._damage = damage;
-        this._player = player;
-
-        transform.position = transform.position;
+        _rigidbody = GetComponent<Rigidbody>();
+        if (_rigidbody == null)
+        {
+            Debug.LogError("Rigidbody가 없습니다.");
+        }
     }
 
-    private void Update()
+    public void Init(Transform target, float attackSpeed, float damage)
     {
-        if (_target == null)
+        this._target = target;
+        this._attackSpeed = attackSpeed;
+        this._damage = damage;
+
+        _direction = (_target.position - transform.position).normalized;
+        _spawnPosition = transform.position;
+
+        _rigidbody.velocity = Vector3.zero; // 기존 속도 초기화. 중첩 방지.
+        _rigidbody.AddForce(_direction * _attackSpeed, ForceMode.VelocityChange); // 기존 속도를 무시하고 즉시 속도 적용.
+    }
+
+    private void FixedUpdate()
+    {
+        if (_target == null || Vector3.Distance(_spawnPosition, _target.position) > 10f)
         {
-            Main.Pool.Push(this); // 타겟이 없으면 풀로 반환.
-            return;
+            Main.Pool.Push(this); // 타겟이 없거나 사정거리를 넘어가면 풀로 반환.
         }
+    }
 
-        // 타겟으로 투사체 이동.
-        Vector3 direction = (_target.position - transform.position).normalized;
-        transform.position += direction * _attackTime * Time.deltaTime;
-
-        // 타겟에 도달했는지 확인.
-        if (Vector3.Distance(transform.position, _target.position) < 0.1f /* ||
-            Vector3.Distance(transform.position, transform.position) > 20f */)
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
         {
             HitTarget();
         }
@@ -46,10 +57,6 @@ public class Projectile : Poolable
         Debug.Log($"원거리 {_damage} 데미지");
 
         // TODO : 플레이어 Hp 깎기.
-        if (_player.TryGetComponent<PlayerCondition>(out PlayerCondition playerCondition))
-        {
-            playerCondition.UpdateHealth(-_damage); // 체력 감소이므로 - 부호를 곱함.
-        }
 
         // 풀로 반환.
         Main.Pool.Push(this);

@@ -8,12 +8,14 @@ public class EnemyChaseState : IEnemyState
     public void EnterState(Enemy enemy)
     {
         Debug.Log("적이 플레이어를 추적하기 시작합니다.");
-        enemy.SetSpeed(4f);
+        enemy.aiPath.canMove = true;
+        enemy.SetSpeed(6f);
         enemy.animator.SetFloat("Speed", enemy.aiPath.maxSpeed);
     }
 
     public void UpdateState(Enemy enemy)
     {
+        Debug.Log("추적상태업데이트중");
         if (enemy.IsDead())
         {
             enemy.TransitionToState(new EnemyDeadState());
@@ -23,9 +25,6 @@ public class EnemyChaseState : IEnemyState
         // A* Pathfinding에서의 타겟을 플레이어로 설정.
         if (enemy.IsTarget())
         {
-            enemy.SetSpeed(4f);
-            // _animator.SetFloat("Speed", _aiPath.maxSpeed);
-
             // 공격 범위 체크
             if(enemy.IsAttackRange())
             {
