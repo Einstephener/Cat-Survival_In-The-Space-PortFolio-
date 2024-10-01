@@ -21,7 +21,7 @@ MonoBehaviour:
   damage: 10
   addSpeed: 0
   attackSpeed: 5
-  attackCooldown: 1.5
+  attackCooldown: 1.3
   sightRange: 7
   exitBuffer: 5
   attackRange: 3

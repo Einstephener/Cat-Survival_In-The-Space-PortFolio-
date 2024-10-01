@@ -20,8 +20,6 @@ public class UI_CraftList : MonoBehaviour
         // 아이템 제작을 처리하는 메서드.
         if (_itemData.DropPrefab != null)
         {
-            // 아이템을 소환 (플레이어 좌표로 수정 필요).
-            Instantiate(_itemData.DropPrefab, Vector3.zero, Quaternion.identity);
 
             // 재료 차감.
             for (int i = 0; i < _itemData.CraftingResourceList.Length; i++)
@@ -31,6 +29,9 @@ public class UI_CraftList : MonoBehaviour
                 // 재료의 남은 수량 업데이트.
                 _resourceOwnedAmounts[i] = Main.Inventory.GetTotalItemCount(_itemData.CraftingResourceList[i].ResourceData);
             }
+
+            // 제작한 아이템 인벤에 넣어주기.
+            Main.Inventory.AddItem(_itemData);
 
             // UI 업데이트.
             UpdateResourceTexts();

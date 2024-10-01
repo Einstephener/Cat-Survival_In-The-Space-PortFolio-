@@ -87,7 +87,6 @@ public class Enemy : MonoBehaviour
     }
     protected virtual void MeleeAttack()
     {
-        //_meleeHitbox.Init(_enemyData.damage);
         if (Vector3.Distance(transform.position, _playerTransform.position) <= _enemyData.attackRange)
         {
             if (_meleeHitbox != null)
@@ -102,7 +101,7 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator DisableMeleeHitboxAfterAttack()
     {
-        yield return new WaitForSeconds(_enemyData.attackSpeed);
+        yield return new WaitForSecondsRealtime(_enemyData.attackSpeed);
         if (_meleeHitbox != null)
         {
             _meleeHitbox.Deactivate();
@@ -185,7 +184,12 @@ public class Enemy : MonoBehaviour
 
     public bool IsDead()
     {
-        return _currentHp <= 0;
+        if(_currentHp <= 0)
+        {
+            //Main.Inventory.AddItem(_enemyData.rewardItem);
+            return true;
+        }
+        else return false;
     }
 
     #region Gizmos
