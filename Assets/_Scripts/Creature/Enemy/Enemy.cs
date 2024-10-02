@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     #region Field
     [SerializeField] private Transform _projectileSpawnPoint;
     [SerializeField] private GameObject _melee;
+
     private MeleeHitbox _meleeHitbox;
 
     public Animator animator { get; private set; }
@@ -24,6 +25,7 @@ public class Enemy : MonoBehaviour
 
     protected float _currentSightRange;
     protected float _currentHp;
+
     private float _attackCooldown;
     private float _lastAttackTime;
 
@@ -123,12 +125,6 @@ public class Enemy : MonoBehaviour
         projectile.Init(_playerTransform, _enemyData.attackSpeed, _enemyData.damage); // 투사체 초기화.
     }
 
-    public virtual void OnHit(float damage)
-    {
-        _currentHp -= damage;
-        if (_currentHp <= 0) IsDead();
-    }
-
     // 플레이어가 시야에 있는지 체크 후 타겟 설정.
     public bool IsTarget()
     {
@@ -176,10 +172,11 @@ public class Enemy : MonoBehaviour
         return false;
     }
 
-    public void DamagedByPlayer(float damage)
+    public virtual void OnHit(float damage)
     {
         _currentHp -= damage;
         Debug.Log(_currentHp);
+        if (_currentHp <= 0) IsDead();
     }
 
     public bool IsDead()
