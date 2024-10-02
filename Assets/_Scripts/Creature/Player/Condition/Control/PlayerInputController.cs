@@ -169,11 +169,11 @@ public class PlayerInputController : MonoBehaviour
         {
             if (_playerInteraction.enemyGameObject.TryGetComponent<Enemy>(out Enemy enemy))
             {
-                enemy.DamagedByPlayer(10f);
+                //enemy.DamagedByPlayer(10f);
             }
             else if (_playerInteraction.enemyGameObject.TryGetComponent<Catcher>(out Catcher catcher))
             {
-                catcher.DamagedByPlayer(10f);
+                //catcher.DamagedByPlayer(10f);
             }
             else
             {
