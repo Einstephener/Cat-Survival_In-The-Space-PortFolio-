@@ -174,6 +174,11 @@ public class Enemy : MonoBehaviour
 
     public virtual void OnHit(float damage)
     {
+        if (_currentState is EnemyWalkingState)
+        {
+            return;
+        }
+
         _currentHp -= damage;
         Debug.Log(_currentHp);
         if (_currentHp <= 0) IsDead();
