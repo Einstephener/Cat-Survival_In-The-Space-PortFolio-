@@ -19,7 +19,7 @@ TagManager:
   - Obstacle
   - Player
   - Enemy
-  - 
+  - EquipItem
   - 
   - 
   - PlayerPoint
