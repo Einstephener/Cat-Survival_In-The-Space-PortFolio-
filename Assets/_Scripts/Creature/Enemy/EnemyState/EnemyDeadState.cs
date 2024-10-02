@@ -6,7 +6,7 @@ public class EnemyDeadState : IEnemyState
 {
     public void EnterState(Enemy enemy)
     {
-        
+        enemy.animator.SetBool("IsDead", true);
     }
 
     public void UpdateState(Enemy enemy)
