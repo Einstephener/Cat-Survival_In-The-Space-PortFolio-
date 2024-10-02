@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MaterialSpawn : MonoBehaviour
+public class NatureSpawn : MonoBehaviour
 {
     #region Fields
 
     // 스폰할 오브젝트들 list로 받아오기.
     public List<Poolable> SpawnMaterials = new List<Poolable>();
 
+    // 스폰 위치 .
+    public List<Transform> _spawnPosition = new List<Transform>();
+
     // 스폰 위치 부모 transform.
     private List<Transform> _parents = new List<Transform>();
+    
 
     #endregion
 
@@ -21,7 +25,6 @@ public class MaterialSpawn : MonoBehaviour
 
     private void Awake()
     {
-
         // 오브젝트 Pool에 생성.
         Main.Pool.Init();
 
@@ -35,6 +38,7 @@ public class MaterialSpawn : MonoBehaviour
             SpawnMaterials[i]._CountNow = 0;
             //프리팹 별로 부모 설정.
             _parents.Add(new GameObject { name = SpawnMaterials[i].Prefab.name + "_Root" }.transform);
+            _parents[i].transform.position = _spawnPosition[i].transform.position;
             _parents[i].parent = transform;
         }
     }
@@ -72,9 +76,24 @@ public class MaterialSpawn : MonoBehaviour
 
     private void SetRandomPosition(Transform objTransform, int index)
     {
+        Vector3 spawnCenter = _spawnPosition[index].position;
+
         Vector3 randDir = Random.insideUnitSphere * Random.Range(1, SpawnMaterials[index]._spawnRadius);
         randDir.y = 0; // 높이(Y)를 고정하여 평면 상에서 위치를 랜덤하게 설정
-        Vector3 randPos = SpawnMaterials[index]._spawnPos + randDir;
+
+        //Vector3 randPos = SpawnMaterials[index]._spawnPos + randDir; 나중에 자원별로 정해져있는 스폰 포인트로 소환.
+        // 랜덤 위치 아래의 지형이나 바닥을 감지하기 위해 Raycast 사용
+
+        Vector3 randPos = spawnCenter + randDir;
+
+        // 울퉁불퉁한 지형일 때, 오브젝트가 겹쳐질때를 위한 코드.
+        //RaycastHit hit;
+        //if (Physics.Raycast(randPos + Vector3.up * 50, Vector3.down, out hit, Mathf.Infinity)) // 위에서 50 유닛 떨어진 곳에서 Raycast 실행
+        //{
+        //    // 감지된 지형의 높이에 맞춰 y좌표를 설정
+        //    randPos.y = hit.point.y;
+        //}
+
         objTransform.position = randPos;
     }
 

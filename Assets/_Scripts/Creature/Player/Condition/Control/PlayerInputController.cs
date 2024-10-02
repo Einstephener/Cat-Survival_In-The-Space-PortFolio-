@@ -20,6 +20,11 @@ public class PlayerInputController : MonoBehaviour
 
     private Vector3 _moveInput;
     private Rigidbody _rigid;
+
+    [HideInInspector] public ItemData currentItem;
+
+
+    [Header ("SpeedValue")]
     [SerializeField] private float _currentSpeed;
     private float _walkSpeed = 3.0f;
     private float _runSpeed = 10.0f;
@@ -39,6 +44,11 @@ public class PlayerInputController : MonoBehaviour
 
     private Animator _playerAnimator;
     private float _animationWeightValue;
+
+    [Header("#UI")]
+    public GameObject inventoryUIDiplay;
+
+    private PlayerInteraction _playerInteraction;
     #endregion
 
     private void Awake()
@@ -50,6 +60,11 @@ public class PlayerInputController : MonoBehaviour
         _groundCheck = GetComponent<Transform>();
         _playerAnimator = GetComponent<Animator>();
         //Cursor.lockState = CursorLockMode.Locked; // 커서 가운데 고정.
+
+        if (TryGetComponent<PlayerInteraction>(out PlayerInteraction playerInteraction))
+        {
+            _playerInteraction = playerInteraction;
+        }
     }
 
 
@@ -96,7 +111,8 @@ public class PlayerInputController : MonoBehaviour
     {
         _isRun = value.isPressed;
 
-        OnRunStateChanged?.Invoke(value.isPressed); // 달리기(스테미나 사용) 이벤트 호출.        
+        // 달리기(스테미나 사용) 이벤트 호출.
+        OnRunStateChanged?.Invoke(value.isPressed); 
 
         if (_isMoving)
         {
@@ -146,6 +162,32 @@ public class PlayerInputController : MonoBehaviour
         Debug.Log("OnFire" + value.ToString());
         _animationWeightValue = 1f;
         _playerAnimator.SetTrigger("IsAttack");
+
+        //TODO 현재 들고 있는 도구에 따라 다른 작용.
+
+        if (_playerInteraction.enemyGameObject != null)
+        {
+            if (_playerInteraction.enemyGameObject.TryGetComponent<Enemy>(out Enemy enemy))
+            {
+                enemy.DamagedByPlayer(10f);
+            }
+            else if (_playerInteraction.enemyGameObject.TryGetComponent<Catcher>(out Catcher catcher))
+            {
+                catcher.DamagedByPlayer(10f);
+            }
+            else
+            {
+                Debug.Log("Non-Enemy");
+            }
+        }
+
+        if(_playerInteraction.natureGameObject != null)
+        {
+            if (_playerInteraction.natureGameObject.TryGetComponent<CollectMatertial>(out CollectMatertial collectMatertial))
+            {
+                collectMatertial.SpitMaterial();
+            }
+        }
     }
 
     private void OnInteract(InputValue value)
@@ -153,10 +195,6 @@ public class PlayerInputController : MonoBehaviour
         Debug.Log("OnInteract" + value.ToString());
     }
 
-    private void OnQuickSlot(InputValue value)
-    {
-        // TODO : 퀵슬롯 부분 추가
-    }
     #endregion
 
 
@@ -182,5 +220,61 @@ public class PlayerInputController : MonoBehaviour
         }
 
         _playerAnimator.SetFloat("Speed", _currentSpeed);
+    }
+
+    private void OnQuickSlot(InputValue value)
+    {
+        //TODO 현재 들고 있는 도구의 정보.
+        var inventory = Main.Inventory.inventoryUI;
+        int index = 0;
+        if (value.isPressed)
+        {
+            // 눌린 키에 따라 슬롯 인덱스를 설정
+            switch (true)
+            {
+                case var _ when Keyboard.current.digit1Key.isPressed:
+                    index = 0;
+                    inventory.SelectSlot(index);
+
+                    break;
+                case var _ when Keyboard.current.digit2Key.isPressed:
+                    index = 1;
+                    inventory.SelectSlot(index);
+
+                    break;
+                case var _ when Keyboard.current.digit3Key.isPressed:
+                    index = 2;
+                    inventory.SelectSlot(index);
+
+                    break;
+                case var _ when Keyboard.current.digit4Key.isPressed:
+                    index = 3;
+                    inventory.SelectSlot(index);
+
+                    break;
+                case var _ when Keyboard.current.digit5Key.isPressed:
+                    index = 4;
+                    inventory.SelectSlot(index);
+
+                    break;
+            }
+        }
+    }
+
+    private void OnUI_Inventory()
+    {
+        //Debug.Log("OnUI_Inventory");
+        if (!inventoryUIDiplay.activeInHierarchy)
+        {
+            inventoryUIDiplay.SetActive(true);
+            Main.Inventory.inventoryUI.boneFireObject.SetActive(false);
+            Main.Inventory.inventoryUI.AdjustParentHeight();
+        }
+        else
+        {
+            inventoryUIDiplay.SetActive(false);
+            Main.Inventory.inventoryUI.boneFireObject.SetActive(false);
+            Main.Inventory.inventoryUI.AdjustParentHeight();
+        }
     }
 }

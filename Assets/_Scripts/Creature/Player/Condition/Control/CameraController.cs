@@ -14,10 +14,6 @@ public class CameraController : MonoBehaviour
         transform.localRotation = Quaternion.Euler(eulerAngleX, 0, 0);
     }
 
-    private void LateUpdate()
-    {
-        //transform.position = PlayerHead.transform.position;
-    }
 
     public void SitSightChange(bool isSit)
     {
