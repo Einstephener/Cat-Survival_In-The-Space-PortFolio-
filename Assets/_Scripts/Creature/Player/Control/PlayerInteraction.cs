@@ -13,22 +13,26 @@ public interface IInteractable
 
 public class PlayerInteraction : MonoBehaviour
 {
+    #region Field
+    [Header("Value")]
     public float checkRate = 0.5f;
+    [SerializeField] private float maxCheckDistance = 5f;
     private float lastCheckTime;
-    [SerializeField]
-    private float maxCheckDistance = 5f;
+
+    [Header("Layer")]
     public LayerMask layerMask;
+    private int enemyLayerNumber = 10;
+    private int natureLayerNumber = 16;
 
-    public LayerMask enemyLayerMask;
-
+    [Header("Interact")]
     private GameObject curInteractGameObject;
-    [HideInInspector]
-    public GameObject enemyGameObject;
+    [HideInInspector] public GameObject enemyGameObject;
+    [HideInInspector] public GameObject natureGameObject;
     private IInteractable curInteractable;
-
-
     public TextMeshProUGUI promptText;
+
     private Camera playerCameara;
+    #endregion
 
     void Start()
     {
@@ -38,7 +42,7 @@ public class PlayerInteraction : MonoBehaviour
     private void Update()
     {
         //test
-        Debug.DrawRay(playerCameara.transform.position, playerCameara.transform.forward * maxCheckDistance, Color.green);
+        Debug.DrawRay(playerCameara.transform.position, playerCameara.transform.forward * maxCheckDistance, Color.red);
 
         if (Time.time - lastCheckTime > checkRate)
         {
@@ -55,17 +59,25 @@ public class PlayerInteraction : MonoBehaviour
                     SetPromptText();
                 }
             }
-            else if (Physics.Raycast(ray, out hit, maxCheckDistance, enemyLayerMask))
+            else if (Physics.Raycast(ray, out hit, maxCheckDistance, 1 << enemyLayerNumber))
             {
                 if (hit.collider.gameObject != enemyGameObject)
                 {
                     enemyGameObject = hit.collider.gameObject;
                 }
             }
+            else if (Physics.Raycast(ray, out hit, maxCheckDistance, 1 << natureLayerNumber))
+            {
+                if (hit.collider.gameObject != natureGameObject)
+                {
+                    natureGameObject = hit.collider.gameObject;
+                }
+            }
             else
             {
                 curInteractGameObject = null;
                 enemyGameObject = null;
+                natureGameObject = null;
                 curInteractable = null;
                 promptText.gameObject.SetActive(false);
             }
