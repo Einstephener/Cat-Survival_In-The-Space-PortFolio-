@@ -9,21 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 2a2777e38e150d9449af3bbf4a6b1796, type: 3}
   m_Name: CatcherBoss
   m_EditorClassIdentifier: Assembly-CSharp::BossEnemyData
-  name: Catcher
-  attackType: 2
-  projectilePrefab: {fileID: 5518298659372828043, guid: a7c0f209bab6d1f4fba67c0a89f1140d,
-    type: 3}
-  maxHp: 200
-  damage: 0
-  addSpeed: 0
-  attackTime: 0
-  attackCooldown: 0
-  sightRange: 0
-  exitBuffer: 0
-  attackRange: 0
-  skillRange: 0
-  skillDamage: 0
-  skillCooldown: 0
+  _projectileSpawnPoint: {fileID: 0}
+  _melee: {fileID: 0}
+  enemySO: {fileID: 0}
