@@ -82,8 +82,18 @@ public class NatureSpawn : MonoBehaviour
         randDir.y = 0; // 높이(Y)를 고정하여 평면 상에서 위치를 랜덤하게 설정
 
         //Vector3 randPos = SpawnMaterials[index]._spawnPos + randDir; 나중에 자원별로 정해져있는 스폰 포인트로 소환.
+        // 랜덤 위치 아래의 지형이나 바닥을 감지하기 위해 Raycast 사용
 
         Vector3 randPos = spawnCenter + randDir;
+
+        // 울퉁불퉁한 지형일 때, 오브젝트가 겹쳐질때를 위한 코드.
+        //RaycastHit hit;
+        //if (Physics.Raycast(randPos + Vector3.up * 50, Vector3.down, out hit, Mathf.Infinity)) // 위에서 50 유닛 떨어진 곳에서 Raycast 실행
+        //{
+        //    // 감지된 지형의 높이에 맞춰 y좌표를 설정
+        //    randPos.y = hit.point.y;
+        //}
+
         objTransform.position = randPos;
     }
 
