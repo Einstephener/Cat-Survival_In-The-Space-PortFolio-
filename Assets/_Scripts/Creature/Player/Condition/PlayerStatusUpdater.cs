@@ -96,7 +96,6 @@ public class PlayerStatusUpdater : MonoBehaviour
             // 달리기 중이고 스태미나가 0 이상일 때만 감소
             if (CheckStamina())
             {
-                Debug.Log(isRun);
                 // 스태미나 감소.
                 _playerCondition.UpdateStamina(-staminaDecreaseRate * Time.deltaTime);
             }
