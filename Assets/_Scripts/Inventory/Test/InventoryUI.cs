@@ -231,6 +231,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     //    }
     //}
 
+    #region boneFire
 
     private void UpdateSlotUI(InventorySlot slot)
     {
@@ -251,6 +252,6 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         UpdateSlotUI(boneFireSlots[0]);
         UpdateSlotUI(boneFireSlots[1]);
     }
-
+    #endregion
 
 }
