@@ -1457,7 +1457,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraController: {fileID: 7521770658698898898}
+  currentItem: {fileID: 0}
+  RagdollObject: {fileID: 3847054888490031696, guid: 6ca6670ec80f37d479ac4151a35552dc,
+    type: 3}
   _currentSpeed: 0
+  inventoryUIDiplay: {fileID: 0}
 --- !u!1 &4747516109109033003
 GameObject:
   m_ObjectHideFlags: 0

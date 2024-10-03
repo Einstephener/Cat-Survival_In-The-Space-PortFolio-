@@ -23,6 +23,8 @@ public class PlayerInputController : MonoBehaviour
 
     [HideInInspector] public ItemData currentItem;
 
+    [Header("RagDoll")]
+    public GameObject RagdollObject;
 
     [Header ("SpeedValue")]
     [SerializeField] private float _currentSpeed;
@@ -193,6 +195,9 @@ public class PlayerInputController : MonoBehaviour
     private void OnInteract(InputValue value)
     {
         Debug.Log("OnInteract" + value.ToString());
+
+        //Test 용도.
+        GetComponent<PlayerCondition>().UpdateHealth(-1000);
     }
 
     #endregion

@@ -190,10 +190,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2721036414450158151, guid: effe6696b4d66ed4aaecc62f8572e48a,
+        type: 3}
+      propertyPath: RagdollObject
+      value: 
+      objectReference: {fileID: 3847054888490031696, guid: 6ca6670ec80f37d479ac4151a35552dc,
+        type: 3}
     - target: {fileID: 4716674183552887032, guid: effe6696b4d66ed4aaecc62f8572e48a,
         type: 3}
       propertyPath: m_Name
       value: Player_Cat
+      objectReference: {fileID: 0}
+    - target: {fileID: 4716674183552887032, guid: effe6696b4d66ed4aaecc62f8572e48a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9107873108740807458, guid: effe6696b4d66ed4aaecc62f8572e48a,
         type: 3}
