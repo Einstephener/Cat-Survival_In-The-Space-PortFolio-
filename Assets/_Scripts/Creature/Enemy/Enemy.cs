@@ -151,7 +151,7 @@ public class Enemy : MonoBehaviour
     // 플레이어가 공격범위 내에 있는가 확인.
     public bool IsAttackRange()
     {
-        if (_playerTransform == null) return false;
+        if (_playerTransform == null && _currentState is EnemyWalkingState) return false;
 
         float distanceToPlayer = Vector3.Distance(transform.position, _playerTransform.position);
         
@@ -184,7 +184,7 @@ public class Enemy : MonoBehaviour
         if (_currentHp <= 0) IsDead();
     }
 
-    public bool IsDead()
+    public virtual bool IsDead()
     {
         if(_currentHp <= 0)
         {
@@ -213,6 +213,11 @@ public class Enemy : MonoBehaviour
     // 상태 전환 메서드
     public virtual void TransitionToState(IEnemyState newState)
     {
+        if (_currentState is EnemyWalkingState && newState is EnemyHitState)
+        {
+            return;
+        }
+
         if (newState == _currentState) return;
         _currentState?.ExitState(this);
 

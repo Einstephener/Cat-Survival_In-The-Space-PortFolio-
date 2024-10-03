@@ -22,8 +22,8 @@ public class PlayerInputControllerTest : MonoBehaviour
     private Vector3 _moveInput;
     private Rigidbody _rigid;
     [SerializeField] private float _currentSpeed;
-    private float _walkSpeed = 10.0f; // 수정
-    private float _runSpeed = 20.0f; // 수정
+    private float _walkSpeed = 5.0f; // 수정
+    private float _runSpeed = 8.0f; // 수정
     private float _sitSpeed = 0.5f;
 
     private LayerMask _groundCheckLayer;
@@ -51,7 +51,7 @@ public class PlayerInputControllerTest : MonoBehaviour
         _currentSpeed = _walkSpeed;
         _groundCheckLayer = LayerMask.GetMask("Ground");
         _groundCheck = GetComponent<Transform>();
-        //Cursor.lockState = CursorLockMode.Locked; // 커서 가운데 고정.
+        Cursor.lockState = CursorLockMode.Locked; // 커서 가운데 고정.
 
         if(TryGetComponent<PlayerInteraction>(out PlayerInteraction playerInteraction))
         {
