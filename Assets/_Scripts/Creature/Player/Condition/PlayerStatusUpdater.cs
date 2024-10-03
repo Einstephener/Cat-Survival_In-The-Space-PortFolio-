@@ -30,7 +30,6 @@ public class PlayerStatusUpdater : MonoBehaviour
         if (TryGetComponent<PlayerInputController>(out PlayerInputController inputController))
         {
             inputController.OnRunStateChanged += HandleRunStateChanged;
-            _ragdollObject = inputController.RagdollObject;
         }
         else // 지후님 Test 전용 코드
         {

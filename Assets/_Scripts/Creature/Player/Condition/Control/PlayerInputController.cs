@@ -23,9 +23,6 @@ public class PlayerInputController : MonoBehaviour
 
     [HideInInspector] public ItemData currentItem;
 
-    [Header("RagDoll")]
-    public GameObject RagdollObject;
-
     [Header ("SpeedValue")]
     [SerializeField] private float _currentSpeed;
     private float _walkSpeed = 3.0f;
