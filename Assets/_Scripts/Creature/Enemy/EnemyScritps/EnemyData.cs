@@ -33,11 +33,3 @@ public class EnemyData : ScriptableObject
     public float exitBuffer;
     public float attackRange;
 }
-
-[CreateAssetMenu(fileName = "BossEnemyData", menuName = "Enemy Types/BossEnemy")]
-public class BossEnemyData : EnemyData
-{
-    public float skillRange;
-    public float skillDamage;
-    public float skillCooldown;
-}
