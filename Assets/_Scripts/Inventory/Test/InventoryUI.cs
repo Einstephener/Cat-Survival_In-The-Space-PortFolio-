@@ -8,7 +8,6 @@ using UnityEngine.UI;
 
 public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 {
-    //public GameObject inventoryUI;
     #region 메모장!
     ///<summary>
     ///1. 슬롯 UI 업데이트
@@ -39,6 +38,8 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     public ItemData testItemData2;
     public ItemData testItemData3;
 
+    public EquipManager equipManager;
+
     private void Awake()
     {
         //임시 초기화
@@ -51,6 +52,8 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         //Main.Inventory.RemoveItem(testItemData1, 7);
         //Main.Inventory.RemoveItem(testItemData2, 5);
         AdjustParentHeight();
+        equipManager = FindObjectOfType<EquipManager>();
+        this.gameObject.SetActive(false);
     }
 
     #region QuickSlot
@@ -149,6 +152,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 
         quickSlotObjects[index].SetOutLine();
 
+        equipManager.EquipNew(selectSlot.curSlot.itemData);// 임시
 
         for (int i = 0; i < quickSlotObjects.Length; i++)
         {

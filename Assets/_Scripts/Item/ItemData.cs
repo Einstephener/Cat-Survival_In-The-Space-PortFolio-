@@ -51,7 +51,7 @@ public class CraftingResource
 //[CreateAssetMenu(fileName = "Item", menuName = "New Item")]
 public class ItemData : ScriptableObject
 {
-    [Header("Info")]
+    [Header("#Info")]
     public string DisplayName;
     public string Description;
     public ItemType Type;
@@ -59,7 +59,7 @@ public class ItemData : ScriptableObject
     public GameObject DropPrefab;
     public Item item;
 
-    [Header("Crafting")]
+    [Header("#Crafting")]
     public CraftingResource[] CraftingResourceList;
 
     //[Header("Stacking")]
@@ -69,8 +69,8 @@ public class ItemData : ScriptableObject
     //[Header("Consumable")]
     //public ItemDataConsumable[] Consumables;
 
-    //[Header("Equip")]
-    //public GameObject EquipPrefab;
+    [Header("#Equip")]
+    public GameObject EquipPrefab;
 
     //[Header("Equipable")]
     //public ItemDataEquipable[] Equipables;

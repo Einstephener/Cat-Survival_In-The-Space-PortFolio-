@@ -14,7 +14,7 @@ public enum IAttackType
 public class EnemyData : ScriptableObject
 {
     [Header("Info")]
-    public string name;
+    public string enemyName;
 
     public IAttackType attackType;
     public GameObject projectilePrefab;

@@ -8,6 +8,8 @@ public class PlayerStatusUpdater : MonoBehaviour
     private PlayerCondition _playerCondition;
     private PlayerStatus _status;
 
+    private GameObject _ragdollObject;
+
     [HideInInspector] public float hungerDecreaseRate = 1f;  // 배고픔 감소 속도
     [HideInInspector] public float thirstDecreaseRate = 1f; // 목마름 감소 속도
     [HideInInspector] public float healthDecreaseRate = 5f;    // 체력 감소 속도 
@@ -125,6 +127,14 @@ public class PlayerStatusUpdater : MonoBehaviour
         // TODO 죽을 때 화면 등등..
         if (_status.Health <= 0)
         {
+            if (TryGetComponent<PlayerRagdoll>(out PlayerRagdoll playerRagdoll))
+            {
+                GetComponent<Animator>().enabled = false;
+                playerRagdoll.SetParentRigidbodyCollider(true);
+                playerRagdoll.SetChildRigidbodyState(false);
+                playerRagdoll.SetChildColliderState(true);
+            }
+
             return true;
         }
         else

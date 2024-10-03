@@ -8,7 +8,9 @@ using UnityEngine.InputSystem;
 public class PlayerInputController : MonoBehaviour
 {
     #region Field
-    [SerializeField] private CameraController _cameraController;
+    //[SerializeField] private CameraController _cameraController;
+    [SerializeField] private Transform _cameraController; // Cat_Head 넣으면 됨 / 메인 카메라와 서브 카메라 같이 움직이도록 하기 위해 수정했습니다. - 문제가 발생하면 능권이에게 연락주시면 됩니다. :)
+
     private float _eulerAngleX;
     private float _eulerAngleY;
     private float _limitMinX = -70;
@@ -22,7 +24,6 @@ public class PlayerInputController : MonoBehaviour
     private Rigidbody _rigid;
 
     [HideInInspector] public ItemData currentItem;
-
 
     [Header ("SpeedValue")]
     [SerializeField] private float _currentSpeed;
@@ -72,8 +73,8 @@ public class PlayerInputController : MonoBehaviour
     {
         // 이동.
         ChangeSpeed();
-        Vector3 cameraForward = new Vector3(_cameraController.transform.forward.x, 0, _cameraController.transform.forward.z).normalized;
-        Vector3 cameraRight = new Vector3(_cameraController.transform.right.x, 0, _cameraController.transform.right.z).normalized;
+        Vector3 cameraForward = new Vector3(_cameraController.forward.x, 0, _cameraController.forward.z).normalized;
+        Vector3 cameraRight = new Vector3(_cameraController.right.x, 0, _cameraController.right.z).normalized;
 
 
         Vector3 nextVec = (_moveInput.z * cameraForward + _moveInput.x * cameraRight).normalized * _currentSpeed * Time.fixedDeltaTime;
@@ -153,7 +154,7 @@ public class PlayerInputController : MonoBehaviour
         // X축 회전 각도 제한
         _eulerAngleX = Mathf.Clamp(_eulerAngleX, _limitMinX, _limitMaxX);
 
-        _cameraController.RotateTo(_eulerAngleX);
+        _cameraController.localRotation = Quaternion.Euler(_eulerAngleX, 0, 0);
         transform.rotation = Quaternion.Euler(0, _eulerAngleY, 0);
     }
 
@@ -193,6 +194,9 @@ public class PlayerInputController : MonoBehaviour
     private void OnInteract(InputValue value)
     {
         Debug.Log("OnInteract" + value.ToString());
+
+        //Test 용도.
+        GetComponent<PlayerCondition>().UpdateHealth(-1000);
     }
 
     #endregion
