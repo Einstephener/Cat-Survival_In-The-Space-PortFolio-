@@ -18,13 +18,13 @@ public class EquipTool : Equip
     public int damage;
 
     private Animator animator;
-    private Camera camera;
+    private Camera _camera;
 
     public float useStamina;
 
     private void Awake()
     {
-        camera = Camera.main;
+        _camera = Camera.main;
         animator = GetComponent<Animator>();
     }
 
@@ -47,7 +47,7 @@ public class EquipTool : Equip
     }
     public void OnHit()
     {
-        Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        Ray ray = _camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, attackDistance))
@@ -66,7 +66,7 @@ public class EquipTool : Equip
     }
     public void OnFishing()
     {
-        Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        Ray ray = _camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, fishingDistance))
         {
