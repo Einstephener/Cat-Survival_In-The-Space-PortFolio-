@@ -25,7 +25,6 @@ public class PlayerInputController : MonoBehaviour
 
     [HideInInspector] public ItemData currentItem;
 
-
     [Header ("SpeedValue")]
     [SerializeField] private float _currentSpeed;
     private float _walkSpeed = 3.0f;
@@ -195,6 +194,9 @@ public class PlayerInputController : MonoBehaviour
     private void OnInteract(InputValue value)
     {
         Debug.Log("OnInteract" + value.ToString());
+
+        //Test 용도.
+        GetComponent<PlayerCondition>().UpdateHealth(-1000);
     }
 
     #endregion

@@ -43,7 +43,9 @@ public class PlayerCondition : MonoBehaviour, ISubject
 
         // PlayerStateUpdater를 추가하여 시간에 따른 상태 감소를 처리.
         PlayerStatusUpdater updater = gameObject.AddComponent<PlayerStatusUpdater>();
+        PlayerRagdoll playerRagdoll = gameObject.AddComponent<PlayerRagdoll>();
         updater.Initialize(this, _state);
+        playerRagdoll.Initialize();
     }
 
     #region 옵저버 관리
