@@ -15,15 +15,11 @@ public class Catcher : Enemy
         Init(enemySO);
     }
 
-    public override bool IsDead()
+    public override void GetReward()
     {
-        if (_currentHp <= 0)
-        {
-            //Main.Inventory.AddItem(_enemyData.rewardItem, 5);
-            Debug.Log($"{_enemyData.rewardItem}를 획득헀습니다.");
-            return true;
-        }
-        else return false;
+        base.GetReward();
+        //Main.Inventory.AddItem(_enemyData.rewardItem, 5);
+        Debug.Log($"{_enemyData.rewardItem} 획득했습니다.");
     }
 
     public void CastSkill()

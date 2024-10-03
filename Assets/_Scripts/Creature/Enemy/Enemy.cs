@@ -174,7 +174,7 @@ public class Enemy : MonoBehaviour
 
     public virtual void OnHit(float damage)
     {
-        if (_currentState is EnemyWalkingState)
+        if (_currentState is EnemyWalkingState || IsDead())
         {
             return;
         }
@@ -184,11 +184,16 @@ public class Enemy : MonoBehaviour
         if (_currentHp <= 0) IsDead();
     }
 
+    public virtual void GetReward()
+    {
+        
+    }
+
     public virtual bool IsDead()
     {
         if(_currentHp <= 0)
         {
-            //Main.Inventory.AddItem(_enemyData.rewardItem);
+            Debug.Log("죽음");
             return true;
         }
         else return false;
