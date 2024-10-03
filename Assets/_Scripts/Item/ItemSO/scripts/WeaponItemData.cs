@@ -8,9 +8,9 @@ public class WeaponItemData : ItemData
     [Header("#MaxAmount")]
     public int MaxAmount = 1;
 
-    [Header("Equip")]
-    public GameObject EquipPrefab;
+    //[Header("Equip")]
+    //public GameObject EquipPrefab;
 
-    [Header("Equipable")]
+    [Header("#Equipable")]
     public ItemDataEquipable[] Equipables;
 }

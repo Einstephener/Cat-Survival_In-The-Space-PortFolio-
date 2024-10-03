@@ -8,9 +8,9 @@ public class InstallationItemData : ItemData
     [Header("#MaxAmount")]
     public int MaxAmount = 1;
 
-    [Header("Equip")]
-    public GameObject EquipPrefab;
+    //[Header("Equip")]
+    //public GameObject EquipPrefab;
 
-    [Header("PreView")]
+    [Header("#PreView")]
     public GameObject preViewObject;
 }

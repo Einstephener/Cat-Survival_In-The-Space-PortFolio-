@@ -7,9 +7,9 @@ using UnityEngine;
 public class PotionItemData : ContableItemData
 {
 
-    [Header("Consumable")]
+    [Header("#Consumable")]
     public ItemDataConsumable[] Consumables;
 
-    [Header("Cooking")]
+    [Header("#Cooking")]
     public ItemData CookingItemData;
 }
