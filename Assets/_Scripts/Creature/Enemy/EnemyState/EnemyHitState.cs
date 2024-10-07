@@ -18,7 +18,7 @@ public class EnemyHitState : IEnemyState
             enemy.TransitionToState(new EnemyDeadState());
             return;
         }
-        // TODO : 집에 가는 상태가 아니라면 맞으면 적도 때리기.
+
         enemy.TransitionToState(new EnemyAttackState());
     }
 
