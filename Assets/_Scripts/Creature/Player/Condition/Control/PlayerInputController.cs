@@ -10,7 +10,6 @@ public class PlayerInputController : MonoBehaviour
     #region Field
     //[SerializeField] private CameraController _cameraController;
     [SerializeField] private Transform _cameraController; // Cat_Head 넣으면 됨 / 메인 카메라와 서브 카메라 같이 움직이도록 하기 위해 수정했습니다. - 문제가 발생하면 능권이에게 연락주시면 됩니다. :)
-
     private float _eulerAngleX;
     private float _eulerAngleY;
     private float _limitMinX = -70;
@@ -60,6 +59,8 @@ public class PlayerInputController : MonoBehaviour
         _rigid = GetComponent<Rigidbody>();
         _groundCheck = GetComponent<Transform>();
         _playerAnimator = GetComponent<Animator>();
+
+        //_cameraController = transform.Find("Cat_Head");
         //Cursor.lockState = CursorLockMode.Locked; // 커서 가운데 고정.
 
         if (TryGetComponent<PlayerInteraction>(out PlayerInteraction playerInteraction))
@@ -87,7 +88,7 @@ public class PlayerInputController : MonoBehaviour
             Quaternion.identity, _groundDistance, _groundCheckLayer);
 
         // 애니메이션
-        if (_playerAnimator.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.9f)
+        if (_playerAnimator.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.7f)
         {
             if (_animationWeightValue >= 0)
             {
@@ -124,9 +125,8 @@ public class PlayerInputController : MonoBehaviour
     private void OnSit(InputValue value)
     {
         _isSit = value.isPressed;
-
+        _cameraController.GetComponent<CameraController>().SitSightChange(_isSit);
         _playerAnimator.SetBool("IsSit", _isSit);
-
     }
 
     private void OnJump()
@@ -166,13 +166,15 @@ public class PlayerInputController : MonoBehaviour
 
         //TODO 현재 들고 있는 도구에 따라 다른 작용.
 
-        if (_playerInteraction.enemyGameObject != null)
+        GetComponent<PlayerCondition>().UpdateStamina(-10);
+
+        if (_playerInteraction.enemyObject != null)
         {
-            if (_playerInteraction.enemyGameObject.TryGetComponent<Enemy>(out Enemy enemy))
+            if (_playerInteraction.enemyObject.TryGetComponent<Enemy>(out Enemy enemy))
             {
                 //enemy.DamagedByPlayer(10f);
             }
-            else if (_playerInteraction.enemyGameObject.TryGetComponent<Catcher>(out Catcher catcher))
+            else if (_playerInteraction.enemyObject.TryGetComponent<Catcher>(out Catcher catcher))
             {
                 //catcher.DamagedByPlayer(10f);
             }
@@ -182,9 +184,9 @@ public class PlayerInputController : MonoBehaviour
             }
         }
 
-        if(_playerInteraction.natureGameObject != null)
+        if(_playerInteraction.natureObject != null)
         {
-            if (_playerInteraction.natureGameObject.TryGetComponent<CollectMatertial>(out CollectMatertial collectMatertial))
+            if (_playerInteraction.natureObject.TryGetComponent<CollectMatertial>(out CollectMatertial collectMatertial))
             {
                 collectMatertial.SpitMaterial();
             }
@@ -195,8 +197,19 @@ public class PlayerInputController : MonoBehaviour
     {
         Debug.Log("OnInteract" + value.ToString());
 
+        if(_playerInteraction.currentInteractObject != null) //Todo : (박기혁) 코드 개판인거... 수정해야함... 일단 땜빵 코드...
+        {
+            if(_playerInteraction.currentInteractObject.TryGetComponent<IInteractable>(out IInteractable interactable))
+            {
+
+            }
+            else if(_playerInteraction.currentInteractObject.TryGetComponent<Water>(out Water water))
+            {
+                GetComponent<PlayerCondition>().UpdateThirst(100);
+            }
+        }
         //Test 용도.
-        GetComponent<PlayerCondition>().UpdateHealth(-1000);
+        //GetComponent<PlayerCondition>().UpdateHealth(-1000);
     }
 
     #endregion
@@ -216,7 +229,14 @@ public class PlayerInputController : MonoBehaviour
         }
         else if (_isRun)
         {
-            _currentSpeed = _runSpeed;
+            if (GetComponent<PlayerCondition>().updater._isStaminaLock)
+            {
+                _currentSpeed = _walkSpeed;
+            }
+            else
+            {
+                _currentSpeed = _runSpeed;
+            }
         }
         else
         {

@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     private float _sitSight = .8f;
-    private float _idleSight = 1.8f;
+    private float _idleSight = 1.7f;
     [SerializeField] GameObject PlayerHead;
 
     public void RotateTo(float eulerAngleX)
@@ -18,6 +18,6 @@ public class CameraController : MonoBehaviour
     public void SitSightChange(bool isSit)
     {
         float y = isSit ? _sitSight : _idleSight;
-        transform.localPosition = new Vector3(0, y, 0.4f);
+        transform.localPosition = new Vector3(0, y, 0.6f);
     }
 }
