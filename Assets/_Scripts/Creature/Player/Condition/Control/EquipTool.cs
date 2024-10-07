@@ -8,10 +8,12 @@ public class EquipTool : Equip
     private bool attacking;
     public float attackDistance;
     public float fishingDistance;
+    public float InstallationDistance;
 
     [Header("Resource Gathering")]
     public bool doesGatherResources;
     public bool doesGatherFish;
+    public bool doesGatherInstallation;
 
     [Header("Combat")]
     public bool doesDealDamage;
@@ -28,16 +30,19 @@ public class EquipTool : Equip
         animator = GetComponent<Animator>();
     }
 
-    public override void OnAttackInput(/*PlayerConditions conditions*/)
+    public override void OnAttacking()
     {
+        Debug.Log($"EquipTool - OnAttacking() : Weaopn Attacking");
+        if(doesGatherInstallation)
+        {
+            return;
+        }
+
         if (!attacking)
         {
-            //if (conditions.UseStamina(useStamina))
-            //{
-            //    attacking = true;
-            //    animator.SetTrigger("Attack");
-            //    Invoke("OnCanAttack", attackRate);
-            //}
+            attacking = true;
+            animator.SetTrigger("OnAttack");
+            Invoke("OnCanAttack", attackRate);
         }
     }
 
@@ -74,11 +79,27 @@ public class EquipTool : Equip
             {
                 if (hit.collider.gameObject.layer != LayerMask.NameToLayer("Water"))
                     return;
-                print("닿았다");
+                Debug.Log($"EquipTool - OnFishing() : {hit.collider.gameObject.layer}");
                 //resource.Fishing(hit.point);
 
             }
 
+        }
+    }
+
+    public void OnInstallation()
+    {
+        Ray ray = _camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, InstallationDistance))
+        {
+            if (doesGatherInstallation && hit.collider.TryGetComponent(out Resource resource))
+            {
+                if (hit.collider.gameObject.layer != LayerMask.NameToLayer("Ground"))
+                    return;
+                Debug.Log($"EquipTool - OnInstallation() : {hit.collider.gameObject.layer}");
+                // 설치 해야 함..
+            }
         }
     }
 }
