@@ -87,7 +87,7 @@ public class PlayerInputController : MonoBehaviour
             Quaternion.identity, _groundDistance, _groundCheckLayer);
 
         // 애니메이션
-        if (_playerAnimator.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.9f)
+        if (_playerAnimator.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.7f)
         {
             if (_animationWeightValue >= 0)
             {
@@ -195,15 +195,15 @@ public class PlayerInputController : MonoBehaviour
     {
         Debug.Log("OnInteract" + value.ToString());
 
-        if(_playerInteraction.currentInteractObject != null)
+        if(_playerInteraction.currentInteractObject != null) //Todo : (박기혁) 코드 개판인거... 수정해야함... 일단 땜빵 코드...
         {
             if(_playerInteraction.currentInteractObject.TryGetComponent<IInteractable>(out IInteractable interactable))
             {
 
             }
-            else if(_playerInteraction.currentInteractObject.TryGetComponent<IInteractable>(out IInteractable _interactable))
+            else if(_playerInteraction.currentInteractObject.TryGetComponent<Water>(out Water water))
             {
-
+                GetComponent<PlayerCondition>().UpdateThirst(100);
             }
         }
         //Test 용도.
@@ -227,7 +227,14 @@ public class PlayerInputController : MonoBehaviour
         }
         else if (_isRun)
         {
-            _currentSpeed = _runSpeed;
+            if (GetComponent<PlayerCondition>().updater._isStaminaLock)
+            {
+                _currentSpeed = _walkSpeed;
+            }
+            else
+            {
+                _currentSpeed = _runSpeed;
+            }
         }
         else
         {

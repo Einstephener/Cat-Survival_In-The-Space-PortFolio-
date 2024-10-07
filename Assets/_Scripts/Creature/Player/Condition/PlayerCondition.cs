@@ -28,6 +28,7 @@ public class PlayerCondition : MonoBehaviour, ISubject
 {
     private List<IObserver> _observers = new List<IObserver>();
     private PlayerStatus _state;
+    [HideInInspector] public PlayerStatusUpdater updater;
     private float _maxValue = 100f;
 
     private void Start()
@@ -42,7 +43,7 @@ public class PlayerCondition : MonoBehaviour, ISubject
         }
 
         // PlayerStateUpdater를 추가하여 시간에 따른 상태 감소를 처리.
-        PlayerStatusUpdater updater = gameObject.AddComponent<PlayerStatusUpdater>();
+        updater = gameObject.AddComponent<PlayerStatusUpdater>();
 
         // 캐릭터 사망시 사용할 플레이어 ragdoll
         PlayerRagdoll playerRagdoll = gameObject.AddComponent<PlayerRagdoll>();
@@ -76,24 +77,48 @@ public class PlayerCondition : MonoBehaviour, ISubject
     public void UpdateHunger(float amount)
     {
         _state.Hunger += amount;
+
+        if (_state.Hunger > _maxValue)
+        {
+            _state.Hunger = _maxValue;
+        }
+
         Notify();
     }
 
     public void UpdateHealth(float amount)
     {
         _state.Health += amount;
+
+        if (_state.Health > _maxValue)
+        {
+            _state.Health = _maxValue;
+        }
+
         Notify();
     }
 
     public void UpdateThirst(float amount)
     {
         _state.Thirst += amount;
+
+        if (_state.Thirst > _maxValue)
+        {
+            _state.Thirst = _maxValue;
+        }
+
         Notify();
     }
 
     public void UpdateStamina(float amount)
     {
         _state.Stamina += amount;
+
+        if (_state.Stamina > _maxValue)
+        {
+            _state.Stamina = _maxValue;
+        }
+
         Notify();
     }
 
