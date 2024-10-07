@@ -180,6 +180,10 @@ public class PlayerInputControllerTest : MonoBehaviour
                 //enemy.DamagedByPlayer(10f);
                 enemy.TransitionToState(new EnemyHitState());
             }
+            else if (_playerInteraction.enemyGameObject.TryGetComponent<EnemyBase>(out EnemyBase enemyBase))
+            {
+                enemy.TransitionToState(new EnemyHitState());
+            }
             else if (_playerInteraction.enemyGameObject.TryGetComponent<Catcher>(out Catcher catcher))
             {
                 //catcher.DamagedByPlayer(10f);

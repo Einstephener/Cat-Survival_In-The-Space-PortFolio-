@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     #region Field
     [SerializeField] private Transform _projectileSpawnPoint;
     [SerializeField] private GameObject _melee;
+    [SerializeField] private float HP;
 
     private MeleeHitbox _meleeHitbox;
 
@@ -42,7 +43,12 @@ public class Enemy : MonoBehaviour
     {
         _basePosition = transform.position;
         _attackCooldown = _enemyData.attackCooldown;
-        _meleeHitbox = _melee.GetComponent<MeleeHitbox>();
+
+        if (_enemyData.attackType == IAttackType.Melee || _enemyData.attackType == IAttackType.Both)
+        {
+            _meleeHitbox = _melee.GetComponent<MeleeHitbox>();
+        }
+
         _playerLayer = LayerMask.GetMask("Player");
         TransitionToState(new EnemyIdleState());
     }
@@ -50,6 +56,8 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         UpdateState();
+
+        HP = _currentHp;
     }
 
     protected void Init(EnemyData enemyData)
@@ -170,6 +178,12 @@ public class Enemy : MonoBehaviour
         _target.target = null;
         aiPath.destination = _basePosition;
         return false;
+    }
+
+    public void RegainHp()
+    {
+        _currentHp = _enemyData.maxHp;
+        Debug.Log("체력 리젠 : " + _currentHp);
     }
 
     public virtual void OnHit(float damage)

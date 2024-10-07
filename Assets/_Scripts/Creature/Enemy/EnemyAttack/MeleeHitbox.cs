@@ -15,7 +15,7 @@ public class MeleeHitbox : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(_collider.gameObject.name);
+        
     }
 
     // 공격 시 이 메서드를 호출하여 히트박스를 활성화.
