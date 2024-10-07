@@ -37,6 +37,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     public ItemData testItemData1;
     public ItemData testItemData2;
     public ItemData testItemData3;
+    public ItemData testItemData4;
 
     public EquipManager equipManager;
 
@@ -46,9 +47,9 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         Main.Inventory.Initialize();
         //Test
         Main.Inventory.AddItem(testItemData1, 10);
-        Main.Inventory.AddItem(testItemData2, 99);
         Main.Inventory.AddItem(testItemData2, 29);
         Main.Inventory.AddItem(testItemData3);
+        Main.Inventory.AddItem(testItemData4);
         //Main.Inventory.RemoveItem(testItemData1, 7);
         //Main.Inventory.RemoveItem(testItemData2, 5);
         AdjustParentHeight();
@@ -147,19 +148,22 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 
     public void SelectSlot(int index)
     {
-        Debug.Log($"사용한 슬롯: {index}");
-        selectSlot = quickSlotObjects[index];
-
-        quickSlotObjects[index].SetOutLine();
-
-        equipManager.EquipNew(selectSlot.curSlot.itemData);// 임시
-
-        for (int i = 0; i < quickSlotObjects.Length; i++)
+        if (selectSlot != quickSlotObjects[index])
         {
-            if (i != index)
+            Debug.Log($"사용한 슬롯: {index}");
+            selectSlot = quickSlotObjects[index];
+
+            quickSlotObjects[index].SetOutLine();
+
+            equipManager.EquipNew(selectSlot.curSlot.itemData);// 임시
+
+            for (int i = 0; i < quickSlotObjects.Length; i++)
             {
-                //selectSlot = quickSlotObjects[i];
-                quickSlotObjects[i].ClearOutLine();
+                if (i != index)
+                {
+                    //selectSlot = quickSlotObjects[i];
+                    quickSlotObjects[i].ClearOutLine();
+                }
             }
         }
     }
