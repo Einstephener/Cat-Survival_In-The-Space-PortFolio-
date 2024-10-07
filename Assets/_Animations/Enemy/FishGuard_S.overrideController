@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FishGuard_S
+  m_Controller: {fileID: 9100000, guid: b16f1a1f03dc2e2469a311f8f7f90968, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: -2533602672706719597, guid: 5179826d65ae57d4b989e6a6ab22e7cc,
+      type: 3}
+    m_OverrideClip: {fileID: 5920797233550837222, guid: a50ae08cb13045d45a34917892d2060d,
+      type: 3}
+  - m_OriginalClip: {fileID: 7349750484683171053, guid: 5179826d65ae57d4b989e6a6ab22e7cc,
+      type: 3}
+    m_OverrideClip: {fileID: -5254575714895047637, guid: a50ae08cb13045d45a34917892d2060d,
+      type: 3}
+  - m_OriginalClip: {fileID: 8030809488957223598, guid: 5179826d65ae57d4b989e6a6ab22e7cc,
+      type: 3}
+    m_OverrideClip: {fileID: 8271921023866862627, guid: a50ae08cb13045d45a34917892d2060d,
+      type: 3}
+  - m_OriginalClip: {fileID: -1751267851543557399, guid: 5179826d65ae57d4b989e6a6ab22e7cc,
+      type: 3}
+    m_OverrideClip: {fileID: -3354123306066695131, guid: a50ae08cb13045d45a34917892d2060d,
+      type: 3}
+  - m_OriginalClip: {fileID: -5299060085235982570, guid: 5179826d65ae57d4b989e6a6ab22e7cc,
+      type: 3}
+    m_OverrideClip: {fileID: -1759501338963781009, guid: a50ae08cb13045d45a34917892d2060d,
+      type: 3}
+  - m_OriginalClip: {fileID: 2492796730825221254, guid: 5179826d65ae57d4b989e6a6ab22e7cc,
+      type: 3}
+    m_OverrideClip: {fileID: -2622249666483137025, guid: a50ae08cb13045d45a34917892d2060d,
+      type: 3}
