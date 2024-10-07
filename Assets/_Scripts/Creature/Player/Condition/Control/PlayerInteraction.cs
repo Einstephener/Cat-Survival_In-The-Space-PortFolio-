@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEngine.InputSystem.InputAction;
 
 public interface IInteractable
 {
@@ -13,92 +11,133 @@ public interface IInteractable
 
 public class PlayerInteraction : MonoBehaviour
 {
-    #region Field
+    #region Fields
     [Header("Value")]
-    public float checkRate = 0.5f;
+    [SerializeField] private float checkRate = 0.5f;
     [SerializeField] private float maxCheckDistance = 5f;
     private float lastCheckTime;
 
-    [Header("Layer")]
-    public LayerMask layerMask;
-    private int enemyLayerNumber = 10;
-    private int natureLayerNumber = 16;
+    [Header("Layers")]
+    [SerializeField] private LayerMask interactableLayer;
+    [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private LayerMask natureLayer;
+    [SerializeField] private LayerMask waterLayer;
 
-    [Header("Interact")]
-    private GameObject curInteractGameObject;
-    [HideInInspector] public GameObject enemyGameObject;
-    [HideInInspector] public GameObject natureGameObject;
-    private IInteractable curInteractable;
+    [Header("Interaction")]
+    [HideInInspector] public GameObject currentInteractObject;
+    [HideInInspector] public GameObject enemyObject;
+    [HideInInspector] public GameObject natureObject;
+    private IInteractable currentInteractable;
+
     public TextMeshProUGUI promptText;
-
-    private Camera playerCameara;
+    private Camera playerCamera;
     #endregion
 
-    void Start()
+    private void Start()
     {
-        playerCameara = Camera.main;
+        playerCamera = Camera.main;
     }
 
     private void Update()
     {
-        //test
-        Debug.DrawRay(playerCameara.transform.position, playerCameara.transform.forward * maxCheckDistance, Color.red);
+        Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward * maxCheckDistance, Color.red);
 
         if (Time.time - lastCheckTime > checkRate)
         {
             lastCheckTime = Time.time;
-
-            Ray ray = playerCameara.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height/ 2));
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, maxCheckDistance, layerMask))
-            {
-                if (hit.collider.gameObject != curInteractGameObject)
-                {
-                    curInteractGameObject = hit.collider.gameObject;
-                    curInteractable = hit.collider.GetComponent<IInteractable>();
-                    SetPromptText();
-                }
-            }
-            else if (Physics.Raycast(ray, out hit, maxCheckDistance, 1 << enemyLayerNumber))
-            {
-                if (hit.collider.gameObject != enemyGameObject)
-                {
-                    enemyGameObject = hit.collider.gameObject;
-                }
-            }
-            else if (Physics.Raycast(ray, out hit, maxCheckDistance, 1 << natureLayerNumber))
-            {
-                if (hit.collider.gameObject != natureGameObject)
-                {
-                    natureGameObject = hit.collider.gameObject;
-                }
-            }
-            else
-            {
-                curInteractGameObject = null;
-                enemyGameObject = null;
-                natureGameObject = null;
-                curInteractable = null;
-                promptText.gameObject.SetActive(false);
-            }
+            CheckForInteractableObjects();
         }
     }
 
+    #region InteractionCheck
+    private void CheckForInteractableObjects()
+    {
+        Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, maxCheckDistance, interactableLayer))
+        {
+            HandleInteractableHit(hit);
+        }
+        else if (Physics.Raycast(ray, out hit, maxCheckDistance, enemyLayer))
+        {
+            HandleEnemyHit(hit);
+        }
+        else if (Physics.Raycast(ray, out hit, maxCheckDistance, natureLayer))
+        {
+            HandleNatureHit(hit);
+        }
+        else if (Physics.Raycast(ray, out hit, maxCheckDistance, waterLayer))
+        {
+            HandleWaterHit(hit);
+        }
+        else
+        {
+            ClearInteraction();
+        }
+    }
+
+    private void HandleInteractableHit(RaycastHit hit)
+    {
+        if (hit.collider.gameObject != currentInteractObject)
+        {
+            currentInteractObject = hit.collider.gameObject;
+            currentInteractable = hit.collider.GetComponent<IInteractable>();
+            SetPromptText();
+        }
+    }
+
+    private void HandleEnemyHit(RaycastHit hit)
+    {
+        if (hit.collider.gameObject != enemyObject)
+        {
+            enemyObject = hit.collider.gameObject;
+        }
+    }
+
+    private void HandleNatureHit(RaycastHit hit)
+    {
+        if (hit.collider.gameObject != natureObject)
+        {
+            natureObject = hit.collider.gameObject;
+        }
+    }
+
+    private void HandleWaterHit(RaycastHit hit)
+    {
+        if (hit.collider.gameObject != currentInteractObject)
+        {
+            currentInteractObject = hit.collider.gameObject;
+            promptText.gameObject.SetActive(true);
+            promptText.text = $"<b>[E]</b> {"DrinkWater"}";
+        }
+    }
+
+    private void ClearInteraction()
+    {
+        currentInteractObject = null;
+        enemyObject = null;
+        natureObject = null;
+        currentInteractable = null;
+        promptText.gameObject.SetActive(false);
+    }
+    #endregion
+
     private void SetPromptText()
     {
-        promptText.gameObject.SetActive(true);
-        promptText.text = string.Format("<b>[E]</b> {0}", curInteractable.GetInteractPrompt());
+        if (currentInteractable != null)
+        {
+            promptText.gameObject.SetActive(true);
+            promptText.text = $"<b>[E]</b> {currentInteractable.GetInteractPrompt()}";
+        }
     }
-    
-    //아이템 획득
+
     public void OnInteract(InputValue value)
     {
-        if (curInteractable != null)
+        if (currentInteractable != null)
         {
-            curInteractable.OnInteract();
-            curInteractGameObject = null;
-            curInteractable = null;
-            promptText.gameObject.SetActive(false);
+            currentInteractable.OnInteract();
+            ClearInteraction();
         }
     }
 }

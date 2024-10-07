@@ -26,7 +26,6 @@ public class EnemyIdleState : IEnemyState
             return;
         }
 
-        Debug.Log("대기");
         //_animator.SetFloat("Speed", 0.1f);
 
         if (enemy.IsTarget())

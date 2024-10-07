@@ -17,7 +17,7 @@ public class PlayerStatusUpdater : MonoBehaviour
 
     [HideInInspector] public bool isRun = false; //TODO 달리기 상태일때 is Run값 바꿔주기.
     [HideInInspector] public bool canRun = false; //TODO 달리기 상태일때 is Run값 바꿔주기.
-    private bool _isStaminaLock = false;
+    [HideInInspector] public bool _isStaminaLock = false;
     #endregion
     private void Start()
     {
@@ -78,49 +78,52 @@ public class PlayerStatusUpdater : MonoBehaviour
         }
     }
 
-    private void StaminaUpdate(bool isRun = false)
+    #region 스테미나 로직
+    private void StaminaUpdate(bool isRunning = false)
     {
-        // 스태미나 회복 시도 (달리기 키를 누르고 있지 않을 때, 달리키를 누르더라도 달릴 수 없는 상황일 때.)
-        if (!isRun || _isStaminaLock)
+        if (isRunning && CanDecreaseStamina()) // 달리기 중이고 스태미나가 충분할 때
         {
-            // 스태미나 회복.
-            if (_status.Stamina <= 100)
-            {
-                // 배고픔에 따라 다른 스태미나 회복량.
-                if (_status.Hunger >= 50)
-                    _playerCondition.UpdateStamina(staminaDecreaseRate * Time.deltaTime);
-                else
-                    _playerCondition.UpdateStamina(staminaDecreaseRate * 0.5f * Time.deltaTime);
-            }
+            DecreaseStamina();
         }
         else
         {
-            // 달리기 중이고 스태미나가 0 이상일 때만 감소
-            if (CheckStamina())
-            {
-                // 스태미나 감소.
-                _playerCondition.UpdateStamina(-staminaDecreaseRate * Time.deltaTime);
-            }
+            RecoverStamina(); // 달리지 않거나 스태미나가 부족한 경우 회복
         }
+
+        CheckStaminaLock(); // 스태미나 상태를 점검하여 락을 업데이트
     }
 
-    private bool CheckStamina()
+    private void CheckStaminaLock()
     {
-        if (_status.Stamina <= 0) // 스태미나가 0 이하일 때
+        if (_status.Stamina <= 0)
         {
-            _isStaminaLock = true;
-            return false;
+            _isStaminaLock = true; // 스태미나 0 이하일 때 락 설정
         }
-
-        if (_status.Stamina >= 20) // 스태미나가 20 이상일 때
+        else if (_status.Stamina >= 20)
         {
-            _isStaminaLock = false;
-            return true;
+            _isStaminaLock = false; // 스태미나가 20 이상으로 회복되면 락 해제
         }
-
-        // 스태미나가 0과 20 사이일 때
-        return !_isStaminaLock;
     }
+
+    private bool CanDecreaseStamina()
+    {
+        return !_isStaminaLock && _status.Stamina > 0; // 스태미나가 0보다 크고, 락이 걸려있지 않을 때만 가능
+    }
+
+    private void DecreaseStamina()
+    {
+        _playerCondition.UpdateStamina(-staminaDecreaseRate * Time.deltaTime); // 스태미나 감소
+    }
+
+    private void RecoverStamina()
+    {
+        if (_status.Stamina < 100) // 스태미나가 최대치 미만일 때만 회복
+        {
+            float recoveryRate = _status.Hunger >= 50 ? staminaDecreaseRate : staminaDecreaseRate * 0.5f;
+            _playerCondition.UpdateStamina(recoveryRate * Time.deltaTime);
+        }
+    }
+    #endregion
 
     public bool IsPlayerDead()
     {

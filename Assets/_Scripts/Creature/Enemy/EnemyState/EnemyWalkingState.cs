@@ -7,6 +7,7 @@ public class EnemyWalkingState : IEnemyState
     public void EnterState(Enemy enemy)
     {
         enemy.SetSpeed(2f);
+        enemy.RegainHp();
         enemy.animator.SetFloat("Speed", enemy.aiPath.maxSpeed);
     }
 
