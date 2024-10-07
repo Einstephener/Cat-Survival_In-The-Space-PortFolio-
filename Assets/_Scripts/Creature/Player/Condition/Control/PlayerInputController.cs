@@ -166,6 +166,8 @@ public class PlayerInputController : MonoBehaviour
 
         //TODO 현재 들고 있는 도구에 따라 다른 작용.
 
+        GetComponent<PlayerCondition>().UpdateStamina(-10);
+
         if (_playerInteraction.enemyObject != null)
         {
             if (_playerInteraction.enemyObject.TryGetComponent<Enemy>(out Enemy enemy))
