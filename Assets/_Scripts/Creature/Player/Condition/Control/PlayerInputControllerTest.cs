@@ -173,14 +173,14 @@ public class PlayerInputControllerTest : MonoBehaviour
     {
         Debug.Log("OnFire" + value.ToString());
 
-        if(_playerInteraction.enemyGameObject != null /* && 적이 집에 가는 상태가 아니라면 */)
+        if(_playerInteraction.enemyObject != null /* && 적이 집에 가는 상태가 아니라면 */)
         {
-            if(_playerInteraction.enemyGameObject.TryGetComponent<Enemy>(out Enemy enemy))
+            if(_playerInteraction.enemyObject.TryGetComponent<Enemy>(out Enemy enemy))
             {
                 //enemy.DamagedByPlayer(10f);
                 enemy.TransitionToState(new EnemyHitState());
             }
-            else if (_playerInteraction.enemyGameObject.TryGetComponent<Catcher>(out Catcher catcher))
+            else if (_playerInteraction.enemyObject.TryGetComponent<Catcher>(out Catcher catcher))
             {
                 //catcher.DamagedByPlayer(10f);
                 enemy.TransitionToState(new EnemyHitState());

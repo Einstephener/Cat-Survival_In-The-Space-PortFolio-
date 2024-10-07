@@ -166,13 +166,13 @@ public class PlayerInputController : MonoBehaviour
 
         //TODO 현재 들고 있는 도구에 따라 다른 작용.
 
-        if (_playerInteraction.enemyGameObject != null)
+        if (_playerInteraction.enemyObject != null)
         {
-            if (_playerInteraction.enemyGameObject.TryGetComponent<Enemy>(out Enemy enemy))
+            if (_playerInteraction.enemyObject.TryGetComponent<Enemy>(out Enemy enemy))
             {
                 //enemy.DamagedByPlayer(10f);
             }
-            else if (_playerInteraction.enemyGameObject.TryGetComponent<Catcher>(out Catcher catcher))
+            else if (_playerInteraction.enemyObject.TryGetComponent<Catcher>(out Catcher catcher))
             {
                 //catcher.DamagedByPlayer(10f);
             }
@@ -182,9 +182,9 @@ public class PlayerInputController : MonoBehaviour
             }
         }
 
-        if(_playerInteraction.natureGameObject != null)
+        if(_playerInteraction.natureObject != null)
         {
-            if (_playerInteraction.natureGameObject.TryGetComponent<CollectMatertial>(out CollectMatertial collectMatertial))
+            if (_playerInteraction.natureObject.TryGetComponent<CollectMatertial>(out CollectMatertial collectMatertial))
             {
                 collectMatertial.SpitMaterial();
             }
@@ -195,8 +195,19 @@ public class PlayerInputController : MonoBehaviour
     {
         Debug.Log("OnInteract" + value.ToString());
 
+        if(_playerInteraction.currentInteractObject != null)
+        {
+            if(_playerInteraction.currentInteractObject.TryGetComponent<IInteractable>(out IInteractable interactable))
+            {
+
+            }
+            else if(_playerInteraction.currentInteractObject.TryGetComponent<IInteractable>(out IInteractable _interactable))
+            {
+
+            }
+        }
         //Test 용도.
-        GetComponent<PlayerCondition>().UpdateHealth(-1000);
+        //GetComponent<PlayerCondition>().UpdateHealth(-1000);
     }
 
     #endregion
