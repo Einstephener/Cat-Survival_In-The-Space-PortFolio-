@@ -440,36 +440,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1803405463}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &785376473
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 785376472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26563c5ed360fa84faabd3bec40b69ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  checkRate: 0.5
-  maxCheckDistance: 5
-  interactableLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 1024
-  natureLayer:
-    serializedVersion: 2
-    m_Bits: 65536
-  waterLayer:
-    serializedVersion: 2
-    m_Bits: 16
-  currentInteractObject: {fileID: 0}
-  enemyObject: {fileID: 0}
-  natureObject: {fileID: 0}
-  promptText: {fileID: 901255372}
 --- !u!114 &785376474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1123,18 +1093,19 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8078267609921037815, guid: effe6696b4d66ed4aaecc62f8572e48a,
+        type: 3}
+      propertyPath: promptText
+      value: 
+      objectReference: {fileID: 901255372}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4716674183552887032, guid: effe6696b4d66ed4aaecc62f8572e48a,
         type: 3}
-      insertIndex: -1
+      insertIndex: 7
       addedObject: {fileID: 785376474}
-    - targetCorrespondingSourceObject: {fileID: 4716674183552887032, guid: effe6696b4d66ed4aaecc62f8572e48a,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 785376473}
   m_SourcePrefab: {fileID: 100100000, guid: effe6696b4d66ed4aaecc62f8572e48a, type: 3}
 --- !u!1 &1811045968
 GameObject:

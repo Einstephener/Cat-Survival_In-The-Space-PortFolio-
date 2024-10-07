@@ -60,6 +60,9 @@ public class PlayerInputController : MonoBehaviour
         _rigid = GetComponent<Rigidbody>();
         _groundCheck = GetComponent<Transform>();
         _playerAnimator = GetComponent<Animator>();
+
+        //_cameraController = transform.Find("Cat_Head");
+
         //Cursor.lockState = CursorLockMode.Locked; // 커서 가운데 고정.
 
         if (TryGetComponent<PlayerInteraction>(out PlayerInteraction playerInteraction))
