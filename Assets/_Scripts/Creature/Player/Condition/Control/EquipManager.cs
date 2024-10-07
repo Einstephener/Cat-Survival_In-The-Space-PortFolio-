@@ -19,9 +19,13 @@ public class EquipManager : MonoBehaviour
         //ItemDataSO 에 장착 아이템 추가 ㄲ
         //curEquip = Main.Inventory.inventoryUI.selectSlot.curSlot.itemData.EquipPrefab.GetComponent<Equip>();
     }
-    public void OnFire(InputValue value)
+    public void OnFire()
     {
         //공격 관련
+        if (curEquip != null)
+        {
+            curEquip.OnAttacking();
+        }
     }
 
     public void EquipNew(ItemData item) // 인벤토리에서 슬롯을 누를 때 동작하도록 해야 함
