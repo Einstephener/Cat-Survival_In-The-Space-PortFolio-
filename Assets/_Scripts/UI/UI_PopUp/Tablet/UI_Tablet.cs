@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_Tablet : MonoBehaviour
+public class UI_Tablet : UI_Popup
 {
     public Button Option_ToolBTN;
     public Button Option_FurnitureBTN;
