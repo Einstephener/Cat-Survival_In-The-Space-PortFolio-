@@ -2269,6 +2269,7 @@ MonoBehaviour:
   currentItem: {fileID: 0}
   _currentSpeed: 0
   inventoryUIDiplay: {fileID: 0}
+  IsFist: 0
 --- !u!114 &4699258732491026427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3697,7 +3698,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e922fc1ab35f42e4ebbc2c3030926573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerHead: {fileID: 7349946128025774067}
 --- !u!1 &7360199890531126193
 GameObject:
   m_ObjectHideFlags: 0

@@ -47,6 +47,7 @@ public class PlayerInputController : MonoBehaviour
 
     [Header("#UI")]
     public GameObject inventoryUIDiplay;
+    [HideInInspector] public bool IsFist = true;
 
     private PlayerInteraction _playerInteraction;
     #endregion
@@ -88,11 +89,11 @@ public class PlayerInputController : MonoBehaviour
             Quaternion.identity, _groundDistance, _groundCheckLayer);
 
         // 애니메이션
-        if (_playerAnimator.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.7f)
+        if (_playerAnimator.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.95f)
         {
             if (_animationWeightValue >= 0)
             {
-                _animationWeightValue -= Time.deltaTime;
+                _animationWeightValue -= 2 * Time.deltaTime;
             }
             _playerAnimator.SetLayerWeight(1, _animationWeightValue);
         }
@@ -162,6 +163,8 @@ public class PlayerInputController : MonoBehaviour
     {
         Debug.Log("OnFire" + value.ToString());
         _animationWeightValue = 1f;
+        IsFist = true;
+        _playerAnimator.SetBool("IsPunch", IsFist);
         _playerAnimator.SetTrigger("IsAttack");
 
         //TODO 현재 들고 있는 도구에 따라 다른 작용.

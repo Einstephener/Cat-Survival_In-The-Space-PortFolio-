@@ -7,8 +7,7 @@ public class CameraController : MonoBehaviour
     private Coroutine _crouchCoroutine; // 코루틴 핸들
     private float _sitSight = .8f;
     private float _idleSight = 1.7f;
-    [SerializeField] GameObject PlayerHead;
-
+    
     public void RotateTo(float eulerAngleX)
     {
         // 실제 카메라의 Quaternion 회전에 적용.
