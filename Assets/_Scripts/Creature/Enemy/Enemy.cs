@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     #region Field
     [SerializeField] private Transform _projectileSpawnPoint;
     [SerializeField] private GameObject _melee;
-    [SerializeField] private float HP;
+    [SerializeField] private float HP; // 추후 삭제.
 
     private MeleeHitbox _meleeHitbox;
 
@@ -61,7 +61,7 @@ public class Enemy : MonoBehaviour
             transform.rotation = quaternion;
         }
 
-        HP = _currentHp;
+        HP = _currentHp; // 추후 삭제.
     }
 
     protected void Init(EnemyData enemyData)
@@ -71,20 +71,16 @@ public class Enemy : MonoBehaviour
         _currentHp = _enemyData.maxHp;
     }
 
+    // 애니메이션 이벤트.
     protected virtual void OnAttack()
     {
-        if (_enemyData.attackType == IAttackType.Melee)
+        if (_enemyData.attackType == IAttackType.Melee || _enemyData.attackType == IAttackType.Both)
         {
             MeleeAttack();
         }
-        else if (_enemyData.attackType == IAttackType.Ranged)
+        else if (_enemyData.attackType == IAttackType.Ranged || _enemyData.attackType == IAttackType.Both)
         {
-            RangedAttack();
-        }
-        else if (_enemyData.attackType == IAttackType.Both)
-        {
-            MeleeAttack();
-            RangedAttack();
+            FireProjectile();
         }
     }
 
@@ -99,18 +95,13 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // 공격 시간이 지난 후 히트박스 비활성화.
+    // 애니메이션 이벤트 : 공격 시간이 지난 후 히트박스 비활성화.
     protected virtual void MeleeHitboxDeactivate()
     {
         if (_meleeHitbox != null)
         {
             _meleeHitbox.Deactivate();
         }
-    }
-
-    protected virtual void RangedAttack()
-    {
-        FireProjectile();
     }
 
     protected virtual void FireProjectile()
@@ -150,6 +141,7 @@ public class Enemy : MonoBehaviour
             return true;
         }
 
+        // TODO : 플레이어가 죽었다면 타겟이 되지 않도록 처리.
         _currentSightRange = _enemyData.sightRange;
         return false;
     }
