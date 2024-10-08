@@ -234,7 +234,6 @@ GameObject:
   - component: {fileID: 8370612798023427613}
   - component: {fileID: 3633936693100545614}
   - component: {fileID: 5878471155951598160}
-  - component: {fileID: 7343144600269406442}
   - component: {fileID: 1340755738134348385}
   - component: {fileID: 1062965111891205450}
   m_Layer: 5
@@ -346,26 +345,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7343144600269406442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3791380690535164332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06b94aee4918c154f9ae120820cf11be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  button: {fileID: 5878471155951598160}
-  outline: {fileID: 0}
-  SlotUIObject: {fileID: 4922155326772832831}
-  icon: {fileID: 3766336031971042037}
-  amuontText: {fileID: 8835531114999196350}
-  WeaponDurability: {fileID: 7495520179320900668}
-  index: 0
-  _amuont: 0
 --- !u!114 &1340755738134348385
 MonoBehaviour:
   m_ObjectHideFlags: 0
