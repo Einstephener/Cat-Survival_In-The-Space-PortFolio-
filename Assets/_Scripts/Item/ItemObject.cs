@@ -53,10 +53,10 @@ public class ItemObject : MonoBehaviour, IInteractable
         }
         else
         {
-
             Installation initem = item as Installation;
             BoneFire Test = item as BoneFire;
             //initem.UIInterac();
+            Debug.Log("ItemObject.cs - OnIntercat() Errer");
             Test.UIInterac();
             //Use();
         }

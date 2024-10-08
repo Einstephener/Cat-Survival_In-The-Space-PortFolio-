@@ -28,7 +28,6 @@ public class BoneFire : Installation
 
     private void Initialize()
     {
-
         boneFireSlot.curSlot = new SlotData();
         nextBoneFireSlot.curSlot = new SlotData();
 
@@ -280,8 +279,8 @@ public class BoneFire : Installation
 
     #endregion
 
-    public override void PreView()
-    {
-        base.PreView();
-    }
+    //public override void PreView()
+    //{
+    //    base.PreView();
+    //}
 }

@@ -83,21 +83,23 @@ public class Craft : MonoBehaviour
         //}
 
         // 현재 선택된 아이템 데이터 가져오기
-        ItemData selectedItemData = Main.Inventory.inventoryUI.GetSelectItemData();
-
-        // itemData가 null이 아니고 InstallationItemData로 캐스팅 가능한 경우만 실행
-        if (selectedItemData != null && selectedItemData is InstallationItemData installationData)
+        if (Main.Inventory.inventoryUI.GetSelectItemData() != null)
         {
-            // 필드 변수를 업데이트
-            itemData = installationData;
+            ItemData selectedItemData = Main.Inventory.inventoryUI.GetSelectItemData();
+            // itemData가 null이 아니고 InstallationItemData로 캐스팅 가능한 경우만 실행
+            if (selectedItemData != null && selectedItemData is InstallationItemData installationData)
+            {
+                // 필드 변수를 업데이트
+                itemData = installationData;
 
-            // 프리뷰 오브젝트와 프리팹 설정
-            Preview_ItemObject = installationData.preViewObject;
-            itemPrefab = installationData.InstallationItemPrefab;
-        }
-        else
-        {
-            Debug.LogWarning("Selected item data is either null or not an InstallationItemData.");
+                // 프리뷰 오브젝트와 프리팹 설정
+                Preview_ItemObject = installationData.preViewObject;
+                itemPrefab = installationData.InstallationItemPrefab;
+            }
+            else
+            {
+                Debug.LogWarning("Selected item data is either null or not an InstallationItemData.");
+            }
         }
     }
 

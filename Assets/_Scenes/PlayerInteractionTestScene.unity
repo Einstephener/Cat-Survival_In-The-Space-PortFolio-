@@ -1080,12 +1080,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!1 &911550545 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6418326072177761560, guid: 3780471d37f1c84408a99f4170315a0b,
-    type: 3}
-  m_PrefabInstance: {fileID: 7625222057961958997}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &959564288 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1434191240061850843, guid: effe6696b4d66ed4aaecc62f8572e48a,
@@ -1229,18 +1223,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &1139466699 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7260636249464745255, guid: 3780471d37f1c84408a99f4170315a0b,
-    type: 3}
-  m_PrefabInstance: {fileID: 7625222057961958997}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0131bfb8b7803b7448471d1670635199, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1155365638
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1476,18 +1458,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1310945363 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3652439168296416805, guid: 3780471d37f1c84408a99f4170315a0b,
-    type: 3}
-  m_PrefabInstance: {fileID: 7625222057961958997}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0131bfb8b7803b7448471d1670635199, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1346763089
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2156,7 +2126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58cceb20048fa4144b29278cc8fd2e0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemObject: {fileID: 0}
+  itemPrefab: {fileID: 0}
   Preview_ItemObject: {fileID: 0}
   itemData: {fileID: 0}
   playerTransform: {fileID: 959564288}
@@ -2301,6 +2271,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bonfire_01
       objectReference: {fileID: 0}
+    - target: {fileID: 468049451368783353, guid: 3819830f40bf07e4fbead13c17f5488d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2372535634883399584, guid: 3819830f40bf07e4fbead13c17f5488d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2351,39 +2326,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4263999013248488210, guid: 3819830f40bf07e4fbead13c17f5488d,
-        type: 3}
-      propertyPath: itemData
-      value: 
-      objectReference: {fileID: 11400000, guid: 4533f3d5054a5e64dbe6c8ce7f9a9e3a,
-        type: 2}
-    - target: {fileID: 4263999013248488210, guid: 3819830f40bf07e4fbead13c17f5488d,
-        type: 3}
-      propertyPath: TestItem1
-      value: 
-      objectReference: {fileID: 11400000, guid: aa35f9b28ed047b438dec8917faaaac0,
-        type: 2}
-    - target: {fileID: 4263999013248488210, guid: 3819830f40bf07e4fbead13c17f5488d,
-        type: 3}
-      propertyPath: cookingTime
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4263999013248488210, guid: 3819830f40bf07e4fbead13c17f5488d,
-        type: 3}
-      propertyPath: boneFireSlot
-      value: 
-      objectReference: {fileID: 1139466699}
-    - target: {fileID: 4263999013248488210, guid: 3819830f40bf07e4fbead13c17f5488d,
-        type: 3}
-      propertyPath: boneFireSlots
-      value: 
-      objectReference: {fileID: 911550545}
-    - target: {fileID: 4263999013248488210, guid: 3819830f40bf07e4fbead13c17f5488d,
-        type: 3}
-      propertyPath: nextBoneFireSlot
-      value: 
-      objectReference: {fileID: 1310945363}
-    - target: {fileID: 6708287941724693295, guid: 3819830f40bf07e4fbead13c17f5488d,
+    - target: {fileID: 4483168903548086897, guid: 3819830f40bf07e4fbead13c17f5488d,
         type: 3}
       propertyPath: item
       value: 
