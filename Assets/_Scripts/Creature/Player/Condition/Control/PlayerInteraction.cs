@@ -22,6 +22,7 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private LayerMask natureLayer;
     [SerializeField] private LayerMask waterLayer;
+    [SerializeField] private LayerMask GroundLayer;
 
     [Header("Interaction")]
     [HideInInspector] public GameObject currentInteractObject;
@@ -136,6 +137,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (currentInteractable != null)
         {
+            Debug.Log("Test2");
             currentInteractable.OnInteract();
             ClearInteraction();
         }

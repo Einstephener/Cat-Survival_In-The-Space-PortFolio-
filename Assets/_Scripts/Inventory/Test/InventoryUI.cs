@@ -168,6 +168,11 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         }
     }
 
+    public ItemData GetSelectItemData()
+    {
+        return selectSlot.curSlot.itemData;
+    }
+
     #region - 정렬
     public void TrimAll()
     {
