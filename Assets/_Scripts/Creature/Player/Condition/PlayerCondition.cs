@@ -30,6 +30,7 @@ public class PlayerCondition : MonoBehaviour, ISubject
     private PlayerStatus _state;
     [HideInInspector] public PlayerStatusUpdater updater;
     private float _maxValue = 100f;
+    [HideInInspector] public float _basicAttack = 10f;
 
     private void Start()
     {
@@ -74,6 +75,7 @@ public class PlayerCondition : MonoBehaviour, ISubject
 
     #region 플레이어 State 수치 Update
 
+    // 배고픔 변경.
     public void UpdateHunger(float amount)
     {
         _state.Hunger += amount;
@@ -86,6 +88,7 @@ public class PlayerCondition : MonoBehaviour, ISubject
         Notify();
     }
 
+    // 체력 변경.
     public void UpdateHealth(float amount)
     {
         _state.Health += amount;
@@ -98,6 +101,7 @@ public class PlayerCondition : MonoBehaviour, ISubject
         Notify();
     }
 
+    // 목마름 변경.
     public void UpdateThirst(float amount)
     {
         _state.Thirst += amount;
@@ -110,6 +114,7 @@ public class PlayerCondition : MonoBehaviour, ISubject
         Notify();
     }
 
+    // 스테미나 변경.
     public void UpdateStamina(float amount)
     {
         _state.Stamina += amount;
@@ -121,6 +126,15 @@ public class PlayerCondition : MonoBehaviour, ISubject
 
         Notify();
     }
+
+    //// 배고픔 변경.
+    //public void UpdateAttack(float amount)
+    //{
+    //    _state.Attack += amount;
+                
+
+    //    Notify();
+    //}
 
     #endregion
 }

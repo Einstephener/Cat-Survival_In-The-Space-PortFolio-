@@ -13,4 +13,7 @@ public class InstallationItemData : ItemData
 
     [Header("#PreView")]
     public GameObject preViewObject;
+
+    [Header("#InstallationItemObject")]
+    public GameObject InstallationItemPrefab;
 }

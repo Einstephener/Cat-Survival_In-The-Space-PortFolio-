@@ -22,13 +22,15 @@ public class Projectile : Poolable
         }
     }
 
-    public void Init(Transform target, float attackSpeed, float damage)
+    public void Init(Transform target, float damage)
     {
         this._target = target;
-        this._attackSpeed = attackSpeed;
+        this._attackSpeed = 20f;
         this._damage = damage;
 
-        _direction = (_target.position - transform.position).normalized;
+        Vector3 targetFace = _target.position + new Vector3(0, 1.7f, 0);
+
+        _direction = (targetFace - transform.position).normalized;
         _spawnPosition = transform.position;
 
         _rigidbody.velocity = Vector3.zero; // 기존 속도 초기화. 중첩 방지.
@@ -47,7 +49,6 @@ public class Projectile : Poolable
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("hit");
             HitTarget(other.gameObject);
             
         }

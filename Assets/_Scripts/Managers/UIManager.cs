@@ -44,7 +44,7 @@ public class UIManager
     }
 
     #region Fields
-    private GameObject _alreayOpenPopUpUI; // 이미 열려있는 PopUp UI
+    private GameObject _alreayOpenPopUpUI = null; // 이미 열려있는 PopUp UI
 
     #endregion
     public void SetCanvas(GameObject obj, OrderValue sort)
@@ -76,9 +76,9 @@ public class UIManager
         if (string.IsNullOrEmpty(name))
             name = typeof(T).Name;
 
-        GameObject go = new GameObject();
+        //GameObject go = new GameObject();
 
-        //GameObject go = Main.Resource.Instantiate($"Prefabs/{name}"); // 임시. 폴더 로드 필요.
+        GameObject go = Main.Resource.Instantiate(name); // 임시. 폴더 로드 필요.
 
         if (!go.TryGetComponent(out T sceneUI))
         {
@@ -101,35 +101,32 @@ public class UIManager
 
 
     // UI_Popup 자식들만 가능
-    public T ShowPopupUI<T>(string name = null) where T : UI_Popup
+    public void ShowPopupUI<T>(string name = null)
     {
-        if (string.IsNullOrEmpty(name)) // 이름을 안받았다면 T로 ㄱㄱ
+        if (string.IsNullOrEmpty(name)) {
+            // 이름을 안받았다면 T로
             name = typeof(T).Name;
+        }
 
-        if (_alreayOpenPopUpUI = null)
+        if (_alreayOpenPopUpUI == null)
         {
-            GameObject go = new GameObject();
-
-            if (!go.TryGetComponent(out T popup))
-            {
-                // 오브젝트에 Canvas 컴포넌트 유무 확인, 확인 후 없으면 추가해줌.
-                popup = go.AddComponent<T>();
-            }
+            //GameObject go = Main.Resource.Instantiate($"UI/Popup/{name}"); // resource manager 수정 필요.
+            GameObject go = Main.Resource.Instantiate(name); // 임시.
+            go.SetActive(true);
 
             _alreayOpenPopUpUI = go;
 
             go.transform.SetParent(Root.transform);
 
             Time.timeScale = 0.0f;
-
-            return popup;
         }
         else
         {
             // 이미 열려있는 팝업이 있는 경우, 팝업 요청 무시.
-            return null;
+            ClosePopupUI(_alreayOpenPopUpUI);
+            //ShowPopupUI<T>(name);
         }
-        //GameObject go = Main.Resource.Instantiate($"UI/Popup/{name}");
+
     }
 
     public void ClosePopupUI(GameObject obj)

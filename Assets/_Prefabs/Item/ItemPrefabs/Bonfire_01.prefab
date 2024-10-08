@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7167457149419449080}
   - component: {fileID: 8796477872950864567}
   - component: {fileID: 4483168903548086897}
-  - component: {fileID: 3107800841197938429}
+  - component: {fileID: 4486389736995075063}
   m_Layer: 6
   m_Name: Bonfire_01
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -149,18 +149,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 4533f3d5054a5e64dbe6c8ce7f9a9e3a, type: 2}
-  item: {fileID: 3107800841197938429}
---- !u!114 &3107800841197938429
+  item: {fileID: 0}
+--- !u!114 &4486389736995075063
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 468049451368783353}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef96dcaa99d802643b1bd03065ab3bcb, type: 3}
+  m_Script: {fileID: 11500000, guid: 77dd376a3fb4a694b9572f2a4b7f02fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 4533f3d5054a5e64dbe6c8ce7f9a9e3a, type: 2}
   isInstallation: 0
+  boneFireSlots: {fileID: 0}
+  boneFireSlot: {fileID: 0}
+  nextBoneFireSlot: {fileID: 0}
+  cookingTime: 5
+  timer: 0
+  TestItem1: {fileID: 0}

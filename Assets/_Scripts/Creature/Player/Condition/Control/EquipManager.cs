@@ -9,10 +9,16 @@ public class EquipManager : MonoBehaviour
 {
     public Equip curEquip;
     public Transform equipParent;
+    [SerializeField] private ItemData _itemData;
 
     private PlayerInputController controller;
     private PlayerCondition condition;
 
+    private void Awake()
+    {
+        controller = GetComponent<PlayerInputController>();
+        condition = GetComponent<PlayerCondition>();
+    }
 
     private void Start()
     {
@@ -28,11 +34,12 @@ public class EquipManager : MonoBehaviour
         }
     }
 
-    public void EquipNew(ItemData item) // 인벤토리에서 슬롯을 누를 때 동작하도록 해야 함
+    public void EquipNew(ItemData itemData) // 인벤토리에서 슬롯을 누를 때 동작하도록 해야 함
     {
         UnEquip();
+        _itemData = itemData;
         //SO 수정사항 - 장착하는 아이템 관련(애니메이션도 필요함 :( )
-        curEquip = Instantiate(item.EquipPrefab, equipParent).GetComponent<Equip>();
+        curEquip = Instantiate(_itemData.EquipPrefab, equipParent).GetComponent<Equip>();
     }
 
     public void UnEquip()
@@ -41,6 +48,7 @@ public class EquipManager : MonoBehaviour
         {
             Destroy(curEquip.gameObject);
             curEquip = null;
+            _itemData = null;
         }
     }
 }

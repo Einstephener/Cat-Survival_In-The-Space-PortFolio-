@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b6b54e5c8dbec3498ccb281fd507a70, type: 3}
   m_Name: RangedEnemy
   m_EditorClassIdentifier: 
-  name: Ranged
+  enemyName: 
   attackType: 1
   projectilePrefab: {fileID: 5518298659372828043, guid: 1331ec86057647043b42cd9f6162fb59,
     type: 3}
@@ -20,8 +20,6 @@ MonoBehaviour:
   maxHp: 150
   damage: 7
   addSpeed: 0
-  attackSpeed: 10
-  attackCooldown: 1.5
   sightRange: 10
   exitBuffer: 3
   attackRange: 5
