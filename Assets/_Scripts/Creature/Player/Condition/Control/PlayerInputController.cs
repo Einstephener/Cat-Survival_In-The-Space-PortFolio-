@@ -24,7 +24,7 @@ public class PlayerInputController : MonoBehaviour
 
     [HideInInspector] public ItemData currentItem;
 
-    [Header ("SpeedValue")]
+    [Header("SpeedValue")]
     [SerializeField] private float _currentSpeed;
     private float _walkSpeed = 3.0f;
     private float _runSpeed = 10.0f;
@@ -47,6 +47,7 @@ public class PlayerInputController : MonoBehaviour
 
     [Header("#UI")]
     public GameObject inventoryUIDiplay;
+    [HideInInspector] public bool IsFist = true;
 
     private PlayerInteraction _playerInteraction;
     #endregion
@@ -88,15 +89,15 @@ public class PlayerInputController : MonoBehaviour
             Quaternion.identity, _groundDistance, _groundCheckLayer);
 
         // 애니메이션
-        if (_playerAnimator.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.7f)
+        if (_playerAnimator.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.95f)
         {
             if (_animationWeightValue >= 0)
             {
-                _animationWeightValue -= Time.deltaTime;
+                _animationWeightValue -= 2 * Time.deltaTime;
             }
             _playerAnimator.SetLayerWeight(1, _animationWeightValue);
         }
-        
+
     }
 
 
@@ -114,7 +115,7 @@ public class PlayerInputController : MonoBehaviour
         _isRun = value.isPressed;
 
         // 달리기(스테미나 사용) 이벤트 호출.
-        OnRunStateChanged?.Invoke(value.isPressed); 
+        OnRunStateChanged?.Invoke(value.isPressed);
 
         if (_isMoving)
         {
@@ -162,11 +163,18 @@ public class PlayerInputController : MonoBehaviour
     {
         Debug.Log("OnFire" + value.ToString());
         _animationWeightValue = 1f;
-        _playerAnimator.SetTrigger("IsAttack");
+
+        // 공격시 스테미나 감소.
+        GetComponent<PlayerCondition>().UpdateStamina(-10);
+
 
         //TODO 현재 들고 있는 도구에 따라 다른 작용.
+        // 도구에 따른 공격 모션 변경
+        IsFist = true;
+        _playerAnimator.SetBool("IsPunch", IsFist);
+        _playerAnimator.SetTrigger("IsAttack");
 
-        GetComponent<PlayerCondition>().UpdateStamina(-10);
+        float attack = GetComponent<PlayerCondition>()._basicAttack;
 
         if (_playerInteraction.enemyObject != null)
         {
@@ -174,17 +182,13 @@ public class PlayerInputController : MonoBehaviour
             {
                 //enemy.DamagedByPlayer(10f);
             }
-            else if (_playerInteraction.enemyObject.TryGetComponent<Catcher>(out Catcher catcher))
-            {
-                //catcher.DamagedByPlayer(10f);
-            }
             else
             {
                 Debug.Log("Non-Enemy");
             }
         }
 
-        if(_playerInteraction.natureObject != null)
+        if (_playerInteraction.natureObject != null)
         {
             if (_playerInteraction.natureObject.TryGetComponent<CollectMatertial>(out CollectMatertial collectMatertial))
             {
@@ -197,13 +201,13 @@ public class PlayerInputController : MonoBehaviour
     {
         Debug.Log("OnInteract" + value.ToString());
 
-        if(_playerInteraction.currentInteractObject != null) //Todo : (박기혁) 코드 개판인거... 수정해야함... 일단 땜빵 코드...
+        if (_playerInteraction.currentInteractObject != null) //Todo : (박기혁) 코드 개판인거... 수정해야함... 일단 땜빵 코드...
         {
-            if(_playerInteraction.currentInteractObject.TryGetComponent<IInteractable>(out IInteractable interactable))
+            if (_playerInteraction.currentInteractObject.TryGetComponent<IInteractable>(out IInteractable interactable))
             {
 
             }
-            else if(_playerInteraction.currentInteractObject.TryGetComponent<Water>(out Water water))
+            else if (_playerInteraction.currentInteractObject.TryGetComponent<Water>(out Water water))
             {
                 GetComponent<PlayerCondition>().UpdateThirst(100);
             }
@@ -301,4 +305,15 @@ public class PlayerInputController : MonoBehaviour
             Main.Inventory.inventoryUI.AdjustParentHeight();
         }
     }
+
+    private void OnUI_Map()
+    {
+        Main.UI.ShowPopupUI<UI_Map>("UI_Map");
+    }
+
+    private void OnUI_Tablet()
+    {
+        Main.UI.ShowPopupUI<UI_Tablet>("UI_CraftingTabletUI");
+    }
+
 }

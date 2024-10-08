@@ -9,8 +9,10 @@ public class TestScene : BaseScene
     {
         if (!base.Initialize()) return false;
 
-        Main.UI.ShowSceneUI<UI_Scene>("UI_MainSceneUI");
 
+        //Scene에 필요한 오브젝트들 소환.
+        Main.Resource.Initialize();
+        //Main.Resource.Instantiate("UI_MainScene");
 
         return true;
     }
