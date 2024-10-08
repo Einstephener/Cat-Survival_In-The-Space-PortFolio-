@@ -26,7 +26,6 @@ public class EnemyAttackState : IEnemyState
         }
         else
         {
-            enemy.OnAttack();
             enemy.aiPath.canMove = false;
             enemy.animator.SetTrigger("OnAttack");
         }

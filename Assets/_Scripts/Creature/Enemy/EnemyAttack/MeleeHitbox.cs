@@ -13,11 +13,6 @@ public class MeleeHitbox : MonoBehaviour
         _collider = GetComponent<Collider>();
     }
 
-    private void Update()
-    {
-        
-    }
-
     // 공격 시 이 메서드를 호출하여 히트박스를 활성화.
     public void Activate(float damage)
     {
