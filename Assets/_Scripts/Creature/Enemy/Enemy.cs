@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     #region Field
     [SerializeField] private Transform _projectileSpawnPoint;
     [SerializeField] private GameObject _melee;
-    [SerializeField] private float HP;
+    [SerializeField] private float HP; // 추후 삭제.
 
     private MeleeHitbox _meleeHitbox;
 
@@ -27,9 +27,6 @@ public class Enemy : MonoBehaviour
     protected float _currentSightRange;
     protected float _currentHp;
 
-    private float _attackCooldown;
-    private float _lastAttackTime;
-
     #endregion
 
     protected virtual void Awake()
@@ -42,7 +39,6 @@ public class Enemy : MonoBehaviour
     protected virtual void Start()
     {
         _basePosition = transform.position;
-        _attackCooldown = _enemyData.attackCooldown;
 
         if (_enemyData.attackType == IAttackType.Melee || _enemyData.attackType == IAttackType.Both)
         {
@@ -57,7 +53,15 @@ public class Enemy : MonoBehaviour
     {
         UpdateState();
 
-        HP = _currentHp;
+        if (_playerTransform != null && _currentState is EnemyAttackState) 
+        {
+            Vector3 direction = _playerTransform.position - transform.position;
+            direction.y = 0;
+            Quaternion quaternion = Quaternion.LookRotation(direction);
+            transform.rotation = quaternion;
+        }
+
+        HP = _currentHp; // 추후 삭제.
     }
 
     protected void Init(EnemyData enemyData)
@@ -67,34 +71,19 @@ public class Enemy : MonoBehaviour
         _currentHp = _enemyData.maxHp;
     }
 
-    public void SetSpeed(float speed)
+    // 애니메이션 이벤트.
+    protected virtual void OnAttack()
     {
-        if (aiPath != null)
+        if (_enemyData.attackType == IAttackType.Melee || _enemyData.attackType == IAttackType.Both)
         {
-            aiPath.maxSpeed = speed;  // AIPath의 최대 속도 설정.
+            MeleeAttack();
+        }
+        else if (_enemyData.attackType == IAttackType.Ranged || _enemyData.attackType == IAttackType.Both)
+        {
+            FireProjectile();
         }
     }
 
-    public virtual void OnAttack()
-    {
-        if (Time.time >= _lastAttackTime + _attackCooldown) // 쿨타임 체크.
-        {
-            if (_enemyData.attackType == IAttackType.Melee)
-            {
-                MeleeAttack();
-            }
-            else if (_enemyData.attackType == IAttackType.Ranged)
-            {
-                RangedAttack();
-            }
-            else if (_enemyData.attackType == IAttackType.Both)
-            {
-                MeleeAttack();
-                RangedAttack();
-            }
-            _lastAttackTime = Time.time; // 마지막 공격 시간 업데이트.
-        }
-    }
     protected virtual void MeleeAttack()
     {
         if (Vector3.Distance(transform.position, _playerTransform.position) <= _enemyData.attackRange)
@@ -102,25 +91,17 @@ public class Enemy : MonoBehaviour
             if (_meleeHitbox != null)
             {
                 _meleeHitbox.Activate(_enemyData.damage);
-
-                // 공격 시간이 지난 후 히트박스 비활성화
-                StartCoroutine(DisableMeleeHitboxAfterAttack());
             }
         }
     }
 
-    private IEnumerator DisableMeleeHitboxAfterAttack()
+    // 애니메이션 이벤트 : 공격 시간이 지난 후 히트박스 비활성화.
+    protected virtual void MeleeHitboxDeactivate()
     {
-        yield return new WaitForSecondsRealtime(_enemyData.attackSpeed);
         if (_meleeHitbox != null)
         {
             _meleeHitbox.Deactivate();
         }
-    }
-
-    protected virtual void RangedAttack()
-    {
-        FireProjectile();
     }
 
     protected virtual void FireProjectile()
@@ -130,7 +111,15 @@ public class Enemy : MonoBehaviour
 
         // 투사체의 위치와 방향 설정.
         projectile.transform.position = _projectileSpawnPoint.position;
-        projectile.Init(_playerTransform, _enemyData.attackSpeed, _enemyData.damage); // 투사체 초기화.
+        projectile.Init(_playerTransform, _enemyData.damage); // 투사체 초기화.
+    }
+
+    public void SetSpeed(float speed)
+    {
+        if (aiPath != null)
+        {
+            aiPath.maxSpeed = speed;  // AIPath의 최대 속도 설정.
+        }
     }
 
     // 플레이어가 시야에 있는지 체크 후 타겟 설정.
@@ -152,6 +141,7 @@ public class Enemy : MonoBehaviour
             return true;
         }
 
+        // TODO : 플레이어가 죽었다면 타겟이 되지 않도록 처리.
         _currentSightRange = _enemyData.sightRange;
         return false;
     }
@@ -200,7 +190,7 @@ public class Enemy : MonoBehaviour
 
     public virtual void GetReward()
     {
-        
+        // 기본 보상.
     }
 
     public virtual bool IsDead()

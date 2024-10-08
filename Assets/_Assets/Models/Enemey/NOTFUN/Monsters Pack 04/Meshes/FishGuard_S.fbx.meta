@@ -110,7 +110,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 153
     - serializedVersion: 16
       name: AttackRight_FishGuard_S
       takeName: AttackRight_FishGuard_S
@@ -135,11 +135,19 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.36101088
+        functionName: OnAttack
+        data: 
+        objectReferenceParameter: {fileID: 265478299795778748, guid: 3148f0bf2b68fef4d88ba748fb6e9b7a,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 189
     - serializedVersion: 16
       name: Death_FishGuard_S
       takeName: Death_FishGuard_S
