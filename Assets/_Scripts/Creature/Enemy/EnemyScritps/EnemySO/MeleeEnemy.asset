@@ -22,4 +22,4 @@ MonoBehaviour:
   addSpeed: 0
   sightRange: 5
   exitBuffer: 3
-  attackRange: 1.5
+  attackRange: 3
