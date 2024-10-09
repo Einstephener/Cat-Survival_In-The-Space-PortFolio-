@@ -74,6 +74,7 @@ public class Enemy : MonoBehaviour
     // 애니메이션 이벤트.
     protected virtual void OnAttack()
     {
+
         if (_enemyData.attackType == IAttackType.Melee || _enemyData.attackType == IAttackType.Both)
         {
             MeleeAttack();
@@ -96,8 +97,11 @@ public class Enemy : MonoBehaviour
     }
 
     // 애니메이션 이벤트 : 공격 시간이 지난 후 히트박스 비활성화.
-    protected virtual void MeleeHitboxDeactivate()
+    protected virtual void EndEnemyAttack()
     {
+        //aiPath.canMove = true;
+        //Debug.Log("canMove = true");
+
         if (_meleeHitbox != null)
         {
             _meleeHitbox.Deactivate();
@@ -135,7 +139,7 @@ public class Enemy : MonoBehaviour
             // 첫 번째로 감지된 플레이어를 대상으로 설정.
             _playerTransform = sight[0].transform;
             _target.target = _playerTransform;
-            aiPath.canMove = true;
+            //aiPath.canMove = true;
             Debug.Log("플레이어 감지");
 
             return true;
@@ -197,11 +201,22 @@ public class Enemy : MonoBehaviour
     {
         if(_currentHp <= 0)
         {
-            Debug.Log("죽음");
+            _target.target = null;
             return true;
         }
         else return false;
     }
+
+    public virtual void EnemyMoveFalse()
+    {
+        aiPath.canMove = false;
+    }
+    public virtual void EnemyMoveTrue()
+    {
+        aiPath.canMove = true;
+    }
+
+
 
     #region Gizmos
     protected virtual void OnDrawGizmosSelected()

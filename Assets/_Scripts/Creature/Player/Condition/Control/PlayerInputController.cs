@@ -180,7 +180,7 @@ public class PlayerInputController : MonoBehaviour
         {
             if (_playerInteraction.enemyObject.TryGetComponent<Enemy>(out Enemy enemy))
             {
-                //enemy.DamagedByPlayer(10f);
+                enemy.OnHit(attack);
             }
             else
             {

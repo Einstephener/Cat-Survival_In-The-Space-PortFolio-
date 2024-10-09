@@ -8,7 +8,7 @@ public class EnemyHitState : IEnemyState
     {
         Debug.Log("아야");
         enemy.animator.SetTrigger("OnHit");
-        enemy.OnHit(10f); // TODO : 플레이어 데미지.
+        //enemy.OnHit(10f); // TODO : 플레이어 데미지.
     }
 
     public void UpdateState(Enemy enemy)
