@@ -46,6 +46,8 @@ public class UIManager
     #region Fields
     private GameObject _alreayOpenPopUpUI = null; // 이미 열려있는 PopUp UI
 
+    [HideInInspector] public  Dictionary<string, GameObject> _uiPopUpDictionary = new Dictionary<string, GameObject>(); // 팝업 UI 관리
+
     #endregion
     public void SetCanvas(GameObject obj, OrderValue sort)
     {
@@ -101,32 +103,35 @@ public class UIManager
 
 
     // UI_Popup 자식들만 가능
-    public void ShowPopupUI<T>(string name = null)
+    public void ShowPopupUI<T>(string name = null) where T : UI_Popup
     {
-        if (string.IsNullOrEmpty(name)) {
-            // 이름을 안받았다면 T로
+        if (string.IsNullOrEmpty(name))
+        {
             name = typeof(T).Name;
         }
 
-        if (_alreayOpenPopUpUI == null)
+        // 이미 열려 있는 팝업이 있는 경우 비활성화
+        if (_alreayOpenPopUpUI != null)
         {
-            //GameObject go = Main.Resource.Instantiate($"UI/Popup/{name}"); // resource manager 수정 필요.
-            GameObject go = Main.Resource.Instantiate(name); // 임시.
-            go.SetActive(true);
-
-            _alreayOpenPopUpUI = go;
-
-            go.transform.SetParent(Root.transform);
-
-            Time.timeScale = 0.0f;
+            ClosePopupUI(_alreayOpenPopUpUI);
         }
         else
         {
-            // 이미 열려있는 팝업이 있는 경우, 팝업 요청 무시.
-            ClosePopupUI(_alreayOpenPopUpUI);
-            //ShowPopupUI<T>(name);
-        }
+            // 팝업이 이미 생성되어 있는지 확인
+            if (!_uiPopUpDictionary.TryGetValue(name, out GameObject popup))
+            {
+                // 팝업이 생성되지 않았으면 새로 생성
+                popup = Main.Resource.Instantiate(name); // 임시. 리소스 매니저 필요
+                popup.transform.SetParent(Root.transform);
+                _uiPopUpDictionary[name] = popup; // 딕셔너리에 저장
+            }
 
+            // 팝업 활성화
+            popup.SetActive(true);
+            _alreayOpenPopUpUI = popup;
+
+            Time.timeScale = 0.0f; // 팝업이 열리면 시간 멈춤
+        }
     }
 
     public void ClosePopupUI(GameObject obj)
@@ -137,8 +142,9 @@ public class UIManager
         {
             obj.SetActive(false);
         }
-        _alreayOpenPopUpUI = null;        
+        _alreayOpenPopUpUI = null;
     }
+
 
 
     #region Setting PopUp UI

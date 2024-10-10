@@ -12,10 +12,20 @@ public class MainScene : BaseScene
         if (!base.Initialize()) return false;
 
         Main.Resource.Initialize();
-        Main.Resource.Instantiate("UI_MainScene");
 
-
+        // Simplify showing and closing popup UIs with a helper method
+        InitPopupUI<UI_Map>("UI_Map");
+        InitPopupUI<UI_Tablet>("UI_CraftingTabletUI");
 
         return true;
+    }
+
+    private void InitPopupUI<T>(string uiName) where T : UI_Popup
+    {
+        Main.UI.ShowPopupUI<T>(uiName);
+        if (Main.UI._uiPopUpDictionary.TryGetValue(uiName, out GameObject popup))
+        {
+            Main.UI.ClosePopupUI(popup);
+        }
     }
 }
