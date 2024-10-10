@@ -45,6 +45,7 @@ public class UIManager
 
     #region Fields
     private GameObject _alreayOpenPopUpUI = null; // 이미 열려있는 PopUp UI
+    [HideInInspector] public GameObject GameSceneUI; // 열려있는  Scene UI
 
     [HideInInspector] public  Dictionary<string, GameObject> _uiPopUpDictionary = new Dictionary<string, GameObject>(); // 팝업 UI 관리
 
@@ -75,12 +76,14 @@ public class UIManager
     //UI_Scene 자식들만 가능
     public T ShowSceneUI<T>(string name = null) where T : UI_Scene
     {
+        Debug.Log("UIManager");
         if (string.IsNullOrEmpty(name))
             name = typeof(T).Name;
 
         //GameObject go = new GameObject();
 
         GameObject go = Main.Resource.Instantiate(name); // 임시. 폴더 로드 필요.
+        GameSceneUI = go;
 
         if (!go.TryGetComponent(out T sceneUI))
         {
