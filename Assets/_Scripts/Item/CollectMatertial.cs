@@ -41,10 +41,10 @@ public class CollectMatertial : MonoBehaviour
             Instantiate(MaterialPrefab,transform.position + plusPosition, Quaternion.identity);
 
             curCount--;
-
+            Debug.Log(curCount);
             if(curCount == 0)
             {
-                Destroy(this);
+                Destroy(this.gameObject);
             }
         }
     }
