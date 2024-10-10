@@ -12,7 +12,7 @@ public class MainScene : BaseScene
         if (!base.Initialize()) return false;
 
         Main.Resource.Initialize();
-        Main.Resource.Instantiate("UI_MainScene");
+        //Main.Resource.Instantiate("UI_MainScene");
 
 
 

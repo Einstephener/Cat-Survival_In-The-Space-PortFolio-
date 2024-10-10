@@ -9,8 +9,8 @@ public class BoneFire : Installation
 {
     public GameObject boneFireSlots;
 
-    //public SlotData boneFireSlotData;
-    //public SlotData nextBoneFireSlotData;
+    public SlotData boneFireSlotData;
+    public SlotData nextBoneFireSlotData;
 
     public InventorySlot boneFireSlot;
     public InventorySlot nextBoneFireSlot;
@@ -28,11 +28,20 @@ public class BoneFire : Installation
 
     private void Initialize()
     {
-        boneFireSlot.curSlot = new SlotData();
-        nextBoneFireSlot.curSlot = new SlotData();
+        if (boneFireSlotData == null && nextBoneFireSlotData == null) // SlotData 생성
+        {
+            boneFireSlotData = new SlotData();
+            nextBoneFireSlotData = new SlotData();
+        }
+        
 
+        boneFireSlot = Main.Inventory.inventoryUI.boneFireSlots[0];
+        nextBoneFireSlot = Main.Inventory.inventoryUI.boneFireSlots[1];
+        //Main.Inventory.inventoryUI.boneFireSlots[0] = boneFireSlot;
+        //Main.Inventory.inventoryUI.boneFireSlots[1] = nextBoneFireSlot;
+
+        Main.Inventory.inventoryUI.BoneFireSlotsGet(boneFireSlot.curSlot, nextBoneFireSlot.curSlot);
         BoneFireUpdateUI();
-        //Test_Initialize();
     }
 
     #region Test
@@ -89,6 +98,7 @@ public class BoneFire : Installation
     public override void UIInterac()
     {
         base .UIInterac();
+
         UISet();
         Main.Inventory.inventoryUI.AdjustParentHeight();
     }
@@ -102,14 +112,14 @@ public class BoneFire : Installation
     #region UI
     private void UpdateSlotUI(InventorySlot slot)
     {
-        if (!slot.curSlot.IsEmpty())
+        if (!slot.curSlot.IsEmpty()) //에러
         {
-            //Debug.Log("UpdateSlotUI");
+            Debug.Log("UpdateSlotUI");
             slot.SetSlot(slot.curSlot);
         }
         else
         {
-            //Debug.Log("UpdateSlotUI");
+            Debug.Log("UpdateSlotUI");
             slot.ClearSlot();
         }
     }
@@ -127,6 +137,8 @@ public class BoneFire : Installation
         Main.Inventory.inventoryUI.gameObject.SetActive(true);
 
         Main.Inventory.inventoryUI.boneFireObject.SetActive(true);
+
+        
     }
 
     public void UIRemove()
@@ -230,7 +242,7 @@ public class BoneFire : Installation
         // 두 데이터가 같아야 함
 
         // 들어가는 ItemData의 PotionItemData의 CookingItemData가 필요
-        if (boneFireSlot.curSlot != null && !boneFireSlot.curSlot.IsEmpty())
+        if (boneFireSlot.curSlot != null) //에러
         {
             PotionItemData boneFirePotionData = boneFireSlot.curSlot.itemData as PotionItemData; // 들어가는 Item
             ItemData nextPotionData = nextBoneFireSlot?.curSlot?.itemData; // 나가는 Item (null 가능성 처리)

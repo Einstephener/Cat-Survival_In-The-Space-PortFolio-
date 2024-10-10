@@ -105,6 +105,7 @@ public class InventorySlot : SlotBase, IPointerEnterHandler, IPointerExitHandler
     {
         if (curSlot.itemData != null)
         {
+            Debug.Log("OnDeginDrag");
             DragSlot _dragSlot = Main.Inventory.inventoryUI.dragSlot;
             _dragSlot.SetDragSlot(this);
             _dragSlot.transform.position = eventData.position;
@@ -121,6 +122,8 @@ public class InventorySlot : SlotBase, IPointerEnterHandler, IPointerExitHandler
     {
         if (curSlot.itemData != null)
         {
+            Debug.Log("OnDrag");
+
             Main.Inventory.inventoryUI.dragSlot.transform.position = eventData.position;
         }
         else
@@ -135,6 +138,8 @@ public class InventorySlot : SlotBase, IPointerEnterHandler, IPointerExitHandler
         //Debug.Log($"End Drap");
         if (Main.Inventory.inventoryUI.dragSlot.thisSlot != null)
         {
+            Debug.Log("OnEndDrag");
+
             Main.Inventory.inventoryUI.dragSlot.RemoveDragSlot();
         }
         else
@@ -148,6 +153,7 @@ public class InventorySlot : SlotBase, IPointerEnterHandler, IPointerExitHandler
     public void OnDrop(PointerEventData eventData)
     {
         //Debug.Log($"OnDrop");
+        Debug.Log("OnDrop");
 
         if (Main.Inventory.inventoryUI.dragSlot.thisSlot != null)
         {

@@ -294,13 +294,13 @@ public class PlayerInputController : MonoBehaviour
         //Debug.Log("OnUI_Inventory");
         if (!inventoryUIDiplay.activeInHierarchy)
         {
-            inventoryUIDiplay.SetActive(true);
+            inventoryUIDiplay.gameObject.SetActive(true);
             Main.Inventory.inventoryUI.boneFireObject.SetActive(false);
             Main.Inventory.inventoryUI.AdjustParentHeight();
         }
         else
         {
-            inventoryUIDiplay.SetActive(false);
+            inventoryUIDiplay.gameObject.SetActive(false);
             Main.Inventory.inventoryUI.boneFireObject.SetActive(false);
             Main.Inventory.inventoryUI.AdjustParentHeight();
         }

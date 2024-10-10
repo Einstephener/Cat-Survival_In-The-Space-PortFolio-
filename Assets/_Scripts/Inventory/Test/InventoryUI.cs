@@ -54,8 +54,10 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         //Main.Inventory.RemoveItem(testItemData2, 5);
         AdjustParentHeight();
         equipManager = FindObjectOfType<EquipManager>();
-        //this.gameObject.SetActive(false);
+        BoneFireUpdateUI();
         SelectSlot(0);
+
+        this.gameObject.SetActive(false);
     }
 
     #region QuickSlot
@@ -169,7 +171,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         }
     }
 
-    public ItemData GetSelectItemData()
+    public ItemData GetSelectItemData() //계속 디버깅 찍힘
     {
         if (selectSlot.curSlot.itemData != null)
         {
@@ -256,24 +258,34 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 
     #region boneFire
 
-    private void UpdateSlotUI(InventorySlot slot)
+    public void BoneFireUpdateUI()
     {
-        if (!slot.curSlot.IsEmpty())
+        for (int i = 0; i < boneFireSlots.Length; i++)
         {
-            //Debug.Log("UpdateSlotUI");
-            slot.SetSlot(slot.curSlot);
-        }
-        else
-        {
-            //Debug.Log("UpdateSlotUI");
-            slot.ClearSlot();
+            if (boneFireSlots[i].curSlot == null)
+            {
+                Debug.Log("new SlotData - BoneFireSlots");
+                boneFireSlots[i].curSlot = new SlotData();
+            }
+
+            if (boneFireSlots[i].curSlot.itemData != null)
+            {
+                boneFireSlots[i].SetSlot(boneFireSlots[i].curSlot);
+            }
+            else
+            {
+                boneFireSlots[i].ClearSlot();
+            }
         }
     }
 
-    public void BoneFireUpdateUI()
+    public void BoneFireSlotsGet(SlotData boneFireSlotData, SlotData nextBoneFireSlotData) // 연결하는 함수 
     {
-        UpdateSlotUI(boneFireSlots[0]);
-        UpdateSlotUI(boneFireSlots[1]);
+        // 모닥불의 데이터 불러오기 ㄱㄱ
+        boneFireSlots[0].curSlot = boneFireSlotData;
+        boneFireSlots[1].curSlot = nextBoneFireSlotData;
+
+        BoneFireUpdateUI();
     }
     #endregion
 
