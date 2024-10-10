@@ -29,7 +29,7 @@ public class PlayerCondition : MonoBehaviour, ISubject
     private List<IObserver> _observers = new List<IObserver>();
     private PlayerStatus _state;
     [HideInInspector] public PlayerStatusUpdater updater;
-    private float _maxValue = 100f;
+    private float _maxValue = 10000f;
     [HideInInspector] public float _basicAttack = 10f;
 
     private void Start()
