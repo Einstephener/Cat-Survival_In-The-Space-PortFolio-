@@ -26,7 +26,7 @@ public class BoneFire : Installation
         Initialize();
     }
 
-    private void Initialize()
+    private void Initialize() // 에러 (수정해야 할 함수임 - InventorySlot - > SlotData 로 변경해서 해야 함)
     {
         if (boneFireSlotData == null && nextBoneFireSlotData == null) // SlotData 생성
         {
