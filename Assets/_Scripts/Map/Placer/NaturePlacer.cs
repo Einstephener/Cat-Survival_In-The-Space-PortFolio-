@@ -10,10 +10,19 @@ public class NaturePlacer : MonoBehaviour
     public LayerMask noNatureLayer;
 
     private List<Vector3> placedNaturePositions = new List<Vector3>();
+    private GameObject natureParent; // Nature 빈 오브젝트
 
     void Start()
     {
+        CreateNatureParent();
         PlaceNatures();
+    }
+
+    void CreateNatureParent()
+    {
+        // "Nature"라는 이름의 빈 오브젝트 생성
+        natureParent = new GameObject("Nature");
+        natureParent.transform.parent = this.transform;
     }
 
     void PlaceNatures()
@@ -39,7 +48,8 @@ public class NaturePlacer : MonoBehaviour
                 GameObject selectedTreePrefab = naturePrefabs[Random.Range(0, naturePrefabs.Length)];
 
                 GameObject treeInstance = Instantiate(selectedTreePrefab, newTreePosition, Quaternion.identity);
-                treeInstance.transform.parent = terrain.transform; // Terrain의 자식으로 설정
+
+                treeInstance.transform.parent = natureParent.transform;
 
                 // 배치된 나무 위치 저장
                 placedNaturePositions.Add(newTreePosition);
