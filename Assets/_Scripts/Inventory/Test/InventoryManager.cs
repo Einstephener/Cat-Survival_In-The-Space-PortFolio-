@@ -28,18 +28,9 @@ public class InventoryManager
     /// 셀 수 있는 아이템인지 여부
     /// </summary>
     #endregion
-    //int : 슬롯 인덱스, InventorySlot : itemdata, 갯수
-    //public Dictionary<int, InventorySlot> dicSlots = new();
     public SlotData[] slotsData = new SlotData[23];
     public InventoryUI inventoryUI;
 
-    
-
-
-    //public void Start()
-    //{
-    //    Initialize();
-    //}
     public void Initialize()
     {
         Debug.Log("InventoryManager Initialize");

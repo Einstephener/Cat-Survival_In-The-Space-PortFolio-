@@ -54,7 +54,8 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         //Main.Inventory.RemoveItem(testItemData2, 5);
         AdjustParentHeight();
         equipManager = FindObjectOfType<EquipManager>();
-        this.gameObject.SetActive(false);
+        //this.gameObject.SetActive(false);
+        SelectSlot(0);
     }
 
     #region QuickSlot
@@ -170,7 +171,16 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 
     public ItemData GetSelectItemData()
     {
-        return selectSlot.curSlot.itemData;
+        if (selectSlot.curSlot.itemData != null)
+        {
+            Debug.Log($"{selectSlot.curSlot.itemData}");
+            return selectSlot.curSlot.itemData;
+        }
+        else
+        {
+            Debug.Log($"{selectSlot.curSlot.itemData}");
+            return null;
+        }
     }
 
     #region - 정렬

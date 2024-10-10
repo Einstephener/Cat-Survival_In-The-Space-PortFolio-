@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEngine;
 
 public class MainScene : BaseScene
@@ -12,10 +13,23 @@ public class MainScene : BaseScene
         if (!base.Initialize()) return false;
 
         Main.Resource.Initialize();
-        Main.Resource.Instantiate("UI_MainScene");
 
+        //Main.UI.ShowSceneUI<UI_Scene>("UI_MainScene");
+        //InitPopupUI<InventoryUI>("Inventory");
+        //Main.UI._uiPopUpDictionary.TryGetValue("Inventory", out GameObject inventory);
 
+        InitPopupUI<UI_Map>("UI_Map");
+        InitPopupUI<UI_Tablet>("UI_CraftingTabletUI");
 
         return true;
+    }
+
+    private void InitPopupUI<T>(string uiName) where T : UI_Popup
+    {
+        Main.UI.ShowPopupUI<T>(uiName);
+        if (Main.UI._uiPopUpDictionary.TryGetValue(uiName, out GameObject popup))
+        {
+            Main.UI.ClosePopupUI(popup);
+        }
     }
 }

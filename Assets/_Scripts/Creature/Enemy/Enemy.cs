@@ -201,7 +201,7 @@ public class Enemy : MonoBehaviour
     {
         if(_currentHp <= 0)
         {
-            Debug.Log("죽음");
+            _target.target = null;
             return true;
         }
         else return false;
