@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3183305258839737402
+--- !u!1 &2858682431108489388
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5952474727868569345}
-  - component: {fileID: 8812523464196533835}
-  - component: {fileID: 5434126520460872415}
+  - component: {fileID: 6420510155275842455}
+  - component: {fileID: 8200233192479984349}
+  - component: {fileID: 4677180100477726281}
   m_Layer: 0
   m_Name: default
   m_TagString: Untagged
@@ -18,36 +18,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5952474727868569345
+--- !u!4 &6420510155275842455
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3183305258839737402}
+  m_GameObject: {fileID: 2858682431108489388}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6551404886499894873}
+  m_Father: {fileID: 5866518828024595151}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &8812523464196533835
+--- !u!33 &8200233192479984349
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3183305258839737402}
-  m_Mesh: {fileID: -2432090755550338912, guid: 1acb7f2b8e5c8ef488af7e0ada14872b, type: 3}
---- !u!23 &5434126520460872415
+  m_GameObject: {fileID: 2858682431108489388}
+  m_Mesh: {fileID: -2432090755550338912, guid: 92f52fafd6a7dd7489367dac7bf0d0e6, type: 3}
+--- !u!23 &4677180100477726281
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3183305258839737402}
+  m_GameObject: {fileID: 2858682431108489388}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 239d3324b949db44cb7c73a011c6ad02, type: 2}
+  - {fileID: 2100000, guid: 74ac520fd07996642b55f13f550d7e37, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,7 +83,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &5881864545796226275
+--- !u!1 &6494717767466113141
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,38 +91,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6551404886499894873}
-  - component: {fileID: 5241286008819329242}
+  - component: {fileID: 5866518828024595151}
+  - component: {fileID: 9099588945880287154}
   m_Layer: 0
-  m_Name: Pine tree 002
+  m_Name: GT_PineTree5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6551404886499894873
+--- !u!4 &5866518828024595151
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5881864545796226275}
+  m_GameObject: {fileID: 6494717767466113141}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5952474727868569345}
+  - {fileID: 6420510155275842455}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &5241286008819329242
+--- !u!65 &9099588945880287154
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5881864545796226275}
+  m_GameObject: {fileID: 6494717767466113141}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
