@@ -45,9 +45,14 @@ public class Craft : MonoBehaviour
 
     public void OnInteract(InputValue value)
     {
-        Set();
-
         ItemData selectedItemData = Main.Inventory.inventoryUI.GetSelectItemData();
+
+        if (selectedItemData == null)
+        {
+            return;
+        }
+
+        Set();
 
         // itemData가 null이 아니고 InstallationItemData로 캐스팅 가능한 경우만 실행
         if (selectedItemData is InstallationItemData installationData)
@@ -63,7 +68,7 @@ public class Craft : MonoBehaviour
 
     private void Build()
     {
-        if (isPreViewActivated)
+        if (isPreViewActivated && Preview_ItemObject.GetComponent<PreviewObject>().IsBuildeble())
         {
             Instantiate(itemPrefab, hitInfo.point, Quaternion.identity);
             Destroy(Preview_ItemObject);

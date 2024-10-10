@@ -37,6 +37,7 @@ public class PlayerInteraction : MonoBehaviour
     private void Start()
     {
         playerCamera = Camera.main;
+        ClearInteraction();
     }
 
     private void Update()
@@ -63,10 +64,12 @@ public class PlayerInteraction : MonoBehaviour
         else if (Physics.Raycast(ray, out hit, maxCheckDistance, enemyLayer))
         {
             HandleEnemyHit(hit);
+
         }
         else if (Physics.Raycast(ray, out hit, maxCheckDistance, natureLayer))
         {
             HandleNatureHit(hit);
+
         }
         else if (Physics.Raycast(ray, out hit, maxCheckDistance, waterLayer))
         {
@@ -121,6 +124,7 @@ public class PlayerInteraction : MonoBehaviour
         natureObject = null;
         currentInteractable = null;
         promptText.gameObject.SetActive(false);
+    
     }
     #endregion
 
