@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5271451859388907605}
   - component: {fileID: 8647561819622335681}
   - component: {fileID: -944132738269641853}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7602338849135380551}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Rock 007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
