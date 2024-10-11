@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
     protected virtual void Start()
     {
         _basePosition = transform.position;
-        aiPath.canMove = true; // 이 것 도 버 그 발 생 요 소
+        //aiPath.canMove = true; // 이 것 도 버 그 발 생 요 소
 
         if (_enemyData.attackType == IAttackType.Melee || _enemyData.attackType == IAttackType.Both)
         {
@@ -75,7 +75,7 @@ public class Enemy : MonoBehaviour
     // 애니메이션 이벤트.
     protected virtual void OnAttack()
     {
-
+        aiPath.canMove = false;
         if (_enemyData.attackType == IAttackType.Melee || _enemyData.attackType == IAttackType.Both)
         {
             MeleeAttack();
@@ -100,9 +100,6 @@ public class Enemy : MonoBehaviour
     // 애니메이션 이벤트 : 공격 시간이 지난 후 히트박스 비활성화.
     protected virtual void EndEnemyAttack()
     {
-        //aiPath.canMove = true;
-        //Debug.Log("canMove = true");
-
         if (_meleeHitbox != null)
         {
             _meleeHitbox.Deactivate();
@@ -140,7 +137,6 @@ public class Enemy : MonoBehaviour
             // 첫 번째로 감지된 플레이어를 대상으로 설정.
             _playerTransform = sight[0].transform;
             _target.target = _playerTransform;
-            //aiPath.canMove = true;
             Debug.Log("플레이어 감지");
 
             return true;
@@ -160,11 +156,12 @@ public class Enemy : MonoBehaviour
 
         if (distanceToPlayer <= _enemyData.attackRange)
         {
-            aiPath.canMove = false; // TODO : 버 그 발 생 요 소.
+            aiPath.canMove = false;
             return true;
         }
         else
         {
+            aiPath.canMove = true;
             return false;
         }
     }
@@ -218,13 +215,18 @@ public class Enemy : MonoBehaviour
     }
 
     // 공격 애니메이션 시, 슬라이딩 방지 이벤트.
+    public virtual void EnemyWalkTrue()
+    {
+        aiPath.canMove = true;
+    }
+
     public virtual void EnemyMoveFalse()
     {
-        aiPath.canMove = false;
+        //aiPath.canMove = false;
     }
     public virtual void EnemyMoveTrue()
     {
-        aiPath.canMove = true;
+        //aiPath.canMove = true;
     }
 
     #region Gizmos

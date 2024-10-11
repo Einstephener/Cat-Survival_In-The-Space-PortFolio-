@@ -136,14 +136,6 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0
-        functionName: EnemyMoveFalse
-        data: 
-        objectReferenceParameter: {fileID: 265478299795778748, guid: 3148f0bf2b68fef4d88ba748fb6e9b7a,
-          type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
       - time: 0.36101088
         functionName: OnAttack
         data: 
@@ -154,14 +146,6 @@ ModelImporter:
         messageOptions: 0
       - time: 1
         functionName: EndEnemyAttack
-        data: 
-        objectReferenceParameter: {fileID: 265478299795778748, guid: 3148f0bf2b68fef4d88ba748fb6e9b7a,
-          type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.99958676
-        functionName: EnemyMoveTrue
         data: 
         objectReferenceParameter: {fileID: 265478299795778748, guid: 3148f0bf2b68fef4d88ba748fb6e9b7a,
           type: 3}
