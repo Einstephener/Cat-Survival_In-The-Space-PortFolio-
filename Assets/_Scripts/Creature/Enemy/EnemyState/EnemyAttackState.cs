@@ -28,7 +28,6 @@ public class EnemyAttackState : IEnemyState
         {
             enemy.animator.SetTrigger("OnAttack");
         }
-        //enemy.animator.SetTrigger("OnAttack");
     }
 
     public void ExitState(Enemy enemy)

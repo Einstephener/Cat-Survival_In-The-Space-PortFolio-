@@ -39,7 +39,6 @@ public class Enemy : MonoBehaviour
     protected virtual void Start()
     {
         _basePosition = transform.position;
-        //aiPath.canMove = true; // 이 것 도 버 그 발 생 요 소
 
         if (_enemyData.attackType == IAttackType.Melee || _enemyData.attackType == IAttackType.Both)
         {
@@ -75,7 +74,6 @@ public class Enemy : MonoBehaviour
     // 애니메이션 이벤트.
     protected virtual void OnAttack()
     {
-        aiPath.canMove = false;
         if (_enemyData.attackType == IAttackType.Melee || _enemyData.attackType == IAttackType.Both)
         {
             MeleeAttack();
@@ -161,7 +159,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            aiPath.canMove = true;
+            //aiPath.canMove = true;
             return false;
         }
     }
@@ -217,7 +215,7 @@ public class Enemy : MonoBehaviour
     // 공격 애니메이션 시, 슬라이딩 방지 이벤트.
     public virtual void EnemyWalkTrue()
     {
-        aiPath.canMove = true;
+        //aiPath.canMove = true;
     }
 
     public virtual void EnemyMoveFalse()

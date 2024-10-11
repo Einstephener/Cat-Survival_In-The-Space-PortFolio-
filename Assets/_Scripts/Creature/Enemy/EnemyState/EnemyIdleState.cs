@@ -26,8 +26,6 @@ public class EnemyIdleState : IEnemyState
             return;
         }
 
-        //_animator.SetFloat("Speed", 0.1f);
-
         if (enemy.IsTarget())
         {
             enemy.TransitionToState(new EnemyChaseState());
