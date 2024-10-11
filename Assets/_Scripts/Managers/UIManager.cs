@@ -46,7 +46,7 @@ public class UIManager
     #region Fields
     private GameObject _alreayOpenPopUpUI = null; // 이미 열려있는 PopUp UI
     [HideInInspector] public GameObject GameSceneUI; // 열려있는  Scene UI
-
+    [HideInInspector] public QuickSlot[] QuickSlots;
     [HideInInspector] public  Dictionary<string, GameObject> _uiPopUpDictionary = new Dictionary<string, GameObject>(); // 팝업 UI 관리
 
     #endregion
@@ -74,28 +74,22 @@ public class UIManager
     #region Scene UI
 
     //UI_Scene 자식들만 가능
-    public T ShowSceneUI<T>(string name = null) where T : UI_Scene
+    public void ShowSceneUI<T>(string name = null) where T : UI_Scene
     {
-        Debug.Log("UIManager");
         if (string.IsNullOrEmpty(name))
             name = typeof(T).Name;
 
         //GameObject go = new GameObject();
 
         GameObject go = Main.Resource.Instantiate(name); // 임시. 폴더 로드 필요.
+        go.SetActive(true);
+        QuickSlots = go.GetComponent<UI_Scene>().UI_QuickSlots;
+        
         GameSceneUI = go;
-
-        if (!go.TryGetComponent(out T sceneUI))
-        {
-            // 오브젝트에 Canvas 컴포넌트 유무 확인, 확인 후 없으면 추가해줌.
-            sceneUI = go.AddComponent<T>();
-        }
 
         //_sceneUI = sceneUI;
 
         go.transform.SetParent(Root.transform);
-
-        return sceneUI;
     }
 
 

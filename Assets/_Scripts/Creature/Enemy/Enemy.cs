@@ -39,6 +39,7 @@ public class Enemy : MonoBehaviour
     protected virtual void Start()
     {
         _basePosition = transform.position;
+        aiPath.canMove = true; // 이 것 도 버 그 발 생 요 소
 
         if (_enemyData.attackType == IAttackType.Melee || _enemyData.attackType == IAttackType.Both)
         {
@@ -156,8 +157,16 @@ public class Enemy : MonoBehaviour
         if (_playerTransform == null && _currentState is EnemyWalkingState) return false;
 
         float distanceToPlayer = Vector3.Distance(transform.position, _playerTransform.position);
-        
-        return distanceToPlayer <= _enemyData.attackRange;
+
+        if (distanceToPlayer <= _enemyData.attackRange)
+        {
+            aiPath.canMove = false; // TODO : 버 그 발 생 요 소.
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     // 현재 리스폰지역에 있는가 확인.
@@ -187,6 +196,7 @@ public class Enemy : MonoBehaviour
             return;
         }
 
+        TransitionToState(new EnemyHitState());
         _currentHp -= damage;
         Debug.Log(_currentHp);
         if (_currentHp <= 0) IsDead();
@@ -207,6 +217,7 @@ public class Enemy : MonoBehaviour
         else return false;
     }
 
+    // 공격 애니메이션 시, 슬라이딩 방지 이벤트.
     public virtual void EnemyMoveFalse()
     {
         aiPath.canMove = false;
@@ -215,8 +226,6 @@ public class Enemy : MonoBehaviour
     {
         aiPath.canMove = true;
     }
-
-
 
     #region Gizmos
     protected virtual void OnDrawGizmosSelected()

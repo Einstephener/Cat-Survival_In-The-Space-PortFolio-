@@ -14,17 +14,12 @@ public class UI_Scene : UI_Base
         return true;
     }
 
-    //[HideInInspector] public QuickSlot[] UI_QuickSlots;
-    //public TextMeshProUGUI interactionTXT;
+    [HideInInspector] public QuickSlot[] UI_QuickSlots;
+    public TextMeshProUGUI interactionTXT;
 
-    //private void Awake()
-    //{
-    //    QuickSlot[] quickSlotComponents = GetComponentsInChildren<QuickSlot>();
-
-    //    for (int i = 0; i < UI_QuickSlots.Length; i++)
-    //    {
-    //        UI_QuickSlots[i] = quickSlotComponents[i];
-    //    }
-    //}
+    private void Awake()
+    {
+        UI_QuickSlots = FindObjectsOfType<QuickSlot>();        
+    }
 
 }
