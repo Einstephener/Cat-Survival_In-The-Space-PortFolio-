@@ -9,11 +9,21 @@ public class TestScene : BaseScene
     {
         if (!base.Initialize()) return false;
 
-
-        //Scene에 필요한 오브젝트들 소환.
         Main.Resource.Initialize();
-        //Main.Resource.Instantiate("UI_MainScene");
 
+        Main.UI.ShowSceneUI<UI_Scene>("UI_MainScene");
+        InitPopupUI<InventoryUI>("Inventory");
+        InitPopupUI<UI_Map>("UI_Map");
+        InitPopupUI<UI_Tablet>("UI_CraftingTabletUI");
         return true;
+    }
+
+    private void InitPopupUI<T>(string uiName) where T : UI_Popup
+    {
+        Main.UI.ShowPopupUI<T>(uiName);
+        if (Main.UI._uiPopUpDictionary.TryGetValue(uiName, out GameObject popup))
+        {
+            Main.UI.ClosePopupUI(popup);
+        }
     }
 }

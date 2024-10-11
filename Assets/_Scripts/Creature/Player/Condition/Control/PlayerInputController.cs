@@ -45,8 +45,13 @@ public class PlayerInputController : MonoBehaviour
     private Animator _playerAnimator;
     private float _animationWeightValue;
 
+    [Header("AttackCoroutine")]
+    private bool _canAttack = true; // 공격이 가능한지 여부
+    [SerializeField] private float _attackCooldown = 1f; // 공격 쿨다운 시간 (1초)
+
+
     [Header("#UI")]
-    public GameObject inventoryUIDiplay;
+    [HideInInspector] public GameObject inventoryUIDiplay;
     [HideInInspector] public bool IsFist = true;
 
     private PlayerInteraction _playerInteraction;
@@ -161,14 +166,22 @@ public class PlayerInputController : MonoBehaviour
 
     private void OnFire(InputValue value)
     {
-        Debug.Log("OnFire" + value.ToString());
+        if (!_canAttack) return; // 공격이 불가능하면 함수 종료
+
+        StartCoroutine(AttackCoroutine()); // 공격 실행 및 딜레이 시작
+    }
+
+    private IEnumerator AttackCoroutine()
+    {
+        _canAttack = false; // 공격 불가능 상태로 전환
+
+        Debug.Log("OnFire");
         _animationWeightValue = 1f;
 
-        // 공격시 스테미나 감소.
+        // 공격 시 스테미나 감소
         GetComponent<PlayerCondition>().UpdateStamina(-10);
 
-
-        //TODO 현재 들고 있는 도구에 따라 다른 작용.
+        // TODO: 현재 들고 있는 도구에 따라 다른 작용
         // 도구에 따른 공격 모션 변경
         IsFist = true;
         _playerAnimator.SetBool("IsPunch", IsFist);
@@ -176,6 +189,7 @@ public class PlayerInputController : MonoBehaviour
 
         float attack = GetComponent<PlayerCondition>()._basicAttack;
 
+        // 적을 공격
         if (_playerInteraction.enemyObject != null)
         {
             if (_playerInteraction.enemyObject.TryGetComponent<Enemy>(out Enemy enemy))
@@ -188,6 +202,7 @@ public class PlayerInputController : MonoBehaviour
             }
         }
 
+        // 자연물 채취
         if (_playerInteraction.natureObject != null)
         {
             if (_playerInteraction.natureObject.TryGetComponent<CollectMatertial>(out CollectMatertial collectMatertial))
@@ -195,6 +210,10 @@ public class PlayerInputController : MonoBehaviour
                 collectMatertial.SpitMaterial();
             }
         }
+
+        yield return new WaitForSecondsRealtime(_attackCooldown);
+
+        _canAttack = true; // 공격 가능 상태로 전환
     }
 
     private void OnInteract(InputValue value)
@@ -292,17 +311,38 @@ public class PlayerInputController : MonoBehaviour
     private void OnUI_Inventory()
     {
         //Debug.Log("OnUI_Inventory");
-        if (!inventoryUIDiplay.activeInHierarchy)
+        //if (!inventoryUIDiplay.activeInHierarchy)
+        //{
+        //    inventoryUIDiplay.gameObject.SetActive(true);
+        //    Main.Inventory.inventoryUI.boneFireObject.SetActive(false);
+        //    Main.Inventory.inventoryUI.AdjustParentHeight();
+        //}
+        //else
+        //{
+        //    inventoryUIDiplay.gameObject.SetActive(false);
+        //    Main.Inventory.inventoryUI.boneFireObject.SetActive(false);
+        //    Main.Inventory.inventoryUI.AdjustParentHeight();
+        //}
+
+        if(inventoryUIDiplay != null) 
         {
-            inventoryUIDiplay.SetActive(true);
-            Main.Inventory.inventoryUI.boneFireObject.SetActive(false);
-            Main.Inventory.inventoryUI.AdjustParentHeight();
+
+            if (!inventoryUIDiplay.activeInHierarchy)
+            {
+                inventoryUIDiplay.SetActive(true);
+                Main.Inventory.inventoryUI.boneFireObject.SetActive(false);
+                Main.Inventory.inventoryUI.AdjustParentHeight();
+            }
+            else
+            {
+                inventoryUIDiplay.SetActive(false);
+                Main.Inventory.inventoryUI.boneFireObject.SetActive(false);
+                Main.Inventory.inventoryUI.AdjustParentHeight();
+            }
         }
         else
         {
-            inventoryUIDiplay.SetActive(false);
-            Main.Inventory.inventoryUI.boneFireObject.SetActive(false);
-            Main.Inventory.inventoryUI.AdjustParentHeight();
+            inventoryUIDiplay = Main.Inventory.inventoryUI.gameObject;
         }
     }
 

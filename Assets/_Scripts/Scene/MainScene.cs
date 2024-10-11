@@ -14,10 +14,8 @@ public class MainScene : BaseScene
 
         Main.Resource.Initialize();
 
-        //Main.UI.ShowSceneUI<UI_Scene>("UI_MainScene");
-        //InitPopupUI<InventoryUI>("Inventory");
-        //Main.UI._uiPopUpDictionary.TryGetValue("Inventory", out GameObject inventory);
-
+        Main.UI.ShowSceneUI<UI_Scene>("UI_MainScene");
+        InitPopupUI<InventoryUI>("Inventory");
         InitPopupUI<UI_Map>("UI_Map");
         InitPopupUI<UI_Tablet>("UI_CraftingTabletUI");
 

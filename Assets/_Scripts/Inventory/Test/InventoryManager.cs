@@ -37,7 +37,7 @@ public class InventoryManager
         
         inventoryUI = GameObject.FindObjectOfType<InventoryUI>();
         InventorySlot[] slotUI = inventoryUI.slotObjects;
-
+        inventoryUI.quickSlotObjects = Main.UI.QuickSlots;
         for (int i = 0; i < slotsData.Length; i++)
         {
             slotsData[i] = new SlotData();
@@ -158,7 +158,53 @@ public class InventoryManager
         Debug.Log("아이템을 찾을 수 없습니다.");
     }
 
+
+    //Test
+    public void TestAddItem(ItemData _itemdata, int _amount = 1, int slotIndex = -1)
+    {
+        if (HadItem(_itemdata) && IsCountTableItem(_itemdata))
+        {
+            // 특정 슬롯에 아이템 추가
+            if (slotIndex >= 0 && slotIndex < slotsData.Length)
+            {
+                var slot = slotsData[slotIndex];
+                if (slot != null && slot.itemData == _itemdata && slot.amount < ((ContableItemData)_itemdata).MaxAmount)
+                {
+                    slot.amount += _amount;
+                    inventoryUI.UpdateUI();
+                    //Debug.Log($"{slot.itemData} += {_itemdata} // Index : {slotIndex} ItemName : {slot.itemData.DisplayName}, Amount : {slot.amount}");
+                    return;
+                }
+                else if (slot == null || slot.IsEmpty())
+                {
+                    slotsData[slotIndex] = new SlotData();
+                    slotsData[slotIndex].itemData = _itemdata;
+                    slotsData[slotIndex].amount = _amount;
+                    //Debug.Log($"{slotsData[slotIndex].itemData} += {_itemdata} // Index : {slotIndex} ItemName : {slotsData[slotIndex].itemData.DisplayName}, Amount : {slotsData[slotIndex].amount}");
+                    inventoryUI.UpdateUI();
+                    return;
+                }
+            }
+        }
+
+        // 빈 슬롯 찾기 (기존 로직)
+        for (int i = 0; i < slotsData.Length; i++)
+        {
+            if (slotsData[i] == null || slotsData[i].IsEmpty())
+            {
+                slotsData[i] = new SlotData();
+                slotsData[i].itemData = _itemdata;
+                slotsData[i].amount = _amount;
+                //Debug.Log($"{slotsData[i].itemData} += {_itemdata} // Index : {i} ItemName : {slotsData[i].itemData.DisplayName}, Amount : {slotsData[i].amount}");
+                inventoryUI.UpdateUI();
+                return;
+            }
+        }
+
+        Debug.Log("슬롯이 가득 찼습니다.");
+        //[기혁님의 요청사항 10/01] : 인벤토리가 다 찼을 때 플레이어 위치 앞에 아이템이 생성되도록 해줭
+    }
     #region DeBug
-    
+
     #endregion
 }

@@ -122,7 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsUsing: 0
   Prefab: {fileID: 6377704947247678139}
-  _CountNow: 4
+  _CountNow: 1
   _KeepCount: 6
   _spawnPos: {x: 0, y: 0, z: 0}
   _spawnRadius: 15
@@ -140,5 +140,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxCount: 5
-  MaterialPrefab: {fileID: 5903704957169112262, guid: 26de2021ac0414640bd3c9d6aad7d69e,
+  MaterialPrefab: {fileID: 3728178060013178304, guid: 706bb5477d27b24409f3bd929f4b5ab7,
     type: 3}
