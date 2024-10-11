@@ -24,6 +24,7 @@ public class Enemy : MonoBehaviour
 
     protected EnemyData _enemyData;
 
+    private float _lastAttackTime;
     protected float _currentSightRange;
     protected float _currentHp;
 
@@ -82,6 +83,17 @@ public class Enemy : MonoBehaviour
         {
             FireProjectile();
         }
+    }
+
+    // 쿨타임 체크.
+    protected virtual bool AttackCooldownCheck()
+    {
+        if (Time.time >= _lastAttackTime + _enemyData.attackCooldown)
+        {
+            _lastAttackTime = Time.time;
+            return true;
+        }
+        return false;
     }
 
     protected virtual void MeleeAttack()
