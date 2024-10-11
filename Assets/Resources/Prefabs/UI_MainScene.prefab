@@ -129,6 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116335b4cf78b5e4e848572dffec1221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UI_QuickSlots: []
+  interactionTXT: {fileID: 0}
   health: {fileID: 0}
   hunger: {fileID: 0}
   thirsty: {fileID: 0}
@@ -5688,6 +5690,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6dce611fb9f4124dbf5dade7901593b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UI_QuickSlots: []
+  interactionTXT: {fileID: 2396603109379630369}
 --- !u!1 &8115321816401345191
 GameObject:
   m_ObjectHideFlags: 0

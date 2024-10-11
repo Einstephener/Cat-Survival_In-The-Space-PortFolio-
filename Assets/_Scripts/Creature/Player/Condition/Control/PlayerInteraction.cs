@@ -112,8 +112,8 @@ public class PlayerInteraction : MonoBehaviour
         if (hit.collider.gameObject != currentInteractObject)
         {
             currentInteractObject = hit.collider.gameObject;
-            promptText.gameObject.SetActive(true);
-            //PromptTextActive(true);
+            //promptText.gameObject.SetActive(true);
+            PromptTextActive(true);
             promptText.text = $"<b>[E]</b> {"DrinkWater"}";
         }
     }
@@ -124,32 +124,32 @@ public class PlayerInteraction : MonoBehaviour
         enemyObject = null;
         natureObject = null;
         currentInteractable = null;
-        promptText.gameObject.SetActive(false);
-        //PromptTextActive(false);
-    
+        //promptText.gameObject.SetActive(false);
+        PromptTextActive(false);
+
     }
     #endregion
-    //private void PromptTextActive(bool isActive)
-    //{
-    //    if (promptText == null)
-    //    {
-    //    }
-    //    else
-    //    {
-    //        if (Main.UI.GameSceneUI.TryGetComponent<UI_Scene>(out UI_Scene uiScene))
-    //        {
-    //            promptText = uiScene.interactionTXT;
-    //        }
-    //        promptText.gameObject.SetActive(isActive);
-    //    }
+    private void PromptTextActive(bool isActive)
+    {
+        if (promptText == null)
+        {
+        }
+        else
+        {
+            if (Main.UI.GameSceneUI.TryGetComponent<UI_Scene>(out UI_Scene uiScene))
+            {
+                promptText = uiScene.interactionTXT;
+            }
+            promptText.gameObject.SetActive(isActive);
+        }
 
-    //}
+    }
     private void SetPromptText()
     {
         if (currentInteractable != null)
         {
-            promptText.gameObject.SetActive(true);
-            //PromptTextActive(true);
+            //promptText.gameObject.SetActive(true);
+            PromptTextActive(true);
             promptText.text = $"<b>[E]</b> {currentInteractable.GetInteractPrompt()}";
         }
     }

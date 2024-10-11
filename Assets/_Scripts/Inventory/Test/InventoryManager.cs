@@ -37,7 +37,7 @@ public class InventoryManager
         
         inventoryUI = GameObject.FindObjectOfType<InventoryUI>();
         InventorySlot[] slotUI = inventoryUI.slotObjects;
-
+        inventoryUI.quickSlotObjects = Main.UI.QuickSlots;
         for (int i = 0; i < slotsData.Length; i++)
         {
             slotsData[i] = new SlotData();

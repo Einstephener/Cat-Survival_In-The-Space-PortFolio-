@@ -23,7 +23,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     /// </summary>
     #endregion
     public InventorySlot[] slotObjects;
-    public QuickSlot[] quickSlotObjects;
+    [HideInInspector] public QuickSlot[] quickSlotObjects;
 
 
     public GameObject boneFireObject; // 모닥불 UI_Object
@@ -46,15 +46,16 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         //임시 초기화
         Main.Inventory.Initialize();
         //Test
-        Main.Inventory.AddItem(testItemData1, 10);
-        Main.Inventory.AddItem(testItemData2, 29);
-        Main.Inventory.AddItem(testItemData3);
-        Main.Inventory.AddItem(testItemData4);
         //Main.Inventory.RemoveItem(testItemData1, 7);
         //Main.Inventory.RemoveItem(testItemData2, 5);
-        AdjustParentHeight();
-        equipManager = FindObjectOfType<EquipManager>();
         //this.gameObject.SetActive(false);
+        //Main.Inventory.AddItem(testItemData1, 10);
+        //Main.Inventory.AddItem(testItemData2, 29);
+        //Main.Inventory.AddItem(testItemData3);
+        //Main.Inventory.AddItem(testItemData4);
+        
+        equipManager = FindObjectOfType<EquipManager>();
+        AdjustParentHeight();
         SelectSlot(0);
     }
 
@@ -156,7 +157,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 
             quickSlotObjects[index].SetOutLine();
 
-            equipManager.EquipNew(selectSlot.curSlot.itemData);// 임시
+            //equipManager.EquipNew(selectSlot.curSlot.itemData);// 임시
 
             for (int i = 0; i < quickSlotObjects.Length; i++)
             {
