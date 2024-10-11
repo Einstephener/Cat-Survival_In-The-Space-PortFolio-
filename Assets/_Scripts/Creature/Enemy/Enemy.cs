@@ -86,7 +86,7 @@ public class Enemy : MonoBehaviour
     }
 
     // 쿨타임 체크.
-    protected virtual bool AttackCooldownCheck()
+    public virtual bool AttackCooldownCheck()
     {
         if (Time.time >= _lastAttackTime + _enemyData.attackCooldown)
         {
@@ -171,7 +171,6 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            //aiPath.canMove = true;
             return false;
         }
     }

@@ -26,7 +26,10 @@ public class EnemyAttackState : IEnemyState
         }
         else
         {
-            enemy.animator.SetTrigger("OnAttack");
+            if(enemy.AttackCooldownCheck())
+            {
+                enemy.animator.SetTrigger("OnAttack");
+            }
         }
     }
 
