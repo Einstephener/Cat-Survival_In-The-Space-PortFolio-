@@ -23,7 +23,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     /// </summary>
     #endregion
     public InventorySlot[] slotObjects;
-    [HideInInspector] public QuickSlot[] quickSlotObjects;
+    public QuickSlot[] quickSlotObjects;
 
 
     public GameObject boneFireObject; // 모닥불 UI_Object
@@ -49,11 +49,11 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         //Main.Inventory.RemoveItem(testItemData1, 7);
         //Main.Inventory.RemoveItem(testItemData2, 5);
         //this.gameObject.SetActive(false);
-        //Main.Inventory.AddItem(testItemData1, 10);
-        //Main.Inventory.AddItem(testItemData2, 29);
-        //Main.Inventory.AddItem(testItemData3);
-        //Main.Inventory.AddItem(testItemData4);
-        
+        Main.Inventory.AddItem(testItemData1, 10);
+        Main.Inventory.AddItem(testItemData2, 29);
+        Main.Inventory.AddItem(testItemData3);
+        Main.Inventory.AddItem(testItemData4);
+
         equipManager = FindObjectOfType<EquipManager>();
         AdjustParentHeight();
         SelectSlot(0);
@@ -247,13 +247,6 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     }
     #endregion
 
-    //public void Preview()
-    //{
-    //    if ()
-    //    {
-    //        selectSlot.curSlot.itemData = null;
-    //    }
-    //}
 
     #region boneFire
 
@@ -275,6 +268,15 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     {
         UpdateSlotUI(boneFireSlots[0]);
         UpdateSlotUI(boneFireSlots[1]);
+    }
+
+    public void BoneFireSlotsGet(SlotData boneFireSlotData, SlotData nextBoneFireSlotData) // 연결하는 함수 
+    {
+        // 모닥불의 데이터 불러오기 ㄱㄱ
+        boneFireSlots[0].curSlot = boneFireSlotData;
+        boneFireSlots[1].curSlot = nextBoneFireSlotData;
+
+        BoneFireUpdateUI();
     }
     #endregion
 

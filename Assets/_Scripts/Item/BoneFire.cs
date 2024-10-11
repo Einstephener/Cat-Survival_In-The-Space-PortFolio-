@@ -28,7 +28,7 @@ public class BoneFire : Installation
         Initialize();
     }
 
-    private void Initialize() // 에러 (수정해야 할 함수임 - InventorySlot - > SlotData 로 변경해서 해야 함)
+    private void Initialize() // 에러 (수정해야 할 함수임 - InventorySlot - > SlotData 로 변경해서 해야 함) - 변경을 했지만 새로운 모닥불이 생기면 이전에 있는 데이터가 날라감
     {
         if (boneFireSlotData == null && nextBoneFireSlotData == null) // SlotData 생성
         {
@@ -66,6 +66,7 @@ public class BoneFire : Installation
             boneFireSlotData.amount = _amount;
             //Debug.Log($"{boneFireSlot.curSlot.itemData} += {_itemdata} // ItemName : {boneFireSlot.curSlot.itemData.DisplayName}, Amount : {boneFireSlot.curSlot.amount}");
             //BoneFireUpdateUI();
+            Main.Inventory.inventoryUI.BoneFireSlotsGet(boneFireSlotData, nextBoneFireSlotData);
             Main.Inventory.inventoryUI.BoneFireUpdateUI();
             return;
         }
@@ -237,11 +238,13 @@ public class BoneFire : Installation
         if (boneFireSlotData.IsEmpty())
         {
             //BoneFireUpdateUI();
+            Main.Inventory.inventoryUI.BoneFireSlotsGet(boneFireSlotData, nextBoneFireSlotData);
             Main.Inventory.inventoryUI.BoneFireUpdateUI();
             Debug.Log("boneFireSlot의 아이템 수량이 0이 되어 슬롯이 비어졌습니다.");
         }
 
         //BoneFireUpdateUI(); // UI 업데이트
+        Main.Inventory.inventoryUI.BoneFireSlotsGet(boneFireSlotData, nextBoneFireSlotData);
         Main.Inventory.inventoryUI.BoneFireUpdateUI();
     }
 
