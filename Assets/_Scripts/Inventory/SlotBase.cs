@@ -33,6 +33,7 @@ public class SlotBase : MonoBehaviour
         icon.gameObject.SetActive(true);
         isWeapon();
         icon.sprite = curSlot.itemData.Icon;
+        _amuont = _slotData.amount;
         amuontText.text = curSlot.amount > 1 ? curSlot.amount.ToString() : string.Empty;
     }
 
@@ -42,6 +43,7 @@ public class SlotBase : MonoBehaviour
         curSlot.itemData = null;
         isWeapon();
         //ClearOutLine();
+        _amuont = 0;
         icon.gameObject.SetActive(false);
         amuontText.text = string.Empty;
     }

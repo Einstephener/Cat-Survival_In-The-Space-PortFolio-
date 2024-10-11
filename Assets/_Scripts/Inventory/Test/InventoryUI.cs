@@ -52,8 +52,9 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         //Main.Inventory.RemoveItem(testItemData2, 5);
         //this.gameObject.SetActive(false);
         Main.Inventory.AddItem(testItemData1, 10);
-        Main.Inventory.AddItem(testItemData2, 99);
-        Main.Inventory.AddItem(testItemData2, 29);
+        Main.Inventory.TestAddItem(testItemData2, 29, 7);
+        Main.Inventory.TestAddItem(testItemData2, 29, 9);
+        Main.Inventory.TestAddItem(testItemData2, 29, 11);
         Main.Inventory.AddItem(testItemData3);
         Main.Inventory.AddItem(testItemData4);
         BoneFireInitialize();
@@ -123,11 +124,11 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         // 슬롯 UI 업데이트
         for (int i = 0; i < _slots.Length; i++)
         {
-            if (_slots[i].itemData != null) // 슬롯이 데이터가 있는지 확인
+            if (_slots[i].itemData != null || _slots[i].amount > 0) // 슬롯이 데이터가 있는지 확인
             {
                 slotObjects[i].SetSlot(_slots[i]); // 슬롯 정보 업데이트
             }
-            else
+            else /*if (_slots[i].IsEmpty())*/ if (_slots[i].itemData == null || _slots[i].amount >= 0)
             {
                 slotObjects[i].ClearSlot(); // 빈 슬롯 처리
             }
@@ -237,14 +238,14 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 
             dropSlotData.itemData = tempSlotaData_ItemData;
             dropSlotData.amount = tempAmount;
-
-            UpdateUI();
-            BoneFireUpdateUI();
         }
         else
         {
             Debug.Log($"아이템의 정보가 없습니다");
         }
+
+        UpdateUI();
+        BoneFireUpdateUI();
     }
 
     public void CombineSlots(SlotData dragSlotData, SlotData dropSlotData)
@@ -265,9 +266,17 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
             dragSlotData.amount = totalItems - 99;
 
             Debug.Log($"2 dragSlotData: {dragSlotData.amount}, dropSlotData: {dropSlotData.amount}");
-            UpdateUI();
-            BoneFireUpdateUI();
         }
+        else
+        {
+            dropSlotData.amount = totalItems;
+            dragSlotData.amount = 0;
+            //임시
+            dragSlotData.itemData = null;
+        }
+
+        UpdateUI();
+        BoneFireUpdateUI();
     }
     #endregion
 
