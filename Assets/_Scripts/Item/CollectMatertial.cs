@@ -12,42 +12,33 @@ public class CollectMatertial : MonoBehaviour
     {
         curCount = maxCount;
     }
+
     public void SpitMaterial()
     {
         if (curCount > 0)
         {
-            int a = Random.Range(1, 4);
-            Vector3 plusPosition = new Vector3(0, 1, 0);
+            // 특정 구역 안에서 임의의 방향 사용
+            Vector3 randomDirection = Random.insideUnitSphere;
+            // 위쪽으로만 이동하게끔 y값을 양수로 설정
+            randomDirection.y = Mathf.Abs(randomDirection.y); 
 
-            switch (a)
+            Vector3 spawnPosition = transform.position + randomDirection;
+
+            GameObject material = Instantiate(MaterialPrefab, spawnPosition, Quaternion.identity);
+
+            // Rigidbody가 있을 경우 해당 방향으로 힘을 가함
+            if (material.TryGetComponent<Rigidbody>(out Rigidbody rigidbody))
             {
-                case 1:
-                    plusPosition = new Vector3(0, 1, 1);
-                    break;
-
-                case 2:
-                    plusPosition = new Vector3(0, 1, -1);
-                    break;
-
-                case 3:
-                    plusPosition = new Vector3(1, 1, 0);
-                    break;
-
-                case 4:
-                    plusPosition = new Vector3(-1, 1, 0);
-                    break;
+                rigidbody.AddForce(randomDirection.normalized, ForceMode.Impulse);
             }
 
-            Instantiate(MaterialPrefab,transform.position + plusPosition, Quaternion.identity);
-
             curCount--;
+
             Debug.Log(curCount);
-            if(curCount == 0)
+            if (curCount == 0)
             {
                 Destroy(this.gameObject);
             }
         }
     }
-
-
 }

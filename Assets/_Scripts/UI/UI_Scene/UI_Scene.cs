@@ -19,6 +19,7 @@ public class UI_Scene : UI_Base
 
     private void Awake()
     {
+
         QuickSlot[] QuickSlots = FindObjectsOfType<QuickSlot>();
 
         // slotNum 중 가장 큰 값을 찾아 배열 크기를 설정

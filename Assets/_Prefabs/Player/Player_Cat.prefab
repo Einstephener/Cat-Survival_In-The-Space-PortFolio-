@@ -2267,6 +2267,7 @@ MonoBehaviour:
   _cameraController: {fileID: 1434191240061850843}
   currentItem: {fileID: 0}
   _currentSpeed: 0
+  _attackCooldown: 1
   inventoryUIDiplay: {fileID: 0}
   IsFist: 0
 --- !u!114 &4699258732491026427
@@ -2315,7 +2316,6 @@ MonoBehaviour:
   currentInteractObject: {fileID: 0}
   enemyObject: {fileID: 0}
   natureObject: {fileID: 0}
-  promptText: {fileID: 0}
 --- !u!114 &2951378759710360154
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
@@ -46,6 +47,7 @@ public class UIManager
     #region Fields
     private GameObject _alreayOpenPopUpUI = null; // 이미 열려있는 PopUp UI
     [HideInInspector] public GameObject GameSceneUI; // 열려있는  Scene UI
+    [HideInInspector] public TextMeshProUGUI PromtText; // 상호작용 txt
     [HideInInspector] public QuickSlot[] QuickSlots;
     [HideInInspector] public  Dictionary<string, GameObject> _uiPopUpDictionary = new Dictionary<string, GameObject>(); // 팝업 UI 관리
 
@@ -86,7 +88,7 @@ public class UIManager
         QuickSlots = go.GetComponent<UI_Scene>().UI_QuickSlots;
         
         GameSceneUI = go;
-
+        PromtText = go.GetComponent<UI_Scene>().interactionTXT;
         //_sceneUI = sceneUI;
 
         go.transform.SetParent(Root.transform);
