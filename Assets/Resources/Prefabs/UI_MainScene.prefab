@@ -4334,6 +4334,7 @@ MonoBehaviour:
   WeaponDurability: {fileID: 2692394105880821760}
   index: 0
   _amuont: 0
+  slotNum: 2
 --- !u!114 &2850606956968984664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4873,6 +4874,7 @@ MonoBehaviour:
   WeaponDurability: {fileID: 1571401228548091024}
   index: 0
   _amuont: 0
+  slotNum: 4
 --- !u!114 &5372953486750873822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5180,6 +5182,7 @@ MonoBehaviour:
   WeaponDurability: {fileID: 8136311863898044923}
   index: 0
   _amuont: 0
+  slotNum: 3
 --- !u!114 &997090998811717012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5835,6 +5838,7 @@ MonoBehaviour:
   WeaponDurability: {fileID: 4407037267419567346}
   index: 0
   _amuont: 0
+  slotNum: 1
 --- !u!114 &1869270103291465367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6329,6 +6333,7 @@ MonoBehaviour:
   WeaponDurability: {fileID: 6205189252636640740}
   index: 0
   _amuont: 0
+  slotNum: 0
 --- !u!114 &3714858930878891456
 MonoBehaviour:
   m_ObjectHideFlags: 0

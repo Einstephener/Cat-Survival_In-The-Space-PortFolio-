@@ -30,7 +30,7 @@ public class PlayerInteraction : MonoBehaviour
     [HideInInspector] public GameObject natureObject;
     private IInteractable currentInteractable;
 
-    public TextMeshProUGUI promptText;
+    private TextMeshProUGUI promptText;
     private Camera playerCamera;
     #endregion
 

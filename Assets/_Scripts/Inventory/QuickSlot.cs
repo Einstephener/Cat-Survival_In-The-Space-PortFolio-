@@ -40,6 +40,8 @@ public class QuickSlot : SlotBase
 
     #endregion
 
+    public int slotNum = 0;
+
     public void GetPrefab()//ItemData의 프리펩 불러오는 작업
     {
 
