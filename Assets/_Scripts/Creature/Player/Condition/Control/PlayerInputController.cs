@@ -51,7 +51,7 @@ public class PlayerInputController : MonoBehaviour
 
 
     [Header("#UI")]
-    public GameObject inventoryUIDiplay;
+    [HideInInspector] public GameObject inventoryUIDiplay;
     [HideInInspector] public bool IsFist = true;
 
     private PlayerInteraction _playerInteraction;
@@ -311,17 +311,24 @@ public class PlayerInputController : MonoBehaviour
     private void OnUI_Inventory()
     {
         //Debug.Log("OnUI_Inventory");
-        if (!inventoryUIDiplay.activeInHierarchy)
-        {
-            inventoryUIDiplay.SetActive(true);
-            Main.Inventory.inventoryUI.boneFireObject.SetActive(false);
-            Main.Inventory.inventoryUI.AdjustParentHeight();
+        if(inventoryUIDiplay != null) {
+
+            if (!inventoryUIDiplay.activeInHierarchy)
+            {
+                inventoryUIDiplay.SetActive(true);
+                Main.Inventory.inventoryUI.boneFireObject.SetActive(false);
+                Main.Inventory.inventoryUI.AdjustParentHeight();
+            }
+            else
+            {
+                inventoryUIDiplay.SetActive(false);
+                Main.Inventory.inventoryUI.boneFireObject.SetActive(false);
+                Main.Inventory.inventoryUI.AdjustParentHeight();
+            }
         }
         else
         {
-            inventoryUIDiplay.SetActive(false);
-            Main.Inventory.inventoryUI.boneFireObject.SetActive(false);
-            Main.Inventory.inventoryUI.AdjustParentHeight();
+            inventoryUIDiplay = Main.Inventory.inventoryUI.gameObject;
         }
     }
 
