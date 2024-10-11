@@ -107,6 +107,7 @@ public class BoneFire : Installation
     public override void UIInterac()
     {
         base .UIInterac();
+        Main.Inventory.inventoryUI.BoneFireSlotsGet(boneFireSlotData, nextBoneFireSlotData);
 
         UISet();
         Main.Inventory.inventoryUI.AdjustParentHeight();
