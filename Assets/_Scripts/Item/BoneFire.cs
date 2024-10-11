@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
 /// 1. 아이템이 있는지 확인 
-/// 2. 
+/// 2. 상호작용하면 bonefire의 SlotData를 Inventory의 있는 bonefireSlot_UI에 연결하는 작업이 필요함 그렇게 하기 위해 UI에서 연결하는 코드를 만들어 
 /// </summary>
 public class BoneFire : Installation
 {
     public GameObject boneFireSlots;
 
+    //test - BoneFire의 ItemData
     public SlotData boneFireSlotData;
     public SlotData nextBoneFireSlotData;
 
+    //인벤토리와 연결할 Slot
     public InventorySlot boneFireSlot;
     public InventorySlot nextBoneFireSlot;
 
@@ -33,15 +35,20 @@ public class BoneFire : Installation
             boneFireSlotData = new SlotData();
             nextBoneFireSlotData = new SlotData();
         }
-        
 
+        //잠시 주석
         boneFireSlot = Main.Inventory.inventoryUI.boneFireSlots[0];
         nextBoneFireSlot = Main.Inventory.inventoryUI.boneFireSlots[1];
+
+
         //Main.Inventory.inventoryUI.boneFireSlots[0] = boneFireSlot;
         //Main.Inventory.inventoryUI.boneFireSlots[1] = nextBoneFireSlot;
 
-        Main.Inventory.inventoryUI.BoneFireSlotsGet(boneFireSlot.curSlot, nextBoneFireSlot.curSlot);
-        BoneFireUpdateUI();
+        Main.Inventory.inventoryUI.BoneFireSlotsGet(boneFireSlotData, nextBoneFireSlotData);
+        //BoneFireUpdateUI();
+
+        Main.Inventory.inventoryUI.BoneFireUpdateUI();
+
     }
 
     #region Test
@@ -52,13 +59,14 @@ public class BoneFire : Installation
 
     public void AddBoneFireSlot(ItemData _itemdata, int _amount = 1)
     {
-        if (boneFireSlot.curSlot == null || boneFireSlot.curSlot.IsEmpty())
+        if (boneFireSlotData == null || boneFireSlotData.IsEmpty())
         {
-            boneFireSlot.curSlot = new SlotData();
-            boneFireSlot.curSlot.itemData = _itemdata;
-            boneFireSlot.curSlot.amount = _amount;
+            boneFireSlotData = new SlotData();
+            boneFireSlotData.itemData = _itemdata;
+            boneFireSlotData.amount = _amount;
             //Debug.Log($"{boneFireSlot.curSlot.itemData} += {_itemdata} // ItemName : {boneFireSlot.curSlot.itemData.DisplayName}, Amount : {boneFireSlot.curSlot.amount}");
-            BoneFireUpdateUI();
+            //BoneFireUpdateUI();
+            Main.Inventory.inventoryUI.BoneFireUpdateUI();
             return;
         }
     }
@@ -75,7 +83,7 @@ public class BoneFire : Installation
         if (isCooking())
         {
             // boneFireSlot에 아이템이 있는지 확인
-            if (boneFireSlot.curSlot != null && !boneFireSlot.curSlot.IsEmpty())
+            if (boneFireSlotData != null && !boneFireSlotData.IsEmpty())
             {
                 if (cookingCoroutine == null)
                 {
@@ -110,25 +118,26 @@ public class BoneFire : Installation
 
 
     #region UI
-    private void UpdateSlotUI(InventorySlot slot)
-    {
-        if (!slot.curSlot.IsEmpty()) //에러
-        {
-            Debug.Log("UpdateSlotUI");
-            slot.SetSlot(slot.curSlot);
-        }
-        else
-        {
-            Debug.Log("UpdateSlotUI");
-            slot.ClearSlot();
-        }
-    }
+    //private void UpdateSlotUI(InventorySlot slot)
+    //{
+    //    if (!slot.curSlot.IsEmpty()) //에러
+    //    {
+    //        Debug.Log("UpdateSlotUI");
+    //        //따로 set 만들자
+    //        slot.SetSlot(slot.curSlot);
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("UpdateSlotUI");
+    //        slot.ClearSlot();
+    //    }
+    //}
 
-    public void BoneFireUpdateUI()
-    {
-        UpdateSlotUI(boneFireSlot);
-        UpdateSlotUI(nextBoneFireSlot);
-    }
+    //public void BoneFireUpdateUI()
+    //{
+    //    UpdateSlotUI(boneFireSlot);
+    //    UpdateSlotUI(nextBoneFireSlot);
+    //}
 
     public void UISet()
     {
@@ -169,7 +178,7 @@ public class BoneFire : Installation
         while (true) // 무한 루프, 종료 조건은 내부에서 처리
         {
             // boneFireSlot 아이템 확인
-            if (boneFireSlot.curSlot == null || boneFireSlot.curSlot.IsEmpty() || boneFireSlot.curSlot.amount <= 0)
+            if (boneFireSlotData == null || boneFireSlotData.IsEmpty() || boneFireSlotData.amount <= 0)
             {
                 //Debug.Log("요리를 종료합니다: boneFireSlot에 아이템이 없습니다.");
                 cookingCoroutine = null; // 코루틴 참조 초기화
@@ -186,7 +195,7 @@ public class BoneFire : Installation
                 CompleteCooking();
 
                 // 요리 완료 후 아이템 상태 확인
-                if (boneFireSlot.curSlot == null || boneFireSlot.curSlot.IsEmpty() || boneFireSlot.curSlot.amount <= 0)
+                if (boneFireSlotData == null || boneFireSlotData.IsEmpty() || boneFireSlotData.amount <= 0)
                 {
                     //Debug.Log("요리를 종료합니다: 요리 후 boneFireSlot에 아이템이 없습니다.");
                     cookingCoroutine = null; // 코루틴 참조 초기화
@@ -202,36 +211,38 @@ public class BoneFire : Installation
     public void CompleteCooking()
     {
         // nextBoneFireSlot의 ItemData가 있는지 확인
-        if (nextBoneFireSlot.curSlot != null && nextBoneFireSlot.curSlot.itemData != null)
+        if (nextBoneFireSlotData != null && nextBoneFireSlotData.itemData != null)
         {
             // 다음 슬롯의 갯수 증가
-            nextBoneFireSlot.curSlot.amount++;
+            nextBoneFireSlotData.amount++;
         }
         else
         {
             // 현재 슬롯의 아이템이 PotionItemData로 캐스팅
-            PotionItemData boneFirePotionData = boneFireSlot.curSlot.itemData as PotionItemData;
+            PotionItemData boneFirePotionData = boneFireSlotData.itemData as PotionItemData;
 
             // 요리 결과 아이템 데이터 가져오기
             ItemData cookingData = boneFirePotionData.CookingItemData;
 
             // nextBoneFireSlot에 아이템 데이터 추가
-            nextBoneFireSlot.curSlot.itemData = cookingData;
-            nextBoneFireSlot.curSlot.amount = 1;
+            nextBoneFireSlotData.itemData = cookingData;
+            nextBoneFireSlotData.amount = 1;
             Debug.Log("nextBoneFireSlot에 새로운 아이템이 추가되었습니다.");
         }
 
         // boneFireSlot의 아이템 수량 감소
-        boneFireSlot.curSlot.amount--;
+        boneFireSlotData.amount--;
 
         //boneFireSlot의 수량이 0이 되면 curSlot을 null로 설정
-        if (boneFireSlot.curSlot.IsEmpty())
+        if (boneFireSlotData.IsEmpty())
         {
-            BoneFireUpdateUI();
+            //BoneFireUpdateUI();
+            Main.Inventory.inventoryUI.BoneFireUpdateUI();
             Debug.Log("boneFireSlot의 아이템 수량이 0이 되어 슬롯이 비어졌습니다.");
         }
 
-        BoneFireUpdateUI(); // UI 업데이트
+        //BoneFireUpdateUI(); // UI 업데이트
+        Main.Inventory.inventoryUI.BoneFireUpdateUI();
     }
 
 
@@ -242,10 +253,10 @@ public class BoneFire : Installation
         // 두 데이터가 같아야 함
 
         // 들어가는 ItemData의 PotionItemData의 CookingItemData가 필요
-        if (boneFireSlot.curSlot != null) //에러
+        if (boneFireSlotData != null) //에러
         {
-            PotionItemData boneFirePotionData = boneFireSlot.curSlot.itemData as PotionItemData; // 들어가는 Item
-            ItemData nextPotionData = nextBoneFireSlot?.curSlot?.itemData; // 나가는 Item (null 가능성 처리)
+            PotionItemData boneFirePotionData = boneFireSlotData.itemData as PotionItemData; // 들어가는 Item
+            ItemData nextPotionData = nextBoneFireSlotData?.itemData; // 나가는 Item (null 가능성 처리)
 
             // 포션 데이터가 유효한지 확인
             if (boneFirePotionData != null)
