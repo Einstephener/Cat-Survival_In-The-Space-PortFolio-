@@ -13,7 +13,7 @@ public class PlayerInteraction : MonoBehaviour
 {
     #region Fields
     [Header("Value")]
-    [SerializeField] private float checkRate = 0.5f;
+    [SerializeField] private float checkRate = 0.1f;
     [SerializeField] private float maxCheckDistance = 5f;
     private float lastCheckTime;
 
@@ -36,8 +36,9 @@ public class PlayerInteraction : MonoBehaviour
 
     private void Start()
     {
-        playerCamera = Camera.main;        
-        ClearInteraction();
+        playerCamera = Camera.main;
+
+        //ClearInteraction();
     }
 
     private void Update()
@@ -112,7 +113,6 @@ public class PlayerInteraction : MonoBehaviour
         if (hit.collider.gameObject != currentInteractObject)
         {
             currentInteractObject = hit.collider.gameObject;
-            //promptText.gameObject.SetActive(true);
             PromptTextActive(true);
             promptText.text = $"<b>[E]</b> {"DrinkWater"}";
         }
@@ -124,41 +124,35 @@ public class PlayerInteraction : MonoBehaviour
         enemyObject = null;
         natureObject = null;
         currentInteractable = null;
-        //promptText.gameObject.SetActive(false);
         PromptTextActive(false);
 
     }
     #endregion
-    private void PromptTextActive(bool isActive)
-    {
-        if (promptText == null)
-        {
-        }
-        else
-        {
-            if (Main.UI.GameSceneUI.TryGetComponent<UI_Scene>(out UI_Scene uiScene))
-            {
-                promptText = uiScene.interactionTXT;
-            }
-            promptText.gameObject.SetActive(isActive);
-        }
 
-    }
     private void SetPromptText()
     {
         if (currentInteractable != null)
         {
-            //promptText.gameObject.SetActive(true);
             PromptTextActive(true);
             promptText.text = $"<b>[E]</b> {currentInteractable.GetInteractPrompt()}";
         }
     }
-
+    private void PromptTextActive(bool isActive)
+    {
+        if (promptText == null)
+        {
+            Main.UI.PromtText.gameObject.SetActive(isActive);
+            promptText = Main.UI.PromtText;
+        }
+        else
+        {
+            promptText.gameObject.SetActive(isActive);
+        }
+    }
     public void OnInteract(InputValue value)
     {
         if (currentInteractable != null)
         {
-            Debug.Log("Test2");
             currentInteractable.OnInteract();
             ClearInteraction();
         }
