@@ -6,17 +6,17 @@ using UnityEngine.InputSystem;
 public class PlayerUIControl : MonoBehaviour
 {
     #region Field
+    //private GameObject UI_Tablet;
     [SerializeField]
-    private GameObject UI_Tablet;
     private bool IsTabletON = false;
+    //private GameObject UI_Setting;
     [SerializeField]
-    private GameObject UI_Setting;
     private bool IsSettingON = false;
+    //private GameObject UI_Inventory;
     [SerializeField]
-    private GameObject UI_Inventory;
     private bool IsInventoryON = false;
+    //private GameObject UI_Map;
     [SerializeField]
-    private GameObject UI_Map;
     private bool IsMapON = false;
 
     public InputActionAsset inputActionAsset;
@@ -54,13 +54,13 @@ public class PlayerUIControl : MonoBehaviour
     {
         if (IsTabletON)
         {
-            UI_Tablet.SetActive(false);
+            //UI_Tablet.SetActive(false);
             IsTabletON = false;
             SwitchToPlayer();
         }
         else
         {
-            UI_Tablet.SetActive(true);
+            //UI_Tablet.SetActive(true);
             IsTabletON = true;
             SwitchToUI();
         }
@@ -70,13 +70,13 @@ public class PlayerUIControl : MonoBehaviour
     {
         if (IsSettingON)
         {
-            UI_Setting.SetActive(false);
+            //UI_Setting.SetActive(false);
             IsSettingON = false;
             SwitchToPlayer();
         }
         else
         {
-            UI_Setting.SetActive(true);
+            //UI_Setting.SetActive(true);
             IsSettingON = true;
             SwitchToUI();
         }
@@ -85,13 +85,13 @@ public class PlayerUIControl : MonoBehaviour
     {
         if (IsMapON)
         {
-            UI_Map.SetActive(false);
+            //UI_Map.SetActive(false);
             IsMapON = false;
             SwitchToPlayer();
         }
         else
         {
-            UI_Map.SetActive(true);
+            //UI_Map.SetActive(true);
             IsMapON = true;
             SwitchToUI();
         }
@@ -100,13 +100,13 @@ public class PlayerUIControl : MonoBehaviour
     {
         if (IsInventoryON)
         {
-            UI_Inventory.SetActive(false);
+            //UI_Inventory.SetActive(false);
             IsInventoryON = false;
             SwitchToPlayer();
         }
         else
         {
-            UI_Inventory.SetActive(true);
+            //UI_Inventory.SetActive(true);
             IsInventoryON = true;
             SwitchToUI();
         }

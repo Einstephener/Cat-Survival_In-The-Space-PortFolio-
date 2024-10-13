@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MainScene : BaseScene
 {
     #region Fields
+
+    public InputActionAsset inputActionAsset;
+
     #endregion
 
     protected override bool Initialize()
@@ -13,6 +17,8 @@ public class MainScene : BaseScene
         if (!base.Initialize()) return false;
 
         Main.Resource.Initialize();
+
+        Main.UI.inputActionAsset = inputActionAsset;
 
         Main.UI.ShowSceneUI<UI_Scene>("UI_MainScene");
         InitPopupUI<InventoryUI>("Inventory");
