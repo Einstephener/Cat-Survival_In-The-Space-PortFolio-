@@ -20,6 +20,7 @@ public class MainScene : BaseScene
 
         Main.UI.inputActionAsset = inputActionAsset;
 
+        Main.Resource.Instantiate("@EventSystem");
         Main.UI.ShowSceneUI<UI_Scene>("UI_MainScene");
         InitPopupUI<InventoryUI>("Inventory");
         InitPopupUI<UI_Map>("UI_Map");
