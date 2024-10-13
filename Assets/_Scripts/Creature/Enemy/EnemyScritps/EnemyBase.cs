@@ -15,7 +15,7 @@ public class EnemyBase : Enemy
     public override void GetReward()
     {
         base.GetReward();
-        //Main.Inventory.AddItem(_enemyData.rewardItem, 5);
+        Main.Inventory.AddItem(_enemyData.rewardItem, 5);
         Debug.Log($"{_enemyData.rewardItem} 획득했습니다.");
     }
 }
