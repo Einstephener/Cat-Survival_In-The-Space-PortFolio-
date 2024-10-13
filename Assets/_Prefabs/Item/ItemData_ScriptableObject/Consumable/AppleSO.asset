@@ -20,8 +20,10 @@ MonoBehaviour:
     type: 3}
   item: {fileID: 255103328736514386, guid: db685445fa85a2b48b02de87edee5630, type: 3}
   CraftingResourceList: []
+  EquipPrefab: {fileID: 4561632533124339639, guid: 4625ed500dfb2a041942241f16cc3b5d,
+    type: 3}
   MaxAmount: 99
-  EquipPrefab: {fileID: 0}
   Consumables:
   - type: 1
     ConsumableValue: 50
+  CookingItemData: {fileID: 0}
