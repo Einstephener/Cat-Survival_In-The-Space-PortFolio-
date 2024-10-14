@@ -29,7 +29,7 @@ public class PlayerCondition : MonoBehaviour, ISubject
     private List<IObserver> _observers = new List<IObserver>();
     private PlayerStatus _state;
     [HideInInspector] public PlayerStatusUpdater updater;
-    private float _maxValue = 10000f;
+    private float _maxValue = 100f;
     [HideInInspector] public float _basicAttack = 10f;
 
     private void Start()
@@ -99,6 +99,11 @@ public class PlayerCondition : MonoBehaviour, ISubject
         }
 
         Notify();
+    }
+
+    public bool IsDead()
+    {
+        return updater.IsPlayerDead();
     }
 
     // 목마름 변경.
