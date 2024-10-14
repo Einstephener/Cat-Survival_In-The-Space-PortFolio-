@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4707803290047135555}
   - component: {fileID: 1389817811203732179}
   - component: {fileID: 7035165599322144774}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7830397575329877247}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.502208, y: 0.14099315, z: -0.7016318}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: aa35f9b28ed047b438dec8917faaaac0, type: 2}
-  item: {fileID: 0}
+  item: {fileID: 7035165599322144774}
 --- !u!114 &7035165599322144774
 MonoBehaviour:
   m_ObjectHideFlags: 0

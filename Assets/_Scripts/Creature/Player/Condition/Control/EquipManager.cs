@@ -34,6 +34,15 @@ public class EquipManager : MonoBehaviour
         }
     }
 
+    public void OnInteract(InputValue value)
+    {
+        if (_itemData.Type == ItemType.Consumable)
+        {
+            curEquip.OnEating();
+            _itemData.item.Use();
+        }
+    }
+
     public void EquipNew(ItemData itemData) // 인벤토리에서 슬롯을 누를 때 동작하도록 해야 함
     {
         UnEquip();

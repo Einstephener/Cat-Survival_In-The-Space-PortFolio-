@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3487519393398620297
+--- !u!1 &3183341481437327937
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1639073067767756073}
-  - component: {fileID: 6634008436369109829}
-  - component: {fileID: 5848849731711427430}
-  m_Layer: 11
-  m_Name: AxeV1_Equip
+  - component: {fileID: 4753473774466366081}
+  - component: {fileID: 4674725975974461601}
+  - component: {fileID: 1796365720869007221}
+  m_Layer: 0
+  m_Name: StonPickAxe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1639073067767756073
+--- !u!4 &4753473774466366081
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3487519393398620297}
+  m_GameObject: {fileID: 3183341481437327937}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.0000001490116, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 785600509405304553}
+  - {fileID: 6175437841539382395}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6634008436369109829
+--- !u!114 &4674725975974461601
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3487519393398620297}
+  m_GameObject: {fileID: 3183341481437327937}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e285492ba5934b4bb18034034f9229d, type: 3}
@@ -53,20 +53,20 @@ MonoBehaviour:
   doesGatherResources: 1
   doesGatherFish: 0
   doesGatherInstallation: 0
-  doesDealDamage: 1
-  damage: 10
-  useStamina: 10
---- !u!95 &5848849731711427430
+  doesDealDamage: 0
+  damage: 0
+  useStamina: 0
+--- !u!95 &1796365720869007221
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3487519393398620297}
+  m_GameObject: {fileID: 3183341481437327937}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e641e0c8eef6bd24980dde67d1058c03, type: 2}
+  m_Controller: {fileID: 22100000, guid: 6720256bd9a40c24fa2a3c360ccc8422, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -77,7 +77,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1 &8239670880084002711
+--- !u!1 &4089685076212817817
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,46 +85,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 785600509405304553}
-  - component: {fileID: 8724297684047526671}
-  - component: {fileID: 442343427828221042}
-  m_Layer: 11
-  m_Name: AxeV1_EquipTool
+  - component: {fileID: 6175437841539382395}
+  - component: {fileID: 5679213984144935955}
+  - component: {fileID: 3019236492856822964}
+  m_Layer: 6
+  m_Name: PickAxeV1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &785600509405304553
+--- !u!4 &6175437841539382395
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8239670880084002711}
+  m_GameObject: {fileID: 4089685076212817817}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.5, y: -0.3, z: 0.7}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: 0.5, y: -0.3, z: 0.85}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1639073067767756073}
+  m_Father: {fileID: 4753473774466366081}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!33 &8724297684047526671
+--- !u!33 &5679213984144935955
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8239670880084002711}
-  m_Mesh: {fileID: -3444995148795218251, guid: bda3df0b090a6d64f9ef4850a025dc3a, type: 3}
---- !u!23 &442343427828221042
+  m_GameObject: {fileID: 4089685076212817817}
+  m_Mesh: {fileID: 8852577410010032590, guid: a2e5c537bbbaee44082807d1614edef1, type: 3}
+--- !u!23 &3019236492856822964
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8239670880084002711}
+  m_GameObject: {fileID: 4089685076212817817}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -139,8 +139,8 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 18c9e94dd61f38949a78534f943fee84, type: 2}
-  - {fileID: 2100000, guid: f7ebf90318e22d14ba2b9db3099952a4, type: 2}
   - {fileID: 2100000, guid: bec39a1b7e10f5f49ad8e94069500dfc, type: 2}
+  - {fileID: 2100000, guid: f7ebf90318e22d14ba2b9db3099952a4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -6,6 +6,10 @@ public class Potion : Item
 {
     public float value;
     public PlayerCondition playerCondition;
+
+    private void Awake() // 플레이어 컨디션 납치하자
+    {
+    }
     public Potion(ItemData data) : base(data)
     {
         if (data is PotionItemData potionData)

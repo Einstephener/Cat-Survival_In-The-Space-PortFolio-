@@ -16,11 +16,13 @@ MonoBehaviour:
   Description: Apple is Hunger +50
   Type: 2
   Icon: {fileID: 21300000, guid: 742979fc8114d0445a7901d7627f52a4, type: 3}
-  DropPrefab: {fileID: 0}
-  item: {fileID: 3938857825991773884, guid: 730aa33df531aa44e9a9e1d36963ce4c, type: 3}
+  DropPrefab: {fileID: 7830397575329877247, guid: 396c86cb99eee6d458e6c17120ff7b1d,
+    type: 3}
+  item: {fileID: 7035165599322144774, guid: 396c86cb99eee6d458e6c17120ff7b1d, type: 3}
   CraftingResourceList: []
+  EquipPrefab: {fileID: 872445033383147113, guid: cf7de5630fa937c4ea0bcf752e2c3c4e,
+    type: 3}
   MaxAmount: 99
-  EquipPrefab: {fileID: 0}
   Consumables:
   - type: 1
     ConsumableValue: 50

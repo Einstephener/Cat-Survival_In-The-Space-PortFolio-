@@ -14,6 +14,7 @@ public class EquipTool : Equip
     public bool doesGatherResources;
     public bool doesGatherFish;
     public bool doesGatherInstallation;
+    public bool doesGatherEat;
 
     [Header("Combat")]
     public bool doesDealDamage;
@@ -33,7 +34,7 @@ public class EquipTool : Equip
     public override void OnAttacking()
     {
         Debug.Log($"EquipTool - OnAttacking() : Weaopn Attacking");
-        if(doesGatherInstallation)
+        if(doesGatherInstallation || doesGatherEat)
         {
             return;
         }
@@ -42,6 +43,22 @@ public class EquipTool : Equip
         {
             attacking = true;
             animator.SetTrigger("OnAttack");
+            Invoke("OnCanAttack", attackRate);
+        }
+    }
+
+    public override void OnEating()
+    {
+        Debug.Log($"EquipTool - OnEating() : Posion Eating");
+        if (!doesGatherEat)
+        {
+            return;
+        }
+
+        if (!attacking)
+        {
+            attacking = true;
+            animator.SetTrigger("OnEat");
             Invoke("OnCanAttack", attackRate);
         }
     }
