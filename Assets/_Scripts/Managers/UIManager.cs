@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public enum OrderValue { _sceneOrder = 5, _popUpOrder = 10, _settingOrder = 20 }
@@ -51,7 +52,40 @@ public class UIManager
     [HideInInspector] public QuickSlot[] QuickSlots;
     [HideInInspector] public  Dictionary<string, GameObject> _uiPopUpDictionary = new Dictionary<string, GameObject>(); // 팝업 UI 관리
 
+
+    [HideInInspector] public InputActionAsset inputActionAsset;
+    private InputActionMap playerActionMap;    // Player용 ActionMap
+    private InputActionMap uiActionMap;        // UI용 ActionMap
+
     #endregion
+
+    public void SwitchToPlayer()
+    {
+        if (playerActionMap == null || uiActionMap == null)
+        {
+            playerActionMap = inputActionAsset.FindActionMap("Player");
+            uiActionMap = inputActionAsset.FindActionMap("UI");
+
+            playerActionMap.Enable();
+        }
+        uiActionMap.Disable();
+        playerActionMap.Enable();
+    }
+
+    public void SwitchToUI()
+    {
+        if (playerActionMap == null || uiActionMap == null)
+        {
+            playerActionMap = inputActionAsset.FindActionMap("Player");
+            uiActionMap = inputActionAsset.FindActionMap("UI");
+
+            playerActionMap.Enable();
+        }
+        playerActionMap.Disable();
+        uiActionMap.Enable();
+    }
+
+
     public void SetCanvas(GameObject obj, OrderValue sort)
     {
         if (!obj.TryGetComponent(out Canvas canvas))
@@ -127,18 +161,20 @@ public class UIManager
 
             // 팝업 활성화
             popup.SetActive(true);
+            SwitchToUI();
             _alreayOpenPopUpUI = popup;
 
-            Time.timeScale = 0.0f; // 팝업이 열리면 시간 멈춤
+            //Time.timeScale = 0.0f; // 팝업이 열리면 시간 멈춤
         }
     }
 
     public void ClosePopupUI(GameObject obj)
     {
-        Time.timeScale = 1.0f;
+        //Time.timeScale = 1.0f;
 
         if (_alreayOpenPopUpUI == obj)
         {
+            SwitchToPlayer();
             obj.SetActive(false);
         }
         _alreayOpenPopUpUI = null;

@@ -22,14 +22,20 @@ public class EnemyAttackState : IEnemyState
         // 플레이어와의 거리 체크 (만약 플레이어가 멀어졌다면 다시 추적)
         if (!enemy.IsAttackRange())
         {
+            enemy.animator.SetBool("IsAttack", false);
             enemy.TransitionToState(new EnemyChaseState());
         }
         else
         {
-            //enemy.aiPath.canMove = false;
-            enemy.animator.SetTrigger("OnAttack");
+            if(enemy.AttackCooldownCheck())
+            {
+                enemy.animator.SetTrigger("OnAttack");
+            }
+            else
+            {
+                enemy.animator.SetBool("IsAttack", true);
+            }
         }
-        //enemy.animator.SetTrigger("OnAttack");
     }
 
     public void ExitState(Enemy enemy)

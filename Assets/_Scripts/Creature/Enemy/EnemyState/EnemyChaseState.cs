@@ -9,12 +9,12 @@ public class EnemyChaseState : IEnemyState
     {
         Debug.Log("적이 플레이어를 추적하기 시작합니다.");
         enemy.SetSpeed(6f);
+        enemy.aiPath.canMove = true;
         enemy.animator.SetFloat("Speed", enemy.aiPath.maxSpeed);
     }
 
     public void UpdateState(Enemy enemy)
     {
-        //enemy.aiPath.canMove = true;
         if (enemy.IsDead())
         {
             enemy.TransitionToState(new EnemyDeadState());

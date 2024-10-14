@@ -20,6 +20,7 @@ MonoBehaviour:
   maxHp: 150
   damage: 7
   addSpeed: 0
+  attackCooldown: 3
   sightRange: 10
   exitBuffer: 3
   attackRange: 5

@@ -26,6 +26,7 @@ public class EnemyData : ScriptableObject
     public float maxHp;
     public float damage;
     public float addSpeed;
+    public float attackCooldown;
 
     public float sightRange;
     public float exitBuffer;

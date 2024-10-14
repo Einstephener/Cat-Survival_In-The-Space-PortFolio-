@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5883107848638553411}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S:prefix_MiddleFinger4_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6921321268093821396}
   - component: {fileID: 7559716908479423191}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: "Catcher_S:\u0421atcher_S"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4650490373829413793}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S:prefix_Ankle_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5587452568024938975}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S:prefix_ToesEnd_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7660128879108048375}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S:prefix_MiddleFinger1_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,7 +242,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4088498616771537905}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S:prefix_Wrist_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +274,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 203377699876387043}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S:prefix_Scapula_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -306,7 +306,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3853621890577802184}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S:prefix_Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -338,7 +338,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 811834927135684573}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S:prefix_Hip_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,7 +370,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8867972097179999117}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S:prefix_Toes_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -402,7 +402,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 921377054408441367}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S:prefix_Shoulder_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -434,7 +434,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1679715578818375871}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S:prefix_Knee_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -466,7 +466,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2359757401553327475}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S:prefix_Root_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -500,7 +500,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6337755807287610862}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S:prefix_HeadEnd_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -531,7 +531,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5995447522522739183}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S:prefix_ToesEnd_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -562,7 +562,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1038991039255545057}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S:prefix_Hip_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -600,7 +600,7 @@ GameObject:
   - component: {fileID: 4732603982079366734}
   - component: {fileID: 6667712141057666846}
   - component: {fileID: 3277579593597615169}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -785,7 +785,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4270593856047663039}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S:prefix_Ankle_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -817,7 +817,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7588253326950216407}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S:prefix_Toes_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -849,7 +849,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 953084435700849291}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S:prefix_Wrist_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -881,7 +881,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1637134735520583425}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S:prefix_Spine1_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -917,7 +917,7 @@ GameObject:
   - component: {fileID: 4849641528501506076}
   - component: {fileID: 718060146343163196}
   - component: {fileID: -3029407931748103535}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Melee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1031,7 +1031,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 753256143376863458}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S:prefix_Elbow_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1063,7 +1063,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2882821352096962648}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S:prefix_Neck_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1095,7 +1095,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3134152764981230017}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S:prefix_Chest_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1129,7 +1129,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8364354642521973303}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_Small
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1161,7 +1161,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4713695515729628083}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S:prefix_MiddleFinger1_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1193,7 +1193,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6215623928961721349}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S:prefix_Elbow_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1225,7 +1225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8776308752954347870}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S:prefix_Knee_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1257,7 +1257,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5968525077904184991}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S:prefix_Head_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1289,7 +1289,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1692311458004885357}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S:prefix_Scapula_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1321,7 +1321,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8370181615717475824}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S:prefix_MiddleFinger4_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1352,7 +1352,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7250139308769972241}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Catcher_S:prefix_Shoulder_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
