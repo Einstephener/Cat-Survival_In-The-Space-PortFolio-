@@ -131,6 +131,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
             else /*if (_slots[i].IsEmpty())*/ if (_slots[i].itemData == null || _slots[i].amount >= 0)
             {
                 slotObjects[i].ClearSlot(); // 빈 슬롯 처리
+                
             }
         }
 
@@ -158,16 +159,16 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         if (selectSlot != quickSlotObjects[index])
         {
             //Debug.Log($"사용한 슬롯: {index}");
-            selectSlot = quickSlotObjects[index];
-
+            selectSlot = slotObjects[index];
+            //selectSlot = quickSlotObjects[index];
             quickSlotObjects[index].SetOutLine();
 
             //equipManager 관련 버그(에러) : 선택된 슬롯의 아이템을 이동 시켜도 그 아이템을 들고 있는 버그가 있음 이걸 Update문이나 이벤트에서 관리를 해야할 거 같음 
-            //equipManager.EquipNew(selectSlot.curSlot.itemData);// 임시
-            //if (selectSlot.curSlot.itemData == null)
-            //{
-            //    equipManager.UnEquip();
-            //}
+            equipManager.EquipNew(selectSlot.curSlot.itemData);// 임시
+            if (selectSlot.curSlot.itemData == null)
+            {
+                equipManager.UnEquip();
+            }
 
             for (int i = 0; i < quickSlotObjects.Length; i++)
             {
@@ -179,6 +180,23 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
             }
         }
     }
+
+    public void WhetherSelectSlot() // 현재 장착된 슬릇
+    {
+        //1. 장착한 슬롯을 가지고 온다
+        //2. 슬롯의 아이템 데이터가 없으면 retrun
+        //3. 있으면 Equipmanager.unEquip();
+        //이걸 모든 이벤트에 적용을 해야함;;
+        //예를들어 스왑, 아이템 사용 등 전부 추가해야함;
+
+        if (selectSlot == null)
+        {
+            return;
+        }
+        equipManager.UnEquip();
+        //equipManager.EquipNew(selectSlot.curSlot.itemData);
+    }
+
 
     public ItemData GetSelectItemData()
     {
@@ -215,6 +233,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
             {
                 //Debug.Log($"[InventoryUI] SwapItem Before - dragSlotData : {dragSlotData.itemData.DisplayName}, {dragSlotData.amount}/ dropSlotData : {dropSlotData.itemData.DisplayName}, {dropSlotData.amount}");
                 MoveSlot(dragSlotData, dropSlotData);
+
                 //Debug.Log($"[InventoryUI] SwapItem After - dragSlotData : {dragSlotData.itemData.DisplayName}, {dragSlotData.amount}/ dropSlotData : {dropSlotData.itemData.DisplayName}, {dropSlotData.amount}");
             }
             else if (dragSlotData.itemData == dropSlotData.itemData && Main.Inventory.IsCountTableItem(dragSlotData.itemData))
@@ -222,6 +241,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
                 //Debug.Log("같은 아이템이며 셀 수 있는 아이템이넹");
                 //두 아이템이 같은 ItemData이면서 셀 수 있는 아이템이면 SeparateAmount() 함수를 통해 갯수를 합치고 만약 함친 값이 MaxAmount보다 높으면 MaxAmount, @ 헤서 함치자 예압
                 CombineSlots(dragSlotData, dropSlotData);
+
             }
         }
         else
@@ -231,10 +251,15 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         
     }
 
-    public void MoveSlot(SlotData dragSlotData, SlotData dropSlotData)
+    public void MoveSlot(SlotData dragSlotData, SlotData dropSlotData) // 두 슬롯의 데이터를 교환하는 함수
     {
         if (dragSlotData.itemData != null && dropSlotData != null)
         {
+            if (dragSlotData == selectSlot.curSlot)
+            {
+                WhetherSelectSlot();
+            }
+
             ItemData tempSlotaData_ItemData = dragSlotData.itemData;
             int tempAmount = dragSlotData.amount;
 
@@ -253,7 +278,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         BoneFireUpdateUI();
     }
 
-    public void CombineSlots(SlotData dragSlotData, SlotData dropSlotData)
+    public void CombineSlots(SlotData dragSlotData, SlotData dropSlotData) // 같은 아이템이면 병합하는 함수
     {
         if (dragSlotData.itemData != dropSlotData.itemData)
         {
@@ -278,6 +303,11 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
             dragSlotData.amount = 0;
             //임시
             dragSlotData.itemData = null;
+
+            if (dragSlotData == selectSlot.curSlot)
+            {
+                WhetherSelectSlot();
+            }
         }
 
         UpdateUI();

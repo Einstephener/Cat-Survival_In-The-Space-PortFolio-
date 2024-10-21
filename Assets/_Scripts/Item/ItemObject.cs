@@ -51,7 +51,7 @@ public class ItemObject : MonoBehaviour, IInteractable
         {
             Main.Inventory.AddItem(itemData);
         }
-        else
+        else // 임시입니다.
         {
             Installation initem = item as Installation;
             BoneFire Test = item as BoneFire;

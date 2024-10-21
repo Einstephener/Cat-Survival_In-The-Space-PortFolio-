@@ -61,7 +61,7 @@ public class PreviewObject : MonoBehaviour
 
     #endregion
 
-    #region Trigger
+    #region Trigger 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer != layerGround && other.gameObject.layer != IGNORE_RAYCAST_LAYER)

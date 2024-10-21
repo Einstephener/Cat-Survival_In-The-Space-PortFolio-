@@ -26,4 +26,8 @@ MonoBehaviour:
   Consumables:
   - type: 1
     ConsumableValue: 50
+  - type: 0
+    ConsumableValue: 100
+  - type: 2
+    ConsumableValue: 30
   CookingItemData: {fileID: 11400000, guid: 461f997950600b9418f1e3001caa2b28, type: 2}

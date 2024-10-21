@@ -133,6 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbdbe0b2cae90784185ccee4d98b3738, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 0}
+  itemData: {fileID: 11400000, guid: aa35f9b28ed047b438dec8917faaaac0, type: 2}
   value: 0
   playerCondition: {fileID: 0}

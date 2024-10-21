@@ -39,15 +39,31 @@ public class EquipManager : MonoBehaviour
         if (_itemData.Type == ItemType.Consumable)
         {
             curEquip.OnEating();
+
+            if (_itemData.item is Potion) // [10/21] 임시
+            {
+                Potion potion = _itemData.item as Potion;
+                if (potion.playerCondition == null)
+                {
+                    potion.playerCondition = GetComponent<PlayerCondition>();
+                }
+
+            }
+
             _itemData.item.Use();
         }
     }
 
-    public void EquipNew(ItemData itemData) // 인벤토리에서 슬롯을 누를 때 동작하도록 해야 함
+    public void EquipNew(ItemData itemData) // 인벤토리에서 슬롯을 누를 때 동작하도록 해야 함 , [10/21] - InventoryUI - SelectSLot() 주석 처리함; 
     {
         UnEquip();
         _itemData = itemData;
         //SO 수정사항 - 장착하는 아이템 관련(애니메이션도 필요함 :( )
+        if (_itemData == null)
+        {
+            return;
+        }
+
         curEquip = Instantiate(_itemData.EquipPrefab, equipParent).GetComponent<Equip>();
     }
 
