@@ -22,20 +22,28 @@ public class EnemyChaseState : IEnemyState
         }
 
         // A* Pathfinding에서의 타겟을 플레이어로 설정.
-        if (enemy.IsTarget())
-        {
-            // 공격 범위 체크
-            if(enemy.IsAttackRange())
-            {
-                enemy.TransitionToState(new EnemyAttackState());
-            }
-        }
-        else
+        if (!enemy.IsTarget())
         {
             if (!enemy.IsHome())
             {
                 Debug.Log("집갈래");
                 enemy.TransitionToState(new EnemyWalkingState());
+            }
+        }
+        else
+        {
+            // 공격 범위 체크
+            if (enemy.IsAttackRange())
+            {
+                enemy.TransitionToState(new EnemyAttackState());
+            }
+
+            PlayerCondition playerCondition = enemy.GetPlayerCondition();
+            if (playerCondition != null && playerCondition.IsDead())
+            {
+                Debug.Log("플레이어가 죽어서 공격을 중단합니다.");
+                enemy.TransitionToState(new EnemyWalkingState());
+                return;
             }
         }
     }

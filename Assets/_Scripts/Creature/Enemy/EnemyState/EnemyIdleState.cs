@@ -30,6 +30,14 @@ public class EnemyIdleState : IEnemyState
         {
             enemy.TransitionToState(new EnemyChaseState());
         }
+        else
+        {
+            if (!enemy.IsHome())
+            {
+                Debug.Log("집갈래");
+                enemy.TransitionToState(new EnemyWalkingState());
+            }
+        }
     }
 
     public void ExitState(Enemy enemy)

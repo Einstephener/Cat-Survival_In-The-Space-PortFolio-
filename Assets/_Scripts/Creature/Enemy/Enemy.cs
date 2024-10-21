@@ -134,6 +134,12 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public PlayerCondition GetPlayerCondition()
+    {
+        if (_playerTransform == null) return null;
+        return _playerTransform.GetComponent<PlayerCondition>();
+    }
+
     // 플레이어가 시야에 있는지 체크 후 타겟 설정.
     public bool IsTarget()
     {
@@ -141,18 +147,26 @@ public class Enemy : MonoBehaviour
         // 배열이 비어 있지 않으면 플레이어가 감지된 것.
         if (sight.Length > 0)
         {
-            // 플레이어가 감지되면 시야가 넓어짐.
-            _currentSightRange = _enemyData.sightRange + _enemyData.exitBuffer;
-
             // 첫 번째로 감지된 플레이어를 대상으로 설정.
             _playerTransform = sight[0].transform;
+
+            PlayerCondition playerCondition = GetPlayerCondition();
+            if (playerCondition != null && playerCondition.IsDead())
+            {
+                // 플레이어가 죽었다면 타겟 해제.
+                _currentSightRange = _enemyData.sightRange;
+                Debug.Log("플레이어가 죽었습니다.");
+                return false;
+            }
+
+            // 플레이어가 감지되면 시야가 넓어짐.
+            _currentSightRange = _enemyData.sightRange + _enemyData.exitBuffer;
             _target.target = _playerTransform;
             Debug.Log("플레이어 감지");
 
             return true;
         }
 
-        // TODO : 플레이어가 죽었다면 타겟이 되지 않도록 처리.
         _currentSightRange = _enemyData.sightRange;
         return false;
     }
@@ -161,6 +175,15 @@ public class Enemy : MonoBehaviour
     public bool IsAttackRange()
     {
         if (_playerTransform == null && _currentState is EnemyWalkingState) return false;
+
+        // 플레이어 죽었는지 체크.
+        PlayerCondition playerCondition = GetPlayerCondition();
+        if (playerCondition != null && playerCondition.IsDead())
+        {
+            Debug.Log("플레이어가 죽어서 공격 중단");
+            aiPath.canMove = true;
+            return false;
+        }
 
         float distanceToPlayer = Vector3.Distance(transform.position, _playerTransform.position);
 
@@ -184,6 +207,7 @@ public class Enemy : MonoBehaviour
             return true;
         }
 
+        Debug.Log("집 가는 중");
         _target.target = null;
         aiPath.destination = _basePosition;
         return false;

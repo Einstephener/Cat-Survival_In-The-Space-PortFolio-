@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UI_QuickSlots: []
-  interactionTXT: {fileID: 0}
+  interactionTXT: {fileID: 2396603109379630369}
   health: {fileID: 0}
   hunger: {fileID: 0}
   thirsty: {fileID: 0}

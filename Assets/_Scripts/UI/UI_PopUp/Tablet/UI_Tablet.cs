@@ -18,7 +18,7 @@ public class UI_Tablet : UI_Popup
     public List<GameObject> ToolsWeapons;
     public List<GameObject> Furnitures;
 
-
+    private List<UI_CraftList> childs = new List<UI_CraftList>(); // 초기화 추가;
 
     private void Start()
     {
@@ -30,13 +30,21 @@ public class UI_Tablet : UI_Popup
         {
             GameObject _craftList = Instantiate(CraftList_Prefab, ToolsContentsParent.transform);
             _craftList.TryGetComponent(out UI_CraftList ui_CraftList);
-            ui_CraftList.InitSetting(tool);
+            ui_CraftList.InitSetting(tool, this);
+            if(_craftList.TryGetComponent<UI_CraftList>(out UI_CraftList craftList))
+            {
+                childs.Add(craftList);
+            }            
         }
         foreach (GameObject furniture in Furnitures)
         {
             GameObject _craftList = Instantiate(CraftList_Prefab, FurnitureContentsParent.transform);
             _craftList.TryGetComponent(out UI_CraftList ui_CraftList);
-            ui_CraftList.InitSetting(furniture);
+            ui_CraftList.InitSetting(furniture, this); 
+            if (_craftList.TryGetComponent<UI_CraftList>(out UI_CraftList craftList))
+            {
+                childs.Add(craftList);
+            }
         }
     }
 
@@ -50,5 +58,13 @@ public class UI_Tablet : UI_Popup
     {
         ToolCraftingPanel.SetActive(false);
         FurnitureCraftingPanel.SetActive(true);
+    }
+
+    public void ReUpdateResource()
+    {
+        foreach(UI_CraftList uI_CraftList in childs)
+        {
+            uI_CraftList.UpdateResourceTexts();
+        }
     }
 }

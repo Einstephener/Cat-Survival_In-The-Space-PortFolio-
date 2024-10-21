@@ -19,7 +19,11 @@ public class EnemyWalkingState : IEnemyState
             return;
         }
 
-        if (enemy.IsHome()) enemy.TransitionToState(new EnemyIdleState());
+        if (enemy.IsHome())
+        {
+            enemy.TransitionToState(new EnemyIdleState());
+            return;
+        }
     }
 
     public void ExitState(Enemy enemy)

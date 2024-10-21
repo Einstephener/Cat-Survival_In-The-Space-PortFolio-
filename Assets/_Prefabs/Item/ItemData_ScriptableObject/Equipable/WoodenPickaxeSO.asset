@@ -16,12 +16,15 @@ MonoBehaviour:
   Description: 
   Type: 1
   Icon: {fileID: 21300000, guid: af53d7965da04ec4995513b8ed985e40, type: 3}
-  DropPrefab: {fileID: 9166431057789560856, guid: 1f8519165644f4949b32df74bd95a373,
+  DropPrefab: {fileID: 945595301229288271, guid: dd82ba6e5a7c35b40976454f21d3c75c,
     type: 3}
   item: {fileID: 0}
-  MaxAmount: 1
-  EquipPrefab: {fileID: 9166431057789560856, guid: 1f8519165644f4949b32df74bd95a373,
+  CraftingResourceList:
+  - ResourceData: {fileID: 11400000, guid: f08ffa4361a37194180ef0894af4c08b, type: 2}
+    Amount: 10
+  EquipPrefab: {fileID: 3183341481437327937, guid: c561d9dfaf2b1d74181b4bcd7fc2f10d,
     type: 3}
+  MaxAmount: 1
   Equipables:
   - type: 1
     DurabilityValue: 10
