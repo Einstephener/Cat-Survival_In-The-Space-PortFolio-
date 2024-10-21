@@ -32,6 +32,7 @@ public class PlayerCondition : MonoBehaviour, ISubject
     private float _maxValue = 100f;
     [HideInInspector] public float _basicAttack = 10f;
     private UI_PlayerCondition uI_PlayerCondition;
+    private UI_Damaged uI_Damaged;
     private bool isAttached = false;
 
     private void Start()
@@ -62,15 +63,17 @@ public class PlayerCondition : MonoBehaviour, ISubject
 
     public void Notify()
     {
-        if(!isAttached)
+        if(!isAttached) // 수정 필요
         {
             if (uI_PlayerCondition == null)
             {
                 uI_PlayerCondition = FindObjectOfType<UI_PlayerCondition>();
+                uI_Damaged = FindObjectOfType<UI_Damaged>();
             }
             else
             {
                 Attach(uI_PlayerCondition);
+                Attach(uI_Damaged);
                 isAttached = true;
             }
         }
