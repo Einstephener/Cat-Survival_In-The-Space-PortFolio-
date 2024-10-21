@@ -28,9 +28,18 @@ public class EquipManager : MonoBehaviour
     public void OnFire()
     {
         //공격 관련
-        if (curEquip != null)
+        if (curEquip != null)// [10/12] 조건문 추가해야 함
         {
             curEquip.OnAttacking();
+        }
+    }
+
+    public void OnInteract(InputValue value)
+    {
+        if (_itemData.Type == ItemType.Consumable)
+        {
+            curEquip.OnEating();
+            _itemData.item.Use();
         }
     }
 

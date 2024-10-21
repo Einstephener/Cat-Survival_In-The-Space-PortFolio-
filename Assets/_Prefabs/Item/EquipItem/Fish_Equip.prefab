@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3487519393398620297
+--- !u!1 &872445033383147113
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,65 +8,66 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1639073067767756073}
-  - component: {fileID: 6634008436369109829}
-  - component: {fileID: 5848849731711427430}
-  m_Layer: 11
-  m_Name: AxeV1_Equip
+  - component: {fileID: 2517368017413508409}
+  - component: {fileID: 2195067609654454149}
+  - component: {fileID: 3655770281078948248}
+  m_Layer: 0
+  m_Name: Fish_Equip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1639073067767756073
+--- !u!4 &2517368017413508409
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3487519393398620297}
+  m_GameObject: {fileID: 872445033383147113}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 785600509405304553}
+  - {fileID: 7557466067181856541}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6634008436369109829
+--- !u!114 &2195067609654454149
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3487519393398620297}
+  m_GameObject: {fileID: 872445033383147113}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e285492ba5934b4bb18034034f9229d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackRate: 1
-  attackDistance: 5
+  attackDistance: 0
   fishingDistance: 0
   InstallationDistance: 0
-  doesGatherResources: 1
+  doesGatherResources: 0
   doesGatherFish: 0
   doesGatherInstallation: 0
-  doesDealDamage: 1
-  damage: 10
-  useStamina: 10
---- !u!95 &5848849731711427430
+  doesGatherEat: 1
+  doesDealDamage: 0
+  damage: 0
+  useStamina: 0
+--- !u!95 &3655770281078948248
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3487519393398620297}
+  m_GameObject: {fileID: 872445033383147113}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e641e0c8eef6bd24980dde67d1058c03, type: 2}
+  m_Controller: {fileID: 22100000, guid: 63f57eacabac6d84bb401b5d867a02c9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -77,7 +78,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1 &8239670880084002711
+--- !u!1 &3849843559906310709
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,46 +86,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 785600509405304553}
-  - component: {fileID: 8724297684047526671}
-  - component: {fileID: 442343427828221042}
+  - component: {fileID: 7557466067181856541}
+  - component: {fileID: 1036046398626061982}
+  - component: {fileID: 4355681885291064452}
   m_Layer: 11
-  m_Name: AxeV1_EquipTool
+  m_Name: Fish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &785600509405304553
+--- !u!4 &7557466067181856541
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8239670880084002711}
+  m_GameObject: {fileID: 3849843559906310709}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.5, y: -0.3, z: 0.7}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5, y: -0.3, z: 0.85}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 1639073067767756073}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!33 &8724297684047526671
+  m_Father: {fileID: 2517368017413508409}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1036046398626061982
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8239670880084002711}
-  m_Mesh: {fileID: -3444995148795218251, guid: bda3df0b090a6d64f9ef4850a025dc3a, type: 3}
---- !u!23 &442343427828221042
+  m_GameObject: {fileID: 3849843559906310709}
+  m_Mesh: {fileID: 2586148439552901436, guid: 6e7236bcc7ad8a345bd8203a37806cee, type: 3}
+--- !u!23 &4355681885291064452
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8239670880084002711}
+  m_GameObject: {fileID: 3849843559906310709}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -135,12 +136,10 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 18c9e94dd61f38949a78534f943fee84, type: 2}
-  - {fileID: 2100000, guid: f7ebf90318e22d14ba2b9db3099952a4, type: 2}
-  - {fileID: 2100000, guid: bec39a1b7e10f5f49ad8e94069500dfc, type: 2}
+  - {fileID: 2100000, guid: df7fe48a4062d5448bff2a0f1470487e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

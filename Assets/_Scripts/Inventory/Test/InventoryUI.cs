@@ -162,7 +162,12 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 
             quickSlotObjects[index].SetOutLine();
 
+            //equipManager 관련 버그(에러) : 선택된 슬롯의 아이템을 이동 시켜도 그 아이템을 들고 있는 버그가 있음 이걸 Update문이나 이벤트에서 관리를 해야할 거 같음 
             //equipManager.EquipNew(selectSlot.curSlot.itemData);// 임시
+            //if (selectSlot.curSlot.itemData == null)
+            //{
+            //    equipManager.UnEquip();
+            //}
 
             for (int i = 0; i < quickSlotObjects.Length; i++)
             {

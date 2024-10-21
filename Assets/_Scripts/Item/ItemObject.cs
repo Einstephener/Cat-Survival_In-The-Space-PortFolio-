@@ -58,7 +58,7 @@ public class ItemObject : MonoBehaviour, IInteractable
             //initem.UIInterac();
             Debug.Log("ItemObject.cs - OnIntercat() Errer");
             Test.UIInterac();
-            //Use();
+            Use();
         }
     }
 
