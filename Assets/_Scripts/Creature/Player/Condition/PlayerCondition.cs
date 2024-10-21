@@ -29,19 +29,15 @@ public class PlayerCondition : MonoBehaviour, ISubject
     private List<IObserver> _observers = new List<IObserver>();
     private PlayerStatus _state;
     [HideInInspector] public PlayerStatusUpdater updater;
-    private float _maxValue = 10000f;
+    private float _maxValue = 100f;
     [HideInInspector] public float _basicAttack = 10f;
+    private UI_PlayerCondition uI_PlayerCondition;
+    private bool isAttached = false;
 
     private void Start()
     {
         // TODO: 저장 시점에 어떤 값을 가지고 있는지, 게임 시작시 초기화.
         _state = new PlayerStatus(_maxValue, _maxValue, _maxValue, _maxValue);
-
-        UI_PlayerCondition uI_PlayerCondition = FindObjectOfType<UI_PlayerCondition>();
-        if (uI_PlayerCondition != null)
-        {
-            Attach(uI_PlayerCondition);
-        }
 
         // PlayerStateUpdater를 추가하여 시간에 따른 상태 감소를 처리.
         updater = gameObject.AddComponent<PlayerStatusUpdater>();
@@ -66,10 +62,25 @@ public class PlayerCondition : MonoBehaviour, ISubject
 
     public void Notify()
     {
-        // 모든 옵저버들에게 공지.
-        foreach (var observer in _observers)
+        if(!isAttached)
         {
-            observer.OnPlayerStateChanged(_state);
+            if (uI_PlayerCondition == null)
+            {
+                uI_PlayerCondition = FindObjectOfType<UI_PlayerCondition>();
+            }
+            else
+            {
+                Attach(uI_PlayerCondition);
+                isAttached = true;
+            }
+        }
+        else
+        {
+            // 모든 옵저버들에게 공지.
+            foreach (var observer in _observers)
+            {
+                observer.OnPlayerStateChanged(_state);
+            }
         }
     }
 

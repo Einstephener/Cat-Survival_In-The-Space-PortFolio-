@@ -91,9 +91,7 @@ public class PlayerInputController : MonoBehaviour
         _rigid.MovePosition(_rigid.position + nextVec);
 
         // 점프.
-        Vector3 boxCastPosition = _groundCheck.position + Vector3.up * 0.1f;
-        _isGrounded = Physics.BoxCast(boxCastPosition, _boxCastSize / 2, Vector3.down,
-            Quaternion.identity, _groundDistance, _groundCheckLayer);
+        CheckGround();
 
         // 애니메이션
         if (_playerAnimator.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.95f)
@@ -105,6 +103,40 @@ public class PlayerInputController : MonoBehaviour
             _playerAnimator.SetLayerWeight(1, _animationWeightValue);
         }
 
+    }
+
+    private bool CheckGround()
+    {
+        //이전 boxCast로 바닥 체크 코드
+        //Vector3 boxCastPosition = _groundCheck.position + Vector3.up * 0.1f;
+        //_isGrounded = Physics.BoxCast(boxCastPosition, _boxCastSize / 2, Vector3.down,
+        //    Quaternion.identity, _groundDistance, _groundCheckLayer);
+
+        Ray[] raysList = new Ray[9]
+        {
+            new Ray(transform.position + (transform.up * 0.03f), -transform.up), //중앙
+            new Ray(transform.position + (transform.forward * 0.25f) + (transform.up * 0.03f), -transform.up), // 앞
+            new Ray(transform.position + (-transform.forward * 0.25f) + (transform.up * 0.03f), -transform.up), //뒤
+            new Ray(transform.position + (-transform.right * 0.25f) + (transform.up * 0.03f), -transform.up), //좌
+            new Ray(transform.position + (transform.right * 0.25f) + (transform.up * 0.03f), -transform.up), // 우
+
+            new Ray(transform.position + (transform.forward * 0.15f) + (transform.right * 0.15f)+ (transform.up * 0.03f), -transform.up),
+            new Ray(transform.position + (-transform.forward * 0.15f) + (transform.right * 0.15f)+ (transform.up * 0.03f), -transform.up),
+            new Ray(transform.position + (transform.forward * 0.15f) + (-transform.right * 0.15f)+ (transform.up * 0.03f), -transform.up),
+            new Ray(transform.position + (-transform.forward * 0.15f) + (-transform.right * 0.15f)+ (transform.up * 0.03f), -transform.up),
+        };
+
+        for (int i = 0; i < raysList.Length; i++)
+        {
+            if (Physics.Raycast(raysList[i], .1f, _groundCheckLayer))
+            {
+                _isGrounded = true;
+                return _isGrounded;
+            }
+        }
+
+        _isGrounded = false;
+        return (_isGrounded);
     }
 
 
