@@ -115,6 +115,11 @@ public class PlayerCondition : MonoBehaviour, ISubject
         Notify();
     }
 
+    public bool IsDead()
+    {
+        return updater.IsPlayerDead();
+    }
+
     // 목마름 변경.
     public void UpdateThirst(float amount)
     {
