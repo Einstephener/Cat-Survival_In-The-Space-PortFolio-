@@ -197,6 +197,7 @@ MonoBehaviour:
   testItemData2: {fileID: 11400000, guid: f08ffa4361a37194180ef0894af4c08b, type: 2}
   testItemData3: {fileID: 11400000, guid: fb98ff29e88e9004a93f3513c9f05443, type: 2}
   testItemData4: {fileID: 11400000, guid: 4533f3d5054a5e64dbe6c8ce7f9a9e3a, type: 2}
+  testItemData5: {fileID: 11400000, guid: 58690460b3ae29f4da0869e9e5b5679c, type: 2}
   equipManager: {fileID: 0}
 --- !u!1 &3424360038770647051
 GameObject:

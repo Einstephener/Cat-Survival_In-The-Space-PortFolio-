@@ -54,10 +54,35 @@ public class ItemObject : MonoBehaviour, IInteractable
         else // 임시입니다.
         {
             Installation initem = item as Installation;
-            BoneFire Test = item as BoneFire;
+
+            BoneFire boneFire = item as BoneFire;
+
+            //Tent tent = item as Tent;
+
+            //if (item is Installation installation)
+            //{
+            //    // Installation 관련 작업 수행
+            //    installation.UIInterac();
+            //}
+            //// item이 BoneFire 타입인지 확인
+            //else if (item is BoneFire boneFire)
+            //{
+            //    // BoneFire 관련 작업 수행
+            //    boneFire.UIInterac();
+            //}
+            //// item이 Tent 타입인지 확인
+            //else if (item is Tent tent)
+            //{
+            //    // Tent 관련 작업 수행
+            //    tent.UIInterac();
+            //}
+            //else
+            //{
+            //    Debug.Log("ItemObject.cs - OnInteract() Error: 알 수 없는 아이템 타입입니다.");
+            //}
             //initem.UIInterac();
             Debug.Log("ItemObject.cs - OnIntercat() Errer");
-            Test.UIInterac();
+            boneFire.UIInterac();
             Use();
         }
     }

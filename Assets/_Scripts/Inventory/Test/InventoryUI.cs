@@ -40,6 +40,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     public ItemData testItemData2;
     public ItemData testItemData3;
     public ItemData testItemData4;
+    public ItemData testItemData5;
 
     public EquipManager equipManager;
 
@@ -57,6 +58,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         Main.Inventory.TestAddItem(testItemData2, 29, 11);
         Main.Inventory.AddItem(testItemData3);
         Main.Inventory.AddItem(testItemData4);
+        Main.Inventory.AddItem(testItemData5);
         BoneFireInitialize();
 
         equipManager = FindObjectOfType<EquipManager>();
@@ -164,11 +166,11 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
             quickSlotObjects[index].SetOutLine();
 
             //equipManager 관련 버그(에러) : 선택된 슬롯의 아이템을 이동 시켜도 그 아이템을 들고 있는 버그가 있음 이걸 Update문이나 이벤트에서 관리를 해야할 거 같음 
-            equipManager.EquipNew(selectSlot.curSlot.itemData);// 임시
-            if (selectSlot.curSlot.itemData == null)
-            {
-                equipManager.UnEquip();
-            }
+            //equipManager.EquipNew(selectSlot.curSlot.itemData);// 임시
+            //if (selectSlot.curSlot.itemData == null)
+            //{
+            //    equipManager.UnEquip();
+            //}
 
             for (int i = 0; i < quickSlotObjects.Length; i++)
             {

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7139345586830667271}
   - component: {fileID: 8155913083534831169}
   - component: {fileID: 1170209336197289062}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Apple_01_Equip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,6 +53,7 @@ MonoBehaviour:
   doesGatherResources: 0
   doesGatherFish: 0
   doesGatherInstallation: 0
+  doesGatherEat: 0
   doesDealDamage: 0
   damage: 0
   useStamina: 0
@@ -88,7 +89,7 @@ GameObject:
   - component: {fileID: 4494916635311789267}
   - component: {fileID: 5680363895564773207}
   - component: {fileID: 5329765543723991591}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Apple_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
