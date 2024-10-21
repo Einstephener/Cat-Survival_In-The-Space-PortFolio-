@@ -19,13 +19,13 @@ public class EnemyAttackState : IEnemyState
             return;
         }
 
-        PlayerCondition playerCondition = enemy.GetPlayerCondition();
-        if (playerCondition != null && playerCondition.IsDead())
-        {
-            Debug.Log("플레이어가 죽어서 공격을 중단합니다.");
-            enemy.TransitionToState(new EnemyIdleState());
-            return;
-        }
+        //PlayerCondition playerCondition = enemy.GetPlayerCondition();
+        //if (playerCondition != null && playerCondition.IsDead())
+        //{
+        //    Debug.Log("플레이어가 죽어서 공격을 중단합니다.");
+        //    enemy.TransitionToState(new EnemyWalkingState());
+        //    return;
+        //}
 
         // 플레이어와의 거리 체크 (만약 플레이어가 멀어졌다면 다시 추적)
         if (!enemy.IsAttackRange())

@@ -154,8 +154,7 @@ public class Enemy : MonoBehaviour
             if (playerCondition != null && playerCondition.IsDead())
             {
                 // 플레이어가 죽었다면 타겟 해제.
-                _playerTransform = null;
-                _target.target = null;
+                _currentSightRange = _enemyData.sightRange;
                 Debug.Log("플레이어가 죽었습니다.");
                 return false;
             }
@@ -168,7 +167,6 @@ public class Enemy : MonoBehaviour
             return true;
         }
 
-        // TODO : 플레이어가 죽었다면 타겟이 되지 않도록 처리.
         _currentSightRange = _enemyData.sightRange;
         return false;
     }
@@ -183,6 +181,7 @@ public class Enemy : MonoBehaviour
         if (playerCondition != null && playerCondition.IsDead())
         {
             Debug.Log("플레이어가 죽어서 공격 중단");
+            aiPath.canMove = true;
             return false;
         }
 
@@ -208,6 +207,7 @@ public class Enemy : MonoBehaviour
             return true;
         }
 
+        Debug.Log("집 가는 중");
         _target.target = null;
         aiPath.destination = _basePosition;
         return false;
