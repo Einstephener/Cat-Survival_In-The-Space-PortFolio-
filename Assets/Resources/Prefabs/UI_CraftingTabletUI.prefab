@@ -272,10 +272,13 @@ MonoBehaviour:
   FurnitureContentsParent: {fileID: 8625688270814763359}
   ToolsContentsParent: {fileID: 6833011151013331529}
   ToolsWeapons:
-  - {fileID: 590213994266012053, guid: 21a76521fd5f23243b2cedabfa14f869, type: 3}
-  - {fileID: 212535214125548848, guid: 2a8eadb186293824a9760e052d62775d, type: 3}
-  - {fileID: 593064721187004885, guid: e91277866e990234f8b82bcf538011b3, type: 3}
-  Furnitures: []
+  - {fileID: 8485809930881838921, guid: b920ce12d52e88d48b99c2a80a7e204c, type: 3}
+  - {fileID: 945595301229288271, guid: dd82ba6e5a7c35b40976454f21d3c75c, type: 3}
+  - {fileID: 8485809930881838921, guid: eaddcff340ad5a74f9089deb79c8f954, type: 3}
+  - {fileID: 945595301229288271, guid: ae51c6b3c77770c40beacb092e7b7884, type: 3}
+  - {fileID: 7312631876051952372, guid: 4e33e530b1ab9124d96997701c3c30fa, type: 3}
+  Furnitures:
+  - {fileID: 468049451368783353, guid: 3819830f40bf07e4fbead13c17f5488d, type: 3}
 --- !u!1 &1474283352924843316
 GameObject:
   m_ObjectHideFlags: 0

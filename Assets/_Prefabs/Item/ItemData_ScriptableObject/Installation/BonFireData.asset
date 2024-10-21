@@ -20,9 +20,9 @@ MonoBehaviour:
     type: 3}
   item: {fileID: 0}
   CraftingResourceList:
-  - ResourceData: {fileID: 0}
+  - ResourceData: {fileID: 11400000, guid: f08ffa4361a37194180ef0894af4c08b, type: 2}
     Amount: 10
-  - ResourceData: {fileID: 0}
+  - ResourceData: {fileID: 11400000, guid: 1a7dbbcb91b556a42a3ea85f6129fe02, type: 2}
     Amount: 10
   EquipPrefab: {fileID: 4330533832513804394, guid: 6777d4a2b3ef43a4e92ea6643627a535,
     type: 3}
