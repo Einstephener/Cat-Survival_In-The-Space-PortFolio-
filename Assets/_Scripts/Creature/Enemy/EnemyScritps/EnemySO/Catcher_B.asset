@@ -18,11 +18,12 @@ MonoBehaviour:
     type: 3}
   rewardItem: {fileID: 11400000, guid: e18af78648779b5498cf8628bc892128, type: 2}
   maxHp: 1000
-  damage: 20
-  addSpeed: 0
-  sightRange: 12
+  damage: 10
+  addSpeed: 4
+  attackCooldown: 3
+  sightRange: 15
   exitBuffer: 5
-  attackRange: 5
-  skillRange: 5
-  skillDamage: 100
-  skillCooldown: 3
+  attackRange: 10
+  skillRange: 3
+  skillDamage: 15
+  skillCooldown: 1
