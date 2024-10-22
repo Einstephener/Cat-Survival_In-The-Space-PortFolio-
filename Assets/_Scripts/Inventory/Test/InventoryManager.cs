@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using static UnityEditor.Progress;
-public class SlotData
+public class SlotData : Data
 {
     public ItemData itemData;
     public int amount;

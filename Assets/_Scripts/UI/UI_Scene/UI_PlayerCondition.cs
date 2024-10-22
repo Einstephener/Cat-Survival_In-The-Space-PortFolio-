@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_PlayerCondition : UI_Scene, IObserver
+public class UI_PlayerCondition : UI_MainScene, IObserver
 {
 
     [HideInInspector] public Image health;

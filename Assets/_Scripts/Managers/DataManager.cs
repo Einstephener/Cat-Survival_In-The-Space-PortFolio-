@@ -17,6 +17,8 @@ public class DataManager
     /// 데이터 추가 되면 추가 하도록 하겠습니다.
     /// </summary>
     public Dictionary<string, DateData> Date = new();
+    public Dictionary<string, RespawnData> Respawn = new();
+    //public Dictionary<string, SlotData> Inventory = new();
 
     public void Initialize()
     {

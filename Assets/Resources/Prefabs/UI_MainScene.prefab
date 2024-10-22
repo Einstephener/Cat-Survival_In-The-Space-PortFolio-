@@ -5585,7 +5585,7 @@ GameObject:
   - component: {fileID: 544461677334877590}
   - component: {fileID: 4705807408648819731}
   - component: {fileID: 2925449618675715853}
-  - component: {fileID: 7238281703679054292}
+  - component: {fileID: 4279350310781022073}
   m_Layer: 5
   m_Name: UI_MainScene
   m_TagString: Untagged
@@ -5681,7 +5681,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &7238281703679054292
+--- !u!114 &4279350310781022073
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5690,7 +5690,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8039494800570462708}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6dce611fb9f4124dbf5dade7901593b, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ca9ee964e3d5504d9e1f9685e3846b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   UI_QuickSlots: []

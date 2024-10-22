@@ -33,7 +33,7 @@ public class PlayerCondition : MonoBehaviour, ISubject
     [HideInInspector] public float _basicAttack = 10f;
     private UI_PlayerCondition uI_PlayerCondition;
     private UI_Damaged uI_Damaged;
-    private bool isAttached = false;
+    private UI_Respawn uI_Respawn;
 
     private void Start()
     {
@@ -52,35 +52,48 @@ public class PlayerCondition : MonoBehaviour, ISubject
     #region 옵저버 관리
     public void Attach(IObserver observer)
     {
+        if (observer == null)
+        {
+            return;
+        }
+
         _observers.Add(observer);
     }
 
     public void Detach(IObserver observer)
     {
+        if (observer == null)
+        {
+            return;
+        }
+
         _observers.Remove(observer);
     }
+
     #endregion
 
     public void Notify()
     {
-        if(!isAttached) // 수정 필요
+        if (uI_PlayerCondition == null)
         {
-            if (uI_PlayerCondition == null)
-            {
-                uI_PlayerCondition = FindObjectOfType<UI_PlayerCondition>();
-                uI_Damaged = FindObjectOfType<UI_Damaged>();
-            }
-            else
-            {
-                Attach(uI_PlayerCondition);
-                Attach(uI_Damaged);
-                isAttached = true;
-            }
+            uI_PlayerCondition = FindObjectOfType<UI_PlayerCondition>();
+            Attach(uI_PlayerCondition);
         }
-        else
+        if (uI_Damaged == null)
         {
-            // 모든 옵저버들에게 공지.
-            foreach (var observer in _observers)
+            uI_Damaged = FindObjectOfType<UI_Damaged>();
+            Attach(uI_Damaged);
+        }
+        if (uI_Respawn == null)
+        {
+            uI_Respawn = FindObjectOfType<UI_Respawn>();
+            Attach(uI_Respawn);
+        }
+
+
+        foreach (var observer in _observers)
+        {
+            if (observer != null)
             {
                 observer.OnPlayerStateChanged(_state);
             }
@@ -150,7 +163,7 @@ public class PlayerCondition : MonoBehaviour, ISubject
     //public void UpdateAttack(float amount)
     //{
     //    _state.Attack += amount;
-                
+
 
     //    Notify();
     //}
