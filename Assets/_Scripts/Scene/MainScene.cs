@@ -23,11 +23,11 @@ public class MainScene : BaseScene
         Main.Resource.Instantiate("@EventSystem");
         Main.UI.ShowSceneUI<UI_MainScene>("UI_MainScene");
         Main.UI.ShowSceneUI<UI_Damaged>("UI_Hit");
+        Main.UI.ShowSceneUI<UI_Respawn>("UI_Respawn");
 
         InitPopupUI<InventoryUI>("Inventory");
         InitPopupUI<UI_Map>("UI_Map");
         InitPopupUI<UI_Tablet>("UI_CraftingTabletUI");
-        InitPopupUI<UI_Respawn>("UI_Respawn");
 
         return true;
     }

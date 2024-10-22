@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public enum OrderValue { _sceneOrder = 5, _popUpOrder = 10, _settingOrder = 20 }
+public enum OrderValue { _sceneOrder = 5, _popUpOrder = 10, _playerDeadOrder = 15 , _settingOrder = 20 }
 /*
 _sceneOrder = 0; // 팝업에 사용할 오더 값
 _popUpOrder = 10; // 팝업에 사용할 오더 값

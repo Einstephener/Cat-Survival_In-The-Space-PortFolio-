@@ -6,7 +6,7 @@ using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class UI_Respawn : UI_Popup, IObserver
+public class UI_Respawn : UI_Scene, IObserver
 {
     public Button LobbyBTN;
     public Button RespawnBTN;
@@ -15,6 +15,15 @@ public class UI_Respawn : UI_Popup, IObserver
     private Image _bgImage;
     private Color _colorSet;
     private float _fadeDuration; // 알파값이 줄어드는 데 걸리는 시간
+
+    public override bool Initialize()
+    {
+        if (!base.Initialize()) return false;
+
+        Main.UI.SetCanvas(gameObject, OrderValue._playerDeadOrder);
+
+        return true;
+    }
 
     private void Awake()
     {
@@ -25,6 +34,7 @@ public class UI_Respawn : UI_Popup, IObserver
     public void OpenPanel()
     {
         BG_Panel.SetActive(true);
+        Main.UI.SwitchToUI();
         _colorSet = _bgImage.color;
 
         StartCoroutine(DarkBackGround());
@@ -57,11 +67,13 @@ public class UI_Respawn : UI_Popup, IObserver
     public void ClickRespawnBtn()
     {
         BG_Panel.SetActive(false);
+        Main.UI.SwitchToPlayer();
         Debug.Log("리스폰");
     }
     public void ClickLobbyBtn()
     {
         BG_Panel.SetActive(false);
+        Main.UI.SwitchToPlayer();
         SceneManager.LoadScene("LobbyScene");
     }
     public void OnPlayerStateChanged(PlayerStatus state)
