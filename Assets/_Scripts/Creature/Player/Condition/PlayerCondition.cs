@@ -33,10 +33,12 @@ public class PlayerCondition : MonoBehaviour, ISubject
     [HideInInspector] public float _basicAttack = 10f;
     private UI_PlayerCondition uI_PlayerCondition;
     private UI_Damaged uI_Damaged;
+    private UI_Respawn uI_Respawn;
     private bool isAttached = false;
 
     private void Start()
     {
+        isAttached = false;
         // TODO: 저장 시점에 어떤 값을 가지고 있는지, 게임 시작시 초기화.
         _state = new PlayerStatus(_maxValue, _maxValue, _maxValue, _maxValue);
 
@@ -52,37 +54,53 @@ public class PlayerCondition : MonoBehaviour, ISubject
     #region 옵저버 관리
     public void Attach(IObserver observer)
     {
+        if (observer == null)
+        {
+            return;
+        }
+
         _observers.Add(observer);
     }
 
     public void Detach(IObserver observer)
     {
+        if (observer == null)
+        {
+            return;
+        }
+
         _observers.Remove(observer);
     }
+
     #endregion
 
     public void Notify()
     {
-        if(!isAttached) // 수정 필요
+        if (!isAttached)
         {
-            if (uI_PlayerCondition == null)
+            if (uI_PlayerCondition == null || uI_Damaged == null || uI_Respawn == null)
             {
                 uI_PlayerCondition = FindObjectOfType<UI_PlayerCondition>();
                 uI_Damaged = FindObjectOfType<UI_Damaged>();
+                uI_Respawn = FindObjectOfType<UI_Respawn>();
+            }
+
+            Attach(uI_PlayerCondition);
+            Attach(uI_Damaged);
+            Attach(uI_Respawn);
+
+            isAttached = true;
+        }
+
+        foreach (var observer in _observers)
+        {
+            if (observer != null)
+            {
+                observer.OnPlayerStateChanged(_state);
             }
             else
             {
-                Attach(uI_PlayerCondition);
-                Attach(uI_Damaged);
-                isAttached = true;
-            }
-        }
-        else
-        {
-            // 모든 옵저버들에게 공지.
-            foreach (var observer in _observers)
-            {
-                observer.OnPlayerStateChanged(_state);
+                Debug.LogError("Null observer detected.");
             }
         }
     }

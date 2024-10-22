@@ -50,7 +50,7 @@ public class UIManager
     [HideInInspector] public GameObject GameSceneUI; // 열려있는  Scene UI
     [HideInInspector] public TextMeshProUGUI PromtText; // 상호작용 txt
     [HideInInspector] public QuickSlot[] QuickSlots;
-    [HideInInspector] public  Dictionary<string, GameObject> _uiPopUpDictionary = new Dictionary<string, GameObject>(); // 팝업 UI 관리
+    [HideInInspector] public Dictionary<string, GameObject> _uiPopUpDictionary = new Dictionary<string, GameObject>(); // 팝업 UI 관리
 
 
     [HideInInspector] public InputActionAsset inputActionAsset;
@@ -114,18 +114,19 @@ public class UIManager
     {
         if (string.IsNullOrEmpty(name))
             name = typeof(T).Name;
-
-        //GameObject go = new GameObject();
-
+                
         GameObject go = Main.Resource.Instantiate(name); // 임시. 폴더 로드 필요.
         go.SetActive(true);
-        QuickSlots = go.GetComponent<UI_Scene>().UI_QuickSlots;
-        
-        GameSceneUI = go;
-        PromtText = go.GetComponent<UI_Scene>().interactionTXT;
-        //_sceneUI = sceneUI;
+        if (name == "UI_MainScene")
+        {
+            QuickSlots = go.GetComponent<UI_MainScene>().UI_QuickSlots;
+            GameSceneUI = go;
+
+            PromtText = go.GetComponent<UI_MainScene>().interactionTXT;
+        }
 
         go.transform.SetParent(Root.transform);
+
     }
 
 
