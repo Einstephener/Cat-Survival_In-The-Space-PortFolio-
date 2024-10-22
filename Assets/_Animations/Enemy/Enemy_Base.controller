@@ -388,7 +388,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GunLeft_Catcher_H
+  m_Name: AttackRight_Catcher_H
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -401,7 +401,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 1943936104014587080, guid: 5179826d65ae57d4b989e6a6ab22e7cc,
+  m_Motion: {fileID: -2533602672706719597, guid: 5179826d65ae57d4b989e6a6ab22e7cc,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -588,7 +588,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AttackRight_Catcher_H
+  m_Name: GunLeft_Catcher_H
   m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
@@ -606,7 +606,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -2533602672706719597, guid: 5179826d65ae57d4b989e6a6ab22e7cc,
+  m_Motion: {fileID: 1943936104014587080, guid: 5179826d65ae57d4b989e6a6ab22e7cc,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 
@@ -941,10 +941,10 @@ AnimatorStateMachine:
     m_Position: {x: 180, y: 300, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1153531453761452143}
-    m_Position: {x: 720, y: 380, z: 0}
+    m_Position: {x: 880, y: 190, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1223534317390941661}
-    m_Position: {x: 720, y: 430, z: 0}
+    m_Position: {x: 880, y: 250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6919075014864294395}
     m_Position: {x: 410, y: 440, z: 0}

@@ -18,7 +18,7 @@ MonoBehaviour:
     type: 3}
   rewardItem: {fileID: 11400000, guid: aa35f9b28ed047b438dec8917faaaac0, type: 2}
   maxHp: 150
-  damage: 7
+  damage: 5
   addSpeed: 0
   attackCooldown: 3
   sightRange: 10

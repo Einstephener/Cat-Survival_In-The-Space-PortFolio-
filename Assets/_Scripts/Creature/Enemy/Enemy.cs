@@ -7,21 +7,17 @@ public class Enemy : MonoBehaviour
 {
     #region Field
     [SerializeField] private Transform _projectileSpawnPoint;
-    [SerializeField] private GameObject _melee;
-    [SerializeField] private float HP; // 추후 삭제.
-
-    private MeleeHitbox _meleeHitbox;
 
     public Animator animator { get; private set; }
     public AIPath aiPath { get; private set; }
 
     private Vector3 _basePosition;
     private LayerMask _playerLayer;
-    private Transform _playerTransform;
     private AIDestinationSetter _target;
 
     private IEnemyState _currentState;
 
+    protected Transform _playerTransform;
     protected EnemyData _enemyData;
 
     private float _lastAttackTime;
@@ -41,11 +37,6 @@ public class Enemy : MonoBehaviour
     {
         _basePosition = transform.position;
 
-        if (_enemyData.attackType == IAttackType.Melee || _enemyData.attackType == IAttackType.Both)
-        {
-            _meleeHitbox = _melee.GetComponent<MeleeHitbox>();
-        }
-
         _playerLayer = LayerMask.GetMask("Player");
         TransitionToState(new EnemyIdleState());
     }
@@ -61,11 +52,9 @@ public class Enemy : MonoBehaviour
             Quaternion quaternion = Quaternion.LookRotation(direction);
             transform.rotation = quaternion;
         }
-
-        HP = _currentHp; // 추후 삭제.
     }
 
-    protected void Init(EnemyData enemyData)
+    protected virtual void Init(EnemyData enemyData)
     {
         _enemyData = enemyData;
         _currentSightRange = _enemyData.sightRange;
@@ -86,7 +75,7 @@ public class Enemy : MonoBehaviour
     }
 
     // 쿨타임 체크.
-    public virtual bool AttackCooldownCheck()
+    public bool AttackCooldownCheck()
     {
         if (Time.time >= _lastAttackTime + _enemyData.attackCooldown)
         {
@@ -100,19 +89,22 @@ public class Enemy : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, _playerTransform.position) <= _enemyData.attackRange)
         {
-            if (_meleeHitbox != null)
-            {
-                _meleeHitbox.Activate(_enemyData.damage);
-            }
-        }
-    }
+            Vector3 direction = (_playerTransform.position - transform.position).normalized;
+            Ray ray = new Ray(transform.position, direction);
+            RaycastHit hit;
 
-    // 애니메이션 이벤트 : 공격 시간이 지난 후 히트박스 비활성화.
-    protected virtual void EndEnemyAttack()
-    {
-        if (_meleeHitbox != null)
-        {
-            _meleeHitbox.Deactivate();
+            if (Physics.Raycast(ray, out hit, _enemyData.attackRange, _playerLayer))
+            {
+                if (hit.collider.CompareTag("Player"))
+                {
+                    Debug.Log($"근거리 {_enemyData.damage} 데미지");
+
+                    if (hit.collider.TryGetComponent<PlayerCondition>(out PlayerCondition playerCondition))
+                    {
+                        playerCondition.UpdateHealth(-_enemyData.damage);
+                    }
+                }
+            }
         }
     }
 
@@ -237,7 +229,7 @@ public class Enemy : MonoBehaviour
         // 기본 보상.
     }
 
-    public virtual bool IsDead()
+    public bool IsDead()
     {
         if(_currentHp <= 0)
         {
@@ -247,23 +239,8 @@ public class Enemy : MonoBehaviour
         else return false;
     }
 
-    // 공격 애니메이션 시, 슬라이딩 방지 이벤트.
-    public virtual void EnemyWalkTrue()
-    {
-        //aiPath.canMove = true;
-    }
-
-    public virtual void EnemyMoveFalse()
-    {
-        //aiPath.canMove = false;
-    }
-    public virtual void EnemyMoveTrue()
-    {
-        //aiPath.canMove = true;
-    }
-
     #region Gizmos
-    protected virtual void OnDrawGizmosSelected()
+    protected void OnDrawGizmosSelected()
     {
         if (_enemyData == null) return;
 
@@ -279,7 +256,7 @@ public class Enemy : MonoBehaviour
 
     #region EnemyStateChange
     // 상태 전환 메서드
-    public virtual void TransitionToState(IEnemyState newState)
+    public void TransitionToState(IEnemyState newState)
     {
         if (_currentState is EnemyWalkingState && newState is EnemyHitState)
         {
@@ -293,7 +270,7 @@ public class Enemy : MonoBehaviour
         _currentState.EnterState(this);
     }
 
-    protected virtual void UpdateState()
+    protected void UpdateState()
     {
         _currentState?.UpdateState(this);
     }

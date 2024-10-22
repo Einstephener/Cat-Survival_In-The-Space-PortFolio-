@@ -59,12 +59,11 @@ public class Projectile : Poolable
         // 타겟에 데미지를 입힘.
         Debug.Log($"원거리 {_damage} 데미지");
 
-        // TODO : 플레이어 Hp 깎기.
+        // 플레이어 Hp 깎기.
         if(gameObject.TryGetComponent<PlayerCondition>(out PlayerCondition playerCondition))
         {
             playerCondition.UpdateHealth(-_damage);
         }
-
 
         // 풀로 반환.
         Main.Pool.Push(this);
