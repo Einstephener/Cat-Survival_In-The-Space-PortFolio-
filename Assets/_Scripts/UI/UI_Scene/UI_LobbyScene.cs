@@ -53,7 +53,7 @@ public class UI_LobbyScene : UI_MainScene
 
     public void OnBtnStartGame()
     {
-        Main.Scene.LoadScene("StartScene");
+        Main.Scene.LoadScene("CutScene");
     }
     public void OnBtnEndGame()
     {
