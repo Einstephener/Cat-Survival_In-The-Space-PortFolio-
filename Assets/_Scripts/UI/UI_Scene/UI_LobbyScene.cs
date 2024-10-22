@@ -6,7 +6,7 @@ using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.UI;
 using static Unity.VisualScripting.Metadata;
 
-public class UI_LobbyScene : UI_Scene
+public class UI_LobbyScene : UI_MainScene
 {
     enum Buttons
     {

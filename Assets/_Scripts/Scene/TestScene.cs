@@ -11,7 +11,7 @@ public class TestScene : BaseScene
 
         Main.Resource.Initialize();
 
-        Main.UI.ShowSceneUI<UI_Scene>("UI_MainScene");
+        Main.UI.ShowSceneUI<UI_MainScene>("UI_MainScene");
         InitPopupUI<InventoryUI>("Inventory");
         InitPopupUI<UI_Map>("UI_Map");
         InitPopupUI<UI_Tablet>("UI_CraftingTabletUI");

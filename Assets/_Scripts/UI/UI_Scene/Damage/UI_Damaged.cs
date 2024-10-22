@@ -4,13 +4,11 @@ using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.UI;
 
-public class UI_Damaged : UI_Popup, IObserver
+public class UI_Damaged : UI_Scene, IObserver
 {
     public Image RedBackGround;
     private float _fadeDuration = 1f; // 알파값이 줄어드는 데 걸리는 시간
     private float _tempHealth;
-
-
 
     private Color _initialColor;
 
@@ -51,7 +49,7 @@ public class UI_Damaged : UI_Popup, IObserver
 
     public void OnPlayerStateChanged(PlayerStatus state)
     {
-        if(_tempHealth != state.Health)
+        if(_tempHealth != state.Health && state.Health > 0)
         {
             PlayerHit();
             _tempHealth = state.Health;
