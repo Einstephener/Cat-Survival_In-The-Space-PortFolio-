@@ -34,11 +34,9 @@ public class PlayerCondition : MonoBehaviour, ISubject
     private UI_PlayerCondition uI_PlayerCondition;
     private UI_Damaged uI_Damaged;
     private UI_Respawn uI_Respawn;
-    private bool isAttached = false;
 
     private void Start()
     {
-        isAttached = false;
         // TODO: 저장 시점에 어떤 값을 가지고 있는지, 게임 시작시 초기화.
         _state = new PlayerStatus(_maxValue, _maxValue, _maxValue, _maxValue);
 
@@ -76,31 +74,28 @@ public class PlayerCondition : MonoBehaviour, ISubject
 
     public void Notify()
     {
-        if (!isAttached)
+        if (uI_PlayerCondition == null)
         {
-            if (uI_PlayerCondition == null || uI_Damaged == null || uI_Respawn == null)
-            {
-                uI_PlayerCondition = FindObjectOfType<UI_PlayerCondition>();
-                uI_Damaged = FindObjectOfType<UI_Damaged>();
-                uI_Respawn = FindObjectOfType<UI_Respawn>();
-            }
-
+            uI_PlayerCondition = FindObjectOfType<UI_PlayerCondition>();
             Attach(uI_PlayerCondition);
-            Attach(uI_Damaged);
-            Attach(uI_Respawn);
-
-            isAttached = true;
         }
+        if (uI_Damaged == null)
+        {
+            uI_Damaged = FindObjectOfType<UI_Damaged>();
+            Attach(uI_Damaged);
+        }
+        if (uI_Respawn == null)
+        {
+            uI_Respawn = FindObjectOfType<UI_Respawn>();
+            Attach(uI_Respawn);
+        }
+
 
         foreach (var observer in _observers)
         {
             if (observer != null)
             {
                 observer.OnPlayerStateChanged(_state);
-            }
-            else
-            {
-                Debug.LogError("Null observer detected.");
             }
         }
     }
@@ -168,7 +163,7 @@ public class PlayerCondition : MonoBehaviour, ISubject
     //public void UpdateAttack(float amount)
     //{
     //    _state.Attack += amount;
-                
+
 
     //    Notify();
     //}
