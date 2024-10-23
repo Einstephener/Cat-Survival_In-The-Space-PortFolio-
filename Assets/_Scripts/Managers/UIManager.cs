@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public enum OrderValue { _sceneOrder = 5, _popUpOrder = 10, _playerDeadOrder = 15 , _settingOrder = 20 }
+public enum OrderValue { _sceneOrder = 5, _popUpOrder = 10, _playerDeadOrder = 15, _settingOrder = 20 }
 /*
 _sceneOrder = 0; // 팝업에 사용할 오더 값
 _popUpOrder = 10; // 팝업에 사용할 오더 값
@@ -114,7 +114,7 @@ public class UIManager
     {
         if (string.IsNullOrEmpty(name))
             name = typeof(T).Name;
-                
+
         GameObject go = Main.Resource.Instantiate(name); // 임시. 폴더 로드 필요.
         go.SetActive(true);
         if (name == "UI_MainScene")
@@ -190,5 +190,27 @@ public class UIManager
     #endregion
 
     #endregion
+
+    #region Lobby에서 한번 초기화 시켜주는 코드
+
+    public void ClearDictionary()
+    {
+        List<string> keysToRemove = new List<string>();
+
+        // 딕셔너리 내 파괴된 객체들을 찾음
+        foreach (var entry in _uiPopUpDictionary)
+        {
+            keysToRemove.Add(entry.Key);
+        }
+
+        foreach (var key in keysToRemove)
+        {
+            _uiPopUpDictionary.Remove(key);
+        }
+    }
+
+
+    #endregion
+
 
 }

@@ -6,23 +6,32 @@ using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.UI;
 using static Unity.VisualScripting.Metadata;
 
-public class UI_LobbyScene : UI_MainScene
+public class UI_LobbyScene : UI_Scene
 {
     enum Buttons
     {
         btnStartGame,
+        btnNewGame,
+        btnLoadGame,
         btnSetting,
         btnEndGame,
     }
 
+    public GameObject BtnNewGame;
+    public GameObject BtnLoadGame;
+
     private Button btnStartGame;
+    private Button btnNewGame;
+    private Button btnLoadGame;
     private Button btnSetting;
     private Button btnEndGame;
+
+    private bool _isclicked = false;
 
     public override bool Initialize()
     {
         if (!base.Initialize()) return false;
-
+        _isclicked = false;
         SetBtn();
 
         return true;
@@ -41,6 +50,12 @@ public class UI_LobbyScene : UI_MainScene
                 case "StartGameBTN":
                     btnStartGame = child.GetComponent<Button>();
                     break;
+                case "NewGameBTN":
+                    btnNewGame = child.GetComponent<Button>();
+                    break;                
+                case "LoadGameBTN":
+                    btnLoadGame = child.GetComponent<Button>();
+                    break;
                 case "SettingBTN":
                     btnSetting = child.GetComponent<Button>();
                     break;
@@ -51,10 +66,21 @@ public class UI_LobbyScene : UI_MainScene
         }
     }
 
-    public void OnBtnStartGame()
+    public void OpenStartBtn()
+    {
+        _isclicked = !_isclicked;
+        BtnNewGame.SetActive(_isclicked);
+        BtnLoadGame.SetActive(_isclicked);
+    }
+    public void OnBtnStartNewGame()
     {
         Main.Scene.LoadScene("CutScene");
     }
+    public void OnBtnStartLoadGame()
+    {
+        //저장된 파일 가지고오기.
+    }
+
     public void OnBtnEndGame()
     {
 
