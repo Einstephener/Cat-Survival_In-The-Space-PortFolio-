@@ -73,6 +73,10 @@ public class Craft : MonoBehaviour
             Instantiate(itemPrefab, hitInfo.point, Quaternion.identity);
             Destroy(Preview_ItemObject);
             RemoveSet();
+
+            //Main.Inventory.RemoveItem(Main.Inventory.inventoryUI.selectSlot.curSlot.itemData); // [10/23] 설치하면 인벤토리에서 아이템 제거 - 임시/Test
+            //Main.Inventory.inventoryUI.UpdateUI();
+            Main.Inventory.Select_RemoveItem(Main.Inventory.inventoryUI.selectSlot.index);
         }
     }
 

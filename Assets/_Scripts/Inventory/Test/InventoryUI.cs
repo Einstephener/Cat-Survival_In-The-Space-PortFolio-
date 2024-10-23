@@ -53,9 +53,9 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         //Main.Inventory.RemoveItem(testItemData2, 5);
         //this.gameObject.SetActive(false);
         Main.Inventory.AddItem(testItemData1, 10);
-        Main.Inventory.TestAddItem(testItemData2, 29, 7);
-        Main.Inventory.TestAddItem(testItemData2, 29, 9);
-        Main.Inventory.TestAddItem(testItemData2, 29, 11);
+        Main.Inventory.Select_AddItem(testItemData2, 29, 7);
+        Main.Inventory.Select_AddItem(testItemData2, 29, 9);
+        Main.Inventory.Select_AddItem(testItemData2, 29, 11);
         Main.Inventory.AddItem(testItemData3);
         Main.Inventory.AddItem(testItemData4);
         Main.Inventory.AddItem(testItemData5);
@@ -126,11 +126,12 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         // 슬롯 UI 업데이트
         for (int i = 0; i < _slots.Length; i++)
         {
+            //Debug.Log(i);
             if (_slots[i].itemData != null || _slots[i].amount > 0) // 슬롯이 데이터가 있는지 확인
             {
                 slotObjects[i].SetSlot(_slots[i]); // 슬롯 정보 업데이트
             }
-            else /*if (_slots[i].IsEmpty())*/ if (_slots[i].itemData == null || _slots[i].amount >= 0)
+            else /*if (_slots[i].IsEmpty())*/ if (_slots[i].itemData == null || _slots[i].amount <= 0)
             {
                 slotObjects[i].ClearSlot(); // 빈 슬롯 처리
                 
@@ -182,6 +183,10 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
             }
         }
     }
+    public void SelectSlotRemove()
+    {
+        Main.Inventory.RemoveItem(selectSlot.curSlot.itemData);
+    }
 
     public void WhetherSelectSlot() // 현재 장착된 슬릇
     {
@@ -204,12 +209,12 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     {
         if (selectSlot.curSlot.itemData != null)
         {
-            Debug.Log($"{selectSlot.curSlot.itemData}");
+            //Debug.Log($"{selectSlot.curSlot.itemData}");
             return selectSlot.curSlot.itemData;
         }
         else
         {
-            Debug.Log($"{selectSlot.curSlot.itemData}");
+            //Debug.Log($"{selectSlot.curSlot.itemData}");
             return null;
         }
     }

@@ -63,18 +63,22 @@ public class ItemObject : MonoBehaviour, IInteractable
             {
                 // Installation 관련 작업 수행
                 installation.UIInterac();
+                //Debug.Log("ItemObject.cs - OnInteract() : Installation.cs Insert");
+
             }
             // item이 BoneFire 타입인지 확인
             else if (item is BoneFire boneFire)
             {
                 // BoneFire 관련 작업 수행
                 boneFire.UIInterac();
+                Debug.Log("ItemObject.cs - OnInteract() : BoneFire.cs Insert");
             }
             // item이 Tent 타입인지 확인
             else if (item is Tent tent)
             {
                 // Tent 관련 작업 수행
                 tent.UIInterac();
+                Debug.Log("ItemObject.cs - OnInteract() : Tent.cs Insert");
             }
             else
             {
@@ -82,7 +86,7 @@ public class ItemObject : MonoBehaviour, IInteractable
             }
             //initem.UIInterac();
             //boneFire.UIInterac();
-            Debug.Log("ItemObject.cs - OnIntercat() Errer");
+            //Debug.Log("ItemObject.cs - OnIntercat() Errer");
             Use();
         }
     }

@@ -83,7 +83,7 @@
     //        }
     //    }
 
-    //    public void TestAddItem()
+    //    public void Select_AddItem()
     //    {
     //        int _amount = 1;
     //        if (HadItem(_Testitemdata) && IsCountTableItem(_Testitemdata))

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 /// <summary>
 /// 시간확인 후 잘수 있는지 확인
@@ -14,25 +15,43 @@ public class RespawnData : Data
 
 public class Tent : Installation
 {
-    public Transform RespawnTransform;
+    public Vector3 RespawnTransform;
     public Tent(ItemData data) : base(data)
     {
     }
-
-    public override void UIInterac() // UI
+    private void Start()    //임시/Test
     {
-        base.UIInterac();
-        SaveRespawnLocation();
+        //RespawnTransform = this.gameObject.transform;
+        RespawnTransform = transform.position + Vector3.right * 3;
+        Debug.Log($"{RespawnTransform}");
+
+        var dataManager = Main.Data; // Main의 싱글톤을 통해 DataManager에 접근
+        if (dataManager.Respawn.TryGetValue("TentRespawn", out RespawnData respawnData))
+        {
+            Debug.Log($"Respawn Position: {respawnData.Position}");
+        }
+        else
+        {
+            Debug.Log("Respawn data not found.");
+        }
     }
 
-    private void SaveRespawnLocation()
+    public override void UIInterac()
+    {
+        base.UIInterac();
+        Debug.Log($"Tent - SaveRespawnLocation(): running");
+
+        //SaveRespawnLocation();
+    }
+
+    private void SaveRespawnLocation()  //Test
     {
         Debug.Log("Tent - SaveRespawnLocation()");
         // 리스폰 위치를 데이터로 변환
         var respawnData = new RespawnData
         {
             Key = "TentRespawn", // 고유 키 설정
-            Position = RespawnTransform.position
+            Position = RespawnTransform
         };
 
         // DataManager에 저장

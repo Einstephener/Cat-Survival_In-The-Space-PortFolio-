@@ -160,7 +160,7 @@ public class InventoryManager
 
 
     //Test
-    public void TestAddItem(ItemData _itemdata, int _amount = 1, int slotIndex = -1)
+    public void Select_AddItem(ItemData _itemdata, int _amount = 1, int slotIndex = -1)
     {
         if (HadItem(_itemdata) && IsCountTableItem(_itemdata))
         {
@@ -203,6 +203,53 @@ public class InventoryManager
 
         Debug.Log("슬롯이 가득 찼습니다.");
         //[기혁님의 요청사항 10/01] : 인벤토리가 다 찼을 때 플레이어 위치 앞에 아이템이 생성되도록 해줭
+    }
+
+    public void Select_RemoveItem(int slotIndex, int _amount = 1)
+    {
+        // 슬롯 인덱스가 유효한지 확인
+        if (slotIndex >= 0 && slotIndex < slotsData.Length)
+        {
+            var slot = slotsData[slotIndex];
+
+            // 슬롯이 존재하고 아이템이 있는지 확인
+            if (slot != null && !slot.IsEmpty())
+            {
+                // 아이템 수량이 제거할 수량보다 큰 경우
+                if (slot.amount > _amount)
+                {
+                    slot.amount -= _amount;
+                    // 수량이 변경된 후 UI 업데이트
+                    //inventoryUI.UpdateUI();
+                    Debug.Log($"Removed {_amount} from {slot.itemData.DisplayName} // Index: {slotIndex}, New Amount: {slot.amount}");
+                }
+                // 아이템 수량이 제거할 수량과 같은 경우
+                else if (slot.amount == _amount)
+                {
+                    // 슬롯을 비움
+                    slot.itemData = null;
+                    slot.amount -= _amount;
+                    inventoryUI.UpdateUI();
+                    inventoryUI.WhetherSelectSlot();
+                    //Debug.Log($"Removed all items from {slot.itemData.DisplayName} // Index: {slotIndex}, New Amount: {slot.amount}");
+                }
+                // 아이템 수량이 제거할 수량보다 적은 경우
+                else
+                {
+                    Debug.Log("제거할 수량이 현재 수량보다 많습니다.");
+                }
+            }
+            else
+            {
+                Debug.Log("해당 슬롯에 아이템이 없습니다.");
+            }
+        }
+        else
+        {
+            Debug.Log("유효하지 않은 슬롯 인덱스입니다.");
+        }
+        inventoryUI.UpdateUI();
+
     }
     #region DeBug
 
