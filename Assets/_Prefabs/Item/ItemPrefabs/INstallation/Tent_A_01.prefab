@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 493346580690787130}
   - component: {fileID: 2975972464363190386}
   - component: {fileID: 2048394481735114961}
-  - component: {fileID: 7785323873453528715}
+  - component: {fileID: -7097845245748811687}
   m_Layer: 6
   m_Name: Tent_A_01
   m_TagString: Untagged
@@ -149,8 +149,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 58690460b3ae29f4da0869e9e5b5679c, type: 2}
-  item: {fileID: 7785323873453528715}
---- !u!114 &7785323873453528715
+  item: {fileID: 0}
+--- !u!114 &-7097845245748811687
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -159,8 +159,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4502265049141516180}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef96dcaa99d802643b1bd03065ab3bcb, type: 3}
+  m_Script: {fileID: 11500000, guid: d6552d6412a2dfe47aa870f1856a0ca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 58690460b3ae29f4da0869e9e5b5679c, type: 2}
   isInstallation: 0
+  RespawnTransform: {fileID: 0}

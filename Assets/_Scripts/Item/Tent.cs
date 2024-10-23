@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 /// <summary>
 /// 시간확인 후 잘수 있는지 확인
@@ -14,15 +15,29 @@ public class RespawnData : Data
 
 public class Tent : Installation
 {
-    public Transform RespawnTransform;
+    public Vector3 RespawnTransform;
     public Tent(ItemData data) : base(data)
     {
     }
+    private void Start()
+    {
+        //RespawnTransform = this.gameObject.transform;
+        RespawnTransform = transform.position + Vector3.right * 3;
+        Debug.Log($"{RespawnTransform}");
+    }
 
-    public override void UIInterac() // UI
+    //public override void UIInterac() // UI
+    //{
+    //    base.UIInterac();
+    //    Debug.Log($"Tent - SaveRespawnLocation(): running");
+    //    //SaveRespawnLocation();
+    //}
+    public override void UIInterac()
     {
         base.UIInterac();
-        SaveRespawnLocation();
+        Debug.Log($"Tent - SaveRespawnLocation(): running");
+
+        //SaveRespawnLocation();
     }
 
     private void SaveRespawnLocation()
@@ -32,7 +47,7 @@ public class Tent : Installation
         var respawnData = new RespawnData
         {
             Key = "TentRespawn", // 고유 키 설정
-            Position = RespawnTransform.position
+            Position = RespawnTransform
         };
 
         // DataManager에 저장

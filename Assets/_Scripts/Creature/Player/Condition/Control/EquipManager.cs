@@ -36,7 +36,7 @@ public class EquipManager : MonoBehaviour
 
     public void OnInteract(InputValue value)
     {
-        if (_itemData.Type == ItemType.Consumable)
+        if (_itemData.Type == ItemType.Consumable) //에러/errer
         {
             curEquip.OnEating();
 
