@@ -6,6 +6,7 @@ using UnityEngine;
 public class Catcher : Enemy
 {
     [SerializeField] public EnemyBossData bossSO;
+    private float _lastSkillTime;
     private bool _isAddSpeed;
     private bool _isCastingSkill;
 
@@ -19,9 +20,14 @@ public class Catcher : Enemy
 
     private void Update()
     {
-        if (_playerTransform != null && Vector3.Distance(transform.position, _playerTransform.position) <= bossSO.skillRange && !_isCastingSkill)
+        UpdateState();
+
+        if (_playerTransform != null && _currentState is EnemyAttackState)
         {
-            StartCoroutine(CastMeleeSkill());
+            Vector3 direction = _playerTransform.position - transform.position;
+            direction.y = 0;
+            Quaternion quaternion = Quaternion.LookRotation(direction);
+            transform.rotation = quaternion;
         }
     }
 
@@ -37,53 +43,75 @@ public class Catcher : Enemy
         base.OnHit(damage);
 
         // 체력이 절반 아래가 되면.
-        if (_currentHp <= _enemyData.maxHp / 2 && !_isAddSpeed)
+        if (IsCastingSkill())
         {
             AddSpeed();
-            CastSkill();
-            _isAddSpeed = true;
+            StartCoroutine(CastMeleeSkill());
         }
+    }
+
+    public bool IsCastingSkill()
+    {
+        return _currentHp <= _enemyData.maxHp / 2 && !_isAddSpeed;
     }
 
     private void AddSpeed()
     {
-        float newSpeed = aiPath.maxSpeed + bossSO.addSpeed;
-        SetSpeed(newSpeed);
-        Debug.Log("이동 속도가 빨라졌습니다!");
-    }
-
-    private void CastSkill()
-    {
-        if (_playerTransform != null)
+        if (!_isAddSpeed) // 중복 증가 방지
         {
-            Debug.Log($"{bossSO.skillDamage}의 데미지를 입히는 스킬을 시전합니다.");
-            
-            if (_playerTransform.TryGetComponent<PlayerCondition>(out PlayerCondition playerCondition))
-            {
-                playerCondition.UpdateHealth(-bossSO.skillDamage);
-            }
+            float newSpeed = aiPath.maxSpeed + bossSO.addSpeed;
+            SetSpeed(newSpeed);
+            _isAddSpeed = true;
+            Debug.Log("이동 속도가 빨라졌습니다!");
         }
     }
 
-    private IEnumerator CastMeleeSkill()
+    public bool SkillCooldownCheck()
+    {
+        if (Time.time >= _lastSkillTime + bossSO.skillCooldown)
+        {
+            _lastSkillTime = Time.time;
+            return true;
+        }
+        return false;
+    }
+
+    public IEnumerator CastMeleeSkill()
     {
         _isCastingSkill = true;
 
-        // Move towards the player
         while (Vector3.Distance(transform.position, _playerTransform.position) > bossSO.skillRange)
         {
+            Debug.Log("플레이어에게 스킬 사용을 위한 이동 중");
             Vector3 direction = (_playerTransform.position - transform.position).normalized;
-            aiPath.destination = _playerTransform.position;  // Set AIPath destination to player
-            yield return null;  // Wait for the next frame
+            aiPath.destination = _playerTransform.position; ;
+            aiPath.canMove = true;
+            yield return null;
         }
 
-        // Perform MeleeAttack three times
-        for (int i = 0; i < 3; i++)
+        aiPath.canMove = false;
+
+        if (SkillCooldownCheck())
         {
             MeleeAttack();
-            yield return new WaitForSeconds(1f);  // Wait for 1 second between attacks
+        }
+        else if(IsAttackRange())
+        {
+            FireProjectile();
         }
 
-        _isCastingSkill = false;  // Reset the casting flag
+        yield return new WaitForSeconds(bossSO.skillCooldown);
+        aiPath.canMove = true;
+        _isCastingSkill = false;
     }
+
+    #region Gizmos
+    protected override void OnDrawGizmosSelected()
+    {
+        base.OnDrawGizmosSelected();
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, bossSO.skillRange);
+    }
+    #endregion
 }

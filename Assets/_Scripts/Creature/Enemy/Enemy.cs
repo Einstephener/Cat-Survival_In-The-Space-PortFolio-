@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
     private LayerMask _playerLayer;
     private AIDestinationSetter _target;
 
-    private IEnemyState _currentState;
+    protected IEnemyState _currentState;
 
     protected Transform _playerTransform;
     protected EnemyData _enemyData;
@@ -240,7 +240,7 @@ public class Enemy : MonoBehaviour
     }
 
     #region Gizmos
-    protected void OnDrawGizmosSelected()
+    protected virtual void OnDrawGizmosSelected()
     {
         if (_enemyData == null) return;
 
@@ -270,7 +270,7 @@ public class Enemy : MonoBehaviour
         _currentState.EnterState(this);
     }
 
-    protected void UpdateState()
+    protected virtual void UpdateState()
     {
         _currentState?.UpdateState(this);
     }
