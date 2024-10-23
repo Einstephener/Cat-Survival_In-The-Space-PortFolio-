@@ -47,6 +47,7 @@ public class UIManager
 
     #region Fields
     private GameObject _alreayOpenPopUpUI = null; // 이미 열려있는 PopUp UI
+    private GameObject _alreayOpenSetting = null; // 이미 열려있는 Setting
     [HideInInspector] public GameObject GameSceneUI; // 열려있는  Scene UI
     [HideInInspector] public TextMeshProUGUI PromtText; // 상호작용 txt
     [HideInInspector] public QuickSlot[] QuickSlots;
@@ -183,11 +184,52 @@ public class UIManager
 
 
 
-    #region Setting PopUp UI
-
-    // TODO 구상중...
 
     #endregion
+
+    #region Setting PopUp UI
+
+    public void ShowSettingPopupUI<T>(string name = null) where T : UI_Setting
+    {
+        if (string.IsNullOrEmpty(name))
+        {
+            name = typeof(T).Name;
+        }
+
+        // 이미 열려 있는 팝업이 있는 경우 비활성화
+        if (_alreayOpenSetting != null)
+        {
+            CloseSetting(_alreayOpenSetting);
+        }
+        else
+        {
+            // 팝업이 이미 생성되어 있는지 확인
+            if (!_uiPopUpDictionary.TryGetValue(name, out GameObject popup))
+            {
+                // 팝업이 생성되지 않았으면 새로 생성
+                popup = Main.Resource.Instantiate(name); 
+                popup.transform.SetParent(Root.transform);
+                _uiPopUpDictionary[name] = popup; 
+            }
+
+            popup.SetActive(true);
+            SwitchToUI();
+            _alreayOpenSetting = popup;
+
+            // 팝업이 열리면 시간 멈춤
+            Time.timeScale = 0.0f; 
+        }
+    }
+
+    public void CloseSetting(GameObject obj)
+    {
+        if (_alreayOpenSetting == obj)
+        {
+            SwitchToPlayer();
+            obj.SetActive(false);
+        }
+        _alreayOpenSetting = null;
+    }
 
     #endregion
 

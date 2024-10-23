@@ -29,6 +29,9 @@ public class MainScene : BaseScene
         InitPopupUI<UI_Map>("UI_Map");
         InitPopupUI<UI_Tablet>("UI_CraftingTabletUI");
 
+        Main.UI.ShowSettingPopupUI<UI_Setting>("Setting");
+        //Main.UI.CloseSetting(_alreayOpenSetting);
+
         return true;
     }
 
