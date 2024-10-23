@@ -27,7 +27,16 @@ public class EnemyAttackState : IEnemyState
         }
         else
         {
-            if(enemy.AttackCooldownCheck())
+            if (enemy is Catcher catcher && catcher.IsCastingSkill())
+            {
+                if (!catcher.IsCastingSkill())
+                {
+                    catcher.StartCoroutine(catcher.CastMeleeSkill());
+                }
+                return;
+            }
+
+            if (enemy.AttackCooldownCheck())
             {
                 enemy.animator.SetTrigger("OnAttack");
             }
