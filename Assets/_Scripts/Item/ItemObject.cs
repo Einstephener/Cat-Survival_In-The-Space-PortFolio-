@@ -63,7 +63,7 @@ public class ItemObject : MonoBehaviour, IInteractable
             {
                 // Installation 관련 작업 수행
                 installation.UIInterac();
-                Debug.Log("ItemObject.cs - OnInteract() : Installation.cs Insert");
+                //Debug.Log("ItemObject.cs - OnInteract() : Installation.cs Insert");
 
             }
             // item이 BoneFire 타입인지 확인

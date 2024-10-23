@@ -92,8 +92,11 @@ public class Potion : Item
             }
 
             // 인벤토리 업데이트
-            Main.Inventory.inventoryUI.selectSlot.curSlot.amount--;
-            Main.Inventory.inventoryUI.UpdateUI();
+            //Main.Inventory.RemoveItem(Main.Inventory.inventoryUI.selectSlot.curSlot.itemData);
+            //Main.Inventory.inventoryUI.selectSlot.curSlot.amount--;
+            Main.Inventory.Select_RemoveItem(Main.Inventory.inventoryUI.selectSlot.index);
+
+            //Main.Inventory.inventoryUI.UpdateUI();
         }
         else
         {
