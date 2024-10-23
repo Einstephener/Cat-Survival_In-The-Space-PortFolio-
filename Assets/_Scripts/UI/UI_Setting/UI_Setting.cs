@@ -22,6 +22,7 @@ public class UI_Setting : UI_Base
 
     public void CancelSetting()
     {
+        Time.timeScale = 1.0f;
         //저장 값 취소
         gameObject.SetActive(false);
     }
