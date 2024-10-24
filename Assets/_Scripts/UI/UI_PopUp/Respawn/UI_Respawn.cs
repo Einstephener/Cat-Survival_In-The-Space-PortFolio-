@@ -78,8 +78,6 @@ public class UI_Respawn : UI_Scene, IObserver
         Main.UI.SwitchToPlayer();
 
         Main.Data.PlayerRespawn();
-
-        Debug.Log("리스폰");
     }
 
     public void ClickLobbyBtn()

@@ -44,7 +44,7 @@ public class DataManager
         return dictionary;
     }
 
-    // 데어터 세이브 - SaveJson(딕셔너리로 되어 있는 Data, "저장될 이름")
+    // 데이터 세이브 - SaveJson(딕셔너리로 되어 있는 Data, "저장될 이름")
     public void SaveJson<T>(Dictionary<string, T> data, string fileName) where T : Data
     {
         string json = JsonConvert.SerializeObject(data.Values.ToList(), Formatting.Indented);

@@ -148,17 +148,19 @@ public class PlayerStatusUpdater : MonoBehaviour
     {
         Debug.Log(isRespawn);
 
+        //체력 초기화
         _status.Health = 100;
         _status.Stamina = 100;
         _status.Thirst = 100;
         _status.Hunger = 100;
+
         if (TryGetComponent<PlayerRagdoll>(out PlayerRagdoll playerRagdoll))
         {
             playerRagdoll.DisableRagdoll();
 
+            // TODO Tent에서 위치 저장 데이터가지고오기
             transform.position = new Vector3(0, 0, 0); // 예시 위치
             transform.rotation = Quaternion.identity;  // 예시 회전
-
         }
     }
 }
