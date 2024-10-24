@@ -24,18 +24,25 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     ///
     /// </summary>
     #endregion
+    [Header("#Slots")]
     public InventorySlot[] slotObjects;
     public QuickSlot[] quickSlotObjects;
 
-
+    [Header("#BoneFire")]
     public GameObject boneFireObject; // 모닥불 UI_Object
     public InventorySlot[] boneFireSlots;
 
+    [Header("#Box")]
+    public GameObject boxSlotsObject;
+    public InventorySlot[] boxSlots = new InventorySlot[12];
+
+    [Header("#Inventory_Info")]
     public SlotBase selectSlot;
     public DragSlot dragSlot;
     public ToolTipContainer toolTipContainer;
     public RectTransform parentTransform; // inventory 창 크기
 
+    [Header("#Test")]
     public ItemData testItemData1;
     public ItemData testItemData2;
     public ItemData testItemData3;
@@ -59,7 +66,11 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         Main.Inventory.AddItem(testItemData3);
         Main.Inventory.AddItem(testItemData4);
         Main.Inventory.AddItem(testItemData5);
+        //모닥불 
         BoneFireInitialize();
+        //창고 [10/24] - 수정해야 함
+        //BoxInitialize();
+        //BoxSlotUpdateUI();
 
         equipManager = FindObjectOfType<EquipManager>();
         AdjustParentHeight();
@@ -96,7 +107,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 
     #endregion
 
-    public void AdjustParentHeight()
+    public void AdjustParentHeight() // UI 크기 셋팅
     {
         float totalHeight = 140f;//위 아래 빈 공간
         //구조상 이렇게 해야함 :(
@@ -330,7 +341,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         boneFireSlots[1].curSlot = new SlotData();
     }
 
-    private void UpdateSlotUI(InventorySlot slot)
+    private void UpdateSlotUI(InventorySlot slot) // 나중에 사용하면 코드를 간소화 할 수 있을 거 같다.
     {
         if (!slot.curSlot.IsEmpty())
         {
@@ -358,6 +369,64 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 
         BoneFireUpdateUI();
     }
+    #endregion
+
+
+    #region BoxInventory
+
+    private void BoxInitialize()
+    {
+        InventorySlot[] foundSlots = boxSlotsObject.GetComponentsInChildren<InventorySlot>();
+        for (int i = 0; i < boxSlots.Length; i++)
+        {
+            boxSlots[i] = foundSlots[i];
+        }
+        for (int i = 0; i < boxSlots.Length; i++)
+        {
+            boxSlots[i].curSlot = new SlotData();
+            boxSlots[i].index = i;
+        }
+        //최대 12개의 슬롯을 boxSlots에 할당합니다.
+        //for (int i = 0; i < boxSlots.Length; i++)
+        //{
+        //    boxSlots[i] = foundSlots[i];
+        //}
+
+        //int childCount = boxSlotsObject.transform.childCount;
+        //List<InventorySlot> tempList = new List<InventorySlot>();
+        //for (int i = 0; i < boxSlots.Length; i++)
+        //{
+        //    Transform child = boxSlotsObject.transform.GetChild(i);
+        //    InventorySlot slot = child.GetComponent<InventorySlot>();
+        //    if (slot != null)
+        //    {
+        //        tempList.Add(slot);
+        //    }
+        //}
+
+        //boxSlots = tempList.ToArray();
+    }
+
+    public void BoxSlotUpdateUI()
+    {
+        SlotData[] _slots = Main.Inventory.slotsData;
+
+        for (int i = 0; i < boxSlots.Length; i++)
+        {
+            UpdateSlotUI(boxSlots[i]);
+        }
+    }
+
+    public void BoxSlotsGet(InventorySlot[] Get_boxSlots) // 박스 데이터 Get 하기
+    {
+        for(int i =0; i < Get_boxSlots.Length; i++)
+        {
+            boxSlots[i].curSlot = Get_boxSlots[i].curSlot;
+        }
+
+        BoxSlotUpdateUI();
+    }
+
     #endregion
 
 }

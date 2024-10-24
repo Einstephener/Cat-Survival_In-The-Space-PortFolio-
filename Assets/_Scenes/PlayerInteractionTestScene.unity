@@ -6080,11 +6080,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5518122264968733312, guid: 3780471d37f1c84408a99f4170315a0b,
         type: 3}
-      propertyPath: quickSlotObjects.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5518122264968733312, guid: 3780471d37f1c84408a99f4170315a0b,
-        type: 3}
       propertyPath: quickSlotObjects.Array.data[0]
       value: 
       objectReference: {fileID: 2120182948}
