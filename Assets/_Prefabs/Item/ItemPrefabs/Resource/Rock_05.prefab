@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5003550744463991947}
   - component: {fileID: 3338770196433212238}
   - component: {fileID: 2149063122922106891}
+  - component: {fileID: -7330363896914902424}
   - component: {fileID: 3058497383661968201}
   - component: {fileID: 8572878463251735798}
   m_Layer: 0
@@ -108,6 +109,33 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: fa2e670bb3648a84b9df8d16da25b85e, type: 3}
+--- !u!54 &-7330363896914902424
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899374446673724991}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &3058497383661968201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 1a7dbbcb91b556a42a3ea85f6129fe02, type: 2}
-  item: {fileID: 0}
+  item: {fileID: 8572878463251735798}
 --- !u!114 &8572878463251735798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,4 +162,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa0786bbbe95ae647b244d1c02e772f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 0}
+  itemData: {fileID: 11400000, guid: 1a7dbbcb91b556a42a3ea85f6129fe02, type: 2}
