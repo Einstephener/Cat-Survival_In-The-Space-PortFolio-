@@ -172,8 +172,6 @@ public class UIManager
 
     public void ClosePopupUI(GameObject obj)
     {
-        //Time.timeScale = 1.0f;
-
         if (_alreayOpenPopUpUI == obj)
         {
             SwitchToPlayer();

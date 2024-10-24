@@ -22,6 +22,7 @@ public class PlayerStatusUpdater : MonoBehaviour
     private void Start()
     {
         GetInputController();
+        Main.Data.OnPlayerRespawn += PlayerRespawn;
     }
 
     private void GetInputController()
@@ -132,10 +133,7 @@ public class PlayerStatusUpdater : MonoBehaviour
         {
             if (TryGetComponent<PlayerRagdoll>(out PlayerRagdoll playerRagdoll))
             {
-                GetComponent<Animator>().enabled = false;
-                playerRagdoll.SetParentRigidbodyCollider(true);
-                playerRagdoll.SetChildRigidbodyState(false);
-                playerRagdoll.SetChildColliderState(true);
+                playerRagdoll.EnableRagdoll();
             }
 
             return true;
@@ -146,4 +144,21 @@ public class PlayerStatusUpdater : MonoBehaviour
         }
     }
 
+    private void PlayerRespawn(bool isRespawn)
+    {
+        Debug.Log(isRespawn);
+
+        _status.Health = 100;
+        _status.Stamina = 100;
+        _status.Thirst = 100;
+        _status.Hunger = 100;
+        if (TryGetComponent<PlayerRagdoll>(out PlayerRagdoll playerRagdoll))
+        {
+            playerRagdoll.DisableRagdoll();
+
+            transform.position = new Vector3(0, 0, 0); // 예시 위치
+            transform.rotation = Quaternion.identity;  // 예시 회전
+
+        }
+    }
 }
