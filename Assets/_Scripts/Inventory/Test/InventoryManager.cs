@@ -221,7 +221,7 @@ public class InventoryManager
                     slot.amount -= _amount;
                     // 수량이 변경된 후 UI 업데이트
                     //inventoryUI.UpdateUI();
-                    Debug.Log($"Removed {_amount} from {slot.itemData.DisplayName} // Index: {slotIndex}, New Amount: {slot.amount}");
+                    //Debug.Log($"Removed {_amount} from {slot.itemData.DisplayName} // Index: {slotIndex}, New Amount: {slot.amount}");
                 }
                 // 아이템 수량이 제거할 수량과 같은 경우
                 else if (slot.amount == _amount)

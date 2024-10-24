@@ -16,6 +16,11 @@ public class UI_Respawn : UI_Scene, IObserver
     private Color _colorSet;
     private float _fadeDuration; // 알파값이 줄어드는 데 걸리는 시간
 
+    private bool _openPanel = false;
+
+
+
+
     public override bool Initialize()
     {
         if (!base.Initialize()) return false;
@@ -29,11 +34,13 @@ public class UI_Respawn : UI_Scene, IObserver
     {
         _fadeDuration = 2f;
         BG_Panel.SetActive(false);
+        _openPanel = false;
         _bgImage = BG_Panel.GetComponent<Image>();
     }
     public void OpenPanel()
     {
         BG_Panel.SetActive(true);
+        _openPanel = true;
         Main.UI.SwitchToUI();
         _colorSet = _bgImage.color;
 
@@ -67,18 +74,22 @@ public class UI_Respawn : UI_Scene, IObserver
     public void ClickRespawnBtn()
     {
         BG_Panel.SetActive(false);
+        _openPanel = false;
         Main.UI.SwitchToPlayer();
-        Debug.Log("리스폰");
+
+        Main.Data.PlayerRespawn();
     }
+
     public void ClickLobbyBtn()
     {
         BG_Panel.SetActive(false);
+        _openPanel = false;
         Main.UI.SwitchToPlayer();
         SceneManager.LoadScene("LobbyScene");
     }
     public void OnPlayerStateChanged(PlayerStatus state)
     {
-        if(state.Health <= 0)
+        if(state.Health <= 0 && !_openPanel)
         {
             OpenPanel();
         }        

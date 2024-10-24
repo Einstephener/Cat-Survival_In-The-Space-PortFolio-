@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8176731937828633521}
   - component: {fileID: 8282696390385449019}
   - component: {fileID: 9125133589201850545}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 3764143075311475668}
   - component: {fileID: 8269368874231441068}
   - component: {fileID: 5382501051129298889}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dead tree 004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: f08ffa4361a37194180ef0894af4c08b, type: 2}
-  item: {fileID: 0}
+  item: {fileID: 5382501051129298889}
 --- !u!114 &5382501051129298889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,4 +165,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa0786bbbe95ae647b244d1c02e772f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 0}
+  itemData: {fileID: 11400000, guid: f08ffa4361a37194180ef0894af4c08b, type: 2}

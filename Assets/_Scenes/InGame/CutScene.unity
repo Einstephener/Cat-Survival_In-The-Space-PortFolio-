@@ -13444,7 +13444,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 628369576}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.011388893, y: 0.90305865, z: -0.02399101, w: -0.42869553}
+  m_LocalRotation: {x: 0.08913751, y: -0.1985744, z: 0.018138371, w: 0.9758554}
   m_LocalPosition: {x: 5.827039, y: 0.62015104, z: 7.3711452}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -27008,7 +27008,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.4
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -27036,8 +27036,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1256975279}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.415, y: 1.7700001, z: 8.709}
+  m_LocalRotation: {x: 0.47334278, y: 0.5207496, z: -0.44516927, w: 0.5537064}
+  m_LocalPosition: {x: 4.552, y: 1.732, z: 10.642}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -29331,7 +29331,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: land space shuttle launch (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6874544376128035798, guid: a0fe72521b524854e8078ba1caf0c152, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -38131,7 +38132,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: land space shuttle launch (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6874544376128035798, guid: a0fe72521b524854e8078ba1caf0c152, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -44749,7 +44751,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: land space shuttle launch (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6874544376128035798, guid: a0fe72521b524854e8078ba1caf0c152, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -48500,7 +48503,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: land space shuttle launch
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6874544376128035798, guid: a0fe72521b524854e8078ba1caf0c152, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

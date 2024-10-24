@@ -23,7 +23,7 @@ public class Tent : Installation
     {
         //RespawnTransform = this.gameObject.transform;
         RespawnTransform = transform.position + Vector3.right * 3;
-        Debug.Log($"{RespawnTransform}");
+        //Debug.Log($"{RespawnTransform}");
 
         var dataManager = Main.Data; // Main의 싱글톤을 통해 DataManager에 접근
         if (dataManager.Respawn.TryGetValue("TentRespawn", out RespawnData respawnData))
