@@ -37,7 +37,7 @@ public class PlayerInputController : MonoBehaviour
     private float _jumpForce = 5.0f;
     private Transform _groundCheck;
     private Vector3 _boxCastSize = new Vector3(0.8f, 0.1f, 0.8f); // 박스 캐스트 크기
-    private float _groundDistance = 0.2f; // 박스 캐스트 높이.
+    //private float _groundDistance = 0.2f; // 박스 캐스트 높이.
 
     private bool _isGrounded;
     private bool _isRun;

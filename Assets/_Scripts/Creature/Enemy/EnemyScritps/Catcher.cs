@@ -16,6 +16,8 @@ public class Catcher : Enemy
         Init(bossSO);
         _isAddSpeed = false;
         _isCastingSkill = false;
+
+        if (_isCastingSkill) { }
     }
 
     private void Update()
