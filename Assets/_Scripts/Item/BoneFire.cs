@@ -288,7 +288,7 @@ public class BoneFire : Installation
             }
             else
             {
-                Debug.Log("하나 이상의 슬롯이 유효한 PotionItemData가 아닙니다.");
+                //Debug.Log("하나 이상의 슬롯이 유효한 PotionItemData가 아닙니다.");
                 return false; // 유효하지 않은 경우 false 반환
             }
         }

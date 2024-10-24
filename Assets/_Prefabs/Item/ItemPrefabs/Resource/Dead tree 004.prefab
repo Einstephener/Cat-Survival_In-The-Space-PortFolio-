@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8176731937828633521}
   - component: {fileID: 8282696390385449019}
   - component: {fileID: 9125133589201850545}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 3764143075311475668}
   - component: {fileID: 8269368874231441068}
   - component: {fileID: 5382501051129298889}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dead tree 004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
