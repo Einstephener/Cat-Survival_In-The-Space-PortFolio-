@@ -20,6 +20,11 @@ public class DataManager
     public Dictionary<string, RespawnData> Respawn = new();
     //public Dictionary<string, SlotData> Inventory = new();
 
+    // 플레이어 리스폰 이벤트
+    public delegate void PlayerRespawnEventHandler(bool isClickRespawn);
+    public event PlayerRespawnEventHandler OnPlayerRespawn;
+
+
     public void Initialize()
     {
         Date = LoadJson<DateData>();
@@ -39,14 +44,17 @@ public class DataManager
         return dictionary;
     }
 
-    // 데어터 세이브 - SaveJson(딕셔너리로 되어 있는 Data, "저장될 이름")
+    // 데이터 세이브 - SaveJson(딕셔너리로 되어 있는 Data, "저장될 이름")
     public void SaveJson<T>(Dictionary<string, T> data, string fileName) where T : Data
     {
         string json = JsonConvert.SerializeObject(data.Values.ToList(), Formatting.Indented);
         File.WriteAllText(Path.Combine(Application.persistentDataPath, $"{fileName}.json"), json);
     }
 
-
+    public void PlayerRespawn()
+    {
+        OnPlayerRespawn?.Invoke(true);
+    }
 
     //public void SaveData<T>(string key, T data) where T : class
     //{

@@ -19,6 +19,7 @@ public class MainScene : BaseScene
         Main.Resource.Initialize();
 
         Main.UI.inputActionAsset = inputActionAsset;
+        Main.UI.ClearDictionary();
 
         Main.Resource.Instantiate("@EventSystem");
         Main.UI.ShowSceneUI<UI_MainScene>("UI_MainScene");

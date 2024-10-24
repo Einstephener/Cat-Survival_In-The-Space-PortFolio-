@@ -8,7 +8,6 @@ using UnityEngine.InputSystem;
 public class PlayerInputController : MonoBehaviour
 {
     #region Field
-    private PlayerUIControl ui_control;
 
     //[SerializeField] private CameraController _cameraController;
     [SerializeField] private Transform _cameraController; // Cat_Head 넣으면 됨 / 메인 카메라와 서브 카메라 같이 움직이도록 하기 위해 수정했습니다. - 문제가 발생하면 능권이에게 연락주시면 됩니다. :)
@@ -35,9 +34,9 @@ public class PlayerInputController : MonoBehaviour
 
     private LayerMask _groundCheckLayer;
     private float _jumpForce = 5.0f;
-    private Transform _groundCheck;
-    private Vector3 _boxCastSize = new Vector3(0.8f, 0.1f, 0.8f); // 박스 캐스트 크기
-    private float _groundDistance = 0.2f; // 박스 캐스트 높이.
+    //private Transform _groundCheck;
+    //private Vector3 _boxCastSize = new Vector3(0.8f, 0.1f, 0.8f); // 박스 캐스트 크기
+    //private float _groundDistance = 0.2f; // 박스 캐스트 높이.
 
     private bool _isGrounded;
     private bool _isRun;
@@ -65,9 +64,7 @@ public class PlayerInputController : MonoBehaviour
         _groundCheckLayer = LayerMask.GetMask("Ground");
 
         _rigid = GetComponent<Rigidbody>();
-        _groundCheck = GetComponent<Transform>();
         _playerAnimator = GetComponent<Animator>();
-        ui_control = GetComponent<PlayerUIControl>();
         //_cameraController = transform.Find("Cat_Head");
         //Cursor.lockState = CursorLockMode.Locked; // 커서 가운데 고정.
 
