@@ -69,8 +69,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         //모닥불 
         BoneFireInitialize();
         //창고 [10/24] - 수정해야 함
-        //BoxInitialize();
-        //BoxSlotUpdateUI();
+        BoxInitialize();
 
         equipManager = FindObjectOfType<EquipManager>();
         AdjustParentHeight();
@@ -230,6 +229,14 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         }
     }
 
+    public void InventoryTotalUpdateUI()
+    {
+        //인벤토리,화로,창고 UI Update
+        UpdateUI();
+        BoneFireUpdateUI();
+        BoxSlotUpdateUI();
+    }
+
     #region - 정렬
     public void TrimAll()
     {
@@ -292,8 +299,10 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
             Debug.Log($"아이템의 정보가 없습니다");
         }
 
-        UpdateUI();
-        BoneFireUpdateUI();
+        InventoryTotalUpdateUI();
+
+        //UpdateUI();
+        //BoneFireUpdateUI();
     }
 
     public void CombineSlots(SlotData dragSlotData, SlotData dropSlotData) // 같은 아이템이면 병합하는 함수
@@ -328,8 +337,10 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
             }
         }
 
-        UpdateUI();
-        BoneFireUpdateUI();
+        InventoryTotalUpdateUI();
+
+        //UpdateUI();
+        //BoneFireUpdateUI();
     }
     #endregion
 
@@ -376,40 +387,24 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 
     private void BoxInitialize()
     {
-        InventorySlot[] foundSlots = boxSlotsObject.GetComponentsInChildren<InventorySlot>();
-        for (int i = 0; i < boxSlots.Length; i++)
+        Transform[] children = GetComponentsInChildren<Transform>();
+        int index = 0;
+        for (int i = 0; i < children.Length; i++)
         {
-            boxSlots[i] = foundSlots[i];
-        }
-        for (int i = 0; i < boxSlots.Length; i++)
-        {
-            boxSlots[i].curSlot = new SlotData();
-            boxSlots[i].index = i;
-        }
-        //최대 12개의 슬롯을 boxSlots에 할당합니다.
-        //for (int i = 0; i < boxSlots.Length; i++)
-        //{
-        //    boxSlots[i] = foundSlots[i];
-        //}
+            if (index >= boxSlots.Length) break; // 배열의 크기를 초과하지 않도록 함
 
-        //int childCount = boxSlotsObject.transform.childCount;
-        //List<InventorySlot> tempList = new List<InventorySlot>();
-        //for (int i = 0; i < boxSlots.Length; i++)
-        //{
-        //    Transform child = boxSlotsObject.transform.GetChild(i);
-        //    InventorySlot slot = child.GetComponent<InventorySlot>();
-        //    if (slot != null)
-        //    {
-        //        tempList.Add(slot);
-        //    }
-        //}
-
-        //boxSlots = tempList.ToArray();
+            InventorySlot slot = children[i].GetComponent<InventorySlot>();
+            if (slot != null)
+            {
+                boxSlots[index] = slot;
+                index++;
+            }
+        }
     }
 
     public void BoxSlotUpdateUI()
     {
-        SlotData[] _slots = Main.Inventory.slotsData;
+        //SlotData[] _slots = Main.Inventory.boxSlotsData;
 
         for (int i = 0; i < boxSlots.Length; i++)
         {
@@ -417,11 +412,11 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         }
     }
 
-    public void BoxSlotsGet(InventorySlot[] Get_boxSlots) // 박스 데이터 Get 하기
+    public void BoxSlotsGet(SlotData[] Get_boxSlots) // 박스 데이터 Get 하기
     {
         for(int i =0; i < Get_boxSlots.Length; i++)
         {
-            boxSlots[i].curSlot = Get_boxSlots[i].curSlot;
+            boxSlots[i].curSlot = Get_boxSlots[i];
         }
 
         BoxSlotUpdateUI();

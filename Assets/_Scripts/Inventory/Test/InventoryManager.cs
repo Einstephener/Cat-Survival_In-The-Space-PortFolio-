@@ -130,7 +130,7 @@ public class InventoryManager
                 slotsData[i] = new SlotData();
                 slotsData[i].itemData = _itemdata;
                 slotsData[i].amount = _amount;
-                //Debug.Log($"{slotsData[i].itemData} += {_itemdata} //Index : {i} ItemName : {slotsData[i].itemData.DisplayName}, Amunt : {slotsData[i].amount}");
+                //Debug.Log($"{boxSlotsData[i].itemData} += {_itemdata} //Index : {i} ItemName : {boxSlotsData[i].itemData.DisplayName}, Amunt : {boxSlotsData[i].amount}");
                 inventoryUI.UpdateUI();
                 return;
             }
@@ -180,7 +180,7 @@ public class InventoryManager
                     slotsData[slotIndex] = new SlotData();
                     slotsData[slotIndex].itemData = _itemdata;
                     slotsData[slotIndex].amount = _amount;
-                    //Debug.Log($"{slotsData[slotIndex].itemData} += {_itemdata} // Index : {slotIndex} ItemName : {slotsData[slotIndex].itemData.DisplayName}, Amount : {slotsData[slotIndex].amount}");
+                    //Debug.Log($"{boxSlotsData[slotIndex].itemData} += {_itemdata} // Index : {slotIndex} ItemName : {boxSlotsData[slotIndex].itemData.DisplayName}, Amount : {boxSlotsData[slotIndex].amount}");
                     inventoryUI.UpdateUI();
                     return;
                 }
@@ -195,7 +195,7 @@ public class InventoryManager
                 slotsData[i] = new SlotData();
                 slotsData[i].itemData = _itemdata;
                 slotsData[i].amount = _amount;
-                //Debug.Log($"{slotsData[i].itemData} += {_itemdata} // Index : {i} ItemName : {slotsData[i].itemData.DisplayName}, Amount : {slotsData[i].amount}");
+                //Debug.Log($"{boxSlotsData[i].itemData} += {_itemdata} // Index : {i} ItemName : {boxSlotsData[i].itemData.DisplayName}, Amount : {boxSlotsData[i].amount}");
                 inventoryUI.UpdateUI();
                 return;
             }
