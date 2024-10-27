@@ -21,15 +21,23 @@ public class EnemyAttackState : IEnemyState
 
         if (enemy is Catcher catcher && catcher.IsCastingSkill())
         {
-            //if (!catcher.IsSkillRange())
-            //{
-            //    enemy.animator.SetBool("IsSkillAttack", false);
-            //    enemy.TransitionToState(new EnemyChaseState());
-            //}
-            //else
-            //{
-            //    enemy.animator.SetBool("IsSkillAttack", true);
-            //}
+            if (!catcher.IsSkillRange())
+            {
+                enemy.animator.SetBool("IsAttack", false);
+                enemy.TransitionToState(new EnemyChaseState());
+            }
+            else
+            {
+                if (catcher.IsCastingSkill())
+                {
+                    catcher.StartCoroutine(catcher.CastMeleeSkill());
+                    enemy.animator.SetTrigger("OnSkill");
+                }
+                else
+                {
+                    enemy.animator.SetBool("IsAttack", true);
+                }
+            }
         }
         else
         {

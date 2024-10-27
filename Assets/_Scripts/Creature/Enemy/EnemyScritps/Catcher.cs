@@ -40,17 +40,6 @@ public class Catcher : Enemy
         Debug.Log($"{_enemyData.rewardItem} 획득했습니다.");
     }
 
-    public override void OnHit(float damage)
-    {
-        base.OnHit(damage);
-
-        // 체력이 절반 아래가 되면.
-        if (IsCastingSkill())
-        {
-            StartCoroutine(CastMeleeSkill());
-        }
-    }
-
     protected override void MeleeAttack()
     {
         if (Vector3.Distance(transform.position, _playerTransform.position) <= bossSO.skillRange)
@@ -113,7 +102,7 @@ public class Catcher : Enemy
     {
         _isCastingSkill = true;
 
-        while (_currentHp <= _enemyData.maxHp / 2)
+        while (IsCastingSkill())
         {
             if (IsSkillRange())
             {
