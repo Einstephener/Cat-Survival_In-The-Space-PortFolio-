@@ -19,23 +19,39 @@ public class EnemyAttackState : IEnemyState
             return;
         }
 
-        // 플레이어와의 거리 체크 (만약 플레이어가 멀어졌다면 다시 추적)
-        if (!enemy.IsAttackRange())
+        if (enemy is Catcher catcher && catcher.IsCastingSkill())
         {
-            enemy.animator.SetBool("IsAttack", false);
-            enemy.TransitionToState(new EnemyChaseState());
+            //if (!catcher.IsSkillRange())
+            //{
+            //    enemy.animator.SetBool("IsSkillAttack", false);
+            //    enemy.TransitionToState(new EnemyChaseState());
+            //}
+            //else
+            //{
+            //    enemy.animator.SetBool("IsSkillAttack", true);
+            //}
         }
         else
         {
-            if(enemy.AttackCooldownCheck())
+            // 플레이어와의 거리 체크 (만약 플레이어가 멀어졌다면 다시 추적)
+            if (!enemy.IsAttackRange())
             {
-                enemy.animator.SetTrigger("OnAttack");
+                enemy.animator.SetBool("IsAttack", false);
+                enemy.TransitionToState(new EnemyChaseState());
             }
             else
             {
-                enemy.animator.SetBool("IsAttack", true);
+                if (enemy.AttackCooldownCheck())
+                {
+                    enemy.animator.SetTrigger("OnAttack");
+                }
+                else
+                {
+                    enemy.animator.SetBool("IsAttack", true);
+                }
             }
         }
+
     }
 
     public void ExitState(Enemy enemy)

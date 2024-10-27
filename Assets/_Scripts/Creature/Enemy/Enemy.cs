@@ -12,9 +12,9 @@ public class Enemy : MonoBehaviour
     public AIPath aiPath { get; private set; }
 
     private Vector3 _basePosition;
-    private LayerMask _playerLayer;
     private AIDestinationSetter _target;
 
+    protected LayerMask _playerLayer;
     protected IEnemyState _currentState;
 
     protected Transform _playerTransform;
@@ -122,7 +122,7 @@ public class Enemy : MonoBehaviour
     {
         if (aiPath != null)
         {
-            aiPath.maxSpeed = speed;  // AIPath의 최대 속도 설정.
+            aiPath.maxSpeed = speed + _enemyData.addSpeed;  // AIPath의 최대 속도 설정.
         }
     }
 
