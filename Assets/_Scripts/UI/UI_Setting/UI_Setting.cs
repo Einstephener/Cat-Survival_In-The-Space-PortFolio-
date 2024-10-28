@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.InputSystem.EnhancedTouch;
+using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class UI_Setting : UI_Base
 {
@@ -13,12 +17,52 @@ public class UI_Setting : UI_Base
     }
 
     #region Field
-        
-    //public GameObject CancelBtn;
-    //public GameObject SaveBtn;
-    //public GameObject EndGameBtn;
+    public AudioMixer audioMixer;
 
-    #endregion  
+
+    public Slider MouseSlider;
+    public Slider MasterSlider;
+    public Slider BGMSlider;
+    public Slider SFXSlider;
+
+    #endregion
+
+    private void Awake()
+    {
+        Main.Data.Mouse = 0.5f;
+
+        MasterSlider.onValueChanged.AddListener(SetMasterVolume);
+        BGMSlider.onValueChanged.AddListener(SetBGMVolume);
+        SFXSlider.onValueChanged.AddListener(SetSFXVolume);
+    }
+
+    private new void OnEnable()
+    {
+        MouseSlider.value = Main.Data.Mouse;
+
+        MasterSlider.value = Main.Data.Master;
+        BGMSlider.value = Main.Data.BGM;
+        SFXSlider.value = Main.Data.SFX;
+    }
+    public void SetMasterVolume(float volume)
+    {
+        audioMixer.SetFloat("Master", Mathf.Log10(volume) * 20);
+        Main.Data.Master = volume;
+    }
+
+    public void SetBGMVolume(float volume)
+    {
+        audioMixer.SetFloat("BGM", Mathf.Log10(volume) * 20);
+        Main.Data.BGM = volume;
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        audioMixer.SetFloat("SFX", Mathf.Log10(volume) * 20);
+        Main.Data.SFX = volume;
+    }
+
+    #region ButtonMethod
 
     public void CancelSetting()
     {
@@ -42,6 +86,7 @@ public class UI_Setting : UI_Base
 #endif
     }
 
+    #endregion
 
 
 

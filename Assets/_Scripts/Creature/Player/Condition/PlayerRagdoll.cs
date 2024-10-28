@@ -35,8 +35,6 @@ public class PlayerRagdoll : MonoBehaviour
     {
         Player.GetComponent<Rigidbody>().isKinematic = state;
         Player.GetComponent<Collider>().enabled = !state;
-        Debug.Log(Player.GetComponent<Rigidbody>());
-        Debug.Log(Player.GetComponent<Collider>());
     }
 
     #region Ragdoll On/Off
