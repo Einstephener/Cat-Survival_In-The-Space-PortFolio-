@@ -32,7 +32,12 @@ public class EnemyChaseState : IEnemyState
         }
         else
         {
-            // 공격 범위 체크
+            if (enemy is Catcher catcher && catcher.IsCastingSkill() && catcher.IsSkillRange())
+            {
+                enemy.TransitionToState(new EnemyAttackState());
+            }
+
+                // 공격 범위 체크
             if (enemy.IsAttackRange())
             {
                 enemy.TransitionToState(new EnemyAttackState());

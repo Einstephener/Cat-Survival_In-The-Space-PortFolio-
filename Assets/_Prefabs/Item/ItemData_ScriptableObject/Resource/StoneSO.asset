@@ -16,9 +16,10 @@ MonoBehaviour:
   Description: ResouceItem
   Type: 0
   Icon: {fileID: 21300000, guid: 282d246fc37b0494f82496f60da87012, type: 3}
-  DropPrefab: {fileID: 5903704957169112262, guid: 26de2021ac0414640bd3c9d6aad7d69e,
+  DropPrefab: {fileID: 899374446673724991, guid: 272f4eb2c625c9244b77dd1ddded4d69,
     type: 3}
-  item: {fileID: 0}
+  item: {fileID: 8572878463251735798, guid: 272f4eb2c625c9244b77dd1ddded4d69, type: 3}
   CraftingResourceList: []
+  EquipPrefab: {fileID: 3787053446633968056, guid: bb6445309f278a540834c166600e996b,
+    type: 3}
   MaxAmount: 99
-  EquipPrefab: {fileID: 0}

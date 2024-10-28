@@ -28,7 +28,7 @@ public class BoneFire : Installation
         Initialize();
     }
 
-    private void Initialize() // 에러 (수정해야 할 함수임 - InventorySlot - > SlotData 로 변경해서 해야 함) - 변경을 했지만 새로운 모닥불이 생기면 이전에 있는 데이터가 날라감
+    private void Initialize() // 에러 (수정해야 할 함수임 - InventorySlot - > SlotData 로 변경해서 해야 함) - 변경을 했지만 새로운 모닥불이 생기면 이전에 있는 데이터가 날라감 - 수정 완 :)
     {
         if (boneFireSlotData == null && nextBoneFireSlotData == null) // SlotData 생성
         {
@@ -110,7 +110,6 @@ public class BoneFire : Installation
         Main.Inventory.inventoryUI.BoneFireSlotsGet(boneFireSlotData, nextBoneFireSlotData);
 
         UISet();
-        Main.Inventory.inventoryUI.AdjustParentHeight();
     }
 
     private void Update()
@@ -149,7 +148,9 @@ public class BoneFire : Installation
 
         Main.Inventory.inventoryUI.boneFireObject.SetActive(true);
 
-        
+        Main.Inventory.inventoryUI.boxSlotsObject.SetActive(false);
+
+        Main.Inventory.inventoryUI.AdjustParentHeight();
     }
 
     public void UIRemove()
@@ -288,7 +289,7 @@ public class BoneFire : Installation
             }
             else
             {
-                Debug.Log("하나 이상의 슬롯이 유효한 PotionItemData가 아닙니다.");
+                //Debug.Log("하나 이상의 슬롯이 유효한 PotionItemData가 아닙니다.");
                 return false; // 유효하지 않은 경우 false 반환
             }
         }

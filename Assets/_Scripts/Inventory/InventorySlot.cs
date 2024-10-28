@@ -167,19 +167,6 @@ public class InventorySlot : SlotBase, IPointerEnterHandler, IPointerExitHandler
     }
     #endregion
 
-    //public void BoneFireTest()
-    //{
-    //    if (boneFireSlot)
-    //    {
-    //        AddFireSlot();
-
-    //    }
-    //}
-
-    //private void AddFireSlot()
-    //{
-
-    //}
 
     private void ChangeSlot()
     {

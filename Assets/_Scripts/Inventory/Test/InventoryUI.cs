@@ -24,18 +24,25 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     ///
     /// </summary>
     #endregion
+    [Header("#Slots")]
     public InventorySlot[] slotObjects;
     public QuickSlot[] quickSlotObjects;
 
-
+    [Header("#BoneFire")]
     public GameObject boneFireObject; // 모닥불 UI_Object
     public InventorySlot[] boneFireSlots;
 
+    [Header("#Box")]
+    public GameObject boxSlotsObject;
+    public InventorySlot[] boxSlots;
+
+    [Header("#Inventory_Info")]
     public SlotBase selectSlot;
     public DragSlot dragSlot;
     public ToolTipContainer toolTipContainer;
     public RectTransform parentTransform; // inventory 창 크기
 
+    [Header("#Test")]
     public ItemData testItemData1;
     public ItemData testItemData2;
     public ItemData testItemData3;
@@ -57,9 +64,13 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         Main.Inventory.Select_AddItem(testItemData2, 29, 9);
         Main.Inventory.Select_AddItem(testItemData2, 29, 11);
         Main.Inventory.AddItem(testItemData3);
-        Main.Inventory.AddItem(testItemData4);
+        //Main.Inventory.AddItem(testItemData4);
         Main.Inventory.AddItem(testItemData5);
+        Main.Inventory.AddItem(testItemData5);
+        //모닥불 
         BoneFireInitialize();
+        //창고 [10/24] - 수정해야 함
+        BoxInitialize();
 
         equipManager = FindObjectOfType<EquipManager>();
         AdjustParentHeight();
@@ -96,7 +107,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 
     #endregion
 
-    public void AdjustParentHeight()
+    public void AdjustParentHeight() // UI 크기 셋팅
     {
         float totalHeight = 140f;//위 아래 빈 공간
         //구조상 이렇게 해야함 :(
@@ -117,6 +128,17 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         Vector2 parentSize = parentTransform.sizeDelta;
         parentSize.y = totalHeight;
         parentTransform.sizeDelta = parentSize;
+    }
+
+    public void InventoryUISet()
+    {
+        this.gameObject.SetActive(true);
+
+        this.boneFireObject.SetActive(false);
+
+        this.boxSlotsObject.SetActive(false);
+
+        Main.Inventory.inventoryUI.AdjustParentHeight();
     }
 
     public void UpdateUI()
@@ -166,12 +188,12 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
             //selectSlot = quickSlotObjects[index];
             quickSlotObjects[index].SetOutLine();
 
-            //equipManager 관련 버그(에러) : 선택된 슬롯의 아이템을 이동 시켜도 그 아이템을 들고 있는 버그가 있음 이걸 Update문이나 이벤트에서 관리를 해야할 거 같음 
-            //equipManager.EquipNew(selectSlot.curSlot.itemData);// 임시
-            //if (selectSlot.curSlot.itemData == null)
-            //{
-            //    equipManager.UnEquip();
-            //}
+            //equipManager 관련 버그(에러) : 선택된 슬롯의 아이템을 이동 시켜도 그 아이템을 들고 있는 버그가 있음 이걸 Update문이나 이벤트에서 관리를 해야할 거 같음 - 수정 완료[10/24]
+            equipManager.EquipNew(selectSlot.curSlot.itemData);// 임시
+            if (selectSlot.curSlot.itemData == null)
+            {
+                equipManager.UnEquip();
+            }
 
             for (int i = 0; i < quickSlotObjects.Length; i++)
             {
@@ -217,6 +239,14 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
             //Debug.Log($"{selectSlot.curSlot.itemData}");
             return null;
         }
+    }
+
+    public void InventoryTotalUpdateUI()
+    {
+        //인벤토리,화로,창고 UI Update
+        UpdateUI();
+        BoneFireUpdateUI();
+        BoxSlotUpdateUI();
     }
 
     #region - 정렬
@@ -281,8 +311,10 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
             Debug.Log($"아이템의 정보가 없습니다");
         }
 
-        UpdateUI();
-        BoneFireUpdateUI();
+        InventoryTotalUpdateUI();
+
+        //UpdateUI();
+        //BoneFireUpdateUI();
     }
 
     public void CombineSlots(SlotData dragSlotData, SlotData dropSlotData) // 같은 아이템이면 병합하는 함수
@@ -317,8 +349,10 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
             }
         }
 
-        UpdateUI();
-        BoneFireUpdateUI();
+        InventoryTotalUpdateUI();
+
+        //UpdateUI();
+        //BoneFireUpdateUI();
     }
     #endregion
 
@@ -330,7 +364,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         boneFireSlots[1].curSlot = new SlotData();
     }
 
-    private void UpdateSlotUI(InventorySlot slot)
+    private void UpdateSlotUI(InventorySlot slot) // 나중에 사용하면 코드를 간소화 할 수 있을 거 같다.
     {
         if (!slot.curSlot.IsEmpty())
         {
@@ -358,6 +392,49 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 
         BoneFireUpdateUI();
     }
+    #endregion
+
+
+    #region BoxInventory
+
+    private void BoxInitialize() //[10/28] 나중에 수정하자 :)
+    {
+        Transform[] children = GetComponentsInChildren<Transform>();
+        int index = 0;
+        //boxSlots = new InventorySlot[12];
+        for (int i = 0; i < children.Length; i++)
+        {
+            if (index >= boxSlots.Length) break; // 배열의 크기를 초과하지 않도록 함
+
+            InventorySlot slot = children[i].GetComponent<InventorySlot>();
+            if (slot != null)
+            {
+                boxSlots[index] = slot;
+                index++;
+            }
+        }
+    }
+
+    public void BoxSlotUpdateUI()
+    {
+        //SlotData[] _slots = Main.Inventory.boxSlotsData;
+
+        for (int i = 0; i < boxSlots.Length; i++)
+        {
+            UpdateSlotUI(boxSlots[i]);
+        }
+    }
+
+    public void BoxSlotsGet(SlotData[] Get_boxSlots) // 박스 데이터 Get 하기
+    {
+        for(int i =0; i < Get_boxSlots.Length; i++)
+        {
+            boxSlots[i].curSlot = Get_boxSlots[i];
+        }
+
+        BoxSlotUpdateUI();
+    }
+
     #endregion
 
 }

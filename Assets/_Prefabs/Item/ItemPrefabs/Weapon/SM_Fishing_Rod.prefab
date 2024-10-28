@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6078071170103789472}
   - component: {fileID: 236134927315546405}
   - component: {fileID: 349119681156005116}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HOOK_FOR_Fishing_Rod_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 8290510482619313648}
   - component: {fileID: 9068943771880198213}
   - component: {fileID: 4000152306515156217}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HOLDER_FOR_Fishing_Rod
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 1941075948551012109}
   - component: {fileID: 2456602993422756683}
   - component: {fileID: 3695179735435111574}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Fishing_Rod
   m_TagString: Untagged
   m_Icon: {fileID: 0}

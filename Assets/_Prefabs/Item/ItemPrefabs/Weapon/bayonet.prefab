@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 793100827084600420}
   - component: {fileID: 7088261238570793364}
   - component: {fileID: 1648681644811127956}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: bayonet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

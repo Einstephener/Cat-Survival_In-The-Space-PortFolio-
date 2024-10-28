@@ -6,15 +6,14 @@ using UnityEngine;
 public class Catcher : Enemy
 {
     [SerializeField] public EnemyBossData bossSO;
+    public float speed;
     private float _lastSkillTime;
-    private bool _isAddSpeed;
     private bool _isCastingSkill;
 
     protected override void Awake()
     {
         base.Awake();
         Init(bossSO);
-        _isAddSpeed = false;
         _isCastingSkill = false;
 
         if (_isCastingSkill) { }
@@ -23,6 +22,7 @@ public class Catcher : Enemy
     private void Update()
     {
         UpdateState();
+        speed = aiPath.maxSpeed;
 
         if (_playerTransform != null && _currentState is EnemyAttackState)
         {
@@ -40,35 +40,35 @@ public class Catcher : Enemy
         Debug.Log($"{_enemyData.rewardItem} 획득했습니다.");
     }
 
-    public override void OnHit(float damage)
+    protected override void MeleeAttack()
     {
-        base.OnHit(damage);
-
-        // 체력이 절반 아래가 되면.
-        if (IsCastingSkill())
+        if (Vector3.Distance(transform.position, _playerTransform.position) <= bossSO.skillRange)
         {
-            AddSpeed();
-            StartCoroutine(CastMeleeSkill());
+            Vector3 direction = (_playerTransform.position - transform.position).normalized;
+            Ray ray = new Ray(transform.position, direction);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, bossSO.skillRange, _playerLayer))
+            {
+                if (hit.collider.CompareTag("Player"))
+                {
+                    Debug.Log($"근거리 {bossSO.skillDamage} 데미지");
+
+                    if (hit.collider.TryGetComponent<PlayerCondition>(out PlayerCondition playerCondition))
+                    {
+                        playerCondition.UpdateHealth(-bossSO.skillDamage);
+                    }
+                }
+            }
         }
     }
 
     public bool IsCastingSkill()
     {
-        return _currentHp <= _enemyData.maxHp / 2 && !_isAddSpeed;
+        return _currentHp <= _enemyData.maxHp / 2;
     }
 
-    private void AddSpeed()
-    {
-        if (!_isAddSpeed) // 중복 증가 방지
-        {
-            float newSpeed = aiPath.maxSpeed + bossSO.addSpeed;
-            SetSpeed(newSpeed);
-            _isAddSpeed = true;
-            Debug.Log("이동 속도가 빨라졌습니다!");
-        }
-    }
-
-    public bool SkillCooldownCheck()
+    public bool IsSkillCooldownCheck()
     {
         if (Time.time >= _lastSkillTime + bossSO.skillCooldown)
         {
@@ -78,32 +78,47 @@ public class Catcher : Enemy
         return false;
     }
 
+    public bool IsSkillRange()
+    {
+        if(Vector3.Distance(transform.position, _playerTransform.position) <= bossSO.skillRange)
+        {
+            Debug.Log("범위 도착");
+            return true;
+        }
+        return false;
+    }
+
+    private void MoveTowardsPlayer()
+    {
+        if (aiPath != null && _playerTransform != null)
+        {
+            Debug.Log("플레이어에게 스킬 사용을 위한 이동 중");
+            aiPath.destination = _playerTransform.position;
+            aiPath.canMove = true;
+        }
+    }
+
     public IEnumerator CastMeleeSkill()
     {
         _isCastingSkill = true;
 
-        while (Vector3.Distance(transform.position, _playerTransform.position) > bossSO.skillRange)
+        while (IsCastingSkill())
         {
-            Debug.Log("플레이어에게 스킬 사용을 위한 이동 중");
-            Vector3 direction = (_playerTransform.position - transform.position).normalized;
-            aiPath.destination = _playerTransform.position; ;
-            aiPath.canMove = true;
+            if (IsSkillRange())
+            {
+                if (IsSkillCooldownCheck())
+                {
+                    MeleeAttack();
+                }
+            }
+            else
+            {
+                MoveTowardsPlayer();
+            }
+
             yield return null;
         }
 
-        aiPath.canMove = false;
-
-        if (SkillCooldownCheck())
-        {
-            MeleeAttack();
-        }
-        else if(IsAttackRange())
-        {
-            FireProjectile();
-        }
-
-        yield return new WaitForSeconds(bossSO.skillCooldown);
-        aiPath.canMove = true;
         _isCastingSkill = false;
     }
 
