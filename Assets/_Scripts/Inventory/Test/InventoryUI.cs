@@ -64,8 +64,8 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         Main.Inventory.Select_AddItem(testItemData2, 29, 9);
         Main.Inventory.Select_AddItem(testItemData2, 29, 11);
         Main.Inventory.AddItem(testItemData3);
-        //Main.Inventory.AddItem(testItemData4);
-        Main.Inventory.AddItem(testItemData5);
+        Main.Inventory.AddItem(testItemData4);
+        //Main.Inventory.AddItem(testItemData5);
         Main.Inventory.AddItem(testItemData5);
         //모닥불 
         BoneFireInitialize();
@@ -246,7 +246,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         //인벤토리,화로,창고 UI Update
         UpdateUI();
         BoneFireUpdateUI();
-        BoxSlotUpdateUI();
+        //BoxSlotUpdateUI();
     }
 
     #region - 정렬
@@ -382,6 +382,18 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     {
         UpdateSlotUI(boneFireSlots[0]);
         UpdateSlotUI(boneFireSlots[1]);
+
+        //for (int i = 0; i < boneFireSlots.Length; i++)
+        //{
+        //    if (boneFireSlots[i].curSlot.itemData == null || boneFireSlots[i].curSlot.amount > 0)
+        //    {
+        //        boneFireSlots[i].SetSlot(boneFireSlots[i].curSlot);
+        //    }
+        //    else
+        //    {
+        //        boneFireSlots[i].ClearSlot();
+        //    }
+        //}
     }
 
     public void BoneFireSlotsGet(SlotData boneFireSlotData, SlotData nextBoneFireSlotData) // 연결하는 함수 
@@ -399,9 +411,9 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 
     private void BoxInitialize() //[10/28] 나중에 수정하자 :)
     {
-        Transform[] children = GetComponentsInChildren<Transform>();
+        Transform[] children = boxSlotsObject.GetComponentsInChildren<Transform>();
         int index = 0;
-        //boxSlots = new InventorySlot[12];
+        boxSlots = new InventorySlot[12];
         for (int i = 0; i < children.Length; i++)
         {
             if (index >= boxSlots.Length) break; // 배열의 크기를 초과하지 않도록 함
@@ -421,7 +433,14 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 
         for (int i = 0; i < boxSlots.Length; i++)
         {
-            UpdateSlotUI(boxSlots[i]);
+            if (boxSlots[i].curSlot.itemData == null || boxSlots[i].curSlot.amount > 0)
+            {
+                boxSlots[i].SetSlot(boxSlots[i].curSlot);
+            }
+            else
+            {
+                boxSlots[i].ClearSlot();
+            }
         }
     }
 
@@ -432,7 +451,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
             boxSlots[i].curSlot = Get_boxSlots[i];
         }
 
-        BoxSlotUpdateUI();
+        //BoxSlotUpdateUI();
     }
 
     #endregion
