@@ -39,6 +39,11 @@ public class UI_PlayerCondition : UI_MainScene, IObserver
                     break;
             }
         }
+
+        Debug.Assert(hunger != null, "Hunger Image is not initialized!");
+        Debug.Assert(thirsty != null, "Thirsty Image is not initialized!");
+        Debug.Assert(stamina != null, "Stamina Image is not initialized!");
+        Debug.Assert(health != null, "Health Image is not initialized!");
     }
 
     public void OnPlayerStateChanged(PlayerStatus state)

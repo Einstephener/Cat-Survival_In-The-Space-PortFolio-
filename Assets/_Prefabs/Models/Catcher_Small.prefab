@@ -773,8 +773,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _projectileSpawnPoint: {fileID: 7660128879108048375}
-  _melee: {fileID: 5518298659372828043}
-  HP: 0
   enemySO: {fileID: 11400000, guid: 1feaa3c2e34d24345b48e689386bfd92, type: 2}
 --- !u!1 &4532949110599922879
 GameObject:
@@ -916,7 +914,6 @@ GameObject:
   - component: {fileID: 1905085869983446425}
   - component: {fileID: 4849641528501506076}
   - component: {fileID: 718060146343163196}
-  - component: {fileID: -3029407931748103535}
   m_Layer: 10
   m_Name: Melee
   m_TagString: Untagged
@@ -1010,18 +1007,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-3029407931748103535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5518298659372828043}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b3b321ee18c7c8409d48a8335771c0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5625574484206105268
 GameObject:
   m_ObjectHideFlags: 0
