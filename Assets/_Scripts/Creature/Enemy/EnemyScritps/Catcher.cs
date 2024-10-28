@@ -6,7 +6,10 @@ using UnityEngine;
 public class Catcher : Enemy
 {
     [SerializeField] public EnemyBossData bossSO;
+
     public float speed;
+    private Coroutine _currentSkillCoroutine;
+
     private float _lastSkillTime;
     private bool _isCastingSkill;
 
@@ -104,6 +107,12 @@ public class Catcher : Enemy
 
         while (IsCastingSkill())
         {
+            if (IsDead())
+            {
+                _isCastingSkill = false;
+                yield break;
+            }
+
             if (IsSkillRange())
             {
                 if (IsSkillCooldownCheck())
@@ -120,6 +129,24 @@ public class Catcher : Enemy
         }
 
         _isCastingSkill = false;
+    }
+
+    public void StartMeleeSkill()
+    {
+        if (_currentSkillCoroutine == null) // 중복 실행 방지.
+        {
+            _currentSkillCoroutine = StartCoroutine(CastMeleeSkill());
+        }
+    }
+
+    public void StopMeleeSkill()
+    {
+        if (_currentSkillCoroutine != null)
+        {
+            StopCoroutine(_currentSkillCoroutine);
+            _currentSkillCoroutine = null;
+            _isCastingSkill = false; // 상태 초기화.
+        }
     }
 
     #region Gizmos

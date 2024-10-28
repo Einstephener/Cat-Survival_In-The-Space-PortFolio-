@@ -122,9 +122,9 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!4 &82568351 stripped
+--- !u!4 &154664345 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 676155865026909005, guid: df328e94997f33142a86874ec5bd0b87,
+  m_CorrespondingSourceObject: {fileID: 4685970393215850891, guid: df328e94997f33142a86874ec5bd0b87,
     type: 3}
   m_PrefabInstance: {fileID: 1359200399}
   m_PrefabAsset: {fileID: 0}
@@ -237,11 +237,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Catcher_Big
       objectReference: {fileID: 0}
+    - target: {fileID: 4556532586325671278, guid: df328e94997f33142a86874ec5bd0b87,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5458712267007793452, guid: df328e94997f33142a86874ec5bd0b87,
         type: 3}
       propertyPath: _projectileSpawnPoint
       value: 
-      objectReference: {fileID: 82568351}
+      objectReference: {fileID: 154664345}
     - target: {fileID: 6549612472047752378, guid: df328e94997f33142a86874ec5bd0b87,
         type: 3}
       propertyPath: height
@@ -263,7 +268,8 @@ PrefabInstance:
       value: 2.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 9169255076364545486, guid: df328e94997f33142a86874ec5bd0b87, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df328e94997f33142a86874ec5bd0b87, type: 3}
@@ -4193,7 +4199,7 @@ PrefabInstance:
     - target: {fileID: 7616039777892376585, guid: c4666e0d11feae6468ee07ec57ef8300,
         type: 3}
       propertyPath: _fullDayLength
-      value: 50
+      value: 5000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
