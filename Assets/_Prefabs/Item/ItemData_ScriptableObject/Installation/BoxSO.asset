@@ -16,14 +16,14 @@ MonoBehaviour:
   Description: 
   Type: 3
   Icon: {fileID: 21300000, guid: b2e7f374dd7a91e49b11609c2dd3ead5, type: 3}
-  DropPrefab: {fileID: 3128428072188876151, guid: 97e9bb259d91b0f459c4d87d7a8ec0f8,
+  DropPrefab: {fileID: 2162597995177280037, guid: 142d333249cbeba4eb54999ebd6dd9b0,
     type: 3}
-  item: {fileID: 1125078182008729829, guid: 97e9bb259d91b0f459c4d87d7a8ec0f8, type: 3}
+  item: {fileID: 4241199412827973179, guid: 142d333249cbeba4eb54999ebd6dd9b0, type: 3}
   CraftingResourceList: []
-  EquipPrefab: {fileID: 1577018478108489478, guid: cbe6220caf95c6943b1879665977d4c3,
+  EquipPrefab: {fileID: 4680392143191225536, guid: 9a264225d05f5714683c68b5a4d0cf04,
     type: 3}
   MaxAmount: 1
-  preViewObject: {fileID: 922419241048491203, guid: 993f12acf124bf44e812b0d826f309e6,
+  preViewObject: {fileID: 1887622364203258004, guid: 8bcd1d01058283c4a95be5998f09425e,
     type: 3}
-  InstallationItemPrefab: {fileID: 3128428072188876151, guid: 97e9bb259d91b0f459c4d87d7a8ec0f8,
+  InstallationItemPrefab: {fileID: 2162597995177280037, guid: 142d333249cbeba4eb54999ebd6dd9b0,
     type: 3}
