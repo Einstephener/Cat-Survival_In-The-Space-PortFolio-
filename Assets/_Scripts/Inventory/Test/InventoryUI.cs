@@ -34,7 +34,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 
     [Header("#Box")]
     public GameObject boxSlotsObject;
-    public InventorySlot[] boxSlots = new InventorySlot[12];
+    public InventorySlot[] boxSlots;
 
     [Header("#Inventory_Info")]
     public SlotBase selectSlot;
@@ -64,7 +64,8 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         Main.Inventory.Select_AddItem(testItemData2, 29, 9);
         Main.Inventory.Select_AddItem(testItemData2, 29, 11);
         Main.Inventory.AddItem(testItemData3);
-        Main.Inventory.AddItem(testItemData4);
+        //Main.Inventory.AddItem(testItemData4);
+        Main.Inventory.AddItem(testItemData5);
         Main.Inventory.AddItem(testItemData5);
         //모닥불 
         BoneFireInitialize();
@@ -127,6 +128,17 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         Vector2 parentSize = parentTransform.sizeDelta;
         parentSize.y = totalHeight;
         parentTransform.sizeDelta = parentSize;
+    }
+
+    public void InventoryUISet()
+    {
+        this.gameObject.SetActive(true);
+
+        this.boneFireObject.SetActive(false);
+
+        this.boxSlotsObject.SetActive(false);
+
+        Main.Inventory.inventoryUI.AdjustParentHeight();
     }
 
     public void UpdateUI()
@@ -385,10 +397,11 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 
     #region BoxInventory
 
-    private void BoxInitialize()
+    private void BoxInitialize() //[10/28] 나중에 수정하자 :)
     {
         Transform[] children = GetComponentsInChildren<Transform>();
         int index = 0;
+        //boxSlots = new InventorySlot[12];
         for (int i = 0; i < children.Length; i++)
         {
             if (index >= boxSlots.Length) break; // 배열의 크기를 초과하지 않도록 함

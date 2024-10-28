@@ -375,7 +375,7 @@ public class PlayerInputController : MonoBehaviour
         //{
         //    inventoryUIDiplay = Main.Inventory.inventoryUI.gameObject;
         //}
-
+        Main.Inventory.inventoryUI.InventoryUISet();
         Main.UI.ShowPopupUI<InventoryUI>("Inventory");
     }
 
