@@ -122,9 +122,9 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!4 &82568351 stripped
+--- !u!4 &528040331 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 676155865026909005, guid: df328e94997f33142a86874ec5bd0b87,
+  m_CorrespondingSourceObject: {fileID: 4685970393215850891, guid: df328e94997f33142a86874ec5bd0b87,
     type: 3}
   m_PrefabInstance: {fileID: 1359200399}
   m_PrefabAsset: {fileID: 0}
@@ -241,27 +241,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _projectileSpawnPoint
       value: 
-      objectReference: {fileID: 82568351}
-    - target: {fileID: 6549612472047752378, guid: df328e94997f33142a86874ec5bd0b87,
-        type: 3}
-      propertyPath: height
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8181833514774419124, guid: df328e94997f33142a86874ec5bd0b87,
-        type: 3}
-      propertyPath: m_Height
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8181833514774419124, guid: df328e94997f33142a86874ec5bd0b87,
-        type: 3}
-      propertyPath: m_Radius
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8181833514774419124, guid: df328e94997f33142a86874ec5bd0b87,
-        type: 3}
-      propertyPath: m_Center.y
-      value: 2.5
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 528040331}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

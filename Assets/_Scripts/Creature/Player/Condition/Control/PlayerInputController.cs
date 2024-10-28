@@ -89,7 +89,7 @@ public class PlayerInputController : MonoBehaviour
 
         // 점프.
         CheckGround();
-        CheckMouseSpeed();
+        //CheckMouseSpeed();
 
         // 애니메이션
         if (_playerAnimator.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.95f)
