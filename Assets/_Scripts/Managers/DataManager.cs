@@ -24,10 +24,59 @@ public class DataManager
     public delegate void PlayerRespawnEventHandler(bool isClickRespawn);
     public event PlayerRespawnEventHandler OnPlayerRespawn;
 
+    public int Day = 1;
+
+    #region Setting
+
+    private float _mouse;
+    private float _master;
+    private float _bgm;
+    private float _sfx;
+
+    public float Mouse
+    {
+        get { return _mouse; }
+        set
+        {
+            _mouse = value;
+        }
+    }
+
+    public float Master
+    {
+        get { return _master; }
+        set
+        {
+            _master = value;
+        }
+    }
+    public float BGM
+    {
+        get { return _bgm; }
+        set
+        {
+            _bgm = value;
+        }
+    }
+
+    public float SFX
+    {
+        get { return _sfx; }
+        set
+        {
+            _sfx = value;
+        }
+    }
+    #endregion
 
     public void Initialize()
     {
         Date = LoadJson<DateData>();
+
+        //// 초기화. 추후 1.0f대신 저장된 값으로 초기화.
+        //_mouse = PlayerPrefs.GetFloat("Mouse", 1.0f);
+        //_sound = PlayerPrefs.GetFloat("Sound", 1.0f);
+        //_sfx = PlayerPrefs.GetFloat("SFX", 1.0f);
     }
 
     // 데이터를 로드 하기 - LoadJson<ClassName>() - Data를 상속 받은 Class만 가능

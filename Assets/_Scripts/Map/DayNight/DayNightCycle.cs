@@ -31,14 +31,20 @@ public class DayNightCycle : MonoBehaviour
     [SerializeField] private Material skyboxMaterial;
 
     private void Start()
-    {
+    {        
         _timeRate = 1.0f / _fullDayLength;
         CurrentTime = _startTime;
     }
 
     private void Update()
     {
-        CurrentTime = (CurrentTime + _timeRate * UnityEngine.Time.deltaTime) % 1.0f;
+        float lastTime = CurrentTime;
+        CurrentTime = (CurrentTime + _timeRate * Time.deltaTime) % 1.0f;
+
+        if (lastTime > CurrentTime)
+        {
+            Main.Data.Day += 1;
+        }
 
         UpdateLighting(Sun, SunColor, SunIntensity);
         UpdateLighting(Moon, MoonColor, MoonIntensity);

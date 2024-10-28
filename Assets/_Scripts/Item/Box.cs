@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Box : Installation
 {
-    public SlotData[] boxSlotsData = new SlotData[12];
+    public SlotData[] boxSlotsData;
     public Box(ItemData data) : base(data)
     {
 
@@ -15,24 +15,25 @@ public class Box : Installation
         Initialize();
     }
 
-    private void Initialize() //에러뜸
+    private void Initialize()
     {
+        boxSlotsData = new SlotData[12];
         //box와 인벤토리 연결하는 작업 할 꺼임
+        
+        for (int i = 0; i < boxSlotsData.Length; i++)
+        {
+            if (boxSlotsData[i] == null)
+            {
+                boxSlotsData[i] = new SlotData();
+            }
+        }
 
-        //for (int i = 0; i< boxSlotsData.Length; i++)
-        //{
-        //    if (boxSlotsData[i] == null)
-        //    {
-        //        boxSlotsData[i] = new SlotData();
-        //    }
-        //}
+        for (int i = 0; i < boxSlotsData.Length; i++)
+        {
+            Main.Inventory.inventoryUI.BoxSlotsGet(boxSlotsData);
+        }
 
-        //for (int i = 0; i < boxSlotsData.Length; i++)
-        //{
-        //    Main.Inventory.inventoryUI.BoxSlotsGet(boxSlotsData);
-        //}
-
-        //Main.Inventory.inventoryUI.BoxSlotUpdateUI();
+        Main.Inventory.inventoryUI.BoxSlotUpdateUI();
     }
 
     public override void Use()
