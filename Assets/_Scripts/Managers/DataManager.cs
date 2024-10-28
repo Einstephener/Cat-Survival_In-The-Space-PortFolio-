@@ -24,9 +24,13 @@ public class DataManager
     public delegate void PlayerRespawnEventHandler(bool isClickRespawn);
     public event PlayerRespawnEventHandler OnPlayerRespawn;
 
+    public int Day = 1;
 
     public void Initialize()
     {
+        //날짜 초기화 구현 필요
+        //Day = 1;
+
         Date = LoadJson<DateData>();
     }
 
