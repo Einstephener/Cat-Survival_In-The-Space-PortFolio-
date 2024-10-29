@@ -105,6 +105,13 @@ public class EquipTool : Equip
         }
     }
 
+    public void OnEat()
+    {
+        Debug.Log("EquipTool - OnEat() - AnimationClip Event : Potion : Item - Use()");
+        //OnEating();
+        Main.Inventory.inventoryUI.selectSlot.curSlot.itemData.item.Use();
+    }
+
     public void OnInstallation()
     {
         Ray ray = _camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));

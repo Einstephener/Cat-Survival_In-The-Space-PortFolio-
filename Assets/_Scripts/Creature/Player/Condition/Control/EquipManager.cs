@@ -56,7 +56,7 @@ public class EquipManager : MonoBehaviour
 
             }
 
-            _itemData.item.Use();
+            //_itemData.item.Use();
         }
     }
 
