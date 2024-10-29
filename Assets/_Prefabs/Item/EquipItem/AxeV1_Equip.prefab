@@ -53,8 +53,9 @@ MonoBehaviour:
   doesGatherResources: 1
   doesGatherFish: 0
   doesGatherInstallation: 0
-  doesDealDamage: 1
-  damage: 10
+  doesGatherEat: 0
+  doesDealDamage: 0
+  damage: 1
   useStamina: 10
 --- !u!95 &5848849731711427430
 Animator:

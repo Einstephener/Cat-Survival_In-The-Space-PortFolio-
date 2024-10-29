@@ -34,7 +34,6 @@ public class CollectMatertial : MonoBehaviour
 
             curCount--;
 
-            Debug.Log(curCount);
             if (curCount == 0)
             {
                 Destroy(this.gameObject);

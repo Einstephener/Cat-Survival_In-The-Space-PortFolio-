@@ -89,7 +89,9 @@ public class PlayerInputController : MonoBehaviour
 
         // 점프.
         CheckGround();
-        //CheckMouseSpeed();
+
+        // 마우스감도
+        CheckMouseSpeed();
 
         // 애니메이션
         if (_playerAnimator.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.95f)
@@ -262,15 +264,16 @@ public class PlayerInputController : MonoBehaviour
             {
 
             }
-            else if (_playerInteraction.currentInteractObject.TryGetComponent<Water>(out Water water))
+            else if (_playerInteraction.waterObject.TryGetComponent<Water>(out Water water))
             {
+                Debug.Log("Water");
                 GetComponent<PlayerCondition>().UpdateThirst(100);
             }
         }
         //Test 용도.
         //GetComponent<PlayerCondition>().UpdateHealth(-1000);
     }
-
+    
     #endregion
 
 
@@ -393,5 +396,9 @@ public class PlayerInputController : MonoBehaviour
     {
         Main.UI.ShowPopupUI<UI_Tablet>("UI_CraftingTabletUI");
     }
-
+    private void OnUI_Setting(InputValue value)
+    {
+        Main.UI.ShowSettingPopupUI<UI_Setting>("UI_Setting");
+    
+    }
 }

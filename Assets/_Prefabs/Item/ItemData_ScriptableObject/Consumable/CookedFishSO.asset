@@ -24,7 +24,7 @@ MonoBehaviour:
   MaxAmount: 99
   Consumables:
   - type: 0
-    ConsumableValue: 50
+    ConsumableValue: 30
   - type: 1
-    ConsumableValue: 50
+    ConsumableValue: 20
   CookingItemData: {fileID: 0}

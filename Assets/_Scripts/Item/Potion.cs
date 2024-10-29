@@ -31,25 +31,31 @@ public class Potion : Item
 
     //private void Start()
     //{
-    //    GameObject Player = GameObject.FindGameObjectWithTag("Player");
-
-    //    if (Player != null)
-    //    {
-    //        // A 스크립트를 가져오기
-    //        playerCondition = Player.GetComponent<PlayerCondition>();
-    //        if (playerCondition != null)
-    //        {
-    //            // A 스크립트의 메서드 호출
-    //            Debug.Log("연결함");
-    //        }
-    //        else
-    //        {
-    //        }
-    //    }
-    //    else
-    //    {
-    //    }
+       
     //}
+
+    private void Initialize()
+    {
+        GameObject Player = GameObject.FindGameObjectWithTag("Player");
+
+        if (Player != null)
+        {
+            // A 스크립트를 가져오기
+            playerCondition = Player.GetComponent<PlayerCondition>();
+            if (playerCondition != null)
+            {
+                // A 스크립트의 메서드 호출
+                Debug.Log("연결함");
+            }
+            else
+            {
+            }
+        }
+        else
+        {
+        }
+    }
+
     public Potion(ItemData data) : base(data)
     {
         if (data is PotionItemData potionData)
@@ -58,13 +64,16 @@ public class Potion : Item
             if (potionData.Consumables.Length > 0)
             {
                 value = potionData.Consumables[0].ConsumableValue;
-                Debug.Log(value);
+                //Debug.Log(value);
                 //Debug.Log($"{potionData.Consumables[0].type}, {potionData.Consumables[0].ConsumableValue}");
             }
         }
     }
     public override void Use()
     {
+
+        Initialize();
+
         if (itemData is PotionItemData potionData)
         {
             // Consumables 배열의 모든 항목에 대해 반복
@@ -79,7 +88,7 @@ public class Potion : Item
                         break;
                     case ConsumableType.Hunger:
                         playerCondition.UpdateHunger(consumable.ConsumableValue);
-                        Debug.Log($"{itemData.DisplayName}을 사용하여 {consumable.ConsumableValue}만큼 허기를 회복합니다.");
+                        Debug.Log($"{itemData.DisplayName}을 사용하여 {consumable.ConsumableValue}만큼 허기를 회복합니다.");   
                         break;
                     case ConsumableType.Thirsty:
                         playerCondition.UpdateThirst(consumable.ConsumableValue);

@@ -14,7 +14,6 @@ public class UI_Damaged : UI_Scene, IObserver
 
     private void Awake()
     {
-        _tempHealth = 100f;
         _initialColor = RedBackGround.color;
     }
 
@@ -49,10 +48,10 @@ public class UI_Damaged : UI_Scene, IObserver
 
     public void OnPlayerStateChanged(PlayerStatus state)
     {
-        if(_tempHealth != state.Health && state.Health > 0)
+        if (_tempHealth > state.Health && state.Health > 0)
         {
             PlayerHit();
-            _tempHealth = state.Health;
         }
+        _tempHealth = state.Health;
     }
 }

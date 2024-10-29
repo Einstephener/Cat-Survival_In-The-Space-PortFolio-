@@ -20,6 +20,7 @@ public class DragSlot : MonoBehaviour
     {
         this.gameObject.SetActive(true);
         thisSlot = _dragSlot;
+        Main.Inventory.inventoryUI.curSlot = thisSlot;
         icon.sprite = thisSlot.curSlot.itemData.Icon;
         //amuontText.text = thisSlot.curSlot.amount > 1 ? thisSlot.curSlot.amount.ToString() : string.Empty;
     }
@@ -27,6 +28,7 @@ public class DragSlot : MonoBehaviour
     public void RemoveDragSlot()
     {
         thisSlot = null;
+        Main.Inventory.inventoryUI.curSlot = thisSlot;
         this.gameObject.SetActive(false);
     }
 

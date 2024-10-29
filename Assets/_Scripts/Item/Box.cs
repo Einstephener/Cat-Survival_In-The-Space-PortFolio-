@@ -28,18 +28,17 @@ public class Box : Installation
             }
         }
 
-        for (int i = 0; i < boxSlotsData.Length; i++)
-        {
-            Main.Inventory.inventoryUI.BoxSlotsGet(boxSlotsData);
-        }
+        //for (int i = 0; i < boxSlotsData.Length; i++)
+        //{
+        //    Main.Inventory.inventoryUI.BoxSlotsGet(boxSlotsData);
+        //}
 
-        Main.Inventory.inventoryUI.BoxSlotUpdateUI();
+        //Main.Inventory.inventoryUI.BoxSlotUpdateUI();
     }
 
     public override void Use()
     {
         //Debug.Log("설치 아이템 상호작용");
-        UISet();
     }
 
     public void UISet()
@@ -59,6 +58,7 @@ public class Box : Installation
     {
         base.UIInterac();
         Main.Inventory.inventoryUI.BoxSlotsGet(boxSlotsData);
-        //Debug.Log("설치 아이템 UI 상호작용");
+
+        UISet();
     }
 }

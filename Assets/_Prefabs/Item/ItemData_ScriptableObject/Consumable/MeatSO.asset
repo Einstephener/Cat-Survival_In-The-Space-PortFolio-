@@ -23,6 +23,8 @@ MonoBehaviour:
   EquipPrefab: {fileID: 0}
   MaxAmount: 99
   Consumables:
+  - type: 0
+    ConsumableValue: 20
   - type: 1
-    ConsumableValue: 50
+    ConsumableValue: 20
   CookingItemData: {fileID: 11400000, guid: 5b1f2bc56c0d4d04d8d96cf7dc92953c, type: 2}
