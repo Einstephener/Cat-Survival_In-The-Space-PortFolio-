@@ -74,10 +74,10 @@ public class EquipTool : Equip
 
         if (Physics.Raycast(ray, out hit, attackDistance))
         {
-            //if (doesGatherResources && hit.collider.TryGetComponent(out Resource resource))
-            //{
-            //    //resource.Gather(hit.point, hit.normal);
-            //}
+            if (doesGatherResources && hit.collider.TryGetComponent(out ResourceObject resourceObject))
+            {
+                resourceObject.Gather(hit.point, hit.normal);
+            }
 
 
             //if (doesDealDamage && hit.collider.TryGetComponent(out IDamagable damageable))
@@ -92,12 +92,13 @@ public class EquipTool : Equip
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, fishingDistance))
         {
-            if (doesGatherFish && hit.collider.TryGetComponent(out Resource resource))
+            if (doesGatherFish && hit.collider.TryGetComponent(out ResourceObject resourceObject))
             {
                 if (hit.collider.gameObject.layer != LayerMask.NameToLayer("Water"))
                     return;
                 Debug.Log($"EquipTool - OnFishing() : {hit.collider.gameObject.layer}");
-                //resource.Fishing(hit.point);
+                //resourceObject.Fishing(hit.point);
+                // #test #임시 #Errer #에러
 
             }
 

@@ -17,8 +17,11 @@ MonoBehaviour:
   Type: 2
   Icon: {fileID: 21300000, guid: 9d00c78642bd5ac438b2603f5c744d5d, type: 3}
   DropPrefab: {fileID: 0}
-  item: {fileID: 3938857825991773884, guid: 730aa33df531aa44e9a9e1d36963ce4c, type: 3}
+  item: {fileID: 0}
+  CraftingResourceList: []
+  EquipPrefab: {fileID: 0}
   MaxAmount: 99
   Consumables:
-  - type: 1
-    ConsumableValue: 50
+  - type: 2
+    ConsumableValue: 30
+  CookingItemData: {fileID: 0}

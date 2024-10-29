@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1975471812209823980}
   - component: {fileID: 6660846555113767747}
-  m_Layer: 0
+  - component: {fileID: 1717998829400156056}
+  m_Layer: 18
   m_Name: GT_PineTree3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,6 +55,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 6, z: 1}
   m_Center: {x: 0, y: 3, z: 0}
+--- !u!114 &1717998829400156056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162378992865512022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f1d726e2d8cdd040a63ac5789fc0c41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: f08ffa4361a37194180ef0894af4c08b, type: 2}
+  quantityPerHit: 1
+  capacity: 4
 --- !u!1 &7902782058626511503
 GameObject:
   m_ObjectHideFlags: 0
@@ -65,7 +81,7 @@ GameObject:
   - component: {fileID: 1376550174794277300}
   - component: {fileID: 4309190902204553470}
   - component: {fileID: 786133678913518698}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}

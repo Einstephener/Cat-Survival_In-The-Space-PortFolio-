@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 33473975283394870}
   - component: {fileID: 23790514423151652}
   - component: {fileID: 5661190312366175253}
-  m_Layer: 0
+  - component: {fileID: -3330917479582127180}
+  m_Layer: 18
   m_Name: DT_Tree1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,3 +108,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300120, guid: e9dda2d2fddd98845ab95cb256605536, type: 3}
+--- !u!114 &-3330917479582127180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589459417301568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f1d726e2d8cdd040a63ac5789fc0c41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: f08ffa4361a37194180ef0894af4c08b, type: 2}
+  quantityPerHit: 1
+  capacity: 4

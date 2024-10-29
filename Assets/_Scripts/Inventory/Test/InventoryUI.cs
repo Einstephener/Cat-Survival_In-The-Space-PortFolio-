@@ -329,12 +329,6 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         if (dragSlotData.itemData != null && dropSlotData != null)
         {
             
-            //if (dropSlotData == selectSlot.curSlot)
-            //{
-            //    Debug.Log("Test2");
-            //    equipManager.EquipNew(dropSlotData.itemData);
-            //}
-
             ItemData tempSlotaData_ItemData = dragSlotData.itemData;
             int tempAmount = dragSlotData.amount;
 
@@ -343,10 +337,6 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 
             dropSlotData.itemData = tempSlotaData_ItemData;
             dropSlotData.amount = tempAmount;
-
-            SlotData a = dragSlotData;
-
-            SlotData b = dropSlotData;
 
             equipManager.SwapEquip(dragSlotData, dropSlotData, selectSlot);
 
