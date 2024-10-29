@@ -37,6 +37,8 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     public InventorySlot[] boxSlots;
 
     [Header("#Inventory_Info")]
+    [HideInInspector] public InventorySlot curSlot;
+    [HideInInspector] public InventorySlot nextSlot;
     public SlotBase selectSlot;
     public DragSlot dragSlot;
     public ToolTipContainer toolTipContainer;
@@ -156,7 +158,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
             else /*if (_slots[i].IsEmpty())*/ if (_slots[i].itemData == null || _slots[i].amount <= 0)
             {
                 slotObjects[i].ClearSlot(); // 빈 슬롯 처리
-                
+
             }
         }
 
@@ -270,6 +272,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
             {
                 //Debug.Log($"[InventoryUI] SwapItem Before - dragSlotData : {dragSlotData.itemData.DisplayName}, {dragSlotData.amount}/ dropSlotData : {dropSlotData.itemData.DisplayName}, {dropSlotData.amount}");
                 MoveSlot(dragSlotData, dropSlotData);
+                Debug.Log("Test");
 
                 //Debug.Log($"[InventoryUI] SwapItem After - dragSlotData : {dragSlotData.itemData.DisplayName}, {dragSlotData.amount}/ dropSlotData : {dropSlotData.itemData.DisplayName}, {dropSlotData.amount}");
             }
@@ -285,7 +288,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         {
             Debug.Log($"아이템의 정보가 없습니다");
         }
-        
+
     }
 
     public void MoveSlot(SlotData dragSlotData, SlotData dropSlotData) // 두 슬롯의 데이터를 교환하는 함수
@@ -324,6 +327,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
             Debug.Log($"InventoruUI - CombineSlots() : dragSlotData != dropSlotData // return");
             return;
         }
+        
 
         int totalItems = dragSlotData.amount + dropSlotData.amount;
 
@@ -338,10 +342,20 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         }
         else
         {
-            dropSlotData.amount = totalItems;
-            dragSlotData.amount = 0;
+            //if (dragSlot.thisSlot == curSlot)
+            //{
+            //    return;
+            //}
+
+            
             //임시
-            dragSlotData.itemData = null;
+
+            if (curSlot.index != nextSlot.index)
+            {
+                dropSlotData.amount = totalItems;
+                dragSlotData.amount = 0;
+                dragSlotData.itemData = null;
+            }
 
             if (dragSlotData == selectSlot.curSlot)
             {
@@ -354,6 +368,13 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         //UpdateUI();
         //BoneFireUpdateUI();
     }
+
+    public void SwapSlot(InventorySlot _curSlot, InventorySlot _nextSlot)
+    {
+        this.curSlot = _curSlot;
+        this.nextSlot = _nextSlot;
+    }
+
     #endregion
 
 
@@ -446,7 +467,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 
     public void BoxSlotsGet(SlotData[] Get_boxSlots) // 박스 데이터 Get 하기
     {
-        for(int i =0; i < Get_boxSlots.Length; i++)
+        for (int i = 0; i < Get_boxSlots.Length; i++)
         {
             boxSlots[i].curSlot = Get_boxSlots[i];
         }

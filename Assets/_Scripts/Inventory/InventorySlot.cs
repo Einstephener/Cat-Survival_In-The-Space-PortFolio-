@@ -107,7 +107,9 @@ public class InventorySlot : SlotBase, IPointerEnterHandler, IPointerExitHandler
         {
             //Debug.Log("OnDeginDrag");
             DragSlot _dragSlot = Main.Inventory.inventoryUI.dragSlot;
+            //Main.Inventory.inventoryUI.curSlot = Main.Inventory.inventoryUI.dragSlot.thisSlot;
             _dragSlot.SetDragSlot(this);
+            Debug.Log(Main.Inventory.inventoryUI.curSlot);
             _dragSlot.transform.position = eventData.position;
         }
         else
@@ -183,6 +185,7 @@ public class InventorySlot : SlotBase, IPointerEnterHandler, IPointerExitHandler
         else if (!curSlot.IsEmpty() && !Main.Inventory.inventoryUI.dragSlot.thisSlot.curSlot.IsEmpty())
         {
             Debug.Log($"아이템 스왑");
+            Main.Inventory.inventoryUI.SwapSlot(Main.Inventory.inventoryUI.dragSlot.thisSlot, this);
             Main.Inventory.inventoryUI.SwapItem(Main.Inventory.inventoryUI.dragSlot.thisSlot.curSlot, curSlot);
         }
         else

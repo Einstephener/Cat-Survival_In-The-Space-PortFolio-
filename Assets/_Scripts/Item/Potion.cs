@@ -79,7 +79,7 @@ public class Potion : Item
                         break;
                     case ConsumableType.Hunger:
                         playerCondition.UpdateHunger(consumable.ConsumableValue);
-                        Debug.Log($"{itemData.DisplayName}을 사용하여 {consumable.ConsumableValue}만큼 허기를 회복합니다.");
+                        Debug.Log($"{itemData.DisplayName}을 사용하여 {consumable.ConsumableValue}만큼 허기를 회복합니다.");   
                         break;
                     case ConsumableType.Thirsty:
                         playerCondition.UpdateThirst(consumable.ConsumableValue);
