@@ -66,8 +66,8 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         Main.Inventory.Select_AddItem(testItemData2, 29, 9);
         Main.Inventory.Select_AddItem(testItemData2, 29, 11);
         Main.Inventory.AddItem(testItemData3);
-        Main.Inventory.AddItem(testItemData4);
-        //Main.Inventory.AddItem(testItemData5);
+        //Main.Inventory.AddItem(testItemData4);
+        Main.Inventory.AddItem(testItemData5);
         Main.Inventory.AddItem(testItemData5);
         //모닥불 
         BoneFireInitialize();
@@ -248,7 +248,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         //인벤토리,화로,창고 UI Update
         UpdateUI();
         BoneFireUpdateUI();
-        //BoxSlotUpdateUI();
+        BoxSlotUpdateUI();
     }
 
     #region - 정렬
@@ -342,14 +342,6 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         }
         else
         {
-            //if (dragSlot.thisSlot == curSlot)
-            //{
-            //    return;
-            //}
-
-            
-            //임시
-
             if (curSlot.index != nextSlot.index)
             {
                 dropSlotData.amount = totalItems;
@@ -451,10 +443,13 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     public void BoxSlotUpdateUI()
     {
         //SlotData[] _slots = Main.Inventory.boxSlotsData;
+        Debug.Log("BoxSlotUpdateUI()");
 
         for (int i = 0; i < boxSlots.Length; i++)
         {
-            if (boxSlots[i].curSlot.itemData == null || boxSlots[i].curSlot.amount > 0)
+            Debug.Log($"Test{i}");
+            //if (boxSlots[i].curSlot.itemData != null || boxSlots[i].curSlot.amount > 0)
+            if (!boxSlots[i].curSlot.IsEmpty())
             {
                 boxSlots[i].SetSlot(boxSlots[i].curSlot);
             }
@@ -472,7 +467,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
             boxSlots[i].curSlot = Get_boxSlots[i];
         }
 
-        //BoxSlotUpdateUI();
+        BoxSlotUpdateUI();
     }
 
     #endregion
