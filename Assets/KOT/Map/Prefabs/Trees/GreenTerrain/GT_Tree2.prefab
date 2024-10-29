@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8541970247377931799}
   - component: {fileID: 1599087454768686404}
-  - component: {fileID: -6527654817027439775}
+  - component: {fileID: -7600595117539355167}
   m_Layer: 18
   m_Name: GT_Tree2
   m_TagString: Untagged
@@ -138,7 +138,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 2, z: 0.5}
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &-6527654817027439775
+--- !u!114 &-7600595117539355167
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,9 +147,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 9061519537372566701}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f1d726e2d8cdd040a63ac5789fc0c41, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f082fe77d09aa344a6741937e971102, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: f08ffa4361a37194180ef0894af4c08b, type: 2}
-  quantityPerHit: 1
-  capacity: 4
+  maxCount: 4
+  MaterialPrefab: {fileID: 5966026150335998539, guid: 991b0ab1b9b34bc4aa97575dde622347,
+    type: 3}
