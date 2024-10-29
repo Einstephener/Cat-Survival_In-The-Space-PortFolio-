@@ -203,6 +203,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  curSlot: {fileID: 0}
+  nextSlot: {fileID: 0}
   selectSlot: {fileID: 0}
   dragSlot: {fileID: 9001941366901410224}
   toolTipContainer: {fileID: 1358932097726830088}
@@ -763,7 +765,7 @@ PrefabInstance:
     - target: {fileID: 7057438910353658201, guid: 3c690c11599688b468151e504f5bc942,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -150
+      value: -335
       objectReference: {fileID: 0}
     - target: {fileID: 7057438910353658201, guid: 3c690c11599688b468151e504f5bc942,
         type: 3}

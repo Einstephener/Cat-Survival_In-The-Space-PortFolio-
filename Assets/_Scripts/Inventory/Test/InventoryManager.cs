@@ -159,7 +159,6 @@ public class InventoryManager
     }
 
 
-    //Test
     public void Select_AddItem(ItemData _itemdata, int _amount = 1, int slotIndex = -1)
     {
         if (HadItem(_itemdata) && IsCountTableItem(_itemdata))

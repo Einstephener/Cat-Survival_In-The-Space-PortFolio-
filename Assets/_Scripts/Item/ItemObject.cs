@@ -50,6 +50,7 @@ public class ItemObject : MonoBehaviour, IInteractable
         if (itemData.Type != ItemType.Installation)
         {
             Main.Inventory.AddItem(itemData);
+            Destroy(this.gameObject);
         }
         else // 임시입니다.
         {
