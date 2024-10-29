@@ -26,6 +26,7 @@ public class PlayerInteraction : MonoBehaviour
 
     [Header("Interaction")]
     [HideInInspector] public GameObject currentInteractObject;
+    [HideInInspector] public GameObject waterObject;
     [HideInInspector] public GameObject enemyObject;
     [HideInInspector] public GameObject natureObject;
     private IInteractable currentInteractable;
@@ -113,6 +114,7 @@ public class PlayerInteraction : MonoBehaviour
         if (hit.collider.gameObject != currentInteractObject)
         {
             currentInteractObject = hit.collider.gameObject;
+            waterObject = currentInteractObject;
             PromptTextActive(true);
             promptText.text = $"<b>[E]</b> {"DrinkWater"}";
         }
