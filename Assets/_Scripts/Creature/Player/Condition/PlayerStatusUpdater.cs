@@ -182,7 +182,7 @@ public class PlayerStatusUpdater : MonoBehaviour
             playerRagdoll.DisableRagdoll();
 
             // TODO Tent에서 위치 저장 데이터가지고오기
-            transform.position = new Vector3(0, 0, 0); // 예시 위치
+            transform.position = new Vector3(-7, 2, 0); // 예시 위치
             transform.rotation = Quaternion.identity;  // 예시 회전
         }
     }
