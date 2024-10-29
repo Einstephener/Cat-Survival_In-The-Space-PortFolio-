@@ -15,6 +15,10 @@ public class PlayerStatusUpdater : MonoBehaviour
     [HideInInspector] public float healthDecreaseRate = 5f;    // 체력 감소 속도 
     [HideInInspector] public float staminaDecreaseRate = 10f;    // 스테미나 감소 속도 
 
+    private float healthDecreaseDelay = 2.0f; // 체력 감소 간격 (초 단위)
+    private float hungerTimer = 0f;
+    private float thirstTimer = 0f;
+
     [HideInInspector] public bool isRun = false; //TODO 달리기 상태일때 is Run값 바꿔주기.
     [HideInInspector] public bool canRun = false; //TODO 달리기 상태일때 is Run값 바꿔주기.
     [HideInInspector] public bool _isStaminaLock = false;
@@ -67,15 +71,34 @@ public class PlayerStatusUpdater : MonoBehaviour
 
     private void HealthDecrease()
     {
-        // 배고픔이 0이면 체력 감소.
+        // 배고픔이 0이하일 때 일정 시간마다 체력 감소
         if (_status.Hunger <= 0)
         {
-            _playerCondition.UpdateHealth(-healthDecreaseRate * Time.deltaTime);
+            hungerTimer += Time.deltaTime;
+            if (hungerTimer >= healthDecreaseDelay)
+            {
+                _playerCondition.UpdateHealth(-healthDecreaseRate);
+                hungerTimer = 0f; // 타이머 초기화
+            }
         }
-        // 목마름이 0이면 체력 감소.
+        else
+        {
+            hungerTimer = 0f; // 배고픔이 0보다 크면 타이머 초기화
+        }
+
+        // 목마름이 0이하일 때 일정 시간마다 체력 감소
         if (_status.Thirst <= 0)
         {
-            _playerCondition.UpdateHealth(-healthDecreaseRate * 2f * Time.deltaTime);
+            thirstTimer += Time.deltaTime;
+            if (thirstTimer >= healthDecreaseDelay)
+            {
+                _playerCondition.UpdateHealth(-healthDecreaseRate * 2f);
+                thirstTimer = 0f; // 타이머 초기화
+            }
+        }
+        else
+        {
+            thirstTimer = 0f; // 목마름이 0보다 크면 타이머 초기화
         }
     }
 

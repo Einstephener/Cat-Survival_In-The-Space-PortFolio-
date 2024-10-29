@@ -25,6 +25,8 @@ public class ResourceManager
         }
         _isInitialized = true;
         // 임시파일 이름 - 아직 추가 안함. 파일 추가 되면 수정 될 예정
+
+        // 이거 언제 해결해주시나요~
         LoadResource<GameObject>("Prefabs");
         LoadResource<TextAsset>("JsonData");
         LoadResource<AudioClip>("Sounds");
