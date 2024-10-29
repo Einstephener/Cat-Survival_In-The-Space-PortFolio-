@@ -18,8 +18,6 @@ public class Catcher : Enemy
         base.Awake();
         Init(bossSO);
         _isCastingSkill = false;
-
-        if (_isCastingSkill) { }
     }
 
     private void Update()
