@@ -73,7 +73,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         BoneFireInitialize();
         //창고 [10/24] - 수정해야 함
         BoxInitialize();
-
+        //InventoryTotalUpdateUI();
         equipManager = FindObjectOfType<EquipManager>();
         AdjustParentHeight();
         SelectSlot(0);
@@ -145,20 +145,33 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 
     public void UpdateUI()
     {
+        //if (!boxSlotsObject.activeSelf)
+        //{
+        //    return;
+        //}
+
         SlotData[] _slots = Main.Inventory.slotsData; // InventoryManager SlotData 가지고 오기
 
         // 슬롯 UI 업데이트
         for (int i = 0; i < _slots.Length; i++)
         {
             //Debug.Log(i);
-            if (_slots[i].itemData != null || _slots[i].amount > 0) // 슬롯이 데이터가 있는지 확인
+            //if (_slots[i].itemData != null || _slots[i].amount > 0) // 슬롯이 데이터가 있는지 확인
+            //{
+            //    slotObjects[i].SetSlot(_slots[i]); // 슬롯 정보 업데이트
+            //}
+            //else /*if (_slots[i].IsEmpty())*/ if (_slots[i].itemData == null || _slots[i].amount <= 0)
+            //{
+            //    slotObjects[i].ClearSlot(); // 빈 슬롯 처리
+            //}
+
+            if (!_slots[i].IsEmpty()) // 슬롯이 데이터가 있는지 확인
             {
                 slotObjects[i].SetSlot(_slots[i]); // 슬롯 정보 업데이트
             }
-            else /*if (_slots[i].IsEmpty())*/ if (_slots[i].itemData == null || _slots[i].amount <= 0)
+            else
             {
                 slotObjects[i].ClearSlot(); // 빈 슬롯 처리
-
             }
         }
 
@@ -246,9 +259,20 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     public void InventoryTotalUpdateUI()
     {
         //인벤토리,화로,창고 UI Update
-        UpdateUI();
-        BoneFireUpdateUI();
-        BoxSlotUpdateUI();
+        if (this.gameObject.activeInHierarchy)
+        {
+            UpdateUI();
+        }
+
+        if (boneFireObject.activeInHierarchy)
+        {
+            BoneFireUpdateUI();
+
+        }
+        if (boxSlotsObject.activeInHierarchy)
+        {
+            BoxSlotUpdateUI();
+        }
     }
 
     #region - 정렬
@@ -272,7 +296,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
             {
                 //Debug.Log($"[InventoryUI] SwapItem Before - dragSlotData : {dragSlotData.itemData.DisplayName}, {dragSlotData.amount}/ dropSlotData : {dropSlotData.itemData.DisplayName}, {dropSlotData.amount}");
                 MoveSlot(dragSlotData, dropSlotData);
-                Debug.Log("Test");
+                //Debug.Log("Test");
 
                 //Debug.Log($"[InventoryUI] SwapItem After - dragSlotData : {dragSlotData.itemData.DisplayName}, {dragSlotData.amount}/ dropSlotData : {dropSlotData.itemData.DisplayName}, {dropSlotData.amount}");
             }
@@ -324,21 +348,20 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     {
         if (dragSlotData.itemData != dropSlotData.itemData)
         {
-            Debug.Log($"InventoruUI - CombineSlots() : dragSlotData != dropSlotData // return");
+            //Debug.Log($"InventoruUI - CombineSlots() : dragSlotData != dropSlotData // return");
             return;
         }
-        
 
         int totalItems = dragSlotData.amount + dropSlotData.amount;
 
         if (totalItems > 99)
         {
-            Debug.Log($"1 dragSlotData: {dragSlotData.amount}, dropSlotData: {dropSlotData.amount}");
+            //Debug.Log($"1 dragSlotData: {dragSlotData.amount}, dropSlotData: {dropSlotData.amount}");
 
             dropSlotData.amount = 99;
             dragSlotData.amount = totalItems - 99;
 
-            Debug.Log($"2 dragSlotData: {dragSlotData.amount}, dropSlotData: {dropSlotData.amount}");
+            //Debug.Log($"2 dragSlotData: {dragSlotData.amount}, dropSlotData: {dropSlotData.amount}");
         }
         else
         {
@@ -356,9 +379,6 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         }
 
         InventoryTotalUpdateUI();
-
-        //UpdateUI();
-        //BoneFireUpdateUI();
     }
 
     public void SwapSlot(InventorySlot _curSlot, InventorySlot _nextSlot)
@@ -396,17 +416,6 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         UpdateSlotUI(boneFireSlots[0]);
         UpdateSlotUI(boneFireSlots[1]);
 
-        //for (int i = 0; i < boneFireSlots.Length; i++)
-        //{
-        //    if (boneFireSlots[i].curSlot.itemData == null || boneFireSlots[i].curSlot.amount > 0)
-        //    {
-        //        boneFireSlots[i].SetSlot(boneFireSlots[i].curSlot);
-        //    }
-        //    else
-        //    {
-        //        boneFireSlots[i].ClearSlot();
-        //    }
-        //}
     }
 
     public void BoneFireSlotsGet(SlotData boneFireSlotData, SlotData nextBoneFireSlotData) // 연결하는 함수 
@@ -422,7 +431,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 
     #region BoxInventory
 
-    private void BoxInitialize() //[10/28] 나중에 수정하자 :)
+    private void BoxInitialize() //[10/28] 나중에 수정하자 :) - 수정 완
     {
         Transform[] children = boxSlotsObject.GetComponentsInChildren<Transform>();
         int index = 0;
@@ -442,13 +451,26 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 
     public void BoxSlotUpdateUI()
     {
-        //SlotData[] _slots = Main.Inventory.boxSlotsData;
-        Debug.Log("BoxSlotUpdateUI()");
+
+        //for (int i = 0; i < boxSlots.Length; i++)
+        //{
+        //    if (boxSlots[i].curSlot.itemData != null || boxSlots[i].curSlot.amount > 0) // 슬롯이 데이터가 있는지 확인
+        //    {
+        //        slotObjects[i].SetSlot(boxSlots[i].curSlot); // 슬롯 정보 업데이트
+        //    }
+        //    else /*if (_slots[i].IsEmpty())*/ if (boxSlots[i].curSlot.itemData == null || boxSlots[i].curSlot.amount <= 0)
+        //    {
+        //        slotObjects[i].ClearSlot(); // 빈 슬롯 처리
+        //    }
+        //}
+
+        //if(!boxSlotsObject.activeInHierarchy)
+        //{
+        //    return;
+        //}
 
         for (int i = 0; i < boxSlots.Length; i++)
         {
-            Debug.Log($"Test{i}");
-            //if (boxSlots[i].curSlot.itemData != null || boxSlots[i].curSlot.amount > 0)
             if (!boxSlots[i].curSlot.IsEmpty())
             {
                 boxSlots[i].SetSlot(boxSlots[i].curSlot);
