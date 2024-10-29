@@ -21,6 +21,7 @@ namespace Ursaanimation.CubicFarmAnimals
 
         void Update()
         {
+            //키 수정할 것
             if (Input.GetKeyDown(KeyCode.W))
             {
                 animator.Play(walkForwardAnimation);
