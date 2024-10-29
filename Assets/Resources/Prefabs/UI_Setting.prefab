@@ -636,7 +636,7 @@ GameObject:
   - component: {fileID: 1148077963721405937}
   - component: {fileID: 5626880078921352625}
   m_Layer: 5
-  m_Name: Cancel
+  m_Name: Close
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -746,7 +746,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3253718570895419803}
         m_TargetAssemblyTypeName: UI_Setting, Assembly-CSharp
-        m_MethodName: CancelSetting
+        m_MethodName: CloseSetting
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -896,7 +896,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Save
+  m_text: Reset
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f0f74c6b33bc00e41b0303deda918c3d, type: 2}
   m_sharedMaterial: {fileID: 2731352583574997097, guid: f0f74c6b33bc00e41b0303deda918c3d,
@@ -1404,19 +1404,7 @@ MonoBehaviour:
   m_Value: 0.001
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3253718570895419803}
-        m_TargetAssemblyTypeName: UI_Setting, Assembly-CSharp
-        m_MethodName: ChangeValue
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Sound
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &4011384907776799732
 GameObject:
   m_ObjectHideFlags: 0
@@ -1767,19 +1755,7 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3253718570895419803}
-        m_TargetAssemblyTypeName: UI_Setting, Assembly-CSharp
-        m_MethodName: ChangeValue
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Mouse
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &4968073041208418821
 GameObject:
   m_ObjectHideFlags: 0
@@ -2190,7 +2166,7 @@ GameObject:
   - component: {fileID: 7550811164543513642}
   - component: {fileID: 14468707682729415}
   m_Layer: 5
-  m_Name: Save
+  m_Name: Reset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2300,7 +2276,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3253718570895419803}
         m_TargetAssemblyTypeName: UI_Setting, Assembly-CSharp
-        m_MethodName: SaveSetting
+        m_MethodName: ResetSetting
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2474,19 +2450,7 @@ MonoBehaviour:
   m_Value: 0.001
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3253718570895419803}
-        m_TargetAssemblyTypeName: UI_Setting, Assembly-CSharp
-        m_MethodName: ChangeValue
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: SFX
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &7223452817324271145
 GameObject:
   m_ObjectHideFlags: 0
@@ -2663,7 +2627,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 20
   m_TargetDisplay: 0
 --- !u!114 &159202514204016674
 MonoBehaviour:
@@ -2865,9 +2829,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Cancel
-
-'
+  m_text: Close
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f0f74c6b33bc00e41b0303deda918c3d, type: 2}
   m_sharedMaterial: {fileID: 2731352583574997097, guid: f0f74c6b33bc00e41b0303deda918c3d,
@@ -3026,19 +2988,7 @@ MonoBehaviour:
   m_Value: 0.001
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3253718570895419803}
-        m_TargetAssemblyTypeName: UI_Setting, Assembly-CSharp
-        m_MethodName: ChangeValue
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Sound
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &8560239037884497167
 GameObject:
   m_ObjectHideFlags: 0

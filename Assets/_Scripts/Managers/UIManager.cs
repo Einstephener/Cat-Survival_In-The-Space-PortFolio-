@@ -62,6 +62,8 @@ public class UIManager
 
     public void SwitchToPlayer()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         if (playerActionMap == null || uiActionMap == null)
         {
             playerActionMap = inputActionAsset.FindActionMap("Player");
@@ -75,6 +77,8 @@ public class UIManager
 
     public void SwitchToUI()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         if (playerActionMap == null || uiActionMap == null)
         {
             playerActionMap = inputActionAsset.FindActionMap("Player");
@@ -225,6 +229,9 @@ public class UIManager
         {
             SwitchToPlayer();
             obj.SetActive(false);
+
+            // 팝업이 열리면 시간 멈춤
+            Time.timeScale = 1.0f;
         }
         _alreayOpenSetting = null;
     }

@@ -1136,37 +1136,37 @@ PrefabInstance:
     - target: {fileID: 518439590988015438, guid: f20b393e266200c4b8cfae3465cd7332,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 576147139473388563, guid: f20b393e266200c4b8cfae3465cd7332,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1146447451335600470, guid: f20b393e266200c4b8cfae3465cd7332,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1267228172119924673, guid: f20b393e266200c4b8cfae3465cd7332,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4602746917403935207, guid: f20b393e266200c4b8cfae3465cd7332,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5504842992716695048, guid: f20b393e266200c4b8cfae3465cd7332,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6532318252256829403, guid: f20b393e266200c4b8cfae3465cd7332,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7185878919195928189, guid: f20b393e266200c4b8cfae3465cd7332,
         type: 3}
@@ -1271,12 +1271,17 @@ PrefabInstance:
     - target: {fileID: 7459979528742938562, guid: f20b393e266200c4b8cfae3465cd7332,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7477142599373015956, guid: f20b393e266200c4b8cfae3465cd7332,
         type: 3}
       propertyPath: m_Name
       value: Setting
+      objectReference: {fileID: 0}
+    - target: {fileID: 7477142599373015956, guid: f20b393e266200c4b8cfae3465cd7332,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

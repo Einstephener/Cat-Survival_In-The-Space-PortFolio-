@@ -31,6 +31,7 @@ public class UI_Setting : UI_Base
     {
         Main.Data.Mouse = 0.5f;
 
+        MouseSlider.onValueChanged.AddListener(SetMouseSpeed);
         MasterSlider.onValueChanged.AddListener(SetMasterVolume);
         BGMSlider.onValueChanged.AddListener(SetBGMVolume);
         SFXSlider.onValueChanged.AddListener(SetSFXVolume);
@@ -43,6 +44,10 @@ public class UI_Setting : UI_Base
         MasterSlider.value = Main.Data.Master;
         BGMSlider.value = Main.Data.BGM;
         SFXSlider.value = Main.Data.SFX;
+    }
+    public void SetMouseSpeed(float value)
+    {
+        Main.Data.Mouse = value;        
     }
     public void SetMasterVolume(float volume)
     {
@@ -64,16 +69,21 @@ public class UI_Setting : UI_Base
 
     #region ButtonMethod
 
-    public void CancelSetting()
+    public void CloseSetting()
     {
-        Time.timeScale = 1.0f;
-        //저장 값 취소
-        gameObject.SetActive(false);
+        // 저장 값 적용.
+        Main.UI.CloseSetting(gameObject);
     }
-    public void SaveSetting()
+    public void ResetSetting()
     {
-        //저장 값 취소
-        gameObject.SetActive(false);
+        // 저장 값 초기화.
+        Main.Data.Mouse = 0.5f;
+
+        // 초기화된 값 동기화.
+        MouseSlider.value = Main.Data.Mouse;
+        MasterSlider.value = Main.Data.Master;
+        BGMSlider.value = Main.Data.BGM;
+        SFXSlider.value = Main.Data.SFX;
     }
     public void EndGame()
     {

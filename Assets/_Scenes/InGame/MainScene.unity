@@ -122,6 +122,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &466273762 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7437825181118995409, guid: 5c19e641e0d5cee4fb844dbbb3e5c772,
+    type: 3}
+  m_PrefabInstance: {fileID: 1751693104}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &528040331 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4685970393215850891, guid: df328e94997f33142a86874ec5bd0b87,
@@ -3400,9 +3406,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7437825181118995409, guid: 5c19e641e0d5cee4fb844dbbb3e5c772,
+        type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 1760173229}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c19e641e0d5cee4fb844dbbb3e5c772, type: 3}
+--- !u!4 &1760173229 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2977243345588757257, guid: 49c014e31eaa3144e93930bb91368743,
+    type: 3}
+  m_PrefabInstance: {fileID: 2082594343}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1770899284
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3980,6 +3996,74 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: effe6696b4d66ed4aaecc62f8572e48a, type: 3}
+--- !u!1001 &2082594343
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 466273762}
+    m_Modifications:
+    - target: {fileID: 2977243345588757257, guid: 49c014e31eaa3144e93930bb91368743,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 61.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 2977243345588757257, guid: 49c014e31eaa3144e93930bb91368743,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 2977243345588757257, guid: 49c014e31eaa3144e93930bb91368743,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 50.009995
+      objectReference: {fileID: 0}
+    - target: {fileID: 2977243345588757257, guid: 49c014e31eaa3144e93930bb91368743,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9913128
+      objectReference: {fileID: 0}
+    - target: {fileID: 2977243345588757257, guid: 49c014e31eaa3144e93930bb91368743,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2977243345588757257, guid: 49c014e31eaa3144e93930bb91368743,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2977243345588757257, guid: 49c014e31eaa3144e93930bb91368743,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.13152577
+      objectReference: {fileID: 0}
+    - target: {fileID: 2977243345588757257, guid: 49c014e31eaa3144e93930bb91368743,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2977243345588757257, guid: 49c014e31eaa3144e93930bb91368743,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2977243345588757257, guid: 49c014e31eaa3144e93930bb91368743,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 15.116
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120936159614433401, guid: 49c014e31eaa3144e93930bb91368743,
+        type: 3}
+      propertyPath: m_Name
+      value: SpaceShip
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 49c014e31eaa3144e93930bb91368743, type: 3}
 --- !u!1001 &7834293367472760658
 PrefabInstance:
   m_ObjectHideFlags: 0
