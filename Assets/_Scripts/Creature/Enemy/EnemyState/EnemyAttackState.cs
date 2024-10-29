@@ -21,7 +21,6 @@ public class EnemyAttackState : IEnemyState
 
         if (enemy is Catcher catcher && catcher.IsCastingSkill())
         {
-            //enemy.animator.SetTrigger("OnEnteredSkill");
             if (!catcher.IsSkillRange())
             {
                 enemy.animator.SetBool("IsAttack", false);
