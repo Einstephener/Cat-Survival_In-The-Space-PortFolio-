@@ -71,7 +71,8 @@ public class InventorySlot : SlotBase, IPointerEnterHandler, IPointerExitHandler
                 if (Main.Inventory.IsPotionItem(curSlot.itemData))
                 {
                     Debug.Log($"{curSlot.itemData} 사용하기");
-                    //curSlot.itemData.item.Use();
+                    curSlot.itemData.item.Use();
+                    Main.Inventory.Select_RemoveItem(this.index);
                 }
                 //Debug.Log($"{curSlot.itemData} aount : {curSlot.amount}");
             }

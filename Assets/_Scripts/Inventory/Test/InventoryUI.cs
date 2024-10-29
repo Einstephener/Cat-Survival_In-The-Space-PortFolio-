@@ -57,7 +57,8 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     {
         //임시 초기화
         Main.Inventory.Initialize();
-        //Test
+
+        #region Test
         //Main.Inventory.RemoveItem(testItemData1, 7);
         //Main.Inventory.RemoveItem(testItemData2, 5);
         //this.gameObject.SetActive(false);
@@ -69,6 +70,8 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         //Main.Inventory.AddItem(testItemData4);
         Main.Inventory.AddItem(testItemData5);
         Main.Inventory.AddItem(testItemData5);
+        #endregion
+
         //모닥불 
         BoneFireInitialize();
         //창고 [10/24] - 수정해야 함
@@ -117,16 +120,16 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         {
             foreach (RectTransform grandChild in child)
             {
-                // 손자 오브젝트가 활성화되어 있는지 확인
+                // 자식 오브젝트가 활성화되어 있는지 확인
                 if (grandChild.gameObject.activeSelf)
                 {
-                    // 손자의 높이를 추가
+                    // 자식의 높이를 추가
                     totalHeight += grandChild.sizeDelta.y;
                 }
             }
         }
 
-        // 부모의 높이를 손자 오브젝트의 총 높이에 설정
+        // 부모의 높이를 자식 오브젝트의 총 높이에 설정
         Vector2 parentSize = parentTransform.sizeDelta;
         parentSize.y = totalHeight;
         parentTransform.sizeDelta = parentSize;
@@ -145,10 +148,6 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 
     public void UpdateUI()
     {
-        //if (!boxSlotsObject.activeSelf)
-        //{
-        //    return;
-        //}
 
         SlotData[] _slots = Main.Inventory.slotsData; // InventoryManager SlotData 가지고 오기
 
@@ -238,6 +237,16 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
             return;
         }
         equipManager.UnEquip();
+
+
+        //if (selectSlot != null)
+        //{
+        //    equipManager.EquipNew(selectSlot.curSlot.itemData);
+        //}
+        //else
+        //{ 
+
+        //}
         //equipManager.EquipNew(selectSlot.curSlot.itemData);
     }
 
@@ -267,8 +276,8 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         if (boneFireObject.activeInHierarchy)
         {
             BoneFireUpdateUI();
-
         }
+
         if (boxSlotsObject.activeInHierarchy)
         {
             BoxSlotUpdateUI();
@@ -319,10 +328,12 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     {
         if (dragSlotData.itemData != null && dropSlotData != null)
         {
-            if (dragSlotData == selectSlot.curSlot)
-            {
-                WhetherSelectSlot();
-            }
+            
+            //if (dropSlotData == selectSlot.curSlot)
+            //{
+            //    Debug.Log("Test2");
+            //    equipManager.EquipNew(dropSlotData.itemData);
+            //}
 
             ItemData tempSlotaData_ItemData = dragSlotData.itemData;
             int tempAmount = dragSlotData.amount;
@@ -332,6 +343,13 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 
             dropSlotData.itemData = tempSlotaData_ItemData;
             dropSlotData.amount = tempAmount;
+
+            SlotData a = dragSlotData;
+
+            SlotData b = dropSlotData;
+
+            equipManager.SwapEquip(dragSlotData, dropSlotData, selectSlot);
+
         }
         else
         {
