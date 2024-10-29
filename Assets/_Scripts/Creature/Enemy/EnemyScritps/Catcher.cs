@@ -83,8 +83,18 @@ public class Catcher : Enemy
 
     public bool IsSkillRange()
     {
-        if(Vector3.Distance(transform.position, _playerTransform.position) <= bossSO.skillRange)
+        // 플레이어 죽었는지 체크.
+        PlayerCondition playerCondition = GetPlayerCondition();
+        if (playerCondition != null && playerCondition.IsDead())
         {
+            Debug.Log("플레이어가 죽어서 공격 중단");
+            aiPath.canMove = true;
+            return false;
+        }
+
+        if (Vector3.Distance(transform.position, _playerTransform.position) <= bossSO.skillRange)
+        {
+            aiPath.canMove = false;
             Debug.Log("범위 도착");
             return true;
         }
