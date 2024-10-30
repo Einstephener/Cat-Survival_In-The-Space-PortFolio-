@@ -112,7 +112,7 @@ public class DayNightCycle : MonoBehaviour
 
     #region Blend 초기화.
     //Todo : 추후 날짜 저장시 이 부분도 건들 필요 있음.
-    private float initialBlendValue = 0f; // 초기화할 _Blend 값
+    private readonly float _initialBlendValue = 0f; // 초기화할 _Blend 값
 
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -124,7 +124,7 @@ public class DayNightCycle : MonoBehaviour
     {
         if (skyboxMaterial != null)
         {
-            skyboxMaterial.SetFloat("_Blend", initialBlendValue);
+            skyboxMaterial.SetFloat("_Blend", _initialBlendValue);
         }
     }
     #endregion
