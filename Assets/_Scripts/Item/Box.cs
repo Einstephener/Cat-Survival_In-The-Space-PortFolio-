@@ -41,17 +41,13 @@ public class Box : Installation
         //Debug.Log("설치 아이템 상호작용");
     }
 
-    public void UISet()
+    public override void UISet()
     {
-        //UI창 생성
-        //boneFireSlots.SetActive(true);
-        Main.Inventory.inventoryUI.gameObject.SetActive(true);
-
+        //Main.Inventory.inventoryUI.gameObject.SetActive(true);
         Main.Inventory.inventoryUI.boneFireObject.SetActive(false);
-
         Main.Inventory.inventoryUI.boxSlotsObject.SetActive(true);
 
-        Main.Inventory.inventoryUI.AdjustParentHeight();
+        base.UISet();
     }
 
     public override void UIInterac()

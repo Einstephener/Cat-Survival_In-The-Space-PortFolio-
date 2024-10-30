@@ -18,6 +18,14 @@ public class Installation : Item
         //Debug.Log("설치 아이템 상호작용");
     }
 
+    public virtual void UISet()
+    {
+        Main.UI.ShowPopupUI<InventoryUI>("Inventory");
+        Main.Inventory.inventoryUI.AdjustParentHeight();
+
+        Main.UI.SwitchToUI();
+    }
+
     public virtual void UIInterac()
     {
         //Debug.Log("설치 아이템 UI 상호작용");

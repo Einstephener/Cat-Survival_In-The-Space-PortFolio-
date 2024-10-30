@@ -12,8 +12,8 @@ public class DragSlot : MonoBehaviour
     /// </summary>
     #endregion
     public InventorySlot thisSlot;
-    //public TextMeshProUGUI amuontText;
     public Image icon;
+    public TextMeshProUGUI amuontText;
     //public Slider WeaponDurability;
 
     public void SetDragSlot(InventorySlot _dragSlot)
@@ -22,7 +22,7 @@ public class DragSlot : MonoBehaviour
         thisSlot = _dragSlot;
         Main.Inventory.inventoryUI.curSlot = thisSlot;
         icon.sprite = thisSlot.curSlot.itemData.Icon;
-        //amuontText.text = thisSlot.curSlot.amount > 1 ? thisSlot.curSlot.amount.ToString() : string.Empty;
+        amuontText.text = thisSlot.curSlot.amount > 1 ? thisSlot.curSlot.amount.ToString() : string.Empty;
     }
 
     public void RemoveDragSlot()

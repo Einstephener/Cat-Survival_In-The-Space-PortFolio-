@@ -4,35 +4,8 @@ using UnityEngine;
 
 public class Potion : Item
 {
-    public float value;
+    //public float value;
     public PlayerCondition playerCondition;
-
-    //private void Awake() // 플레이어 컨디션 납치하자
-    //{
-    //    GameObject player = GameObject.FindGameObjectWithTag("Player");
-    //    if (player != null)
-    //    {
-    //        playerCondition = player.GetComponent<PlayerCondition>();
-    //        if (playerCondition != null)
-    //        {
-    //            // PlayerCondition을 사용할 수 있음
-    //            Debug.Log("PlayerCondition found!");
-    //        }
-    //        else
-    //        {
-    //            Debug.Log("PlayerCondition not found on player.");
-    //        }
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("Player not found with tag.");
-    //    }
-    //}
-
-    //private void Start()
-    //{
-       
-    //}
 
     private void Initialize()
     {
@@ -40,19 +13,12 @@ public class Potion : Item
 
         if (Player != null)
         {
-            // A 스크립트를 가져오기
             playerCondition = Player.GetComponent<PlayerCondition>();
             if (playerCondition != null)
             {
-                // A 스크립트의 메서드 호출
                 Debug.Log("연결함");
             }
-            else
-            {
-            }
-        }
-        else
-        {
+            
         }
     }
 
@@ -61,18 +27,19 @@ public class Potion : Item
         if (data is PotionItemData potionData)
         {
             // 첫 번째 consumable의 값을 무조건 받음
-            if (potionData.Consumables.Length > 0)
-            {
-                value = potionData.Consumables[0].ConsumableValue;
-                //Debug.Log(value);
-                //Debug.Log($"{potionData.Consumables[0].type}, {potionData.Consumables[0].ConsumableValue}");
-            }
+            //if (potionData.Consumables.Length > 0)
+            //{
+            //    value = potionData.Consumables[0].ConsumableValue;
+                
+            //}
         }
     }
     public override void Use()
     {
 
         Initialize();
+
+        if (playerCondition.IsDead()) return;
 
         if (itemData is PotionItemData potionData)
         {

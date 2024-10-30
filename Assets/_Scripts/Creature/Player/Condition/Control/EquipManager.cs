@@ -88,17 +88,17 @@ public class EquipManager : MonoBehaviour
 
         if (dragSlotData == selectSlot.curSlot)
         {
-            Debug.Log("UnEquip Item");
+            //Debug.Log("UnEquip Item");
             EquipNew(dragSlotData.itemData);
         }
         else if (dropSlotData.itemData == selectSlot.curSlot.itemData)
         {
-            Debug.Log("Equip New Item");
+            //Debug.Log("Equip New Item");
             EquipNew(dropSlotData.itemData);
         }
         else
         {
-            Debug.Log("UnEquip Item");
+            //Debug.Log("UnEquip Item");
             UnEquip();
         }
 
