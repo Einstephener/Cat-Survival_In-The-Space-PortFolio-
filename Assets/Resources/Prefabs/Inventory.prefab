@@ -212,7 +212,7 @@ MonoBehaviour:
   testItemData1: {fileID: 11400000, guid: aa35f9b28ed047b438dec8917faaaac0, type: 2}
   testItemData2: {fileID: 11400000, guid: f08ffa4361a37194180ef0894af4c08b, type: 2}
   testItemData3: {fileID: 11400000, guid: fb98ff29e88e9004a93f3513c9f05443, type: 2}
-  testItemData4: {fileID: 11400000, guid: 4533f3d5054a5e64dbe6c8ce7f9a9e3a, type: 2}
+  testItemData4: {fileID: 11400000, guid: e095e223502448c46b440c26f7eb509b, type: 2}
   testItemData5: {fileID: 11400000, guid: 14a6bc6b86365b04ab171dc2f6666fa6, type: 2}
   equipManager: {fileID: 0}
 --- !u!1 &3424360038770647051

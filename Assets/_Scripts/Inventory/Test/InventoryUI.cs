@@ -68,7 +68,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         Main.Inventory.Select_AddItem(testItemData2, 29, 11);
         Main.Inventory.AddItem(testItemData3);
         //Main.Inventory.AddItem(testItemData4);
-        Main.Inventory.AddItem(testItemData5);
+        Main.Inventory.AddItem(testItemData4);
         Main.Inventory.AddItem(testItemData5);
         #endregion
 
