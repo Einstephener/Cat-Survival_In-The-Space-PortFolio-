@@ -43,7 +43,7 @@ public class Craft : MonoBehaviour
         }
     }
 
-    public void OnInteract(InputValue value)
+    public void OnUse() // OnInteract() -> OnUse();
     {
         ItemData selectedItemData = Main.Inventory.inventoryUI.GetSelectItemData();
 
