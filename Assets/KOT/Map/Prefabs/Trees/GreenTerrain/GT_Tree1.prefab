@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8818923779256831644}
   - component: {fileID: 5959444486038452182}
   - component: {fileID: 7174666377122829122}
-  m_Layer: 18
+  m_Layer: 16
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 8219958006353526724}
   - component: {fileID: 1463409540598445106}
   - component: {fileID: 2571670860850404463}
-  m_Layer: 18
+  m_Layer: 16
   m_Name: GT_Tree1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

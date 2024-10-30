@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DayNightCycle : MonoBehaviour
 {
@@ -35,6 +36,19 @@ public class DayNightCycle : MonoBehaviour
         _timeRate = 1.0f / _fullDayLength;
         CurrentTime = _startTime;
     }
+
+    private void OnEnable()
+    {
+        ResetBlendValue();
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        ResetBlendValue();
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
 
     private void Update()
     {
@@ -94,5 +108,25 @@ public class DayNightCycle : MonoBehaviour
 
         skyboxMaterial.SetFloat("_Blend", blend);
     }
+
+
+    #region Blend 초기화.
+    //Todo : 추후 날짜 저장시 이 부분도 건들 필요 있음.
+    private readonly float _initialBlendValue = 0f; // 초기화할 _Blend 값
+
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        ResetBlendValue();
+    }
+
+    private void ResetBlendValue()
+    {
+        if (skyboxMaterial != null)
+        {
+            skyboxMaterial.SetFloat("_Blend", _initialBlendValue);
+        }
+    }
+    #endregion
 
 }
