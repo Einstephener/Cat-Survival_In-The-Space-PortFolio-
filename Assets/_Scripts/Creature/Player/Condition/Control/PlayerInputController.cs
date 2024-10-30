@@ -26,7 +26,7 @@ public class PlayerInputController : MonoBehaviour
     [HideInInspector] public ItemData currentItem;
 
     [Header("SpeedValue")]
-    [SerializeField] private float _currentSpeed;
+    public float _currentSpeed;
     private float _walkSpeed = 3.0f;
     private float _runSpeed = 10.0f;
     private float _sitSpeed = 0.5f;
