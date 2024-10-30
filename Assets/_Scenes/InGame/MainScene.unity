@@ -2418,6 +2418,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!218 &1133343503 stripped
+Terrain:
+  m_CorrespondingSourceObject: {fileID: 9175030023083081564, guid: 5c19e641e0d5cee4fb844dbbb3e5c772,
+    type: 3}
+  m_PrefabInstance: {fileID: 1751693104}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1155707592
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6989,6 +6995,18 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 790802775}
+    - targetCorrespondingSourceObject: {fileID: 5112444234053503589, guid: 5c19e641e0d5cee4fb844dbbb3e5c772,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1751693109}
+    - targetCorrespondingSourceObject: {fileID: 1116167785284793845, guid: 5c19e641e0d5cee4fb844dbbb3e5c772,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1751693118}
+    - targetCorrespondingSourceObject: {fileID: 3780039731172152592, guid: 5c19e641e0d5cee4fb844dbbb3e5c772,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1751693115}
   m_SourcePrefab: {fileID: 100100000, guid: 5c19e641e0d5cee4fb844dbbb3e5c772, type: 3}
 --- !u!4 &1751693105 stripped
 Transform:
@@ -6996,6 +7014,110 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1751693104}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1751693106 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3780039731172152592, guid: 5c19e641e0d5cee4fb844dbbb3e5c772,
+    type: 3}
+  m_PrefabInstance: {fileID: 1751693104}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1751693107 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1116167785284793845, guid: 5c19e641e0d5cee4fb844dbbb3e5c772,
+    type: 3}
+  m_PrefabInstance: {fileID: 1751693104}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1751693108 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5112444234053503589, guid: 5c19e641e0d5cee4fb844dbbb3e5c772,
+    type: 3}
+  m_PrefabInstance: {fileID: 1751693104}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1751693109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751693108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0443d76e52536394bb8060f983d23a7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrain: {fileID: 1133343503}
+  naturePrefabs:
+  - {fileID: 1335726306580732, guid: 56a164011e4a48f478dacd4c4d007e18, type: 3}
+  - {fileID: 1550140418629916, guid: 7d422c6f7d3569848aeb70936f28b37c, type: 3}
+  - {fileID: 1250690161900600, guid: d7164e5b16662114bb916656abc235f3, type: 3}
+  - {fileID: 7287873531420738419, guid: 89b3b0ae696bcc042924f6b269fa0ad2, type: 3}
+  - {fileID: 5433673073776775229, guid: 51917d0c5c6ee6f46aafb7fd58f5b89f, type: 3}
+  - {fileID: 6429880454871919423, guid: e73b402e3e261d147b8b11c5a074f9d5, type: 3}
+  numberOfNatures: 100
+  minDistanceBetweenNatures: 5
+  noNatureLayer:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!218 &1751693114 stripped
+Terrain:
+  m_CorrespondingSourceObject: {fileID: 1946470757029056306, guid: 5c19e641e0d5cee4fb844dbbb3e5c772,
+    type: 3}
+  m_PrefabInstance: {fileID: 1751693104}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1751693115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751693106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0443d76e52536394bb8060f983d23a7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrain: {fileID: 1751693114}
+  naturePrefabs:
+  - {fileID: 4822431972316174437, guid: 8edffc0b26e80414ba94e36b01b3ae12, type: 3}
+  - {fileID: 4978890121609894341, guid: 216cfb2aabe99004ebf865842e946721, type: 3}
+  - {fileID: 3779870450763190555, guid: ecab984fa146b0949929aa9b507b9791, type: 3}
+  - {fileID: 6486319289619685857, guid: 2eddcacd98ca9db45a62885ef9b8a8c9, type: 3}
+  - {fileID: 5831220921881019582, guid: 0a4af0ad95aae2944880156d0db5a2b1, type: 3}
+  - {fileID: 1690045051103409652, guid: 3a4ad1679258ac84482aa87406b03216, type: 3}
+  numberOfNatures: 400
+  minDistanceBetweenNatures: 5
+  noNatureLayer:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!218 &1751693117 stripped
+Terrain:
+  m_CorrespondingSourceObject: {fileID: 7150553552832303837, guid: 5c19e641e0d5cee4fb844dbbb3e5c772,
+    type: 3}
+  m_PrefabInstance: {fileID: 1751693104}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1751693118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751693107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0443d76e52536394bb8060f983d23a7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrain: {fileID: 1751693117}
+  naturePrefabs:
+  - {fileID: 1589459417301568, guid: 14d3cba01a896e44e942ce8a12de41f6, type: 3}
+  - {fileID: 1219954904984438, guid: fb6e525e9c25a934587e1fd753a80b20, type: 3}
+  - {fileID: 1257762460816566, guid: 4982dafaecd4f9a4181a102d58eb12a2, type: 3}
+  - {fileID: 3656696918337930391, guid: 2304379db88c67045b57be81af6a94bd, type: 3}
+  - {fileID: 204760360782740188, guid: 186ce845d86b2b642ae9d321e9cbbd7b, type: 3}
+  numberOfNatures: 100
+  minDistanceBetweenNatures: 5
+  noNatureLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &1770899284
 PrefabInstance:
   m_ObjectHideFlags: 0
