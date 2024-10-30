@@ -120,5 +120,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f082fe77d09aa344a6741937e971102, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxCount: 0
-  MaterialPrefab: {fileID: 0}
+  maxCount: 4
+  MaterialPrefab: {fileID: 5966026150335998539, guid: 991b0ab1b9b34bc4aa97575dde622347,
+    type: 3}
