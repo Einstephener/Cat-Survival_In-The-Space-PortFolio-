@@ -6,6 +6,6 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: StonePickAxe
-  m_Controller: {fileID: 9100000, guid: e641e0c8eef6bd24980dde67d1058c03, type: 2}
+  m_Name: _CookedMeat_Animator
+  m_Controller: {fileID: 9100000, guid: b240fece84cf46f4589a006256b018fe, type: 2}
   m_Clips: []

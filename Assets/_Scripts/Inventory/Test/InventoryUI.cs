@@ -44,6 +44,8 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     public ToolTipContainer toolTipContainer;
     public RectTransform parentTransform; // inventory 창 크기
 
+    private bool shortcutKey = false;
+
     [Header("#Test")]
     public ItemData testItemData1;
     public ItemData testItemData2;
@@ -111,6 +113,11 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     }
 
     #endregion
+
+    public bool ShortcutKey(bool isPress)
+    {
+        return isPress ? true : false;
+    }
 
     public void AdjustParentHeight() // UI 크기 셋팅
     {
@@ -347,9 +354,6 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         }
 
         InventoryTotalUpdateUI();
-
-        //UpdateUI();
-        //BoneFireUpdateUI();
     }
 
     public void CombineSlots(SlotData dragSlotData, SlotData dropSlotData) // 같은 아이템이면 병합하는 함수
@@ -395,6 +399,10 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         this.nextSlot = _nextSlot;
     }
 
+    public void HalfSlotAmount(SlotData dragSlotData, SlotData dropSlotData)
+    {
+        //반띵 ㄲ
+    }
     #endregion
 
 
