@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3214355421179795162}
   - component: {fileID: 2640926416496976818}
   - component: {fileID: -1765191855608627005}
-  m_Layer: 18
+  m_Layer: 16
   m_Name: GT_PineTree4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 2660390476771288962}
   - component: {fileID: 881777914036281032}
   - component: {fileID: 4402566012282206812}
-  m_Layer: 18
+  m_Layer: 16
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}

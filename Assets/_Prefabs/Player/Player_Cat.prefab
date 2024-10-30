@@ -592,7 +592,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 100343
+    m_Bits: 362487
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -2312,8 +2312,9 @@ MonoBehaviour:
     m_Bits: 16
   GroundLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 65664
   currentInteractObject: {fileID: 0}
+  waterObject: {fileID: 0}
   enemyObject: {fileID: 0}
   natureObject: {fileID: 0}
 --- !u!114 &2951378759710360154
