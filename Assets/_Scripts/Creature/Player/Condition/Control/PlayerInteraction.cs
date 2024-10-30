@@ -116,7 +116,7 @@ public class PlayerInteraction : MonoBehaviour
             currentInteractObject = hit.collider.gameObject;
             waterObject = currentInteractObject;
             PromptTextActive(true);
-            promptText.text = $"<b>[E]</b> {"DrinkWater"}";
+            promptText.text = $"<b>[RightClick]</b> {"DrinkWater"}";
         }
     }
 
