@@ -137,7 +137,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 
     public void InventoryUISet()
     {
-        this.gameObject.SetActive(true);
+        //this.gameObject.SetActive(true);
 
         this.boneFireObject.SetActive(false);
 

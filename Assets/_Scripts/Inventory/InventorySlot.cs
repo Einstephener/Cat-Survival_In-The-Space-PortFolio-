@@ -110,7 +110,7 @@ public class InventorySlot : SlotBase, IPointerEnterHandler, IPointerExitHandler
             DragSlot _dragSlot = Main.Inventory.inventoryUI.dragSlot;
             //Main.Inventory.inventoryUI.curSlot = Main.Inventory.inventoryUI.dragSlot.thisSlot;
             _dragSlot.SetDragSlot(this);
-            Debug.Log(Main.Inventory.inventoryUI.curSlot);
+    
             _dragSlot.transform.position = eventData.position;
         }
         else

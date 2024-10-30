@@ -46,13 +46,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e285492ba5934b4bb18034034f9229d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRate: 4
+  attackRate: 1
   attackDistance: 0
   fishingDistance: 10
   InstallationDistance: 0
   doesGatherResources: 0
   doesGatherFish: 1
   doesGatherInstallation: 0
+  doesGatherEat: 0
   doesDealDamage: 0
   damage: 0
   useStamina: 0
