@@ -74,6 +74,8 @@ public class Potion : Item
 
         Initialize();
 
+        if (playerCondition.IsDead()) return;
+
         if (itemData is PotionItemData potionData)
         {
             // Consumables 배열의 모든 항목에 대해 반복
