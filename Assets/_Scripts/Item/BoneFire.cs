@@ -119,54 +119,14 @@ public class BoneFire : Installation
 
 
     #region UI
-    //private void UpdateSlotUI(InventorySlot slot)
-    //{
-    //    if (!slot.curSlot.IsEmpty()) //에러
-    //    {
-    //        Debug.Log("UpdateSlotUI");
-    //        //따로 set 만들자
-    //        slot.SetSlot(slot.curSlot);
-    //    }
-    //    else
-    //    {
-    //        Debug.Log("UpdateSlotUI");
-    //        slot.ClearSlot();
-    //    }
-    //}
 
-    //public void BoneFireUpdateUI()
-    //{
-    //    UpdateSlotUI(boneFireSlot);
-    //    UpdateSlotUI(nextBoneFireSlot);
-    //}
-
-    public void UISet()
+    public override void UISet()
     {
-        //UI창 생성
-        //boneFireSlots.SetActive(true);
-        Main.Inventory.inventoryUI.gameObject.SetActive(true);
-
+        //Main.Inventory.inventoryUI.gameObject.SetActive(true);
         Main.Inventory.inventoryUI.boneFireObject.SetActive(true);
-
         Main.Inventory.inventoryUI.boxSlotsObject.SetActive(false);
 
-        Main.Inventory.inventoryUI.AdjustParentHeight();
-    }
-
-    public void UIRemove()
-    {
-        //if (Input.GetKeyDown(KeyCode.I)) 
-        //{
-        //    if (Main.Inventory.inventoryUI.gameObject.activeSelf)
-        //    {
-        //        Main.Inventory.inventoryUI.boneFireObject.SetActive(false);
-        //        Main.Inventory.inventoryUI.gameObject.SetActive(false);
-        //    }
-        //    //else
-        //    //{
-        //    //    Main.Inventory.inventoryUI.boneFireObject.SetActive(true);
-        //    //}
-        //}
+        base.UISet();
     }
 
     #endregion

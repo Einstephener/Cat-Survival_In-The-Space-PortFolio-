@@ -52,7 +52,7 @@ public class SlotBase : MonoBehaviour
     {
         if (curSlot.itemData != null)
         {
-            if (!Main.Inventory.IsCountTableItem(curSlot.itemData))
+            if (Main.Inventory.IsWeaponItem(curSlot.itemData))
             {
                 WeaponDurability.gameObject.SetActive(true);
             }

@@ -365,6 +365,7 @@ MonoBehaviour:
   WeaponDurability: {fileID: 7495520179320900668}
   index: 0
   _amuont: 0
+  boneFireSlot: 0
 --- !u!114 &1062965111891205450
 MonoBehaviour:
   m_ObjectHideFlags: 0

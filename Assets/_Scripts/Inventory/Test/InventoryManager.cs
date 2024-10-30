@@ -78,6 +78,18 @@ public class InventoryManager
         return _itemdata is ContableItemData;
     }
 
+    public bool IsInstallationItem(ItemData _itemdata)
+    {
+        return _itemdata is InstallationItemData;
+    }
+    
+    public bool IsWeaponItem(ItemData _itemdata)
+    {
+        return _itemdata is WeaponItemData;
+    }
+
+    
+
     public bool IsPotionItem(ItemData _itemdata)
     {
         return _itemdata is PotionItemData;

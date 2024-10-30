@@ -401,4 +401,12 @@ public class PlayerInputController : MonoBehaviour
         Main.UI.ShowSettingPopupUI<UI_Setting>("UI_Setting");
     
     }
+
+    private void OnShortcutKey(InputValue value)
+    {
+        bool isShortcutKey = false;
+        isShortcutKey = value.isPressed;
+
+        Main.Inventory.inventoryUI.ShortcutKey(isShortcutKey);
+    }
 }

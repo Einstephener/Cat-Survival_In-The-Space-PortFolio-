@@ -405,6 +405,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ShortcutKey",
+                    "type": "Value",
+                    "id": "f89628d5-3a02-48a5-80c4-eda57562e15b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(pressPoint=0.01,behavior=2)",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -460,6 +469,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ae779970-836f-41c8-8194-9989d82b012a",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShortcutKey",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
