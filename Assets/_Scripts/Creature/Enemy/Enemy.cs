@@ -154,7 +154,7 @@ public class Enemy : MonoBehaviour
             // 플레이어가 감지되면 시야가 넓어짐.
             _currentSightRange = _enemyData.sightRange + _enemyData.exitBuffer;
             _target.target = _playerTransform;
-            Debug.Log("플레이어 감지");
+            //Debug.Log("플레이어 감지");
 
             return true;
         }
@@ -195,12 +195,12 @@ public class Enemy : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, _basePosition) < 0.5f)
         {
-            Debug.Log("도착");
+            //Debug.Log("도착");
             _currentSightRange = _enemyData.sightRange;
             return true;
         }
 
-        Debug.Log("집 가는 중");
+        //Debug.Log("집 가는 중");
         _target.target = null;
         aiPath.destination = _basePosition;
         return false;

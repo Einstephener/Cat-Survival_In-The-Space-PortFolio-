@@ -11,13 +11,11 @@ public class Catcher : Enemy
     private Coroutine _currentSkillCoroutine;
 
     private float _lastSkillTime;
-    private bool _isCastingSkill;
 
     protected override void Awake()
     {
         base.Awake();
         Init(bossSO);
-        _isCastingSkill = false;
     }
 
     private void Update()
@@ -111,13 +109,10 @@ public class Catcher : Enemy
 
     public IEnumerator CastMeleeSkill()
     {
-        _isCastingSkill = true;
-
         while (IsCastingSkill())
         {
             if (IsDead())
             {
-                _isCastingSkill = false;
                 yield break;
             }
 
@@ -135,8 +130,6 @@ public class Catcher : Enemy
 
             yield return null;
         }
-
-        _isCastingSkill = false;
     }
 
     public void StartMeleeSkill()
@@ -153,7 +146,6 @@ public class Catcher : Enemy
         {
             StopCoroutine(_currentSkillCoroutine);
             _currentSkillCoroutine = null;
-            _isCastingSkill = false; // 상태 초기화.
         }
     }
 
