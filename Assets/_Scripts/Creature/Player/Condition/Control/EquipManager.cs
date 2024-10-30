@@ -34,7 +34,7 @@ public class EquipManager : MonoBehaviour
         }
     }
 
-    public void OnInteract(InputValue value)
+    public void OnUse()
     {
         if(!curEquip)
         {
