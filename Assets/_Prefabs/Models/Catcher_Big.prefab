@@ -91,17 +91,17 @@ PrefabInstance:
     - target: {fileID: 3490355923430725924, guid: 4fa3cf1ab181d73409dc6a3a27da2b7e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 21.96
+      value: 12.389999
       objectReference: {fileID: 0}
     - target: {fileID: 3490355923430725924, guid: 4fa3cf1ab181d73409dc6a3a27da2b7e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.007818222
+      value: 2.05
       objectReference: {fileID: 0}
     - target: {fileID: 3490355923430725924, guid: 4fa3cf1ab181d73409dc6a3a27da2b7e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 18.82
+      value: 28.83
       objectReference: {fileID: 0}
     - target: {fileID: 3490355923430725924, guid: 4fa3cf1ab181d73409dc6a3a27da2b7e,
         type: 3}
@@ -253,9 +253,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 5458712267007793452}
   m_SourcePrefab: {fileID: 100100000, guid: 4fa3cf1ab181d73409dc6a3a27da2b7e, type: 3}
---- !u!4 &676155865026909005 stripped
+--- !u!4 &4685970393215850891 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 3490355923430725924, guid: 4fa3cf1ab181d73409dc6a3a27da2b7e,
+  m_CorrespondingSourceObject: {fileID: 8653074234926289890, guid: 4fa3cf1ab181d73409dc6a3a27da2b7e,
     type: 3}
   m_PrefabInstance: {fileID: 4112362696097991273}
   m_PrefabAsset: {fileID: 0}
@@ -392,6 +392,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a2777e38e150d9449af3bbf4a6b1796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectileSpawnPoint: {fileID: 676155865026909005}
+  _projectileSpawnPoint: {fileID: 4685970393215850891}
   bossSO: {fileID: 11400000, guid: df5bf9bbdee1e9f4da695d128fa0b382, type: 2}
   speed: 0
