@@ -1685,7 +1685,7 @@ MonoBehaviour:
   minDistanceBetweenNatures: 5
   noNatureLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 197632
 --- !u!1 &1149791426392623028
 GameObject:
   m_ObjectHideFlags: 0
@@ -3800,6 +3800,59 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 10
   m_Center: {x: 0.000015258789, y: 0, z: 0.000030517578}
+--- !u!1 &2792420847251354534
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4788157648905864874}
+  - component: {fileID: 7828949115277709132}
+  m_Layer: 17
+  m_Name: WaterZone (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4788157648905864874
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2792420847251354534}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.27931195, z: -0, w: 0.9602005}
+  m_LocalPosition: {x: 118.7, y: 0, z: -55.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4134381817257650403}
+  m_LocalEulerAnglesHint: {x: 0, y: 32.438, z: 0}
+--- !u!65 &7828949115277709132
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2792420847251354534}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 41.39, y: 70, z: 100}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2956625958567492858
 GameObject:
   m_ObjectHideFlags: 0
@@ -4586,7 +4639,7 @@ Transform:
   m_GameObject: {fileID: 3338906840137315802}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 51.9, y: 0, z: -245.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5059,11 +5112,15 @@ Transform:
   m_GameObject: {fileID: 3711058260874452803}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 131.72682, y: 90.25, z: -168.57149}
+  m_LocalPosition: {x: 69.8, y: 90.25, z: 67.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 822029043737469041}
+  - {fileID: 5309671158506820865}
+  - {fileID: 7728823683620014683}
+  - {fileID: 4788157648905864874}
+  - {fileID: 3920558817513742358}
   m_Father: {fileID: 3952488997090129347}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3715354393126646212
@@ -5350,7 +5407,7 @@ MonoBehaviour:
   minDistanceBetweenNatures: 5
   noNatureLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 197632
 --- !u!1 &3931823124521341160
 GameObject:
   m_ObjectHideFlags: 0
@@ -6852,7 +6909,7 @@ MonoBehaviour:
   minDistanceBetweenNatures: 5
   noNatureLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 197632
 --- !u!1 &5116265059659274930
 GameObject:
   m_ObjectHideFlags: 0
@@ -8898,6 +8955,59 @@ Transform:
   - {fileID: 606946079564086995}
   m_Father: {fileID: 7437825181118995409}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7150108594741685021
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5309671158506820865}
+  - component: {fileID: 6749686547482324940}
+  m_Layer: 17
+  m_Name: WaterZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5309671158506820865
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7150108594741685021}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -8.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4134381817257650403}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6749686547482324940
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7150108594741685021}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 700, y: 100, z: 40}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7538006205376462644
 GameObject:
   m_ObjectHideFlags: 0
@@ -9981,6 +10091,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db3a87a5e7aa31b4fb0e63218cf8222d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8159296794448085615
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3920558817513742358}
+  - component: {fileID: 6543917153246516341}
+  m_Layer: 17
+  m_Name: WaterZone (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3920558817513742358
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8159296794448085615}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.5507312, z: -0, w: 0.8346827}
+  m_LocalPosition: {x: 61.9, y: 0, z: -99.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4134381817257650403}
+  m_LocalEulerAnglesHint: {x: 0, y: 66.834, z: 0}
+--- !u!65 &6543917153246516341
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8159296794448085615}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 40, y: 70, z: 100}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8224592698601330639
 GameObject:
   m_ObjectHideFlags: 0
@@ -10507,6 +10670,59 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 10
   m_Center: {x: -0.0000076293945, y: 0, z: 0.000015258789}
+--- !u!1 &8871829641934460914
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7728823683620014683}
+  - component: {fileID: 8232827600739389416}
+  m_Layer: 17
+  m_Name: WaterZone (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7728823683620014683
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8871829641934460914}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -8.9}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4134381817257650403}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8232827600739389416
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8871829641934460914}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 40, y: 100, z: 700}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8874126862447713831
 GameObject:
   m_ObjectHideFlags: 0
@@ -17693,7 +17909,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1390825017730088, guid: aa6c507182efa4241946f06a1237fbea, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 4513914050705382, guid: aa6c507182efa4241946f06a1237fbea, type: 3}
       propertyPath: m_RootOrder
@@ -18105,6 +18321,10 @@ PrefabInstance:
     - target: {fileID: 1739176662596396, guid: 81f51ec42d5c7784aa8e8d5298eddaa0, type: 3}
       propertyPath: m_Name
       value: mountain (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1739176662596396, guid: 81f51ec42d5c7784aa8e8d5298eddaa0, type: 3}
+      propertyPath: m_Layer
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 4703823074467580, guid: 81f51ec42d5c7784aa8e8d5298eddaa0, type: 3}
       propertyPath: m_RootOrder
@@ -20625,6 +20845,10 @@ PrefabInstance:
     - target: {fileID: 1739176662596396, guid: 81f51ec42d5c7784aa8e8d5298eddaa0, type: 3}
       propertyPath: m_Name
       value: mountain (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1739176662596396, guid: 81f51ec42d5c7784aa8e8d5298eddaa0, type: 3}
+      propertyPath: m_Layer
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 4703823074467580, guid: 81f51ec42d5c7784aa8e8d5298eddaa0, type: 3}
       propertyPath: m_RootOrder
@@ -25317,7 +25541,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1390825017730088, guid: aa6c507182efa4241946f06a1237fbea, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 4513914050705382, guid: aa6c507182efa4241946f06a1237fbea, type: 3}
       propertyPath: m_RootOrder
@@ -29546,7 +29770,7 @@ PrefabInstance:
     - target: {fileID: 6532402980801889236, guid: 14dc43117d7e26544bcabef5f209b1dd,
         type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 17
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -32895,7 +33119,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1390825017730088, guid: aa6c507182efa4241946f06a1237fbea, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 4513914050705382, guid: aa6c507182efa4241946f06a1237fbea, type: 3}
       propertyPath: m_RootOrder
@@ -34669,6 +34893,10 @@ PrefabInstance:
     - target: {fileID: 1739176662596396, guid: 81f51ec42d5c7784aa8e8d5298eddaa0, type: 3}
       propertyPath: m_Name
       value: mountain (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1739176662596396, guid: 81f51ec42d5c7784aa8e8d5298eddaa0, type: 3}
+      propertyPath: m_Layer
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 4703823074467580, guid: 81f51ec42d5c7784aa8e8d5298eddaa0, type: 3}
       propertyPath: m_RootOrder
@@ -40608,6 +40836,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: mountain (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1739176662596396, guid: 81f51ec42d5c7784aa8e8d5298eddaa0, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
     - target: {fileID: 4703823074467580, guid: 81f51ec42d5c7784aa8e8d5298eddaa0, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -41425,7 +41657,7 @@ PrefabInstance:
     - target: {fileID: 6532402980801889236, guid: 14dc43117d7e26544bcabef5f209b1dd,
         type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 17
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

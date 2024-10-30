@@ -78,6 +78,11 @@ public class NaturePlacer : MonoBehaviour
             return false; // 해당 레이어의 오브젝트가 있을 경우 false 반환
         }
 
+        int layer = LayerMask.NameToLayer(LayerMask.LayerToName(noNatureLayer));
+        if (layer == LayerMask.NameToLayer("NoNatureLayer")) // "NoNatureLayer"는 noNatureLayer의 실제 이름
+        {
+            return false; // 해당 위치가 noNatureLayer에 속하는 경우 false 반환
+        }
         return true; // 모든 조건을 만족하면 true 반환
     }
 }
