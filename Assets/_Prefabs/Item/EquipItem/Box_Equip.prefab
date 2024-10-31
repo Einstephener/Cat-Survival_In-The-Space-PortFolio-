@@ -135,7 +135,7 @@ MonoBehaviour:
   InstallationDistance: 0
   doesGatherResources: 0
   doesGatherFish: 0
-  doesGatherInstallation: 0
+  doesGatherInstallation: 1
   doesGatherEat: 0
   doesDealDamage: 0
   damage: 0
