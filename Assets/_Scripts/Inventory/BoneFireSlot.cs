@@ -24,10 +24,10 @@ public class BoneFireSlot : InventorySlot // 추 후에 변경될 수 있음
         base.ClearSlot();
     }
 
-    public override void isWeapon()
-    {
-        base.isWeapon();
-    }
+    //public override void isWeapon()
+    //{
+    //    base.isWeapon();
+    //}
 
     public override void SetOutLine()
     {

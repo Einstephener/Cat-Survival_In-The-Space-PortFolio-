@@ -4346,7 +4346,7 @@ MonoBehaviour:
   SlotUIObject: {fileID: 6733771277373976593}
   icon: {fileID: 6400373510827416468}
   amuontText: {fileID: 8037582795276708119}
-  WeaponDurability: {fileID: 2692394105880821760}
+  weaponDurability: {fileID: 2692394105880821760}
   index: 0
   _amuont: 0
   slotNum: 2
@@ -4886,7 +4886,7 @@ MonoBehaviour:
   SlotUIObject: {fileID: 7062093326779058940}
   icon: {fileID: 8138917854783343735}
   amuontText: {fileID: 659622221995687847}
-  WeaponDurability: {fileID: 1571401228548091024}
+  weaponDurability: {fileID: 1571401228548091024}
   index: 0
   _amuont: 0
   slotNum: 4
@@ -5194,7 +5194,7 @@ MonoBehaviour:
   SlotUIObject: {fileID: 7282337015914556633}
   icon: {fileID: 3553327552598095678}
   amuontText: {fileID: 1906165354654375426}
-  WeaponDurability: {fileID: 8136311863898044923}
+  weaponDurability: {fileID: 8136311863898044923}
   index: 0
   _amuont: 0
   slotNum: 3
@@ -5850,7 +5850,7 @@ MonoBehaviour:
   SlotUIObject: {fileID: 8115321816401345191}
   icon: {fileID: 9019355895587357465}
   amuontText: {fileID: 7386792644793081670}
-  WeaponDurability: {fileID: 4407037267419567346}
+  weaponDurability: {fileID: 4407037267419567346}
   index: 0
   _amuont: 0
   slotNum: 1
@@ -6345,7 +6345,7 @@ MonoBehaviour:
   SlotUIObject: {fileID: 8984754684674961573}
   icon: {fileID: 2676571552434587577}
   amuontText: {fileID: 355180941051392211}
-  WeaponDurability: {fileID: 6205189252636640740}
+  weaponDurability: {fileID: 6205189252636640740}
   index: 0
   _amuont: 0
   slotNum: 0

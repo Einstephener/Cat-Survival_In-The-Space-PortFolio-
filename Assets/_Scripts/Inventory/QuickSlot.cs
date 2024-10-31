@@ -24,6 +24,7 @@ public class QuickSlot : SlotBase
         base.ClearSlot();
     }
 
+
     public override void isWeapon()
     {
         base.isWeapon();

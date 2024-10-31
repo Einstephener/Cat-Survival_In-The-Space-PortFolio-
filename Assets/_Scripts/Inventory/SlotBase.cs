@@ -64,7 +64,14 @@ public class SlotBase : MonoBehaviour
         }
         else
         {
-            weaponDurability.gameObject.SetActive(false);
+            if (weaponDurability != null)
+            {
+                weaponDurability.gameObject.SetActive(false);
+            }
+            else
+            {
+                Debug.LogError("Weapon Durability Slider is not assigned!", this);
+            }
         }
     }
 
