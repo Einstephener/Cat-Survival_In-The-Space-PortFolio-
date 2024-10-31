@@ -181,6 +181,7 @@ public class PlayerInputController : MonoBehaviour
     {
         if (_isGrounded)
         {
+            SoundManager.Instance.PlaySFX("SFX_Jump", 1f);
             _rigid.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
             _playerAnimator.SetTrigger("OnJump");
             //TODO: 점프 착지시 동작 연결[Animator탭에서 수정할듯.]
