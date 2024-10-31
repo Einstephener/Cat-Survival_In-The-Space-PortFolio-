@@ -25,10 +25,10 @@ public class Projectile : Poolable
     public void Init(Transform target, float damage)
     {
         this._target = target;
-        this._attackSpeed = 20f;
+        this._attackSpeed = 30f;
         this._damage = damage;
 
-        Vector3 targetFace = _target.position + new Vector3(0, 1.7f, 0);
+        Vector3 targetFace = _target.position + new Vector3(0, 1f, 0);
 
         _direction = (targetFace - transform.position).normalized;
         _spawnPosition = transform.position;

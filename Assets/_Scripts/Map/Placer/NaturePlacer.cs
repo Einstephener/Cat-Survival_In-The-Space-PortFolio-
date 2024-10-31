@@ -72,7 +72,7 @@ public class NaturePlacer : MonoBehaviour
         }
 
         // 특정 레이어에 위치한 오브젝트가 있는지 확인
-        Collider[] colliders = Physics.OverlapSphere(position, 0.5f, noNatureLayer);
+        Collider[] colliders = Physics.OverlapSphere(position, 1f, noNatureLayer);
         if (colliders.Length > 0)
         {
             return false; // 해당 레이어의 오브젝트가 있을 경우 false 반환

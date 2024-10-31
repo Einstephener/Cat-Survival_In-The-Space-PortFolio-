@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class UI_Setting : UI_Base
+public class UI_Setting : UI_Popup
 {
     public override bool Initialize()
     {
@@ -72,12 +73,12 @@ public class UI_Setting : UI_Base
     public void CloseSetting()
     {
         // 저장 값 적용.
-        Main.UI.CloseSetting(gameObject);
+        Main.UI.ClosePopupUI(gameObject);
     }
     public void ResetSetting()
     {
         // 저장 값 초기화.
-        Main.Data.Mouse = 0.5f;
+        Main.Data.ResetSettingValue();
 
         // 초기화된 값 동기화.
         MouseSlider.value = Main.Data.Mouse;
@@ -89,9 +90,12 @@ public class UI_Setting : UI_Base
     {
 #if UNITY_EDITOR
         // 유니티 에디터에서 실행 중일 때 에디터 종료.
-        UnityEditor.EditorApplication.isPlaying = false;
+
+        // 자동 저장하기 필요.
+        SceneManager.LoadScene("LobbyScene");
 #else
         // 빌드된 환경에서 실행 중일 때 애플리케이션 종료.
+        
         Application.Quit();
 #endif
     }

@@ -225,6 +225,9 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
                     quickSlotObjects[i].ClearOutLine();
                 }
             }
+
+            // 들고 있는 도구
+            Main.Inventory.InHand = selectSlot.curSlot.itemData;
         }
     }
     public void SelectSlotRemove()

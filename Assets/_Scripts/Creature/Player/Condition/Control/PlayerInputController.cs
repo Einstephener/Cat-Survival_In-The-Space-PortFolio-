@@ -17,6 +17,8 @@ public class PlayerInputController : MonoBehaviour
     private float _limitMaxX = 70;
     private float _rotateSpeed = 0.5f;
 
+    private CapsuleCollider _collider;
+
     public delegate void RunStateChanged(bool isRunning);
     public event RunStateChanged OnRunStateChanged; // 달리기 이벤트.
 
@@ -38,7 +40,7 @@ public class PlayerInputController : MonoBehaviour
     //private Vector3 _boxCastSize = new Vector3(0.8f, 0.1f, 0.8f); // 박스 캐스트 크기
     //private float _groundDistance = 0.2f; // 박스 캐스트 높이.
 
-    private bool _isGrounded;
+    [HideInInspector] public bool _isGrounded;
     private bool _isRun;
     private bool _isSit;
     private bool _isMoving;
@@ -68,6 +70,7 @@ public class PlayerInputController : MonoBehaviour
         //_cameraController = transform.Find("Cat_Head");
         //Cursor.lockState = CursorLockMode.Locked; // 커서 가운데 고정.
 
+        _collider = GetComponent<CapsuleCollider>();
         if (TryGetComponent<PlayerInteraction>(out PlayerInteraction playerInteraction))
         {
             _playerInteraction = playerInteraction;
@@ -169,6 +172,7 @@ public class PlayerInputController : MonoBehaviour
     private void OnSit(InputValue value)
     {
         _isSit = value.isPressed;
+        SitColliderChange(_isSit);
         _cameraController.GetComponent<CameraController>().SitSightChange(_isSit);
         _playerAnimator.SetBool("IsSit", _isSit);
     }
@@ -219,33 +223,52 @@ public class PlayerInputController : MonoBehaviour
         // 공격 시 스테미나 감소
         GetComponent<PlayerCondition>().UpdateStamina(-10);
 
+
         // TODO: 현재 들고 있는 도구에 따라 다른 작용
         // 도구에 따른 공격 모션 변경
         IsFist = true;
         _playerAnimator.SetBool("IsPunch", IsFist);
         _playerAnimator.SetTrigger("IsAttack");
 
-        float attack = GetComponent<PlayerCondition>()._basicAttack;
+        ItemData curItem = Main.Inventory.InHand;
 
-        // 적을 공격
-        if (_playerInteraction.enemyObject != null)
+        // 손에 도구를 들고 있는 경우.
+        if (curItem.Type == ItemType.Equipable)
         {
-            if (_playerInteraction.enemyObject.TryGetComponent<Enemy>(out Enemy enemy))
-            {
-                enemy.OnHit(attack);
-            }
-            else
-            {
-                Debug.Log("Non-Enemy");
-            }
-        }
+            WeaponItemData weaponItem = curItem as WeaponItemData;
 
-        // 자연물 채취
-        if (_playerInteraction.natureObject != null)
-        {
-            if (_playerInteraction.natureObject.TryGetComponent<CollectMatertial>(out CollectMatertial collectMatertial))
+            if (weaponItem != null)
             {
-                collectMatertial.SpitMaterial();
+                // 자원 채취
+                if (_playerInteraction.natureObject != null)
+                {
+                    if (weaponItem.WeaponDatas.type == EquipableType.Ax)
+                    {
+                        Attack_Axe();
+                    }
+                    else if (weaponItem.WeaponDatas.type == EquipableType.Pick)
+                    {
+                        Attack_Pick();
+                    }
+                }
+
+                // 적을 공격
+                if (_playerInteraction.enemyObject != null)
+                {
+                    float attack = GetComponent<PlayerCondition>()._basicAttack;
+                    if (weaponItem.WeaponDatas.type == EquipableType.Ax)
+                    {
+                        Attack_Enemy(attack);
+                    }
+                    else if (weaponItem.WeaponDatas.type == EquipableType.Pick)
+                    {
+                        Attack_Enemy(attack);
+                    }
+                    if (weaponItem.WeaponDatas.type == EquipableType.Weapon)
+                    {
+                        Attack_Enemy(2 * attack);
+                    }
+                }
             }
         }
 
@@ -253,6 +276,40 @@ public class PlayerInputController : MonoBehaviour
 
         _canAttack = true; // 공격 가능 상태로 전환
     }
+
+    #region ClickAttackBTN
+
+    private void Attack_Axe()
+    {
+        if (_playerInteraction.natureObject.TryGetComponent<CollectMatertial>(out CollectMatertial collectMatertial))
+        {
+            if (collectMatertial.NatureType == NatureResource.Wood)
+            {
+                collectMatertial.SpitMaterial();
+            }
+        }
+
+    }
+    private void Attack_Pick()
+    {
+        if (_playerInteraction.natureObject.TryGetComponent<CollectMatertial>(out CollectMatertial collectMatertial))
+        {
+            if (collectMatertial.NatureType == NatureResource.Stone)
+            {
+                collectMatertial.SpitMaterial();
+            }
+        }
+
+    }
+    private void Attack_Enemy(float attack)
+    {
+        if (_playerInteraction.enemyObject.TryGetComponent<Enemy>(out Enemy enemy))
+        {
+            enemy.OnHit(attack);
+        }
+    }
+
+    #endregion
 
     private void OnInteract(InputValue value)
     {
@@ -273,40 +330,9 @@ public class PlayerInputController : MonoBehaviour
         //Test 용도.
         //GetComponent<PlayerCondition>().UpdateHealth(-1000);
     }
-    
+
     #endregion
 
-
-    private void ChangeSpeed()
-    {
-        if (!_isGrounded) return;
-
-        if (!_isMoving)
-        {
-            _currentSpeed = _idleSpeed;
-        }
-        else if (_isSit)
-        {
-            _currentSpeed = _sitSpeed;
-        }
-        else if (_isRun)
-        {
-            if (GetComponent<PlayerCondition>().updater._isStaminaLock)
-            {
-                _currentSpeed = _walkSpeed;
-            }
-            else
-            {
-                _currentSpeed = _runSpeed;
-            }
-        }
-        else
-        {
-            _currentSpeed = _walkSpeed;
-        }
-
-        _playerAnimator.SetFloat("Speed", _currentSpeed);
-    }
 
     private void OnQuickSlot(InputValue value)
     {
@@ -398,8 +424,8 @@ public class PlayerInputController : MonoBehaviour
     }
     private void OnUI_Setting(InputValue value)
     {
-        Main.UI.ShowSettingPopupUI<UI_Setting>("UI_Setting");
-    
+        Main.UI.ShowPopupUI<UI_Setting>("UI_Setting");
+
     }
 
     private void OnShortcutKey(InputValue value)
@@ -408,5 +434,51 @@ public class PlayerInputController : MonoBehaviour
         isShortcutKey = value.isPressed;
 
         Main.Inventory.inventoryUI.ShortcutKey(isShortcutKey);
+    }
+
+
+    private void ChangeSpeed()
+    {
+        if (!_isGrounded) return;
+
+        if (!_isMoving)
+        {
+            _currentSpeed = _idleSpeed;
+        }
+        else if (_isSit)
+        {
+            _currentSpeed = _sitSpeed;
+        }
+        else if (_isRun)
+        {
+            if (GetComponent<PlayerCondition>().updater._isStaminaLock)
+            {
+                _currentSpeed = _walkSpeed;
+            }
+            else
+            {
+                _currentSpeed = _runSpeed;
+            }
+        }
+        else
+        {
+            _currentSpeed = _walkSpeed;
+        }
+
+        _playerAnimator.SetFloat("Speed", _currentSpeed);
+    }
+
+    private void SitColliderChange(bool isSit)
+    {
+        if (isSit)
+        {
+            _collider.height = 1.2f;
+            _collider.center = new Vector3(0, 0.6f, 0);
+        }
+        else
+        {
+            _collider.height = 2f;
+            _collider.center = new Vector3(0, 1f, 0);
+        }
     }
 }

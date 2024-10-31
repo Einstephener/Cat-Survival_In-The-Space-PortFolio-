@@ -31,6 +31,8 @@ public class InventoryManager
     public SlotData[] slotsData = new SlotData[23];
     public InventoryUI inventoryUI;
 
+    public ItemData InHand;
+
     public void Initialize()
     {
         Debug.Log("InventoryManager Initialize");

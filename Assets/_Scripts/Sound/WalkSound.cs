@@ -3,59 +3,66 @@ using UnityEngine;
 
 public class WalkSound : MonoBehaviour
 {
-    [HideInInspector] public AudioSource audioSource;
-    
+    [HideInInspector] public AudioSource PlayerAudioSource;
+    [HideInInspector] public AudioClip WalkClip;
+    [HideInInspector] public AudioClip RunClip;
+    [HideInInspector] public AudioClip SitClip;
+
     private float _speed;
-    private float _soundDelay;
+    private float _tempSpeed;
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-        StartCoroutine(AudioSoundPlay());
+        PlayerAudioSource = GetComponent<AudioSource>();
     }
 
-    public void ChangeSound(AudioClip audioClip)
+    private void FixedUpdate()
     {
-        audioSource.clip = audioClip;
+        PlayerWalk();
     }
 
+    private void ChangeSound(AudioClip audioClip)
+    {
+        PlayerAudioSource.clip = audioClip;
+    }
 
     private void PlayerWalk()
     {
-        _speed = GetComponent<PlayerInputController>()._currentSpeed;
-
-        if (_speed != 0)
+        if (!GetComponent<PlayerInputController>()._isGrounded)
         {
-            if (_speed == 3.0f)
-            {
-                _soundDelay = 0.2f;
-            }
-            else if (_speed == 10.0f)
-            {
-                _soundDelay = 0.05f;
-            }
-            else
-            {
-                _soundDelay = .5f;
-            }
+            PlayerAudioSource.volume = 0;
+            return;
         }
         else
         {
-            _soundDelay = 0f;
-        }
-    }
-
-    private IEnumerator AudioSoundPlay()
-    {
-        while (true)
-        {
-            PlayerWalk();
-            if (_speed != 0 && !audioSource.isPlaying)
+            PlayerAudioSource.volume = 0.4f;
+            _speed = GetComponent<PlayerInputController>()._currentSpeed;
+            if (_tempSpeed != _speed)
             {
-                audioSource.Play();
+                if (_speed != 0)
+                {
+                    if (_speed == 3.0f) // 걷기
+                    {
+                        ChangeSound(WalkClip);
+                        PlayerAudioSource.Play();
+                    }
+                    else if (_speed == 10.0f) // 달리기
+                    {
+                        ChangeSound(RunClip);
+                        PlayerAudioSource.Play();
+                    }
+                    else // 앉기
+                    {
+                        ChangeSound(SitClip);
+                        PlayerAudioSource.Play();
+                    }
+                }
+                else
+                {
+                    PlayerAudioSource.Stop();
+                }
+                _tempSpeed = _speed;
             }
-
-            yield return new WaitForSecondsRealtime(_soundDelay);
         }
     }
 }

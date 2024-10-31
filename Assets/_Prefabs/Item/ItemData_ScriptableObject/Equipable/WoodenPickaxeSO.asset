@@ -25,6 +25,6 @@ MonoBehaviour:
   EquipPrefab: {fileID: 3183341481437327937, guid: c561d9dfaf2b1d74181b4bcd7fc2f10d,
     type: 3}
   MaxAmount: 1
-  Equipables:
-  - type: 1
-    DurabilityValue: 10
+  WeaponDatas:
+    type: 1
+    DurabilityValue: 0

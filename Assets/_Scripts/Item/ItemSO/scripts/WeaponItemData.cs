@@ -12,5 +12,5 @@ public class WeaponItemData : ItemData
     //public GameObject EquipPrefab;
 
     [Header("#Equipable")]
-    public ItemDataEquipable[] Equipables;
+    public ItemDataEquipable WeaponDatas;
 }

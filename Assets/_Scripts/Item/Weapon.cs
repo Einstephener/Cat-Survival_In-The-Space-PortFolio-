@@ -11,12 +11,7 @@ public class Weapon : Item
     {
         if (data is WeaponItemData weaponItemData)
         {
-            // 첫 번째 consumable의 값을 무조건 받음
-            if (weaponItemData.Equipables.Length > 0)
-            {
-                Durability = weaponItemData.Equipables[0].DurabilityValue;
-                //Debug.Log($"{weaponItemData.Equipables[0].type}, {weaponItemData.Equipables[0].DurabilityValue}");
-            }
+            Durability = weaponItemData.WeaponDatas.DurabilityValue;
         }
     }
 

@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f082fe77d09aa344a6741937e971102, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxCount: 4
+  maxCount: 8
   MaterialPrefab: {fileID: 899374446673724991, guid: 272f4eb2c625c9244b77dd1ddded4d69,
     type: 3}
+  NatureType: 1
