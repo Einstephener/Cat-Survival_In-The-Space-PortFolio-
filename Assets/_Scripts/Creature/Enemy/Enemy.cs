@@ -110,6 +110,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void FireProjectile()
     {
+        SoundManager.Instance.PlaySFX("SFX_Swoosh", 1f);
         // 투사체 생성 및 발사.
         Projectile projectile = Main.Pool.Pop(_enemyData.projectilePrefab).GetComponent<Projectile>();
 
