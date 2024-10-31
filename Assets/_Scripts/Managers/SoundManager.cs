@@ -51,4 +51,23 @@ public class SoundManager : MonoBehaviour
             // 만약 모든 AudioSource가 사용 중이라면, 추가적인 처리 필요 (예: 경고 메시지)
         }
     }
+
+    public void PlayLoopingSFX(string clipName, float volume)
+    {
+        AudioClip clip = Resources.Load<AudioClip>("Sound/SFX/" + clipName);
+        if (clip != null)
+        {
+            foreach (var source in sfxSources)
+            {
+                if (!source.isPlaying)
+                {
+                    source.clip = clip;
+                    source.volume = volume;
+                    source.loop = true;
+                    source.Play();
+                    return;
+                }
+            }
+        }
+    }
 }
