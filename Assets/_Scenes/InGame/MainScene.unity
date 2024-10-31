@@ -122,74 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &765413797
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4026167085268298930, guid: 3edcf70af3303894482eb673a57b1198,
-        type: 3}
-      propertyPath: m_Name
-      value: SK_Goat_dark
-      objectReference: {fileID: 0}
-    - target: {fileID: 4026167085268298943, guid: 3edcf70af3303894482eb673a57b1198,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.1184292
-      objectReference: {fileID: 0}
-    - target: {fileID: 4026167085268298943, guid: 3edcf70af3303894482eb673a57b1198,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.9915819
-      objectReference: {fileID: 0}
-    - target: {fileID: 4026167085268298943, guid: 3edcf70af3303894482eb673a57b1198,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 9.108778
-      objectReference: {fileID: 0}
-    - target: {fileID: 4026167085268298943, guid: 3edcf70af3303894482eb673a57b1198,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4026167085268298943, guid: 3edcf70af3303894482eb673a57b1198,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4026167085268298943, guid: 3edcf70af3303894482eb673a57b1198,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4026167085268298943, guid: 3edcf70af3303894482eb673a57b1198,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4026167085268298943, guid: 3edcf70af3303894482eb673a57b1198,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4026167085268298943, guid: 3edcf70af3303894482eb673a57b1198,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4026167085268298943, guid: 3edcf70af3303894482eb673a57b1198,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3edcf70af3303894482eb673a57b1198, type: 3}
 --- !u!1 &904107142
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,6 +236,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df328e94997f33142a86874ec5bd0b87, type: 3}
+--- !u!218 &1601032969 stripped
+Terrain:
+  m_CorrespondingSourceObject: {fileID: 6570778330767199282, guid: 5c19e641e0d5cee4fb844dbbb3e5c772,
+    type: 3}
+  m_PrefabInstance: {fileID: 1751693104}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1678193051
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -508,6 +446,59 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 234fe7f53645cf74dbd82dd108d7b7d1, type: 3}
+--- !u!1 &1988681799
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1988681800}
+  - component: {fileID: 1988681801}
+  m_Layer: 0
+  m_Name: GoatSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1988681800
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988681799}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1988681801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988681799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d1c286baee4ba042a312ce982ee4259, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  goatPrefabs:
+  - {fileID: 4026167085268298930, guid: 3edcf70af3303894482eb673a57b1198, type: 3}
+  - {fileID: 6885452974112614176, guid: 1f8729ffe5e3ebb45b5c6b50bc6a2cec, type: 3}
+  - {fileID: 1868461998570734802, guid: d4d6ee78313566d4fb5c9a6ce2e66e80, type: 3}
+  - {fileID: 4803590418286029818, guid: 89340c34cb7cd124883d3f31b9835bfd, type: 3}
+  - {fileID: 6517686061769116559, guid: f32fc89859f16ec49bc857008a5ed9c5, type: 3}
+  numberOfGoats: 10
+  wanderRadius: 50
+  terrain: {fileID: 1601032969}
 --- !u!1001 &2017416250
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -734,4 +725,4 @@ SceneRoots:
   - {fileID: 1678193051}
   - {fileID: 7834293367472760658}
   - {fileID: 1359200399}
-  - {fileID: 765413797}
+  - {fileID: 1988681800}
