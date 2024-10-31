@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour
 
     protected Transform _playerTransform;
     protected EnemyData _enemyData;
+    protected Collider _collider;
 
     private float _lastAttackTime;
     protected float _currentSightRange;
@@ -31,11 +32,13 @@ public class Enemy : MonoBehaviour
         aiPath = GetComponent<AIPath>();
         animator = GetComponentInChildren<Animator>();
         _target = GetComponent<AIDestinationSetter>();
+        _collider = GetComponent<Collider>();
     }
 
     protected virtual void Start()
     {
         _basePosition = transform.position;
+        _collider.enabled = true;
 
         _playerLayer = LayerMask.GetMask("Player");
         TransitionToState(new EnemyIdleState());
@@ -236,6 +239,7 @@ public class Enemy : MonoBehaviour
         if(_currentHp <= 0)
         {
             _target.target = null;
+            _collider.enabled = false;
             return true;
         }
         else return false;

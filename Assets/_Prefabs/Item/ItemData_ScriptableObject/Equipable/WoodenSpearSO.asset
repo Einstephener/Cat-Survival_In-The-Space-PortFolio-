@@ -19,9 +19,10 @@ MonoBehaviour:
   DropPrefab: {fileID: 9166431057789560856, guid: 1f8519165644f4949b32df74bd95a373,
     type: 3}
   item: {fileID: 0}
-  MaxAmount: 1
+  CraftingResourceList: []
   EquipPrefab: {fileID: 9166431057789560856, guid: 1f8519165644f4949b32df74bd95a373,
     type: 3}
-  Equipables:
-  - type: 2
-    DurabilityValue: 10
+  MaxAmount: 1
+  WeaponDatas:
+    type: 2
+    DurabilityValue: 0

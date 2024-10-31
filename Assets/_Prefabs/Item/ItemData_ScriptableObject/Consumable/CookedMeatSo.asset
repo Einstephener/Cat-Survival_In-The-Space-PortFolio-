@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CookedMeatSO
   m_EditorClassIdentifier: 
   DisplayName: CookedMeat
-  Description: 
+  Description: CookedMeat is Hunger +40 , Health  +40
   Type: 2
   Icon: {fileID: 21300000, guid: 7ab847ac00097e14b9bd81f8dd987db1, type: 3}
   DropPrefab: {fileID: 575408537459641996, guid: c7abdd6ea75c2844e9799039c2c1017a,

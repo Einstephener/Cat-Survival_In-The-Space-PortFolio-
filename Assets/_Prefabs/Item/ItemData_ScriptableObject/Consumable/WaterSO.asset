@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WaterSO
   m_EditorClassIdentifier: 
   DisplayName: Water
-  Description: Apple is Hunger +50
+  Description: Thirsty + 30
   Type: 2
   Icon: {fileID: 21300000, guid: 9d00c78642bd5ac438b2603f5c744d5d, type: 3}
   DropPrefab: {fileID: 0}

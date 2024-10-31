@@ -2,11 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum NatureResource
+{
+    Wood,
+    Stone
+}
+
 public class CollectMatertial : MonoBehaviour
 {
     private int curCount;
     public int maxCount;
     public GameObject MaterialPrefab;
+    public NatureResource NatureType;
 
     private void OnEnable()
     {

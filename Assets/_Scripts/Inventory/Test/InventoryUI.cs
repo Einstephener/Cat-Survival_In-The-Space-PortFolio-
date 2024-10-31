@@ -44,7 +44,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     public ToolTipContainer toolTipContainer;
     public RectTransform parentTransform; // inventory 창 크기
 
-    private bool shortcutKey = false;
+    public bool shortcutKey { get; private set; } = false;
 
     [Header("#Test")]
     public ItemData testItemData1;
@@ -116,7 +116,8 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 
     public bool ShortcutKey(bool isPress)
     {
-        return isPress ? true : false;
+        shortcutKey = isPress;
+        return shortcutKey ? true : false;
     }
 
     public void AdjustParentHeight() // UI 크기 셋팅
@@ -224,6 +225,9 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
                     quickSlotObjects[i].ClearOutLine();
                 }
             }
+
+            // 들고 있는 도구
+            Main.Inventory.InHand = selectSlot.curSlot.itemData;
         }
     }
     public void SelectSlotRemove()
@@ -335,7 +339,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     {
         if (dragSlotData.itemData != null && dropSlotData != null)
         {
-            
+
             ItemData tempSlotaData_ItemData = dragSlotData.itemData;
             int tempAmount = dragSlotData.amount;
 
@@ -401,7 +405,54 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 
     public void HalfSlotAmount(SlotData dragSlotData, SlotData dropSlotData)
     {
-        //반띵 ㄲ
+        ///<summary> 반띵 조건
+        ///1. 반띵할 대상이 있어야 할 것
+        ///2. 대상이 셀 수 있는지 확인 할 것
+        ///3. 대상의 갯수가 2개 이상이여하 할것
+        ///4. 갯수를 넘겨주는 대상이 같은 아이템이거나, 없어야 할 것
+        /// </summary>
+        if (dragSlotData.IsEmpty() || !Main.Inventory.IsCountTableItem(dragSlotData.itemData) || dragSlotData.amount <= 1 || !dropSlotData.IsEmpty() && dragSlotData.itemData != dropSlotData.itemData)
+        {
+            return;
+        }
+
+        //if (!Main.Inventory.IsCountTableItem(dragSlotData.itemData))
+        //{
+        //    return;
+        //}
+
+        //if (dragSlotData.amount <= 1)
+        //{
+        //    return;
+        //}
+
+        //if (!dropSlotData.IsEmpty() && dragSlotData.itemData != dropSlotData.itemData)
+        //{
+        //    return;
+        //}
+
+        if (dropSlotData.IsEmpty())
+        {
+            dropSlotData.itemData = dragSlotData.itemData;
+            dropSlotData.amount = 0;
+        }
+
+        if (dragSlotData.amount % 2 == 0)
+        {
+            //Debug.Log("even");
+            int temp = dragSlotData.amount / 2;
+            dragSlotData.amount -= temp;
+            dropSlotData.amount += temp;
+        }
+        else
+        {
+            //Debug.Log("odd");
+            int temp = dragSlotData.amount / 2;
+            dragSlotData.amount = temp + 1;
+            dropSlotData.amount += temp;
+        }
+
+        InventoryTotalUpdateUI();
     }
     #endregion
 

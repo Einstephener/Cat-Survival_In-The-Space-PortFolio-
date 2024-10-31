@@ -362,9 +362,10 @@ MonoBehaviour:
   SlotUIObject: {fileID: 3791380690535164332}
   icon: {fileID: 3766336031971042037}
   amuontText: {fileID: 8835531114999196350}
-  WeaponDurability: {fileID: 7495520179320900668}
+  weaponDurability: {fileID: 7495520179320900668}
   index: 0
   _amuont: 0
+  slotNum: 0
 --- !u!114 &1062965111891205450
 MonoBehaviour:
   m_ObjectHideFlags: 0

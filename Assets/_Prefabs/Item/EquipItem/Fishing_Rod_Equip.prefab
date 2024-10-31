@@ -50,8 +50,8 @@ MonoBehaviour:
   attackDistance: 0
   fishingDistance: 10
   InstallationDistance: 0
-  doesGatherResources: 1
-  doesGatherFish: 0
+  doesGatherResources: 0
+  doesGatherFish: 1
   doesGatherInstallation: 0
   doesGatherEat: 0
   doesDealDamage: 0

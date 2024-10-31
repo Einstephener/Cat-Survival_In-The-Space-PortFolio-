@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CookedFishSO
   m_EditorClassIdentifier: 
   DisplayName: CookedFish
-  Description: CookedFish Hunger + 100
+  Description: CookedMeat is Hunger +30 , Health  +20
   Type: 2
   Icon: {fileID: 21300000, guid: 93f870da6648f8840a9bc2c3bff466b4, type: 3}
   DropPrefab: {fileID: 8090356973028520947, guid: 384dd58881494ca45b881574aa1922c4,
