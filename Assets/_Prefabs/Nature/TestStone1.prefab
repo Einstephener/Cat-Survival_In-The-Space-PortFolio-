@@ -349,6 +349,7 @@ MonoBehaviour:
   maxCount: 5
   MaterialPrefab: {fileID: 3728178060013178304, guid: 706bb5477d27b24409f3bd929f4b5ab7,
     type: 3}
+  NatureType: 1
 --- !u!1 &3851428527279203328
 GameObject:
   m_ObjectHideFlags: 0

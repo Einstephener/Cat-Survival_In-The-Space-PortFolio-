@@ -223,33 +223,52 @@ public class PlayerInputController : MonoBehaviour
         // 공격 시 스테미나 감소
         GetComponent<PlayerCondition>().UpdateStamina(-10);
 
+
         // TODO: 현재 들고 있는 도구에 따라 다른 작용
         // 도구에 따른 공격 모션 변경
         IsFist = true;
         _playerAnimator.SetBool("IsPunch", IsFist);
         _playerAnimator.SetTrigger("IsAttack");
 
-        float attack = GetComponent<PlayerCondition>()._basicAttack;
+        ItemData curItem = Main.Inventory.InHand;
 
-        // 적을 공격
-        if (_playerInteraction.enemyObject != null)
+        // 손에 도구를 들고 있는 경우.
+        if (curItem.Type == ItemType.Equipable)
         {
-            if (_playerInteraction.enemyObject.TryGetComponent<Enemy>(out Enemy enemy))
-            {
-                enemy.OnHit(attack);
-            }
-            else
-            {
-                Debug.Log("Non-Enemy");
-            }
-        }
+            WeaponItemData weaponItem = curItem as WeaponItemData;
 
-        // 자연물 채취
-        if (_playerInteraction.natureObject != null)
-        {
-            if (_playerInteraction.natureObject.TryGetComponent<CollectMatertial>(out CollectMatertial collectMatertial))
+            if (weaponItem != null)
             {
-                collectMatertial.SpitMaterial();
+                // 자원 채취
+                if (_playerInteraction.natureObject != null)
+                {
+                    if (weaponItem.WeaponDatas.type == EquipableType.Ax)
+                    {
+                        Attack_Axe();
+                    }
+                    else if (weaponItem.WeaponDatas.type == EquipableType.Pick)
+                    {
+                        Attack_Pick();
+                    }
+                }
+
+                // 적을 공격
+                if (_playerInteraction.enemyObject != null)
+                {
+                    float attack = GetComponent<PlayerCondition>()._basicAttack;
+                    if (weaponItem.WeaponDatas.type == EquipableType.Ax)
+                    {
+                        Attack_Enemy(attack);
+                    }
+                    else if (weaponItem.WeaponDatas.type == EquipableType.Pick)
+                    {
+                        Attack_Enemy(attack);
+                    }
+                    if (weaponItem.WeaponDatas.type == EquipableType.Weapon)
+                    {
+                        Attack_Enemy(2 * attack);
+                    }
+                }
             }
         }
 
@@ -257,6 +276,40 @@ public class PlayerInputController : MonoBehaviour
 
         _canAttack = true; // 공격 가능 상태로 전환
     }
+
+    #region ClickAttackBTN
+
+    private void Attack_Axe()
+    {
+        if (_playerInteraction.natureObject.TryGetComponent<CollectMatertial>(out CollectMatertial collectMatertial))
+        {
+            if (collectMatertial.NatureType == NatureResource.Wood)
+            {
+                collectMatertial.SpitMaterial();
+            }
+        }
+
+    }
+    private void Attack_Pick()
+    {
+        if (_playerInteraction.natureObject.TryGetComponent<CollectMatertial>(out CollectMatertial collectMatertial))
+        {
+            if (collectMatertial.NatureType == NatureResource.Stone)
+            {
+                collectMatertial.SpitMaterial();
+            }
+        }
+
+    }
+    private void Attack_Enemy(float attack)
+    {
+        if (_playerInteraction.enemyObject.TryGetComponent<Enemy>(out Enemy enemy))
+        {
+            enemy.OnHit(attack);
+        }
+    }
+
+    #endregion
 
     private void OnInteract(InputValue value)
     {
@@ -277,7 +330,7 @@ public class PlayerInputController : MonoBehaviour
         //Test 용도.
         //GetComponent<PlayerCondition>().UpdateHealth(-1000);
     }
-    
+
     #endregion
 
 
@@ -372,7 +425,7 @@ public class PlayerInputController : MonoBehaviour
     private void OnUI_Setting(InputValue value)
     {
         Main.UI.ShowPopupUI<UI_Setting>("UI_Setting");
-    
+
     }
 
     private void OnShortcutKey(InputValue value)
@@ -425,7 +478,7 @@ public class PlayerInputController : MonoBehaviour
         else
         {
             _collider.height = 2f;
-            _collider.center = new Vector3 (0, 1f, 0);
+            _collider.center = new Vector3(0, 1f, 0);
         }
     }
 }

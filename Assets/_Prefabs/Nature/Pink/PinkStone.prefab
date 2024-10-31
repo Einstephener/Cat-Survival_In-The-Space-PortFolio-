@@ -122,3 +122,4 @@ MonoBehaviour:
   maxCount: 4
   MaterialPrefab: {fileID: 899374446673724991, guid: 272f4eb2c625c9244b77dd1ddded4d69,
     type: 3}
+  NatureType: 1
