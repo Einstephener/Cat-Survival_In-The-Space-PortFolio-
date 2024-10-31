@@ -1142,6 +1142,9 @@ MonoBehaviour:
   numberOfGoats: 10
   wanderRadius: 50
   terrain: {fileID: 1601032969}
+  noSpawnZoneLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1001 &2017416250
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1462,8 +1465,9 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 8846307432883689482}
   - {fileID: 904107144}
+  - {fileID: 6059149}
+  - {fileID: 8846307432883689482}
   - {fileID: 2017416250}
   - {fileID: 1751693104}
   - {fileID: 1770899284}
@@ -1471,4 +1475,3 @@ SceneRoots:
   - {fileID: 7834293367472760658}
   - {fileID: 1359200399}
   - {fileID: 1988681800}
-  - {fileID: 6059149}
