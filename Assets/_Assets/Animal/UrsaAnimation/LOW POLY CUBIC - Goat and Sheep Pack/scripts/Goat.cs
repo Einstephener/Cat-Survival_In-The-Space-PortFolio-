@@ -35,9 +35,16 @@ namespace Ursaanimation.CubicFarmAnimals
             animator = GetComponent<Animator>();
             audioSource = GetComponent<AudioSource>();
 
+            GameObject targetParent = GameObject.Find("GoatTargets");
+            if (targetParent == null)
+            {
+                targetParent = new GameObject("GoatTargets");
+            }
+
             if (destinationSetter.target == null)
             {
                 GameObject targetObject = new GameObject("Target");
+                targetObject.transform.parent = targetParent.transform;
                 destinationSetter.target = targetObject.transform;
             }
 

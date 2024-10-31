@@ -1250,7 +1250,7 @@ MonoBehaviour:
   terrain: {fileID: 1601032969}
   noSpawnZoneLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 131072
 --- !u!1001 &2017416250
 PrefabInstance:
   m_ObjectHideFlags: 0

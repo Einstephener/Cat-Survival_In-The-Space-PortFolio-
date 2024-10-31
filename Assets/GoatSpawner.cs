@@ -36,7 +36,8 @@ public class GoatSpawner : MonoBehaviour
                 }
             } while (Physics.CheckSphere(randomPosition, 1f, noSpawnZoneLayer)); // 충돌 체크
 
-            Instantiate(goatPrefab, randomPosition, Quaternion.identity);
+            GameObject goatInstance = Instantiate(goatPrefab, randomPosition, Quaternion.identity);
+            goatInstance.transform.parent = transform;
         }
     }
 
