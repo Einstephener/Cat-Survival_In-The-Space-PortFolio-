@@ -16,6 +16,8 @@ public class MainScene : BaseScene
     {
         if (!base.Initialize()) return false;
 
+        SoundManager.Instance.PlayBGM("BGM_CALM", 1f);
+
         Main.Resource.Initialize();
 
         Main.UI.inputActionAsset = inputActionAsset;
