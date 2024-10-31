@@ -11,6 +11,7 @@ namespace Ursaanimation.CubicFarmAnimals
         private AIPath aiPath;
         private AIDestinationSetter destinationSetter;
         private Animator animator;
+        private AudioSource audioSource;
         public float wanderRadius = 20f;
         public float idleTime = 4f;
 
@@ -32,6 +33,7 @@ namespace Ursaanimation.CubicFarmAnimals
             aiPath = GetComponent<AIPath>();
             destinationSetter = GetComponent<AIDestinationSetter>();
             animator = GetComponent<Animator>();
+            audioSource = GetComponent<AudioSource>();
 
             if (destinationSetter.target == null)
             {
@@ -65,6 +67,7 @@ namespace Ursaanimation.CubicFarmAnimals
 
                     case GoatState.Troting:
                         aiPath.maxSpeed = 2f;
+                        PlaySound();
                         animator.Play(trotAnimation);
                         destinationSetter.target.position = randomPoint;
 
@@ -125,6 +128,13 @@ namespace Ursaanimation.CubicFarmAnimals
             Vector3 randomPos = center + Random.insideUnitSphere * radius;
             randomPos.y = Terrain.activeTerrain.SampleHeight(randomPos) + Terrain.activeTerrain.transform.position.y;
             return randomPos;
+        }
+        private void PlaySound()
+        {
+            if (audioSource != null && audioSource.clip != null)
+            {
+                audioSource.Play();
+            }
         }
     }
 }
