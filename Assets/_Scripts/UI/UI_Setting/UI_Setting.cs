@@ -7,7 +7,7 @@ using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class UI_Setting : UI_Base
+public class UI_Setting : UI_Popup
 {
     public override bool Initialize()
     {
@@ -73,7 +73,7 @@ public class UI_Setting : UI_Base
     public void CloseSetting()
     {
         // 저장 값 적용.
-        Main.UI.CloseSetting(gameObject);
+        Main.UI.ClosePopupUI(gameObject);
     }
     public void ResetSetting()
     {

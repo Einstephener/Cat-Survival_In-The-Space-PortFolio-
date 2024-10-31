@@ -17,6 +17,8 @@ public class PlayerInputController : MonoBehaviour
     private float _limitMaxX = 70;
     private float _rotateSpeed = 0.5f;
 
+    private CapsuleCollider _collider;
+
     public delegate void RunStateChanged(bool isRunning);
     public event RunStateChanged OnRunStateChanged; // 달리기 이벤트.
 
@@ -38,7 +40,7 @@ public class PlayerInputController : MonoBehaviour
     //private Vector3 _boxCastSize = new Vector3(0.8f, 0.1f, 0.8f); // 박스 캐스트 크기
     //private float _groundDistance = 0.2f; // 박스 캐스트 높이.
 
-    private bool _isGrounded;
+    [HideInInspector] public bool _isGrounded;
     private bool _isRun;
     private bool _isSit;
     private bool _isMoving;
@@ -68,6 +70,7 @@ public class PlayerInputController : MonoBehaviour
         //_cameraController = transform.Find("Cat_Head");
         //Cursor.lockState = CursorLockMode.Locked; // 커서 가운데 고정.
 
+        _collider = GetComponent<CapsuleCollider>();
         if (TryGetComponent<PlayerInteraction>(out PlayerInteraction playerInteraction))
         {
             _playerInteraction = playerInteraction;
@@ -169,6 +172,7 @@ public class PlayerInputController : MonoBehaviour
     private void OnSit(InputValue value)
     {
         _isSit = value.isPressed;
+        SitColliderChange(_isSit);
         _cameraController.GetComponent<CameraController>().SitSightChange(_isSit);
         _playerAnimator.SetBool("IsSit", _isSit);
     }
@@ -277,37 +281,6 @@ public class PlayerInputController : MonoBehaviour
     #endregion
 
 
-    private void ChangeSpeed()
-    {
-        if (!_isGrounded) return;
-
-        if (!_isMoving)
-        {
-            _currentSpeed = _idleSpeed;
-        }
-        else if (_isSit)
-        {
-            _currentSpeed = _sitSpeed;
-        }
-        else if (_isRun)
-        {
-            if (GetComponent<PlayerCondition>().updater._isStaminaLock)
-            {
-                _currentSpeed = _walkSpeed;
-            }
-            else
-            {
-                _currentSpeed = _runSpeed;
-            }
-        }
-        else
-        {
-            _currentSpeed = _walkSpeed;
-        }
-
-        _playerAnimator.SetFloat("Speed", _currentSpeed);
-    }
-
     private void OnQuickSlot(InputValue value)
     {
         //TODO 현재 들고 있는 도구의 정보.
@@ -398,7 +371,7 @@ public class PlayerInputController : MonoBehaviour
     }
     private void OnUI_Setting(InputValue value)
     {
-        Main.UI.ShowSettingPopupUI<UI_Setting>("UI_Setting");
+        Main.UI.ShowPopupUI<UI_Setting>("UI_Setting");
     
     }
 
@@ -408,5 +381,51 @@ public class PlayerInputController : MonoBehaviour
         isShortcutKey = value.isPressed;
 
         Main.Inventory.inventoryUI.ShortcutKey(isShortcutKey);
+    }
+
+
+    private void ChangeSpeed()
+    {
+        if (!_isGrounded) return;
+
+        if (!_isMoving)
+        {
+            _currentSpeed = _idleSpeed;
+        }
+        else if (_isSit)
+        {
+            _currentSpeed = _sitSpeed;
+        }
+        else if (_isRun)
+        {
+            if (GetComponent<PlayerCondition>().updater._isStaminaLock)
+            {
+                _currentSpeed = _walkSpeed;
+            }
+            else
+            {
+                _currentSpeed = _runSpeed;
+            }
+        }
+        else
+        {
+            _currentSpeed = _walkSpeed;
+        }
+
+        _playerAnimator.SetFloat("Speed", _currentSpeed);
+    }
+
+    private void SitColliderChange(bool isSit)
+    {
+        if (isSit)
+        {
+            _collider.height = 1.2f;
+            _collider.center = new Vector3(0, 0.6f, 0);
+        }
+        else
+        {
+            _collider.height = 2f;
+            _collider.center = new Vector3 (0, 1f, 0);
+        }
     }
 }

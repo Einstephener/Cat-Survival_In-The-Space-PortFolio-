@@ -26,7 +26,7 @@ public class MainScene : BaseScene
         Main.UI.ShowSceneUI<UI_Damaged>("UI_Hit");
         Main.UI.ShowSceneUI<UI_Respawn>("UI_Respawn");
 
-        InitSettingUI<UI_Setting>("UI_Setting");
+        InitPopupUI<UI_Setting>("UI_Setting");
         InitPopupUI<InventoryUI>("Inventory");
         InitPopupUI<UI_Map>("UI_Map");
         InitPopupUI<UI_Tablet>("UI_CraftingTabletUI");
@@ -45,12 +45,12 @@ public class MainScene : BaseScene
             Main.UI.ClosePopupUI(popup);
         }
     }
-    private void InitSettingUI<T>(string uiName) where T : UI_Setting
-    {
-        Main.UI.ShowSettingPopupUI<T>(uiName);
-        if (Main.UI._uiPopUpDictionary.TryGetValue(uiName, out GameObject popup))
-        {
-            Main.UI.CloseSetting(popup);
-        }
-    }
+    //private void InitSettingUI<T>(string uiName) where T : UI_Setting
+    //{
+    //    Main.UI.ShowSettingPopupUI<T>(uiName);
+    //    if (Main.UI._uiPopUpDictionary.TryGetValue(uiName, out GameObject popup))
+    //    {
+    //        Main.UI.CloseSetting(popup);
+    //    }
+    //}
 }

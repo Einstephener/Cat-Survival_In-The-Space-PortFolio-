@@ -209,9 +209,9 @@ public class UIManager
             if (!_uiPopUpDictionary.TryGetValue(name, out GameObject popup))
             {
                 // 팝업이 생성되지 않았으면 새로 생성
-                popup = Main.Resource.Instantiate(name); 
+                popup = Main.Resource.Instantiate(name);
                 popup.transform.SetParent(Root.transform);
-                _uiPopUpDictionary[name] = popup; 
+                _uiPopUpDictionary[name] = popup;
             }
 
             popup.SetActive(true);
@@ -219,21 +219,26 @@ public class UIManager
             _alreayOpenSetting = popup;
 
             // 팝업이 열리면 시간 멈춤
-            Time.timeScale = 0.0f; 
+            Time.timeScale = 0.0f;
         }
     }
 
     public void CloseSetting(GameObject obj)
     {
-        if (_alreayOpenSetting == obj)
+        if (_alreayOpenSetting == null)
+        {
+            ClosePopupUI(_alreayOpenPopUpUI);
+        }
+        else if (_alreayOpenSetting == obj)
         {
             SwitchToPlayer();
             obj.SetActive(false);
 
             // 팝업이 열리면 시간 멈춤
             Time.timeScale = 1.0f;
+            _alreayOpenSetting = null;
         }
-        _alreayOpenSetting = null;
+
     }
 
     #endregion
