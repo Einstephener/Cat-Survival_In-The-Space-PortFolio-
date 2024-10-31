@@ -56,6 +56,11 @@ public class InventorySlot : SlotBase, IPointerEnterHandler, IPointerExitHandler
         base.ClearOutLine();
     }
 
+    //public override void weaponDurabilityUpdate()
+    //{
+    //    base.weaponDurabilityUpdate();
+    //}
+
     #endregion
 
 

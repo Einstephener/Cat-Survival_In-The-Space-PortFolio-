@@ -14,7 +14,7 @@ public class DragSlot : MonoBehaviour
     public InventorySlot thisSlot;
     public Image icon;
     public TextMeshProUGUI amuontText;
-    //public Slider WeaponDurability;
+    //public Slider weaponDurability;
 
     public void SetDragSlot(InventorySlot _dragSlot)
     {

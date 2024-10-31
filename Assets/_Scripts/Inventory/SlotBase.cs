@@ -15,7 +15,7 @@ public class SlotBase : MonoBehaviour
     public Image icon;
     public TextMeshProUGUI amuontText;//갯수
     public SlotData curSlot;
-    public Slider WeaponDurability;
+    public Slider weaponDurability;
 
     public int index;
     public int _amuont;
@@ -54,16 +54,17 @@ public class SlotBase : MonoBehaviour
         {
             if (Main.Inventory.IsWeaponItem(curSlot.itemData))
             {
-                WeaponDurability.gameObject.SetActive(true);
+                weaponDurability.gameObject.SetActive(true);
+                //weaponDurabilityUpdate();
             }
             else
             {
-                WeaponDurability.gameObject.SetActive(false);
+                weaponDurability.gameObject.SetActive(false);
             }
         }
         else
         {
-            WeaponDurability.gameObject.SetActive(false);
+            weaponDurability.gameObject.SetActive(false);
         }
     }
 
@@ -76,6 +77,20 @@ public class SlotBase : MonoBehaviour
     {
         outline.enabled = false;
     }
+
+    //public virtual void weaponDurabilityUpdate()
+    //{
+    //    weaponDurability.value = curSlot.weaponDurability;
+
+    //    curSlot.weaponDurability = (int)weaponDurability.value;
+    //}
+
+    //public void DurabilityDecrease(int decrease = 1)
+    //{
+    //    curSlot.weaponDurability -= decrease; // HP 감소
+    //    curSlot.weaponDurability = Mathf.Clamp(curSlot.weaponDurability, 0, 100); // HP가 0 미만으로 떨어지지 않도록 제한
+    //    weaponDurability.value = curSlot.weaponDurability; // 슬라이더 값 업데이트
+    //}
 
     #endregion
 }

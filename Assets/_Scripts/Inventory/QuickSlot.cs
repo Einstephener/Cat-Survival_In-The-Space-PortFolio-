@@ -38,6 +38,11 @@ public class QuickSlot : SlotBase
         base.ClearOutLine();
     }
 
+    //public override void weaponDurabilityUpdate()
+    //{
+    //    base.weaponDurabilityUpdate();
+    //}
+
     #endregion
 
     public int slotNum = 0;
