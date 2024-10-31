@@ -44,7 +44,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     public ToolTipContainer toolTipContainer;
     public RectTransform parentTransform; // inventory 창 크기
 
-    public bool shortcutKey {get; private set;} = false;
+    public bool shortcutKey { get; private set; } = false;
 
     [Header("#Test")]
     public ItemData testItemData1;
@@ -336,7 +336,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     {
         if (dragSlotData.itemData != null && dropSlotData != null)
         {
-            
+
             ItemData tempSlotaData_ItemData = dragSlotData.itemData;
             int tempAmount = dragSlotData.amount;
 
@@ -408,34 +408,28 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         ///3. 대상의 갯수가 2개 이상이여하 할것
         ///4. 갯수를 넘겨주는 대상이 같은 아이템이거나, 없어야 할 것
         /// </summary>
-        if (dragSlotData.IsEmpty())
+        if (dragSlotData.IsEmpty() || !Main.Inventory.IsCountTableItem(dragSlotData.itemData) || dragSlotData.amount <= 1 || !dropSlotData.IsEmpty() && dragSlotData.itemData != dropSlotData.itemData)
         {
-            Debug.Log($"{dragSlotData.IsEmpty()}");
             return;
         }
 
-        if (!Main.Inventory.IsCountTableItem(dragSlotData.itemData))
-        {
-            Debug.Log($"{Main.Inventory.IsCountTableItem(dragSlotData.itemData)}");
-            return;
-        }
+        //if (!Main.Inventory.IsCountTableItem(dragSlotData.itemData))
+        //{
+        //    return;
+        //}
 
-        if (dragSlotData.amount <= 1)
-        {
-            Debug.Log($"{dragSlotData.amount <= 1}");
-            return;
-        }
-        
-        if (!dropSlotData.IsEmpty() && dragSlotData != dropSlotData)
-        {
-            Debug.Log($"{dragSlotData != dropSlotData}");
-            return;
-        }
+        //if (dragSlotData.amount <= 1)
+        //{
+        //    return;
+        //}
+
+        //if (!dropSlotData.IsEmpty() && dragSlotData.itemData != dropSlotData.itemData)
+        //{
+        //    return;
+        //}
 
         if (dropSlotData.IsEmpty())
         {
-            Debug.Log($"dropSlotData.IsEmpty() - new ItemData, amount = 0 ");
-
             dropSlotData.itemData = dragSlotData.itemData;
             dropSlotData.amount = 0;
         }
