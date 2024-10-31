@@ -69,6 +69,15 @@ public class DataManager
     }
     #endregion
 
+    public void ResetSettingValue()
+    {
+        _mouse = 0.5f;
+        _master = 0.5f;
+        _bgm = 0.5f;
+        _sfx = 0.5f;
+    }
+
+
     public void Initialize()
     {
         Date = LoadJson<DateData>();
