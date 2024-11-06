@@ -8,8 +8,9 @@ public class SoundManager : MonoBehaviour
 
     [Header("Audio Sources")]
     public AudioSource musicSource;
-    public AudioMixerGroup bgmMixer;
-    public AudioMixerGroup sfxMixer;
+    public AudioMixer audioMixer;
+    private AudioMixerGroup bgmMixer;
+    private AudioMixerGroup sfxMixer;
     public List<AudioSource> sfxSources;
 
     private void Awake()
@@ -23,6 +24,13 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        SetAudioMixers();
+    }
+
+    private void SetAudioMixers()
+    {
+        bgmMixer = audioMixer.FindMatchingGroups("BGM")[0];
+        sfxMixer = audioMixer.FindMatchingGroups("SFX")[0];
     }
 
     public void PlayBGM(string clipName, float volume)
