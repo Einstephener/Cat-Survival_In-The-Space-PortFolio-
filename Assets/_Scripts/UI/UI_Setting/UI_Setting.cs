@@ -31,6 +31,9 @@ public class UI_Setting : UI_Popup
     private void Awake()
     {
         Main.Data.Mouse = 0.5f;
+        Main.Data.Master = 0.5f;
+        Main.Data.BGM = 0.5f;
+        Main.Data.SFX = 0.5f;
 
         MouseSlider.onValueChanged.AddListener(SetMouseSpeed);
         MasterSlider.onValueChanged.AddListener(SetMasterVolume);

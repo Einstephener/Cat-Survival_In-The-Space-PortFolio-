@@ -158,6 +158,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicSource: {fileID: 6059151}
+  bgmMixer: {fileID: 7689878233873655803, guid: 97b31cd811a16484fa821bb6fc973c5c,
+    type: 2}
+  sfxMixer: {fileID: 349245807441631278, guid: 97b31cd811a16484fa821bb6fc973c5c, type: 2}
   sfxSources:
   - {fileID: 6059150}
   - {fileID: 6059155}

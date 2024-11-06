@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SoundManager : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class SoundManager : MonoBehaviour
 
     [Header("Audio Sources")]
     public AudioSource musicSource;
+    public AudioMixerGroup bgmMixer;
+    public AudioMixerGroup sfxMixer;
     public List<AudioSource> sfxSources;
 
     private void Awake()
@@ -29,6 +32,8 @@ public class SoundManager : MonoBehaviour
         {
             musicSource.clip = clip;
             musicSource.volume = volume;
+            musicSource.loop = true;
+            musicSource.outputAudioMixerGroup = bgmMixer;
             musicSource.Play();
         }
     }
@@ -44,6 +49,7 @@ public class SoundManager : MonoBehaviour
                 if (!source.isPlaying)
                 {
                     musicSource.volume = volume;
+                    musicSource.outputAudioMixerGroup= sfxMixer;
                     source.PlayOneShot(clip);
                     return;
                 }
