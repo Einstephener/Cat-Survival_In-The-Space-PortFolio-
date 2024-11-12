@@ -39,7 +39,7 @@ public class Craft : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Cancel();
+            //Cancel();
         }
     }
 
@@ -148,6 +148,7 @@ public class Craft : MonoBehaviour
         {
             if (hitInfo.transform != null)
             {
+                Debug.Log("Craft - PreviewPOstitionUpdate() : Test");
                 Vector3 _location = hitInfo.point;
                 Preview_ItemObject.transform.position = _location;
 

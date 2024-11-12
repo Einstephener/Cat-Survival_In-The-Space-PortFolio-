@@ -147,6 +147,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00ffcaef52de1d945b6ea1b0b1ab4045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colliderList: []
+  layers:
+    serializedVersion: 2
+    m_Bits: 131205
   layerGround: 7
+  layerNoNatureZone: 17
+  layerDefault: 0
   green: {fileID: 2100000, guid: a99372db45d269a4988dfaee17940b85, type: 2}
   red: {fileID: 2100000, guid: c6600fa2654ea97429fd586153224bf9, type: 2}

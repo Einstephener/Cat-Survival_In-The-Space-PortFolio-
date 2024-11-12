@@ -18,8 +18,12 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: 85fdb1ea5b684a443bed0eec52d056fa, type: 3}
   DropPrefab: {fileID: 4502265049141516180, guid: b42ba9e7b8fe12243b088a85518cf36d,
     type: 3}
-  item: {fileID: 7785323873453528715, guid: b42ba9e7b8fe12243b088a85518cf36d, type: 3}
-  CraftingResourceList: []
+  item: {fileID: -7097845245748811687, guid: b42ba9e7b8fe12243b088a85518cf36d, type: 3}
+  CraftingResourceList:
+  - ResourceData: {fileID: 11400000, guid: f08ffa4361a37194180ef0894af4c08b, type: 2}
+    Amount: 10
+  - ResourceData: {fileID: 11400000, guid: 1a7dbbcb91b556a42a3ea85f6129fe02, type: 2}
+    Amount: 10
   EquipPrefab: {fileID: 8778599480668442447, guid: ab9956cdd87b9cd4ebb4ec98adcdcb45,
     type: 3}
   MaxAmount: 1
