@@ -10,14 +10,14 @@ public class PreviewObject : MonoBehaviour
 
     public LayerMask layers; // 레이어 마스크
 
-    [SerializeField]
-    private int layerGround; // 지상레이어
-    [SerializeField]
-    private int layerNoNatureZone;
-    [SerializeField]
-    private int layerDefault;
+    //[SerializeField]
+    //private int layerGround; // 지상레이어
+    //[SerializeField]
+    //private int layerNoNatureZone;
+    //[SerializeField]
+    //private int layerDefault;
 
-    private const int IGNORE_RAYCAST_LAYER = 2; // 기본값  2 
+    //private const int IGNORE_RAYCAST_LAYER = 2; // 기본값  2 
 
     [Header("#Materials")]
     [SerializeField]
