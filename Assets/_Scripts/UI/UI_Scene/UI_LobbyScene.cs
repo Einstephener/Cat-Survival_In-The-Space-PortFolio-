@@ -1,10 +1,6 @@
-using Pathfinding.RVO;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.UI;
-using static Unity.VisualScripting.Metadata;
 
 public class UI_LobbyScene : UI_Scene
 {
