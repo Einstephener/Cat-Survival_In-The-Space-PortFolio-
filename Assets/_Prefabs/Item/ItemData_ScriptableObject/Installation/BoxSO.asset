@@ -19,7 +19,9 @@ MonoBehaviour:
   DropPrefab: {fileID: 2162597995177280037, guid: 142d333249cbeba4eb54999ebd6dd9b0,
     type: 3}
   item: {fileID: 4241199412827973179, guid: 142d333249cbeba4eb54999ebd6dd9b0, type: 3}
-  CraftingResourceList: []
+  CraftingResourceList:
+  - ResourceData: {fileID: 11400000, guid: f08ffa4361a37194180ef0894af4c08b, type: 2}
+    Amount: 20
   EquipPrefab: {fileID: 4680392143191225536, guid: 9a264225d05f5714683c68b5a4d0cf04,
     type: 3}
   MaxAmount: 1

@@ -39,7 +39,7 @@ public class Craft : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Cancel();
+            //Cancel();
         }
     }
 

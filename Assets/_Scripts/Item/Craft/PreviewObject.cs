@@ -6,11 +6,18 @@ using UnityEngine;
 public class PreviewObject : MonoBehaviour
 {
     //출돌한 오브젝트의 콜라이더
-    private List<Collider> colliderList = new();
+    public List<Collider> colliderList = new();
 
-    [SerializeField]
-    private int layerGround; // 지상레이어
-    private const int IGNORE_RAYCAST_LAYER = 2; // 기본값  2 
+    public LayerMask layers; // 레이어 마스크
+
+    //[SerializeField]
+    //private int layerGround; // 지상레이어
+    //[SerializeField]
+    //private int layerNoNatureZone;
+    //[SerializeField]
+    //private int layerDefault;
+
+    //private const int IGNORE_RAYCAST_LAYER = 2; // 기본값  2 
 
     [Header("#Materials")]
     [SerializeField]
@@ -61,10 +68,16 @@ public class PreviewObject : MonoBehaviour
 
     #endregion
 
+    private bool IsLayerInMask(int layer)
+    {
+        return (layers & (1 << layer)) != 0;
+    }
+
     #region Trigger 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer != layerGround && other.gameObject.layer != IGNORE_RAYCAST_LAYER)
+        
+        if (!IsLayerInMask(other.gameObject.layer))
         {
             colliderList.Add(other);
         }

@@ -65,9 +65,9 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         //Main.Inventory.RemoveItem(testItemData2, 5);
         //this.gameObject.SetActive(false);
         Main.Inventory.AddItem(testItemData1, 10);
-        Main.Inventory.Select_AddItem(testItemData2, 29, 7);
-        Main.Inventory.Select_AddItem(testItemData2, 29, 9);
-        Main.Inventory.Select_AddItem(testItemData2, 29, 11);
+        //Main.Inventory.Select_AddItem(testItemData2, 29, 7);
+        //Main.Inventory.Select_AddItem(testItemData2, 29, 9);
+        //Main.Inventory.Select_AddItem(testItemData2, 29, 11);
         Main.Inventory.AddItem(testItemData3);
         //Main.Inventory.AddItem(testItemData4);
         Main.Inventory.AddItem(testItemData4);
