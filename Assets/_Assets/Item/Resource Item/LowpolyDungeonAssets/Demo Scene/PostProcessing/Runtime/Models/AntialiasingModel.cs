@@ -90,7 +90,7 @@ namespace UnityEngine.PostProcessing
             [Range(0.33f, 0.5f)]
             public float subpixelSpreadAmount;
 
-            [Tooltip("This value dictates how sharp the edges in the image are kept; a higher value implies sharper edges.")]
+            [Tooltip("This value dictates how sharp the edges in the icon are kept; a higher value implies sharper edges.")]
             [Range(2f, 8f)]
             public float edgeSharpnessAmount;
 
