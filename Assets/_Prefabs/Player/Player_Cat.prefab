@@ -2269,6 +2269,7 @@ MonoBehaviour:
   _cameraController: {fileID: 1434191240061850843}
   currentItem: {fileID: 0}
   _currentSpeed: 0
+  _isGrounded: 0
   _attackCooldown: 1
   inventoryUIDiplay: {fileID: 0}
   IsFist: 0
@@ -2366,7 +2367,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d34fab48de66d640857adc62a7374f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 0}
+  PlayerAudioSource: {fileID: 0}
+  WalkClip: {fileID: 0}
+  RunClip: {fileID: 0}
+  SitClip: {fileID: 0}
 --- !u!82 &3881024767206645179
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2379,10 +2383,10 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 349245807441631278, guid: 97b31cd811a16484fa821bb6fc973c5c,
     type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
