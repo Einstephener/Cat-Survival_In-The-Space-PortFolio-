@@ -39,7 +39,7 @@ public class ItemObject : MonoBehaviour, IInteractable
     }
     public string GetInteractPrompt()
     {
-        return string.Format("<interaction> {0}", itemData.DisplayName);
+        return string.Format(" {0}", itemData.DisplayName);
     }
 
     public void OnInteract()

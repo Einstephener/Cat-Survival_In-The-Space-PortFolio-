@@ -21,8 +21,10 @@ public class Projectile : Poolable
         }
     }
 
-    public void Init(Transform target, float damage)
+    public void Init(Transform target, float damage, bool canAttack = true)
     {
+        if (!canAttack) return;
+
         this._target = target;
         this._attackSpeed = 30f;
         this._damage = damage;

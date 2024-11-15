@@ -56,9 +56,11 @@ public class SoundManager : MonoBehaviour
             {
                 if (!source.isPlaying)
                 {
-                    musicSource.volume = volume;
-                    musicSource.outputAudioMixerGroup= sfxMixer;
-                    source.PlayOneShot(clip);
+                    source.clip = clip;
+                    source.volume = volume;
+                    source.loop = false;
+                    source.outputAudioMixerGroup= sfxMixer;
+                    source.Play();
                     return;
                 }
             }
