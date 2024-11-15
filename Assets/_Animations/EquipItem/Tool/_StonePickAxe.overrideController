@@ -7,5 +7,5 @@ AnimatorOverrideController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: _StonePickAxe
-  m_Controller: {fileID: 9100000, guid: e641e0c8eef6bd24980dde67d1058c03, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8b50c3fae6d02f548a3ef8e14e14f292, type: 2}
   m_Clips: []

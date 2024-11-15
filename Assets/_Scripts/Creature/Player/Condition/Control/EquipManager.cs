@@ -86,21 +86,45 @@ public class EquipManager : MonoBehaviour
     public void SwapEquip(SlotData dragSlotData, SlotData dropSlotData, SlotBase selectSlot)
     {
 
+        //if (dragSlotData == selectSlot.curSlot)
+        //{
+        //    //Debug.Log("UnEquip Item");
+        //    EquipNew(dragSlotData.itemData);
+        //}
+        //else if (dropSlotData.itemData == selectSlot.curSlot.itemData)
+        //{
+        //    //Debug.Log("Equip New Item");
+        //    EquipNew(dropSlotData.itemData);
+        //}
+        //{
+        //    //Debug.Log("UnEquip Item");
+        //    if (selectSlot.curSlot.itemData != null)
+        //    {
+        //        UnEquip();
+        //    }
+        //}
+
         if (dragSlotData == selectSlot.curSlot)
         {
-            //Debug.Log("UnEquip Item");
             EquipNew(dragSlotData.itemData);
         }
-        else if (dropSlotData.itemData == selectSlot.curSlot.itemData)
+        else if (dropSlotData != null && dropSlotData.itemData == selectSlot.curSlot.itemData)
         {
-            //Debug.Log("Equip New Item");
             EquipNew(dropSlotData.itemData);
         }
         else
         {
-            //Debug.Log("UnEquip Item");
-            UnEquip();
+            if (selectSlot.curSlot.itemData != null)
+            {
+                if (dragSlotData == selectSlot.curSlot && dropSlotData.itemData == null)
+                {
+                    UnEquip();
+                }
+                else
+                {
+                    return;
+                }
+            }
         }
-
     }
 }

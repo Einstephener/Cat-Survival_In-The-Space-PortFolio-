@@ -63,7 +63,10 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         //Main.Inventory.RemoveItem(testItemData1, 7);
         //Main.Inventory.RemoveItem(testItemData2, 5);
         //this.gameObject.SetActive(false);
-        Main.Inventory.AddItem(testItemData1, 10);
+        Main.Inventory.AddItem(testItemData1, 20);
+        Main.Inventory.AddItem(testItemData2, 20);
+        //Main.Inventory.AddItem(testItemData1, 10);
+
         //Main.Inventory.Select_AddItem(testItemData2, 29, 7);
         //Main.Inventory.Select_AddItem(testItemData2, 29, 9);
         //Main.Inventory.Select_AddItem(testItemData2, 29, 11);
@@ -331,7 +334,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         {
             Debug.Log($"아이템의 정보가 없습니다");
         }
-
+        //SelectSlot(selectSlot.index);
     }
 
     public void MoveSlot(SlotData dragSlotData, SlotData dropSlotData) // 두 슬롯의 데이터를 교환하는 함수
@@ -355,6 +358,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         {
             Debug.Log($"아이템의 정보가 없습니다");
         }
+        //SelectSlot(selectSlot.index);
 
         InventoryTotalUpdateUI();
     }
@@ -392,6 +396,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
                 WhetherSelectSlot();
             }
         }
+        //SelectSlot(selectSlot.index);
 
         InventoryTotalUpdateUI();
     }
@@ -450,6 +455,7 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
             dragSlotData.amount = temp + 1;
             dropSlotData.amount += temp;
         }
+        //SelectSlot(selectSlot.index);
 
         InventoryTotalUpdateUI();
     }
