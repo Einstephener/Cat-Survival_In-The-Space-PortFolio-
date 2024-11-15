@@ -324,7 +324,6 @@ public class PlayerInputController : MonoBehaviour
             }
             else if (_playerInteraction.waterObject.TryGetComponent<Water>(out Water water))
             {
-                Debug.Log("Water");
                 GetComponent<PlayerCondition>().UpdateThirst(100);
             }
         }
