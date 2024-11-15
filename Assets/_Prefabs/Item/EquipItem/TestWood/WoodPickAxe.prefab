@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4753473774466366081}
   - component: {fileID: 4674725975974461601}
   - component: {fileID: 1796365720869007221}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WoodPickAxe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 6175437841539382395}
   - component: {fileID: 5679213984144935955}
   - component: {fileID: 3019236492856822964}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: PickAxeV1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -210,10 +210,10 @@ MonoBehaviour:
   toolTipContainer: {fileID: 1358932097726830088}
   parentTransform: {fileID: 250689463425934576}
   testItemData1: {fileID: 11400000, guid: e18af78648779b5498cf8628bc892128, type: 2}
-  testItemData2: {fileID: 11400000, guid: f08ffa4361a37194180ef0894af4c08b, type: 2}
+  testItemData2: {fileID: 11400000, guid: a16db5de07af48c4ba517b8b17dbdb03, type: 2}
   testItemData3: {fileID: 11400000, guid: 14a6bc6b86365b04ab171dc2f6666fa6, type: 2}
   testItemData4: {fileID: 11400000, guid: 4533f3d5054a5e64dbe6c8ce7f9a9e3a, type: 2}
-  testItemData5: {fileID: 11400000, guid: 58690460b3ae29f4da0869e9e5b5679c, type: 2}
+  testItemData5: {fileID: 11400000, guid: d788614c7c5a9f047ad5d7a7b903fcec, type: 2}
   equipManager: {fileID: 0}
 --- !u!1 &3424360038770647051
 GameObject:

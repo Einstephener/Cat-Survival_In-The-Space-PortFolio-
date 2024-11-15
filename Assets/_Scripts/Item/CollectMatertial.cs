@@ -27,7 +27,7 @@ public class CollectMatertial : MonoBehaviour
             // 특정 구역 안에서 임의의 방향 사용
             Vector3 randomDirection = Random.insideUnitSphere;
             // 위쪽으로만 이동하게끔 y값을 양수로 설정
-            randomDirection.y = Mathf.Abs(randomDirection.y); 
+            randomDirection.y = Mathf.Abs(randomDirection.y) + 1.0f; 
 
             Vector3 spawnPosition = transform.position + randomDirection;
 

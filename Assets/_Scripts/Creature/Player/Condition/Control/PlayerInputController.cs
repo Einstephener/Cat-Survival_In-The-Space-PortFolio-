@@ -218,7 +218,6 @@ public class PlayerInputController : MonoBehaviour
     {
         _canAttack = false; // 공격 불가능 상태로 전환
 
-        Debug.Log("OnFire");
         _animationWeightValue = 1f;
 
         // 공격 시 스테미나 감소
@@ -241,6 +240,7 @@ public class PlayerInputController : MonoBehaviour
             if (weaponItem != null)
             {
                 // 자원 채취
+                Debug.Log(weaponItem.WeaponDatas.type);
                 if (_playerInteraction.natureObject != null)
                 {
                     if (weaponItem.WeaponDatas.type == EquipableType.Ax)
