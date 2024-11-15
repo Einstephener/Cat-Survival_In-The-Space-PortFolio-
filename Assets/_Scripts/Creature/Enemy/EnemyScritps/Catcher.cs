@@ -11,6 +11,7 @@ public class Catcher : Enemy
     private Coroutine _currentSkillCoroutine;
 
     private float _lastSkillTime;
+    private bool _isCastingSkill;
 
     protected override void Awake()
     {
@@ -37,6 +38,13 @@ public class Catcher : Enemy
         base.GetReward();
         Main.Inventory.AddItem(_enemyData.rewardItem, 5);
         Debug.Log($"{_enemyData.rewardItem} 획득했습니다.");
+    }
+
+    protected override void FireProjectile()
+    {
+        if (_isCastingSkill) return; // 스킬 상태일 경우 투사체 공격 중단.
+
+        base.FireProjectile();
     }
 
     protected override void MeleeAttack()
@@ -109,6 +117,7 @@ public class Catcher : Enemy
 
     public IEnumerator CastMeleeSkill()
     {
+        _isCastingSkill = true;
         while (IsCastingSkill())
         {
             if (IsDead())
@@ -130,6 +139,7 @@ public class Catcher : Enemy
 
             yield return null;
         }
+        _isCastingSkill = false;
     }
 
     public void StartMeleeSkill()
