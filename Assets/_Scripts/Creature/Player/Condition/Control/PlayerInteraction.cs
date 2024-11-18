@@ -116,7 +116,7 @@ public class PlayerInteraction : MonoBehaviour
             currentInteractObject = hit.collider.gameObject;
             waterObject = currentInteractObject;
             PromptTextActive(true);
-            promptText.text = $"<b>[E]</b> \n {"DrinkWater"}";
+            promptText.text = $"<b>[E]</b>\n{"DrinkWater"}";
         }
     }
 
@@ -136,7 +136,7 @@ public class PlayerInteraction : MonoBehaviour
         if (currentInteractable != null)
         {
             PromptTextActive(true);
-            promptText.text = $"<b>[E]</b> \n {currentInteractable.GetInteractPrompt()}";
+            promptText.text = $"<b>[E]</b>\n{currentInteractable.GetInteractPrompt()}";
         }
     }
     private void PromptTextActive(bool isActive)
