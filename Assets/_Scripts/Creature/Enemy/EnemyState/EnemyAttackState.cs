@@ -23,14 +23,14 @@ public class EnemyAttackState : IEnemyState
         {
             if (!catcher.IsSkillRange())
             {
+                catcher.MoveTowardsPlayer();
                 enemy.animator.SetBool("IsAttack", false);
                 enemy.TransitionToState(new EnemyChaseState());
             }
             else
             {
-                if (catcher.IsCastingSkill())
+                if (catcher.IsSkillCooldownCheck())
                 {
-                    catcher.StartCoroutine(catcher.CastMeleeSkill());
                     enemy.animator.SetTrigger("OnSkill");
                 }
                 else
