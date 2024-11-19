@@ -19,6 +19,7 @@ public class MainScene : BaseScene
         SoundManager.Instance.PlayBGM("BGM_CALM", 0.5f);
 
         Main.Resource.Initialize();
+        Main.Data.Initialize();
 
         Main.UI.inputActionAsset = inputActionAsset;
         Main.UI.ClearDictionary();

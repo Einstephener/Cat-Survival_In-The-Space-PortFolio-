@@ -72,13 +72,13 @@ public class ResourceManager
         // 해당 타입의 리소스 딕셔너리 조회하기
         if (!_resources.TryGetValue(typeof(T), out Dictionary<string, Object> dictionary))
         {
-            Debug.LogError($"[ResourceManager] Get<{typeof(T)}>({key})");
+            Debug.LogWarning($"[ResourceManager] Get<{typeof(T)}>({key})");
             return null;
         }
         // 키가 존재하는지 확인하기
         if (!dictionary.TryGetValue(key, out Object resource))
         {
-            Debug.LogError($"[ResourceManager] Get<{typeof(T)}>({key})");
+            Debug.LogWarning($"[ResourceManager] Get<{typeof(T)}>({key})");
             return null;
         }
         return resource as T;
@@ -89,7 +89,7 @@ public class ResourceManager
         // 해당 타입의 리소스 딕셔너리 조회하기
         if (!_resources.TryGetValue(typeof(T), out Dictionary<string, Object> dictionary))
         {
-            Debug.LogError($"[ResourceManager] GetAll<{typeof(T)}>()");
+            Debug.LogWarning($"[ResourceManager] GetAll<{typeof(T)}>()");
             return null;
         }
 
@@ -108,7 +108,7 @@ public class ResourceManager
         //프리팹
         if (prefab == null)
         {
-            Debug.LogError($"[ResourceManager] Instantiate({key}): Failed to load prefab.");
+            Debug.LogWarning($"[ResourceManager] Instantiate({key}): Failed to load prefab.");
             return null;
         }
 

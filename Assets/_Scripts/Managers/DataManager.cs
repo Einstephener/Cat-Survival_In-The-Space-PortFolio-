@@ -15,6 +15,7 @@ public class DataManager
 {
     /// <summary>
     /// 데이터 추가 되면 추가 하도록 하겠습니다.
+    /// Json을 Dictionary로 관리
     /// </summary>
     public Dictionary<string, DateData> Date = new();
     public Dictionary<string, RespawnData> Respawn = new();
@@ -91,7 +92,11 @@ public class DataManager
     // 데이터를 로드 하기 - LoadJson<ClassName>() - Data를 상속 받은 Class만 가능
     private Dictionary<string, T> LoadJson<T>() where T : Data
     {
+        // Resource 매니저에서 특정 Json 파일을 로드.
+        // -> JsonConvert.DeserializeObject<List<T>>()를 사용해 JSON 데이터를 클래스의 리스트로 역직렬화.
         var dataList = JsonConvert.DeserializeObject<List<T>>(Main.Resource.Get<TextAsset>($"{typeof(T).Name}").text);
+
+        // 리스트를 Dictionary<string, T> 로 변환하여 관리.
         var dictionary = new Dictionary<string, T>();
 
         foreach (var data in dataList)
@@ -105,6 +110,9 @@ public class DataManager
     // 데이터 세이브 - SaveJson(딕셔너리로 되어 있는 Data, "저장될 이름")
     public void SaveJson<T>(Dictionary<string, T> data, string fileName) where T : Data
     {
+        // 입력받은 Dictionary에서 값 추출.(data.Values.ToList())
+        // JsonConvert.SerializeObject로 Json 문자열로 직렬화
+        // Application.persistentDataPath이란 지정된 경로에 Json 파일 저장.
         string json = JsonConvert.SerializeObject(data.Values.ToList(), Formatting.Indented);
         File.WriteAllText(Path.Combine(Application.persistentDataPath, $"{fileName}.json"), json);
     }
