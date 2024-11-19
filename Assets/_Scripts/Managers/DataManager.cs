@@ -81,7 +81,7 @@ public class DataManager
 
     public void Initialize()
     {
-        Date = LoadJson<DateData>();
+        LoadJson("dateData", ref Date);
 
         //// 초기화. 추후 1.0f대신 저장된 값으로 초기화.
         //_mouse = PlayerPrefs.GetFloat("Mouse", 1.0f);
@@ -90,31 +90,41 @@ public class DataManager
     }
 
     // 데이터를 로드 하기 - LoadJson<ClassName>() - Data를 상속 받은 Class만 가능
-    private Dictionary<string, T> LoadJson<T>() where T : Data
+    private void LoadJson<T>(string fileName, ref Dictionary<string, T> dataDictionary) where T : Data
     {
-        // Resource 매니저에서 특정 Json 파일을 로드.
-        // -> JsonConvert.DeserializeObject<List<T>>()를 사용해 JSON 데이터를 클래스의 리스트로 역직렬화.
-        var dataList = JsonConvert.DeserializeObject<List<T>>(Main.Resource.Get<TextAsset>($"{typeof(T).Name}").text);
+        // JSON 파일 경로 설정
+        string filePath = Path.Combine(Application.persistentDataPath, fileName);
 
-        // 리스트를 Dictionary<string, T> 로 변환하여 관리.
-        var dictionary = new Dictionary<string, T>();
-
-        foreach (var data in dataList)
+        // 파일이 존재하지 않는 경우
+        if (!File.Exists(filePath))
         {
-            dictionary[data.Key] = data; // 키가 중복될 경우 덮어씁니다.
+            Debug.Log($"File not found: {filePath}");
+            return;
         }
 
-        return dictionary;
+        // 파일을 읽어 JSON 데이터를 리스트로 변환.
+        var json = File.ReadAllText(filePath);
+        var dataList = JsonConvert.DeserializeObject<List<T>>(json);
+
+        // 리스트의 데이터를 Dictionary에 추가.
+        foreach (var data in dataList)
+        {
+            dataDictionary[data.Key] = data; // Key를 기준으로 데이터를 저장
+        }
+
     }
 
     // 데이터 세이브 - SaveJson(딕셔너리로 되어 있는 Data, "저장될 이름")
-    public void SaveJson<T>(Dictionary<string, T> data, string fileName) where T : Data
+    public void SaveJson<T>(Dictionary<string, T> dataDictionary, string fileName) where T : Data
     {
-        // 입력받은 Dictionary에서 값 추출.(data.Values.ToList())
-        // JsonConvert.SerializeObject로 Json 문자열로 직렬화
-        // Application.persistentDataPath이란 지정된 경로에 Json 파일 저장.
-        string json = JsonConvert.SerializeObject(data.Values.ToList(), Formatting.Indented);
-        File.WriteAllText(Path.Combine(Application.persistentDataPath, $"{fileName}.json"), json);
+        // Dictionary의 Value들을 JSON 포맷으로 변환
+        string json = JsonConvert.SerializeObject(dataDictionary.Values, Formatting.Indented);
+
+        // JSON 파일 경로 설정
+        string filePath = Path.Combine(Application.persistentDataPath, fileName);
+
+        // JSON 데이터를 파일로 저장합니다.
+        File.WriteAllText(filePath, json);
     }
 
     public void PlayerRespawn()
