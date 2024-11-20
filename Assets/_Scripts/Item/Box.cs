@@ -44,8 +44,8 @@ public class Box : Installation
     public override void UISet()
     {
         //Main.Inventory.inventoryUI.gameObject.SetActive(true);
-        Main.Inventory.inventoryUI.boneFireObject.SetActive(false);
-        Main.Inventory.inventoryUI.boxSlotsObject.SetActive(true);
+        Main.Inventory.inventoryUI.boneFireInventoryUI.boneFireObject.SetActive(false);
+        Main.Inventory.inventoryUI.boxInventoryUI.boxSlotsObject.SetActive(true);
 
         base.UISet();
     }
@@ -53,7 +53,8 @@ public class Box : Installation
     public override void UIInterac()
     {
         base.UIInterac();
-        Main.Inventory.inventoryUI.BoxSlotsGet(boxSlotsData);
+        //Main.Inventory.inventoryUI.BoxSlotsGet(boxSlotsData);
+        Main.Inventory.inventoryUI.boxInventoryUI.BoxSlotsGet(boxSlotsData);
 
         UISet();
     }

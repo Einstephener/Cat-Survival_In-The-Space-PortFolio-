@@ -209,7 +209,7 @@ public class InventorySlot : SlotBase, IPointerEnterHandler, IPointerExitHandler
         {
             Debug.Log($"아이템 정보 없음");
         }
-        Main.Inventory.inventoryUI.SelectSlot(Main.Inventory.inventoryUI.selectSlot.index);
+        Main.Inventory.inventoryUI.SelectSlot();
     }
 
 }
