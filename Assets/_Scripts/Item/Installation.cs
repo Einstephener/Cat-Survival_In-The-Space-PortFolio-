@@ -26,7 +26,7 @@ public class Installation : Item
         Main.UI.SwitchToUI();
     }
 
-    public virtual void UIInterac()
+    public virtual void UIInteract()
     {
         //Debug.Log("설치 아이템 UI 상호작용");
     }

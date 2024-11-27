@@ -50,9 +50,9 @@ public class Box : Installation
         base.UISet();
     }
 
-    public override void UIInterac()
+    public override void UIInteract()
     {
-        base.UIInterac();
+        base.UIInteract();
         Main.Inventory.inventoryUI.BoxSlotsGet(boxSlotsData);
 
         UISet();

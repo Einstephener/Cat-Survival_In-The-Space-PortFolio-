@@ -62,7 +62,7 @@ public class ItemObject : MonoBehaviour, IInteractable
             if (item is Installation installation)
             {
                 // Installation 관련 작업 수행
-                installation.UIInterac();
+                installation.UIInteract();
                 //Debug.Log("ItemObject.cs - OnInteract() : Installation.cs Insert");
 
             }

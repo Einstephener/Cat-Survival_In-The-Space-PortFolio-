@@ -70,11 +70,14 @@ public class UI_LobbyScene : UI_Scene
     }
     public void OnBtnStartNewGame()
     {
+        Main.Data.ResetData();
+        Main.Data.LoadPlayerDataFromJson();
         Main.Scene.LoadScene("CutScene");
     }
     public void OnBtnStartLoadGame()
     {
-        //저장된 파일 가지고오기.
+        Main.Data.LoadPlayerDataFromJson();
+        Main.Scene.LoadScene("MainScene");
     }
 
     public void OnBtnEndGame()
