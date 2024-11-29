@@ -36,11 +36,13 @@ public class Tent : Installation
         }
     }
 
-    public override void UIInterac()
+    public override void UIInteract()
     {
-        base.UIInterac();
+        base.UIInteract();
         Debug.Log($"Tent - SaveRespawnLocation(): running");
 
+        Main.Data.savedData.lastPosition = RespawnTransform;
+        Main.Data.SavePlayerDataToJson();
         //SaveRespawnLocation();
     }
 
@@ -67,7 +69,7 @@ public class Tent : Installation
         }
 
         // 데이터 저장
-        dataManager.SaveJson(dataManager.Respawn, "RespawnData");
+        //dataManager.SaveJson(dataManager.Respawn, "RespawnData");
     }
 
 }

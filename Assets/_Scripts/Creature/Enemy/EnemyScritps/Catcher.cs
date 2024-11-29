@@ -8,7 +8,6 @@ public class Catcher : Enemy
     [SerializeField] public EnemyBossData bossSO;
 
     public float speed;
-    private Coroutine _currentSkillCoroutine;
 
     private float _lastSkillTime;
     private bool _isCastingSkill;
@@ -40,6 +39,18 @@ public class Catcher : Enemy
         Debug.Log($"{_enemyData.rewardItem} 획득했습니다.");
     }
 
+    protected override void OnAttack()
+    {
+        if (IsCastingSkill())
+        {
+            CastSkill();
+        }
+        else
+        {
+            base.OnAttack();
+        }
+    }
+
     protected override void FireProjectile()
     {
         if (_isCastingSkill) return; // 스킬 상태일 경우 투사체 공격 중단.
@@ -47,24 +58,22 @@ public class Catcher : Enemy
         base.FireProjectile();
     }
 
-    protected override void MeleeAttack()
+    public void CastSkill()
     {
-        if (Vector3.Distance(transform.position, _playerTransform.position) <= bossSO.skillRange)
+        if (_playerTransform == null) return;
+
+        Vector3 direction = (_playerTransform.position - transform.position).normalized;
+        Ray ray = new Ray(transform.position, direction);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, bossSO.skillRange, _playerLayer))
         {
-            Vector3 direction = (_playerTransform.position - transform.position).normalized;
-            Ray ray = new Ray(transform.position, direction);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, bossSO.skillRange, _playerLayer))
+            if (hit.collider.CompareTag("Player"))
             {
-                if (hit.collider.CompareTag("Player"))
-                {
-                    Debug.Log($"근거리 {bossSO.skillDamage} 데미지");
+                Debug.Log($"근거리 {bossSO.skillDamage} 데미지");
 
-                    if (hit.collider.TryGetComponent<PlayerCondition>(out PlayerCondition playerCondition))
-                    {
-                        playerCondition.UpdateHealth(-bossSO.skillDamage);
-                    }
+                if (hit.collider.TryGetComponent<PlayerCondition>(out PlayerCondition playerCondition))
+                {
+                    playerCondition.UpdateHealth(-bossSO.skillDamage);
                 }
             }
         }
@@ -87,6 +96,8 @@ public class Catcher : Enemy
 
     public bool IsSkillRange()
     {
+        if (_playerTransform == null) return false;
+
         // 플레이어 죽었는지 체크.
         PlayerCondition playerCondition = GetPlayerCondition();
         if (playerCondition != null && playerCondition.IsDead())
@@ -105,57 +116,13 @@ public class Catcher : Enemy
         return false;
     }
 
-    private void MoveTowardsPlayer()
+    public void MoveTowardsPlayer()
     {
         if (aiPath != null && _playerTransform != null)
         {
             Debug.Log("플레이어에게 스킬 사용을 위한 이동 중");
             aiPath.destination = _playerTransform.position;
             aiPath.canMove = true;
-        }
-    }
-
-    public IEnumerator CastMeleeSkill()
-    {
-        _isCastingSkill = true;
-        while (IsCastingSkill())
-        {
-            if (IsDead())
-            {
-                yield break;
-            }
-
-            if (IsSkillRange())
-            {
-                if (IsSkillCooldownCheck())
-                {
-                    MeleeAttack();
-                }
-            }
-            else
-            {
-                MoveTowardsPlayer();
-            }
-
-            yield return null;
-        }
-        _isCastingSkill = false;
-    }
-
-    public void StartMeleeSkill()
-    {
-        if (_currentSkillCoroutine == null) // 중복 실행 방지.
-        {
-            _currentSkillCoroutine = StartCoroutine(CastMeleeSkill());
-        }
-    }
-
-    public void StopMeleeSkill()
-    {
-        if (_currentSkillCoroutine != null)
-        {
-            StopCoroutine(_currentSkillCoroutine);
-            _currentSkillCoroutine = null;
         }
     }
 

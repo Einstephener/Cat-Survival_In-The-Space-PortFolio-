@@ -97,9 +97,9 @@ public class BoneFire : Installation
         }
     }
 
-    public override void UIInterac()
+    public override void UIInteract()
     {
-        base .UIInterac();
+        base.UIInteract();
         Main.Inventory.inventoryUI.boneFireInventoryUI.BoneFireSlotsGet(boneFireSlotData, nextBoneFireSlotData);
 
         UISet();
