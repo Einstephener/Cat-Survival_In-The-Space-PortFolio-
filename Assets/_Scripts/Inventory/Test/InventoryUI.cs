@@ -149,11 +149,6 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 
     public void InventoryUISet()
     {
-        //this.gameObject.SetActive(true);
-
-        //this.boneFireObject.SetActive(false);
-        //this.boxSlotsObject.SetActive(false);
-
         boneFireInventoryUI.boneFireObject.SetActive(false);
 
         boxInventoryUI.boxSlotsObject.SetActive(false);
@@ -169,16 +164,6 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         // 슬롯 UI 업데이트
         for (int i = 0; i < _slots.Length; i++)
         {
-            //Debug.Log(i);
-            //if (_slots[i].itemData != null || _slots[i].amount > 0) // 슬롯이 데이터가 있는지 확인
-            //{
-            //    slotObjects[i].SetSlot(_slots[i]); // 슬롯 정보 업데이트
-            //}
-            //else /*if (_slots[i].IsEmpty())*/ if (_slots[i].itemData == null || _slots[i].amount <= 0)
-            //{
-            //    slotObjects[i].ClearSlot(); // 빈 슬롯 처리
-            //}
-
             if (!_slots[i].IsEmpty()) // 슬롯이 데이터가 있는지 확인
             {
                 slotObjects[i].SetSlot(_slots[i]); // 슬롯 정보 업데이트
@@ -217,9 +202,8 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
     {
         if (selectSlot != quickSlotObjects[index])
         {
-            //Debug.Log($"사용한 슬롯: {index}");
             selectSlot = slotObjects[index];
-            //selectSlot = quickSlotObjects[index];
+
             quickSlotObjects[index].SetOutLine();
 
             //equipManager 관련 버그(에러) : 선택된 슬롯의 아이템을 이동 시켜도 그 아이템을 들고 있는 버그가 있음 이걸 Update문이나 이벤트에서 관리를 해야할 거 같음 - 수정 완료[10/24]
@@ -261,16 +245,6 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         }
         equipManager.UnEquip();
 
-
-        //if (selectSlot != null)
-        //{
-        //    equipManager.EquipNew(selectSlot.curSlot.itemData);
-        //}
-        //else
-        //{ 
-
-        //}
-        //equipManager.EquipNew(selectSlot.curSlot.itemData);
     }
 
 
@@ -298,13 +272,11 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
 
         if (boneFireInventoryUI.boneFireObject.activeInHierarchy)
         {
-            //BoneFireUpdateUI();
             boneFireInventoryUI.BoneFireUpdateUI();
         }
 
         if (boxInventoryUI.boxSlotsObject.activeInHierarchy)
         {
-            //BoxSlotUpdateUI();
             boxInventoryUI.BoxSlotUpdateUI();
         }
     }
@@ -346,7 +318,6 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         {
             Debug.Log($"아이템의 정보가 없습니다");
         }
-        //SelectSlot(selectSlot.index);
     }
 
     public void MoveSlot(SlotData dragSlotData, SlotData dropSlotData) // 두 슬롯의 데이터를 교환하는 함수
@@ -370,7 +341,6 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
         {
             Debug.Log($"아이템의 정보가 없습니다");
         }
-        //SelectSlot(selectSlot.index);
 
         InventoryTotalUpdateUI();
     }
@@ -408,7 +378,6 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
                 WhetherSelectSlot();
             }
         }
-        //SelectSlot(selectSlot.index);
 
         InventoryTotalUpdateUI();
     }
@@ -432,21 +401,6 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
             return;
         }
 
-        //if (!Main.Inventory.IsCountTableItem(dragSlotData.itemData))
-        //{
-        //    return;
-        //}
-
-        //if (dragSlotData.amount <= 1)
-        //{
-        //    return;
-        //}
-
-        //if (!dropSlotData.IsEmpty() && dragSlotData.itemData != dropSlotData.itemData)
-        //{
-        //    return;
-        //}
-
         if (dropSlotData.IsEmpty())
         {
             dropSlotData.itemData = dragSlotData.itemData;
@@ -467,116 +421,9 @@ public class InventoryUI : /*MonoBehaviour*/ UI_Popup
             dragSlotData.amount = temp + 1;
             dropSlotData.amount += temp;
         }
-        //SelectSlot(selectSlot.index);
 
         InventoryTotalUpdateUI();
     }
-    #endregion
-
-
-    #region boneFire
-    //private void BoneFireInitialize()
-    //{
-    //    boneFireSlots[0].curSlot = new SlotData();
-    //    boneFireSlots[1].curSlot = new SlotData();
-    //}
-
-    //private void UpdateSlotUI(InventorySlot slot) // 나중에 사용하면 코드를 간소화 할 수 있을 거 같다.
-    //{
-    //    if (!slot.curSlot.IsEmpty())
-    //    {
-    //        //Debug.Log("UpdateSlotUI");
-    //        slot.SetSlot(slot.curSlot);
-    //    }
-    //    else
-    //    {
-    //        //Debug.Log("UpdateSlotUI");
-    //        slot.ClearSlot();
-    //    }
-    //}
-
-    //public void BoneFireUpdateUI()
-    //{
-    //    UpdateSlotUI(boneFireSlots[0]);
-    //    UpdateSlotUI(boneFireSlots[1]);
-
-    //}
-
-    //public void BoneFireSlotsGet(SlotData boneFireSlotData, SlotData nextBoneFireSlotData) // 연결하는 함수 
-    //{
-    //    // 모닥불의 데이터 불러오기 ㄱㄱ
-    //    boneFireSlots[0].curSlot = boneFireSlotData;
-    //    boneFireSlots[1].curSlot = nextBoneFireSlotData;
-
-    //    BoneFireUpdateUI();
-    //}
-    #endregion
-
-
-    #region BoxInventory
-
-    //private void BoxInitialize() //[10/28] 나중에 수정하자 :) - 수정 완
-    //{
-    //    Transform[] children = boxSlotsObject.GetComponentsInChildren<Transform>();
-    //    int index = 0;
-    //    boxSlots = new InventorySlot[12];
-    //    for (int i = 0; i < children.Length; i++)
-    //    {
-    //        if (index >= boxSlots.Length) break; // 배열의 크기를 초과하지 않도록 함
-
-    //        InventorySlot slot = children[i].GetComponent<InventorySlot>();
-    //        if (slot != null)
-    //        {
-    //            boxSlots[index] = slot;
-    //            index++;
-    //        }
-    //    }
-    //}
-
-    //public void BoxSlotUpdateUI()
-    //{
-
-    //    //for (int i = 0; i < boxSlots.Length; i++)
-    //    //{
-    //    //    if (boxSlots[i].curSlot.itemData != null || boxSlots[i].curSlot.amount > 0) // 슬롯이 데이터가 있는지 확인
-    //    //    {
-    //    //        slotObjects[i].SetSlot(boxSlots[i].curSlot); // 슬롯 정보 업데이트
-    //    //    }
-    //    //    else /*if (_slots[i].IsEmpty())*/ if (boxSlots[i].curSlot.itemData == null || boxSlots[i].curSlot.amount <= 0)
-    //    //    {
-    //    //        slotObjects[i].ClearSlot(); // 빈 슬롯 처리
-    //    //    }
-    //    //}
-
-    //    //if(!boxSlotsObject.activeInHierarchy)
-    //    //{
-    //    //    return;
-    //    //}
-
-    //    for (int i = 0; i < boxSlots.Length; i++)
-    //    {
-    //        if (!boxSlots[i].curSlot.IsEmpty())
-    //        {
-    //            boxSlots[i].SetSlot(boxSlots[i].curSlot);
-    //        }
-    //        else
-    //        {
-    //            boxSlots[i].ClearSlot();
-    //        }
-    //    }
-    //}
-
-    //public void BoxSlotsGet(SlotData[] Get_boxSlots) // 박스 데이터 Get 하기
-    //{
-    //    for (int i = 0; i < Get_boxSlots.Length; i++)
-    //    {
-    //        boxSlots[i].curSlot = Get_boxSlots[i];
-    //    }
-
-    //    //BoxSlotUpdateUI();
-    //    boxInventoryUI.BoxSlotUpdateUI();
-    //}
-
     #endregion
 
 }

@@ -27,13 +27,6 @@ public class Box : Installation
                 boxSlotsData[i] = new SlotData();
             }
         }
-
-        //for (int i = 0; i < boxSlotsData.Length; i++)
-        //{
-        //    Main.Inventory.inventoryUI.BoxSlotsGet(boxSlotsData);
-        //}
-
-        //Main.Inventory.inventoryUI.BoxSlotUpdateUI();
     }
 
     public override void Use()
@@ -43,7 +36,6 @@ public class Box : Installation
 
     public override void UISet()
     {
-        //Main.Inventory.inventoryUI.gameObject.SetActive(true);
         Main.Inventory.inventoryUI.boneFireInventoryUI.boneFireObject.SetActive(false);
         Main.Inventory.inventoryUI.boxInventoryUI.boxSlotsObject.SetActive(true);
 
@@ -53,9 +45,18 @@ public class Box : Installation
     public override void UIInterac()
     {
         base.UIInterac();
-        //Main.Inventory.inventoryUI.BoxSlotsGet(boxSlotsData);
         Main.Inventory.inventoryUI.boxInventoryUI.BoxSlotsGet(boxSlotsData);
 
         UISet();
+    }
+
+    public override void RemoveObject()
+    {
+        foreach(SlotData _slotaData in boxSlotsData)
+        {
+            RetrieveSlotItemData(_slotaData);
+        }
+
+        base.RemoveObject();
     }
 }

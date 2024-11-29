@@ -44,4 +44,23 @@ public class Installation : Item
             Debug.LogWarning("itemData가 InstallationData가 아닙니다.");
         }
     }
+
+
+    //아이템이 회수 할 때 사용
+    public virtual void RemoveObject()
+    {
+
+        Debug.Log("회수하다.");
+
+        Main.Inventory.AddItem(this.itemData);
+        Destroy(this.gameObject);
+    }
+
+    protected void RetrieveSlotItemData(SlotData _slotaData)
+    {
+        if(!_slotaData.IsEmpty())
+        {
+            Main.Inventory.AddItem(_slotaData.itemData, _slotaData.amount);
+        }
+    }
 }
