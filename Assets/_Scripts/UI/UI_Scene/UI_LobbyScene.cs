@@ -66,7 +66,8 @@ public class UI_LobbyScene : UI_Scene
     {
         _isclicked = !_isclicked;
         BtnNewGame.SetActive(_isclicked);
-        BtnLoadGame.SetActive(_isclicked);
+        // 저장 기능 비활성화
+        //BtnLoadGame.SetActive(_isclicked);
     }
     public void OnBtnStartNewGame()
     {
