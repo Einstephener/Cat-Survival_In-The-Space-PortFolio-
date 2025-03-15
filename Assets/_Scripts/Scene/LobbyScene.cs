@@ -12,6 +12,7 @@ public class LobbyScene : BaseScene
 
         //Scene에 필요한 오브젝트들 소환.
         Main.Resource.Initialize();
+        Main.Data.Initialize();
 
         //오류 방지용 UI초기화
         Main.UI.ClearDictionary();
