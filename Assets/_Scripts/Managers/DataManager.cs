@@ -25,7 +25,7 @@ public class DataManager
     public delegate void PlayerRespawnEventHandler(bool isClickRespawn);
     public event PlayerRespawnEventHandler OnPlayerRespawn;
 
-    public int Day = 1;
+    [HideInInspector] public int Day = 0;
 
     #region Setting
 
@@ -82,7 +82,6 @@ public class DataManager
     public void Initialize()
     {
         LoadPlayerDataFromJson();
-
         //// 초기화. 추후 1.0f대신 저장된 값으로 초기화.
         //_mouse = PlayerPrefs.GetFloat("Mouse", 1.0f);
         //_sound = PlayerPrefs.GetFloat("Sound", 1.0f);
@@ -172,6 +171,13 @@ public class DataManager
         savedData.time = 0;
         savedData.lastPosition = Vector3.zero;
         SavePlayerDataToJson();
+    }
+
+    public void OpenMainScene()
+    {
+        // MainScene 실행시 실행됨.
+        Day = savedData.day;
+
     }
 
     public class SavedData

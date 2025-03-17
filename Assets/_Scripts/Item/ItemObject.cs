@@ -51,14 +51,9 @@ public class ItemObject : MonoBehaviour, IInteractable
             Main.Inventory.AddItem(itemData);
             Destroy(this.gameObject);
         }
-        else // 임시입니다.
+        else
         {
-            //Installation initem = item as Installation;
-
-            //BoneFire boneFire = item as BoneFire;
-
-            //Tent tent = item as Tent;
-
+            
             if (item is Installation installation)
             {
                 // Installation 관련 작업 수행
@@ -66,27 +61,6 @@ public class ItemObject : MonoBehaviour, IInteractable
                 //Debug.Log("ItemObject.cs - OnInteract() : Installation.cs Insert");
 
             }
-            // item이 BoneFire 타입인지 확인
-            //else if (item is BoneFire boneFire)
-            //{
-            //    // BoneFire 관련 작업 수행
-            //    boneFire.UIInterac();
-            //    Debug.Log("ItemObject.cs - OnInteract() : BoneFire.cs Insert");
-            //}
-            //// item이 Tent 타입인지 확인
-            //else if (item is Tent tent)
-            //{
-            //    // Tent 관련 작업 수행
-            //    tent.UIInterac();
-            //    Debug.Log("ItemObject.cs - OnInteract() : Tent.cs Insert");
-            //}
-            //else
-            //{
-            //    Debug.Log("ItemObject.cs - OnInteract() Error: 알 수 없는 아이템 타입입니다.");
-            //}
-            //initem.UIInterac();
-            //boneFire.UIInterac();
-            //Debug.Log("ItemObject.cs - OnIntercat() Errer");
             Use();
         }
     }
@@ -95,4 +69,5 @@ public class ItemObject : MonoBehaviour, IInteractable
     {
         item.Use();
     }
+
 }

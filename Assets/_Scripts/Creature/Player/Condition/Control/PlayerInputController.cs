@@ -270,6 +270,18 @@ public class PlayerInputController : MonoBehaviour
                         Attack_Enemy(2 * attack);
                     }
                 }
+
+                // 설치된 아이템 공격 - [11/29 - 능권이가 추가함]
+                if(_playerInteraction.installtionItemObject != null)
+                {
+                    float attack = GetComponent<PlayerCondition>()._basicAttack;
+
+                    if (weaponItem.WeaponDatas.type == EquipableType.Pick)
+                    {
+                        Attack_InstallationItem();
+                    }
+
+                }
             }
         }
 
@@ -300,13 +312,20 @@ public class PlayerInputController : MonoBehaviour
                 collectMatertial.SpitMaterial();
             }
         }
-
     }
     private void Attack_Enemy(float attack)
     {
         if (_playerInteraction.enemyObject.TryGetComponent<Enemy>(out Enemy enemy))
         {
             enemy.OnHit(attack);
+        }
+    }
+
+    private void Attack_InstallationItem()// [11/29 - 능권이가 추가함]
+    {
+        if (_playerInteraction.installtionItemObject.TryGetComponent<Installation>(out Installation installation))
+        {
+            installation.RemoveObject();
         }
     }
 

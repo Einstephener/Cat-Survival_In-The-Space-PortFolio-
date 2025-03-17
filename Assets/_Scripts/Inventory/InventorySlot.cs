@@ -197,7 +197,6 @@ public class InventorySlot : SlotBase, IPointerEnterHandler, IPointerExitHandler
             //기존의 있던 슬롯의 데이터 제거 후 index슬롯으로 이동;
             Debug.Log($"아이템 이동");
             Main.Inventory.inventoryUI.MoveSlot(Main.Inventory.inventoryUI.dragSlot.thisSlot.curSlot, curSlot);
-            //Main.Inventory.inventoryUI.SwapItem(Main.Inventory.inventoryUI.SlotIndex(index), index);
         }
         else if (!Main.Inventory.inventoryUI.dragSlot.thisSlot.curSlot.IsEmpty() && !curSlot.IsEmpty())
         {
@@ -209,7 +208,7 @@ public class InventorySlot : SlotBase, IPointerEnterHandler, IPointerExitHandler
         {
             Debug.Log($"아이템 정보 없음");
         }
-        Main.Inventory.inventoryUI.SelectSlot(Main.Inventory.inventoryUI.selectSlot.index);
+        Main.Inventory.inventoryUI.SelectSlot();
     }
 
 }

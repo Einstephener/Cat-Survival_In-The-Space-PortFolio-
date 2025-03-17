@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public interface IInteractable
 {
@@ -29,6 +30,7 @@ public class PlayerInteraction : MonoBehaviour
     [HideInInspector] public GameObject waterObject;
     [HideInInspector] public GameObject enemyObject;
     [HideInInspector] public GameObject natureObject;
+    [HideInInspector] public GameObject installtionItemObject;
     private IInteractable currentInteractable;
 
     private TextMeshProUGUI promptText;
@@ -54,6 +56,8 @@ public class PlayerInteraction : MonoBehaviour
     }
 
     #region InteractionCheck
+
+    
     private void CheckForInteractableObjects()
     {
         Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
@@ -81,10 +85,18 @@ public class PlayerInteraction : MonoBehaviour
         {
             ClearInteraction();
         }
+        
     }
 
     private void HandleInteractableHit(RaycastHit hit)
     {
+        Item _item = hit.collider.gameObject.GetComponent<Item>(); // [11/29 - 능권이가 추가함]
+
+        if (_item is Installation)
+        {
+            installtionItemObject = hit.collider.gameObject;
+        }
+        
         if (hit.collider.gameObject != currentInteractObject)
         {
             currentInteractObject = hit.collider.gameObject;

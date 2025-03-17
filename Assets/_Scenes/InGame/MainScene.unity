@@ -1206,6 +1206,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1648977433402404027, guid: effe6696b4d66ed4aaecc62f8572e48a,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 886775
+      objectReference: {fileID: 0}
     - target: {fileID: 2547421560664689271, guid: effe6696b4d66ed4aaecc62f8572e48a,
         type: 3}
       propertyPath: layerMask.m_Bits
@@ -1265,6 +1270,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player_Cat
+      objectReference: {fileID: 0}
+    - target: {fileID: 8078267609921037815, guid: effe6696b4d66ed4aaecc62f8572e48a,
+        type: 3}
+      propertyPath: installtionLayer.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

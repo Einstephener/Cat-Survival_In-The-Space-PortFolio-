@@ -37,18 +37,12 @@ public class BoneFire : Installation
         }
 
         //잠시 주석
-        boneFireSlot = Main.Inventory.inventoryUI.boneFireSlots[0];
-        nextBoneFireSlot = Main.Inventory.inventoryUI.boneFireSlots[1];
+        boneFireSlot = Main.Inventory.inventoryUI.boneFireInventoryUI.boneFireSlots[0];
+        nextBoneFireSlot = Main.Inventory.inventoryUI.boneFireInventoryUI.boneFireSlots[1];
+        
+        Main.Inventory.inventoryUI.boneFireInventoryUI.BoneFireSlotsGet(boneFireSlotData, nextBoneFireSlotData);
 
-
-        //Main.Inventory.inventoryUI.boneFireSlots[0] = boneFireSlot;
-        //Main.Inventory.inventoryUI.boneFireSlots[1] = nextBoneFireSlot;
-
-        Main.Inventory.inventoryUI.BoneFireSlotsGet(boneFireSlotData, nextBoneFireSlotData);
-        //BoneFireUpdateUI();
-
-        Main.Inventory.inventoryUI.BoneFireUpdateUI();
-
+        Main.Inventory.inventoryUI.boneFireInventoryUI.BoneFireUpdateUI();
     }
 
     #region Test
@@ -65,9 +59,8 @@ public class BoneFire : Installation
             boneFireSlotData.itemData = _itemdata;
             boneFireSlotData.amount = _amount;
             //Debug.Log($"{boneFireSlot.curSlot.itemData} += {_itemdata} // ItemName : {boneFireSlot.curSlot.itemData.DisplayName}, Amount : {boneFireSlot.curSlot.amount}");
-            //BoneFireUpdateUI();
-            Main.Inventory.inventoryUI.BoneFireSlotsGet(boneFireSlotData, nextBoneFireSlotData);
-            Main.Inventory.inventoryUI.BoneFireUpdateUI();
+            Main.Inventory.inventoryUI.boneFireInventoryUI.BoneFireSlotsGet(boneFireSlotData, nextBoneFireSlotData);
+            Main.Inventory.inventoryUI.boneFireInventoryUI.BoneFireUpdateUI();
             return;
         }
     }
@@ -106,8 +99,8 @@ public class BoneFire : Installation
 
     public override void UIInteract()
     {
-        base .UIInteract();
-        Main.Inventory.inventoryUI.BoneFireSlotsGet(boneFireSlotData, nextBoneFireSlotData);
+        base.UIInteract();
+        Main.Inventory.inventoryUI.boneFireInventoryUI.BoneFireSlotsGet(boneFireSlotData, nextBoneFireSlotData);
 
         UISet();
     }
@@ -122,14 +115,23 @@ public class BoneFire : Installation
 
     public override void UISet()
     {
-        //Main.Inventory.inventoryUI.gameObject.SetActive(true);
-        Main.Inventory.inventoryUI.boneFireObject.SetActive(true);
-        Main.Inventory.inventoryUI.boxSlotsObject.SetActive(false);
+        Main.Inventory.inventoryUI.boneFireInventoryUI.boneFireObject.SetActive(true);
+        Main.Inventory.inventoryUI.boxInventoryUI.boxSlotsObject.SetActive(false);
 
         base.UISet();
     }
 
     #endregion
+
+
+    //아이템이 회수 할 때 사용
+    public override void RemoveObject()
+    {
+        RetrieveSlotItemData(boneFireSlotData);
+        RetrieveSlotItemData(nextBoneFireSlotData);
+        //데이터 제거 안하고 테스트 ㄱㄱ;
+        base.RemoveObject();
+    }
 
 
     #region cook
@@ -199,15 +201,14 @@ public class BoneFire : Installation
         //boneFireSlot의 수량이 0이 되면 curSlot을 null로 설정
         if (boneFireSlotData.IsEmpty())
         {
-            //BoneFireUpdateUI();
-            Main.Inventory.inventoryUI.BoneFireSlotsGet(boneFireSlotData, nextBoneFireSlotData);
-            Main.Inventory.inventoryUI.BoneFireUpdateUI();
+            Main.Inventory.inventoryUI.boneFireInventoryUI.BoneFireSlotsGet(boneFireSlotData, nextBoneFireSlotData);
+            Main.Inventory.inventoryUI.boneFireInventoryUI.BoneFireUpdateUI();
             Debug.Log("boneFireSlot의 아이템 수량이 0이 되어 슬롯이 비어졌습니다.");
         }
 
         //BoneFireUpdateUI(); // UI 업데이트
-        Main.Inventory.inventoryUI.BoneFireSlotsGet(boneFireSlotData, nextBoneFireSlotData);
-        Main.Inventory.inventoryUI.BoneFireUpdateUI();
+        Main.Inventory.inventoryUI.boneFireInventoryUI.BoneFireSlotsGet(boneFireSlotData, nextBoneFireSlotData);
+        Main.Inventory.inventoryUI.boneFireInventoryUI.BoneFireUpdateUI();
     }
 
 
@@ -267,8 +268,4 @@ public class BoneFire : Installation
 
     #endregion
 
-    //public override void PreView()
-    //{
-    //    base.PreView();
-    //}
 }
